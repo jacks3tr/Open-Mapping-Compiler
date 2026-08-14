@@ -1,0 +1,14 @@
+{
+  "batch": "BATCH-001",
+  "manufacturingOrder": "MO-00001",
+  "material": "MAT-1000",
+  "plannedQuantity": {
+    "unit": "DZ",
+    "value": 1
+  },
+  "plant": "PLANT-01",
+  "productionLine": "LINE-A",
+  "scheduledStart": "2026-08-11T08:30:00.000Z",
+  "systemStatus": "REL",
+  "workCenter": "WC-100"
+}

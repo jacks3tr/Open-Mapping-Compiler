@@ -1,0 +1,78 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+
+# Node.js
+node_modules/
+
+# Checks and build output
+.coverage
+.coverage.*
+coverage.json
+coverage.xml
+htmlcov/
+.hypothesis/
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+.tox/
+.nox/
+build/
+dist/
+junit*.xml
+test-results/
+benchmark-results/
+artifacts/
+
+# Generated suggestions are transient except the reviewed public fixtures.
+**/suggestions.json
+!/benchmarks/**/suggestions.json
+!/examples/**/suggestions.json
+
+# Root results are reproducible release evidence; nested local result directories are transient.
+**/results/
+!/results/
+!/results/**
+
+# Generated quick-start output
+/examples/*/output.json
+/examples/*/generated.py
+/examples/*/generated.ts
+
+# Local model settings may contain real model IDs or organization-specific routes.
+**/open-mapping.models.yaml
+**/open-mapping.models.yml
+**/open-mapping.models.*.yaml
+**/open-mapping.models.*.yml
+!/examples/model-assisted/open-mapping.models.example.yaml
+!/tests/golden/model_protocol/open-mapping.models.yaml
+
+# Local configuration, editors, and operating systems
+.env
+.env.*
+!.env.example
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+*.bak
+*.log
+*.orig
+*.rej
+*.swp
+*.tmp
+*~
+
+# Internal planning, agent, and evaluation files
+/Design.md
+/Agent-Implementation-Plan.md
+/2026-08-13-configurable-model-assisted-mapping-plan.md
+/AGENTS.md
+/CLAUDE.md
+/.agents/
+/.agentbench/
+/.claude/
+/.codex/
+/.omo/

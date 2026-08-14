@@ -1,0 +1,58 @@
+mapping_version: "0.1"
+id: erp-production-order-to-mes-job
+source_schema: erp-production-order
+source_schema_version: "unversioned"
+target_schema: mes-job
+target_schema_version: "unversioned"
+rules:
+  - target: /jobNumber
+    expression: { op: get, path: /manufacturingOrder, document: input }
+    confidence: 0.99
+    confidence_method: ground-truth
+  - target: /partNumber
+    expression: { op: get, path: /material, document: input }
+    confidence: 0.99
+    confidence_method: ground-truth
+  - target: /facility
+    expression: { op: get, path: /plant, document: input }
+    confidence: 0.99
+    confidence_method: ground-truth
+  - target: /line
+    expression: { op: get, path: /productionLine, document: input }
+    confidence: 0.99
+    confidence_method: business-instruction-v0.1
+  - target: /quantity
+    expression:
+      op: cast
+      target_type: integer
+      value:
+        op: multiply
+        left: { op: get, path: /plannedQuantity/value, document: input }
+        right:
+          op: lookup
+          key: { op: get, path: /plannedQuantity/unit, document: input }
+          values: { EA: 1, DZ: 12 }
+    confidence: 0.99
+    confidence_method: business-instruction-v0.1
+  - target: /lotNumber
+    expression:
+      op: coalesce
+      operands: [{ op: get, path: /batch, document: input }]
+    confidence: 0.55
+    confidence_method: heuristic-v0.1
+  - target: /status
+    expression:
+      op: lookup
+      key: { op: get, path: /systemStatus, document: input }
+      values: { REL: Released, CRTD: Pending }
+      default: { op: literal, value: Unknown }
+    confidence: 0.99
+    confidence_method: business-instruction-v0.1
+  - target: /scheduledStartUtc
+    expression:
+      op: format_date
+      value: { op: parse_date, value: { op: get, path: /scheduledStart, document: input } }
+      pattern: "YYYY-MM-DDThh:mm:ss.SSSZ"
+    confidence: 0.99
+    confidence_method: business-instruction-v0.1
+invariants: []

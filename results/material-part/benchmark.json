@@ -1,0 +1,4609 @@
+{
+  "assisted_confidence_counts": {
+    "high": 0,
+    "low": 0,
+    "medium": 0,
+    "none": 5
+  },
+  "assisted_disposition_counts": {
+    "ambiguous": 0,
+    "manual": 5,
+    "no_match": 0,
+    "review_required": 0,
+    "suggested": 0
+  },
+  "baseline_confidence_counts": {
+    "high": 1,
+    "low": 1,
+    "medium": 1,
+    "none": 2
+  },
+  "baseline_disposition_counts": {
+    "ambiguous": 0,
+    "manual": 0,
+    "no_match": 2,
+    "review_required": 2,
+    "suggested": 1
+  },
+  "denominators": {
+    "ambiguity_precision": 0,
+    "compile_success_rate": 2,
+    "cross_runtime_equivalence": 61,
+    "direct_match_precision": 3,
+    "direct_match_recall": 2,
+    "duplicate_target_rejection": 1,
+    "expected_ambiguity_detection": 0,
+    "expected_no_match_detection": 0,
+    "high_confidence_false_positive_rate": 1,
+    "high_confidence_precision": 1,
+    "invalid_source_path_rejection": 1,
+    "invariant_pass_rate": 0,
+    "low_confidence_precision": 1,
+    "medium_confidence_precision": 1,
+    "no_match_precision": 2,
+    "no_match_recall": 0,
+    "required_target_coverage": 5,
+    "review_application_correctness": 0,
+    "target_outcome_coverage": 5,
+    "target_schema_pass_rate": 180,
+    "transformation_exact_match_rate": 3
+  },
+  "gate_results": [
+    {
+      "maximum": null,
+      "metric": "cross_runtime_equivalence",
+      "minimum": 1.0,
+      "passed": true,
+      "value": 1.0
+    },
+    {
+      "maximum": null,
+      "metric": "duplicate_target_rejection",
+      "minimum": 1.0,
+      "passed": true,
+      "value": 1.0
+    },
+    {
+      "maximum": null,
+      "metric": "expected_ambiguity_detection",
+      "minimum": 1.0,
+      "passed": true,
+      "value": 1.0
+    },
+    {
+      "maximum": null,
+      "metric": "expected_no_match_detection",
+      "minimum": 1.0,
+      "passed": true,
+      "value": 1.0
+    },
+    {
+      "maximum": 0.02,
+      "metric": "high_confidence_false_positive_rate",
+      "minimum": null,
+      "passed": true,
+      "value": 0.0
+    },
+    {
+      "maximum": null,
+      "metric": "high_confidence_precision",
+      "minimum": 0.9,
+      "passed": true,
+      "value": 1.0
+    },
+    {
+      "maximum": null,
+      "metric": "invalid_source_path_rejection",
+      "minimum": 1.0,
+      "passed": true,
+      "value": 1.0
+    },
+    {
+      "maximum": null,
+      "metric": "review_application_correctness",
+      "minimum": 1.0,
+      "passed": true,
+      "value": 1.0
+    },
+    {
+      "maximum": null,
+      "metric": "target_outcome_coverage",
+      "minimum": 1.0,
+      "passed": true,
+      "value": 1.0
+    }
+  ],
+  "gate_thresholds": {
+    "cross_runtime_equivalence": {
+      "maximum": null,
+      "minimum": 1.0
+    },
+    "duplicate_target_rejection": {
+      "maximum": null,
+      "minimum": 1.0
+    },
+    "expected_ambiguity_detection": {
+      "maximum": null,
+      "minimum": 1.0
+    },
+    "expected_no_match_detection": {
+      "maximum": null,
+      "minimum": 1.0
+    },
+    "high_confidence_false_positive_rate": {
+      "maximum": 0.02,
+      "minimum": null
+    },
+    "high_confidence_precision": {
+      "maximum": null,
+      "minimum": 0.9
+    },
+    "invalid_source_path_rejection": {
+      "maximum": null,
+      "minimum": 1.0
+    },
+    "review_application_correctness": {
+      "maximum": null,
+      "minimum": 1.0
+    },
+    "target_outcome_coverage": {
+      "maximum": null,
+      "minimum": 1.0
+    }
+  },
+  "id": "material-part",
+  "issues": [],
+  "metrics": {
+    "ambiguity_precision": 1.0,
+    "compile_success_rate": 1.0,
+    "cross_runtime_equivalence": 1.0,
+    "direct_match_precision": 0.6666666666666666,
+    "direct_match_recall": 1.0,
+    "duplicate_target_rejection": 1.0,
+    "expected_ambiguity_detection": 1.0,
+    "expected_no_match_detection": 1.0,
+    "high_confidence_false_positive_rate": 0.0,
+    "high_confidence_precision": 1.0,
+    "invalid_source_path_rejection": 1.0,
+    "invariant_pass_rate": 1.0,
+    "low_confidence_precision": 0.0,
+    "medium_confidence_precision": 1.0,
+    "no_match_precision": 0.0,
+    "no_match_recall": 1.0,
+    "required_target_coverage": 1.0,
+    "review_application_correctness": 1.0,
+    "target_outcome_coverage": 1.0,
+    "target_schema_pass_rate": 1.0,
+    "transformation_exact_match_rate": 1.0
+  },
+  "numerators": {
+    "ambiguity_precision": 0,
+    "compile_success_rate": 2,
+    "cross_runtime_equivalence": 61,
+    "direct_match_precision": 2,
+    "direct_match_recall": 2,
+    "duplicate_target_rejection": 1,
+    "expected_ambiguity_detection": 0,
+    "expected_no_match_detection": 0,
+    "high_confidence_false_positive_rate": 0,
+    "high_confidence_precision": 1,
+    "invalid_source_path_rejection": 1,
+    "invariant_pass_rate": 0,
+    "low_confidence_precision": 0,
+    "medium_confidence_precision": 1,
+    "no_match_precision": 0,
+    "no_match_recall": 0,
+    "required_target_coverage": 5,
+    "review_application_correctness": 0,
+    "target_outcome_coverage": 5,
+    "target_schema_pass_rate": 180,
+    "transformation_exact_match_rate": 3
+  },
+  "report_version": "0.1",
+  "runtime_observations": [
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 1",
+        "facilities": [
+          {
+            "plant": "P1",
+            "status": "Active"
+          },
+          {
+            "plant": "P3",
+            "status": "Active"
+          },
+          {
+            "plant": "P2",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Kilogram",
+        "partNumber": "MP-00001",
+        "weightLb": 22.046226
+      },
+      "runtime": "interpreter",
+      "sample_id": "material-part-equivalent-kg",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 1",
+        "facilities": [
+          {
+            "plant": "P1",
+            "status": "Active"
+          },
+          {
+            "plant": "P3",
+            "status": "Active"
+          },
+          {
+            "plant": "P2",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Kilogram",
+        "partNumber": "MP-00001",
+        "weightLb": 22.046226
+      },
+      "runtime": "python",
+      "sample_id": "material-part-equivalent-kg",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 1",
+        "facilities": [
+          {
+            "plant": "P1",
+            "status": "Active"
+          },
+          {
+            "plant": "P3",
+            "status": "Active"
+          },
+          {
+            "plant": "P2",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Kilogram",
+        "partNumber": "MP-00001",
+        "weightLb": 22.046226
+      },
+      "runtime": "typescript",
+      "sample_id": "material-part-equivalent-kg",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 2",
+        "facilities": [
+          {
+            "plant": "P2",
+            "status": "Active"
+          },
+          {
+            "plant": "P4",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Pound",
+        "partNumber": "MP-00002",
+        "weightLb": 22.046226
+      },
+      "runtime": "interpreter",
+      "sample_id": "material-part-equivalent-lb",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 2",
+        "facilities": [
+          {
+            "plant": "P2",
+            "status": "Active"
+          },
+          {
+            "plant": "P4",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Pound",
+        "partNumber": "MP-00002",
+        "weightLb": 22.046226
+      },
+      "runtime": "python",
+      "sample_id": "material-part-equivalent-lb",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 2",
+        "facilities": [
+          {
+            "plant": "P2",
+            "status": "Active"
+          },
+          {
+            "plant": "P4",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Pound",
+        "partNumber": "MP-00002",
+        "weightLb": 22.046226
+      },
+      "runtime": "typescript",
+      "sample_id": "material-part-equivalent-lb",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 3",
+        "facilities": [
+          {
+            "plant": "P3",
+            "status": "Inactive"
+          },
+          {
+            "plant": "P1",
+            "status": "Active"
+          }
+        ],
+        "inventoryUnit": "Kilogram",
+        "partNumber": "MP-00003",
+        "weightLb": 24.250849
+      },
+      "runtime": "interpreter",
+      "sample_id": "material-part-003",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 3",
+        "facilities": [
+          {
+            "plant": "P3",
+            "status": "Inactive"
+          },
+          {
+            "plant": "P1",
+            "status": "Active"
+          }
+        ],
+        "inventoryUnit": "Kilogram",
+        "partNumber": "MP-00003",
+        "weightLb": 24.250849
+      },
+      "runtime": "python",
+      "sample_id": "material-part-003",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 3",
+        "facilities": [
+          {
+            "plant": "P3",
+            "status": "Inactive"
+          },
+          {
+            "plant": "P1",
+            "status": "Active"
+          }
+        ],
+        "inventoryUnit": "Kilogram",
+        "partNumber": "MP-00003",
+        "weightLb": 24.250849
+      },
+      "runtime": "typescript",
+      "sample_id": "material-part-003",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 4",
+        "facilities": [
+          {
+            "plant": "P4",
+            "status": "Active"
+          },
+          {
+            "plant": "P2",
+            "status": "Active"
+          },
+          {
+            "plant": "P1",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Kilogram",
+        "partNumber": "MP-00004",
+        "weightLb": 25.35316
+      },
+      "runtime": "interpreter",
+      "sample_id": "material-part-004",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 4",
+        "facilities": [
+          {
+            "plant": "P4",
+            "status": "Active"
+          },
+          {
+            "plant": "P2",
+            "status": "Active"
+          },
+          {
+            "plant": "P1",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Kilogram",
+        "partNumber": "MP-00004",
+        "weightLb": 25.35316
+      },
+      "runtime": "python",
+      "sample_id": "material-part-004",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 4",
+        "facilities": [
+          {
+            "plant": "P4",
+            "status": "Active"
+          },
+          {
+            "plant": "P2",
+            "status": "Active"
+          },
+          {
+            "plant": "P1",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Kilogram",
+        "partNumber": "MP-00004",
+        "weightLb": 25.35316
+      },
+      "runtime": "typescript",
+      "sample_id": "material-part-004",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 5",
+        "facilities": [
+          {
+            "plant": "P1",
+            "status": "Active"
+          },
+          {
+            "plant": "P3",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Kilogram",
+        "partNumber": "MP-00005",
+        "weightLb": 26.455471
+      },
+      "runtime": "interpreter",
+      "sample_id": "material-part-005",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 5",
+        "facilities": [
+          {
+            "plant": "P1",
+            "status": "Active"
+          },
+          {
+            "plant": "P3",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Kilogram",
+        "partNumber": "MP-00005",
+        "weightLb": 26.455471
+      },
+      "runtime": "python",
+      "sample_id": "material-part-005",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 5",
+        "facilities": [
+          {
+            "plant": "P1",
+            "status": "Active"
+          },
+          {
+            "plant": "P3",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Kilogram",
+        "partNumber": "MP-00005",
+        "weightLb": 26.455471
+      },
+      "runtime": "typescript",
+      "sample_id": "material-part-005",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 6",
+        "facilities": [
+          {
+            "plant": "P2",
+            "status": "Inactive"
+          },
+          {
+            "plant": "P4",
+            "status": "Active"
+          }
+        ],
+        "inventoryUnit": "Kilogram",
+        "partNumber": "MP-00006",
+        "weightLb": 27.557783
+      },
+      "runtime": "interpreter",
+      "sample_id": "material-part-006",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 6",
+        "facilities": [
+          {
+            "plant": "P2",
+            "status": "Inactive"
+          },
+          {
+            "plant": "P4",
+            "status": "Active"
+          }
+        ],
+        "inventoryUnit": "Kilogram",
+        "partNumber": "MP-00006",
+        "weightLb": 27.557783
+      },
+      "runtime": "python",
+      "sample_id": "material-part-006",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 6",
+        "facilities": [
+          {
+            "plant": "P2",
+            "status": "Inactive"
+          },
+          {
+            "plant": "P4",
+            "status": "Active"
+          }
+        ],
+        "inventoryUnit": "Kilogram",
+        "partNumber": "MP-00006",
+        "weightLb": 27.557783
+      },
+      "runtime": "typescript",
+      "sample_id": "material-part-006",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 7",
+        "facilities": [
+          {
+            "plant": "P3",
+            "status": "Active"
+          },
+          {
+            "plant": "P1",
+            "status": "Active"
+          },
+          {
+            "plant": "P4",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Kilogram",
+        "partNumber": "MP-00007",
+        "weightLb": 28.660094
+      },
+      "runtime": "interpreter",
+      "sample_id": "material-part-007",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 7",
+        "facilities": [
+          {
+            "plant": "P3",
+            "status": "Active"
+          },
+          {
+            "plant": "P1",
+            "status": "Active"
+          },
+          {
+            "plant": "P4",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Kilogram",
+        "partNumber": "MP-00007",
+        "weightLb": 28.660094
+      },
+      "runtime": "python",
+      "sample_id": "material-part-007",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 7",
+        "facilities": [
+          {
+            "plant": "P3",
+            "status": "Active"
+          },
+          {
+            "plant": "P1",
+            "status": "Active"
+          },
+          {
+            "plant": "P4",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Kilogram",
+        "partNumber": "MP-00007",
+        "weightLb": 28.660094
+      },
+      "runtime": "typescript",
+      "sample_id": "material-part-007",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 8",
+        "facilities": [
+          {
+            "plant": "P4",
+            "status": "Active"
+          },
+          {
+            "plant": "P2",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Kilogram",
+        "partNumber": "MP-00008",
+        "weightLb": 29.762405
+      },
+      "runtime": "interpreter",
+      "sample_id": "material-part-008",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 8",
+        "facilities": [
+          {
+            "plant": "P4",
+            "status": "Active"
+          },
+          {
+            "plant": "P2",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Kilogram",
+        "partNumber": "MP-00008",
+        "weightLb": 29.762405
+      },
+      "runtime": "python",
+      "sample_id": "material-part-008",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 8",
+        "facilities": [
+          {
+            "plant": "P4",
+            "status": "Active"
+          },
+          {
+            "plant": "P2",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Kilogram",
+        "partNumber": "MP-00008",
+        "weightLb": 29.762405
+      },
+      "runtime": "typescript",
+      "sample_id": "material-part-008",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 9",
+        "facilities": [
+          {
+            "plant": "P1",
+            "status": "Inactive"
+          },
+          {
+            "plant": "P3",
+            "status": "Active"
+          }
+        ],
+        "inventoryUnit": "Kilogram",
+        "partNumber": "MP-00009",
+        "weightLb": 30.864717
+      },
+      "runtime": "interpreter",
+      "sample_id": "material-part-009",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 9",
+        "facilities": [
+          {
+            "plant": "P1",
+            "status": "Inactive"
+          },
+          {
+            "plant": "P3",
+            "status": "Active"
+          }
+        ],
+        "inventoryUnit": "Kilogram",
+        "partNumber": "MP-00009",
+        "weightLb": 30.864717
+      },
+      "runtime": "python",
+      "sample_id": "material-part-009",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 9",
+        "facilities": [
+          {
+            "plant": "P1",
+            "status": "Inactive"
+          },
+          {
+            "plant": "P3",
+            "status": "Active"
+          }
+        ],
+        "inventoryUnit": "Kilogram",
+        "partNumber": "MP-00009",
+        "weightLb": 30.864717
+      },
+      "runtime": "typescript",
+      "sample_id": "material-part-009",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 10",
+        "facilities": [
+          {
+            "plant": "P2",
+            "status": "Active"
+          },
+          {
+            "plant": "P4",
+            "status": "Active"
+          },
+          {
+            "plant": "P3",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Kilogram",
+        "partNumber": "MP-00010",
+        "weightLb": 31.967028
+      },
+      "runtime": "interpreter",
+      "sample_id": "material-part-010",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 10",
+        "facilities": [
+          {
+            "plant": "P2",
+            "status": "Active"
+          },
+          {
+            "plant": "P4",
+            "status": "Active"
+          },
+          {
+            "plant": "P3",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Kilogram",
+        "partNumber": "MP-00010",
+        "weightLb": 31.967028
+      },
+      "runtime": "python",
+      "sample_id": "material-part-010",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 10",
+        "facilities": [
+          {
+            "plant": "P2",
+            "status": "Active"
+          },
+          {
+            "plant": "P4",
+            "status": "Active"
+          },
+          {
+            "plant": "P3",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Kilogram",
+        "partNumber": "MP-00010",
+        "weightLb": 31.967028
+      },
+      "runtime": "typescript",
+      "sample_id": "material-part-010",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 11",
+        "facilities": [
+          {
+            "plant": "P3",
+            "status": "Active"
+          },
+          {
+            "plant": "P1",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Kilogram",
+        "partNumber": "MP-00011",
+        "weightLb": 33.069339
+      },
+      "runtime": "interpreter",
+      "sample_id": "material-part-011",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 11",
+        "facilities": [
+          {
+            "plant": "P3",
+            "status": "Active"
+          },
+          {
+            "plant": "P1",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Kilogram",
+        "partNumber": "MP-00011",
+        "weightLb": 33.069339
+      },
+      "runtime": "python",
+      "sample_id": "material-part-011",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 11",
+        "facilities": [
+          {
+            "plant": "P3",
+            "status": "Active"
+          },
+          {
+            "plant": "P1",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Kilogram",
+        "partNumber": "MP-00011",
+        "weightLb": 33.069339
+      },
+      "runtime": "typescript",
+      "sample_id": "material-part-011",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 12",
+        "facilities": [
+          {
+            "plant": "P4",
+            "status": "Inactive"
+          },
+          {
+            "plant": "P2",
+            "status": "Active"
+          }
+        ],
+        "inventoryUnit": "Kilogram",
+        "partNumber": "MP-00012",
+        "weightLb": 34.171651
+      },
+      "runtime": "interpreter",
+      "sample_id": "material-part-012",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 12",
+        "facilities": [
+          {
+            "plant": "P4",
+            "status": "Inactive"
+          },
+          {
+            "plant": "P2",
+            "status": "Active"
+          }
+        ],
+        "inventoryUnit": "Kilogram",
+        "partNumber": "MP-00012",
+        "weightLb": 34.171651
+      },
+      "runtime": "python",
+      "sample_id": "material-part-012",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 12",
+        "facilities": [
+          {
+            "plant": "P4",
+            "status": "Inactive"
+          },
+          {
+            "plant": "P2",
+            "status": "Active"
+          }
+        ],
+        "inventoryUnit": "Kilogram",
+        "partNumber": "MP-00012",
+        "weightLb": 34.171651
+      },
+      "runtime": "typescript",
+      "sample_id": "material-part-012",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 13",
+        "facilities": [
+          {
+            "plant": "P1",
+            "status": "Active"
+          },
+          {
+            "plant": "P3",
+            "status": "Active"
+          },
+          {
+            "plant": "P2",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Kilogram",
+        "partNumber": "MP-00013",
+        "weightLb": 35.273962
+      },
+      "runtime": "interpreter",
+      "sample_id": "material-part-013",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 13",
+        "facilities": [
+          {
+            "plant": "P1",
+            "status": "Active"
+          },
+          {
+            "plant": "P3",
+            "status": "Active"
+          },
+          {
+            "plant": "P2",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Kilogram",
+        "partNumber": "MP-00013",
+        "weightLb": 35.273962
+      },
+      "runtime": "python",
+      "sample_id": "material-part-013",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 13",
+        "facilities": [
+          {
+            "plant": "P1",
+            "status": "Active"
+          },
+          {
+            "plant": "P3",
+            "status": "Active"
+          },
+          {
+            "plant": "P2",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Kilogram",
+        "partNumber": "MP-00013",
+        "weightLb": 35.273962
+      },
+      "runtime": "typescript",
+      "sample_id": "material-part-013",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 14",
+        "facilities": [
+          {
+            "plant": "P2",
+            "status": "Active"
+          },
+          {
+            "plant": "P4",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Kilogram",
+        "partNumber": "MP-00014",
+        "weightLb": 36.376273
+      },
+      "runtime": "interpreter",
+      "sample_id": "material-part-014",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 14",
+        "facilities": [
+          {
+            "plant": "P2",
+            "status": "Active"
+          },
+          {
+            "plant": "P4",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Kilogram",
+        "partNumber": "MP-00014",
+        "weightLb": 36.376273
+      },
+      "runtime": "python",
+      "sample_id": "material-part-014",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 14",
+        "facilities": [
+          {
+            "plant": "P2",
+            "status": "Active"
+          },
+          {
+            "plant": "P4",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Kilogram",
+        "partNumber": "MP-00014",
+        "weightLb": 36.376273
+      },
+      "runtime": "typescript",
+      "sample_id": "material-part-014",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 15",
+        "facilities": [
+          {
+            "plant": "P3",
+            "status": "Inactive"
+          },
+          {
+            "plant": "P1",
+            "status": "Active"
+          }
+        ],
+        "inventoryUnit": "Kilogram",
+        "partNumber": "MP-00015",
+        "weightLb": 37.478585
+      },
+      "runtime": "interpreter",
+      "sample_id": "material-part-015",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 15",
+        "facilities": [
+          {
+            "plant": "P3",
+            "status": "Inactive"
+          },
+          {
+            "plant": "P1",
+            "status": "Active"
+          }
+        ],
+        "inventoryUnit": "Kilogram",
+        "partNumber": "MP-00015",
+        "weightLb": 37.478585
+      },
+      "runtime": "python",
+      "sample_id": "material-part-015",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 15",
+        "facilities": [
+          {
+            "plant": "P3",
+            "status": "Inactive"
+          },
+          {
+            "plant": "P1",
+            "status": "Active"
+          }
+        ],
+        "inventoryUnit": "Kilogram",
+        "partNumber": "MP-00015",
+        "weightLb": 37.478585
+      },
+      "runtime": "typescript",
+      "sample_id": "material-part-015",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 16",
+        "facilities": [
+          {
+            "plant": "P4",
+            "status": "Active"
+          },
+          {
+            "plant": "P2",
+            "status": "Active"
+          },
+          {
+            "plant": "P1",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Kilogram",
+        "partNumber": "MP-00016",
+        "weightLb": 38.580896
+      },
+      "runtime": "interpreter",
+      "sample_id": "material-part-016",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 16",
+        "facilities": [
+          {
+            "plant": "P4",
+            "status": "Active"
+          },
+          {
+            "plant": "P2",
+            "status": "Active"
+          },
+          {
+            "plant": "P1",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Kilogram",
+        "partNumber": "MP-00016",
+        "weightLb": 38.580896
+      },
+      "runtime": "python",
+      "sample_id": "material-part-016",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 16",
+        "facilities": [
+          {
+            "plant": "P4",
+            "status": "Active"
+          },
+          {
+            "plant": "P2",
+            "status": "Active"
+          },
+          {
+            "plant": "P1",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Kilogram",
+        "partNumber": "MP-00016",
+        "weightLb": 38.580896
+      },
+      "runtime": "typescript",
+      "sample_id": "material-part-016",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 17",
+        "facilities": [
+          {
+            "plant": "P1",
+            "status": "Active"
+          },
+          {
+            "plant": "P3",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Kilogram",
+        "partNumber": "MP-00017",
+        "weightLb": 39.683207
+      },
+      "runtime": "interpreter",
+      "sample_id": "material-part-017",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 17",
+        "facilities": [
+          {
+            "plant": "P1",
+            "status": "Active"
+          },
+          {
+            "plant": "P3",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Kilogram",
+        "partNumber": "MP-00017",
+        "weightLb": 39.683207
+      },
+      "runtime": "python",
+      "sample_id": "material-part-017",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 17",
+        "facilities": [
+          {
+            "plant": "P1",
+            "status": "Active"
+          },
+          {
+            "plant": "P3",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Kilogram",
+        "partNumber": "MP-00017",
+        "weightLb": 39.683207
+      },
+      "runtime": "typescript",
+      "sample_id": "material-part-017",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 18",
+        "facilities": [
+          {
+            "plant": "P2",
+            "status": "Inactive"
+          },
+          {
+            "plant": "P4",
+            "status": "Active"
+          }
+        ],
+        "inventoryUnit": "Kilogram",
+        "partNumber": "MP-00018",
+        "weightLb": 40.785519
+      },
+      "runtime": "interpreter",
+      "sample_id": "material-part-018",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 18",
+        "facilities": [
+          {
+            "plant": "P2",
+            "status": "Inactive"
+          },
+          {
+            "plant": "P4",
+            "status": "Active"
+          }
+        ],
+        "inventoryUnit": "Kilogram",
+        "partNumber": "MP-00018",
+        "weightLb": 40.785519
+      },
+      "runtime": "python",
+      "sample_id": "material-part-018",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 18",
+        "facilities": [
+          {
+            "plant": "P2",
+            "status": "Inactive"
+          },
+          {
+            "plant": "P4",
+            "status": "Active"
+          }
+        ],
+        "inventoryUnit": "Kilogram",
+        "partNumber": "MP-00018",
+        "weightLb": 40.785519
+      },
+      "runtime": "typescript",
+      "sample_id": "material-part-018",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 19",
+        "facilities": [
+          {
+            "plant": "P3",
+            "status": "Active"
+          },
+          {
+            "plant": "P1",
+            "status": "Active"
+          },
+          {
+            "plant": "P4",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Kilogram",
+        "partNumber": "MP-00019",
+        "weightLb": 41.88783
+      },
+      "runtime": "interpreter",
+      "sample_id": "material-part-019",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 19",
+        "facilities": [
+          {
+            "plant": "P3",
+            "status": "Active"
+          },
+          {
+            "plant": "P1",
+            "status": "Active"
+          },
+          {
+            "plant": "P4",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Kilogram",
+        "partNumber": "MP-00019",
+        "weightLb": 41.88783
+      },
+      "runtime": "python",
+      "sample_id": "material-part-019",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 19",
+        "facilities": [
+          {
+            "plant": "P3",
+            "status": "Active"
+          },
+          {
+            "plant": "P1",
+            "status": "Active"
+          },
+          {
+            "plant": "P4",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Kilogram",
+        "partNumber": "MP-00019",
+        "weightLb": 41.88783
+      },
+      "runtime": "typescript",
+      "sample_id": "material-part-019",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 20",
+        "facilities": [
+          {
+            "plant": "P4",
+            "status": "Active"
+          },
+          {
+            "plant": "P2",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Kilogram",
+        "partNumber": "MP-00020",
+        "weightLb": 42.990141
+      },
+      "runtime": "interpreter",
+      "sample_id": "material-part-020",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 20",
+        "facilities": [
+          {
+            "plant": "P4",
+            "status": "Active"
+          },
+          {
+            "plant": "P2",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Kilogram",
+        "partNumber": "MP-00020",
+        "weightLb": 42.990141
+      },
+      "runtime": "python",
+      "sample_id": "material-part-020",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 20",
+        "facilities": [
+          {
+            "plant": "P4",
+            "status": "Active"
+          },
+          {
+            "plant": "P2",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Kilogram",
+        "partNumber": "MP-00020",
+        "weightLb": 42.990141
+      },
+      "runtime": "typescript",
+      "sample_id": "material-part-020",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 21",
+        "facilities": [
+          {
+            "plant": "P1",
+            "status": "Inactive"
+          },
+          {
+            "plant": "P3",
+            "status": "Active"
+          }
+        ],
+        "inventoryUnit": "Kilogram",
+        "partNumber": "MP-00021",
+        "weightLb": 44.092452
+      },
+      "runtime": "interpreter",
+      "sample_id": "material-part-021",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 21",
+        "facilities": [
+          {
+            "plant": "P1",
+            "status": "Inactive"
+          },
+          {
+            "plant": "P3",
+            "status": "Active"
+          }
+        ],
+        "inventoryUnit": "Kilogram",
+        "partNumber": "MP-00021",
+        "weightLb": 44.092452
+      },
+      "runtime": "python",
+      "sample_id": "material-part-021",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 21",
+        "facilities": [
+          {
+            "plant": "P1",
+            "status": "Inactive"
+          },
+          {
+            "plant": "P3",
+            "status": "Active"
+          }
+        ],
+        "inventoryUnit": "Kilogram",
+        "partNumber": "MP-00021",
+        "weightLb": 44.092452
+      },
+      "runtime": "typescript",
+      "sample_id": "material-part-021",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 22",
+        "facilities": [
+          {
+            "plant": "P2",
+            "status": "Active"
+          },
+          {
+            "plant": "P4",
+            "status": "Active"
+          },
+          {
+            "plant": "P3",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Kilogram",
+        "partNumber": "MP-00022",
+        "weightLb": 45.194764
+      },
+      "runtime": "interpreter",
+      "sample_id": "material-part-022",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 22",
+        "facilities": [
+          {
+            "plant": "P2",
+            "status": "Active"
+          },
+          {
+            "plant": "P4",
+            "status": "Active"
+          },
+          {
+            "plant": "P3",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Kilogram",
+        "partNumber": "MP-00022",
+        "weightLb": 45.194764
+      },
+      "runtime": "python",
+      "sample_id": "material-part-022",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 22",
+        "facilities": [
+          {
+            "plant": "P2",
+            "status": "Active"
+          },
+          {
+            "plant": "P4",
+            "status": "Active"
+          },
+          {
+            "plant": "P3",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Kilogram",
+        "partNumber": "MP-00022",
+        "weightLb": 45.194764
+      },
+      "runtime": "typescript",
+      "sample_id": "material-part-022",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 23",
+        "facilities": [
+          {
+            "plant": "P3",
+            "status": "Active"
+          },
+          {
+            "plant": "P1",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Kilogram",
+        "partNumber": "MP-00023",
+        "weightLb": 46.297075
+      },
+      "runtime": "interpreter",
+      "sample_id": "material-part-023",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 23",
+        "facilities": [
+          {
+            "plant": "P3",
+            "status": "Active"
+          },
+          {
+            "plant": "P1",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Kilogram",
+        "partNumber": "MP-00023",
+        "weightLb": 46.297075
+      },
+      "runtime": "python",
+      "sample_id": "material-part-023",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 23",
+        "facilities": [
+          {
+            "plant": "P3",
+            "status": "Active"
+          },
+          {
+            "plant": "P1",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Kilogram",
+        "partNumber": "MP-00023",
+        "weightLb": 46.297075
+      },
+      "runtime": "typescript",
+      "sample_id": "material-part-023",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 24",
+        "facilities": [
+          {
+            "plant": "P4",
+            "status": "Inactive"
+          },
+          {
+            "plant": "P2",
+            "status": "Active"
+          }
+        ],
+        "inventoryUnit": "Kilogram",
+        "partNumber": "MP-00024",
+        "weightLb": 47.399386
+      },
+      "runtime": "interpreter",
+      "sample_id": "material-part-024",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 24",
+        "facilities": [
+          {
+            "plant": "P4",
+            "status": "Inactive"
+          },
+          {
+            "plant": "P2",
+            "status": "Active"
+          }
+        ],
+        "inventoryUnit": "Kilogram",
+        "partNumber": "MP-00024",
+        "weightLb": 47.399386
+      },
+      "runtime": "python",
+      "sample_id": "material-part-024",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 24",
+        "facilities": [
+          {
+            "plant": "P4",
+            "status": "Inactive"
+          },
+          {
+            "plant": "P2",
+            "status": "Active"
+          }
+        ],
+        "inventoryUnit": "Kilogram",
+        "partNumber": "MP-00024",
+        "weightLb": 47.399386
+      },
+      "runtime": "typescript",
+      "sample_id": "material-part-024",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 25",
+        "facilities": [
+          {
+            "plant": "P1",
+            "status": "Active"
+          },
+          {
+            "plant": "P3",
+            "status": "Active"
+          },
+          {
+            "plant": "P2",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Kilogram",
+        "partNumber": "MP-00025",
+        "weightLb": 48.501698
+      },
+      "runtime": "interpreter",
+      "sample_id": "material-part-025",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 25",
+        "facilities": [
+          {
+            "plant": "P1",
+            "status": "Active"
+          },
+          {
+            "plant": "P3",
+            "status": "Active"
+          },
+          {
+            "plant": "P2",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Kilogram",
+        "partNumber": "MP-00025",
+        "weightLb": 48.501698
+      },
+      "runtime": "python",
+      "sample_id": "material-part-025",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 25",
+        "facilities": [
+          {
+            "plant": "P1",
+            "status": "Active"
+          },
+          {
+            "plant": "P3",
+            "status": "Active"
+          },
+          {
+            "plant": "P2",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Kilogram",
+        "partNumber": "MP-00025",
+        "weightLb": 48.501698
+      },
+      "runtime": "typescript",
+      "sample_id": "material-part-025",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 26",
+        "facilities": [
+          {
+            "plant": "P2",
+            "status": "Active"
+          },
+          {
+            "plant": "P4",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Kilogram",
+        "partNumber": "MP-00026",
+        "weightLb": 49.604009
+      },
+      "runtime": "interpreter",
+      "sample_id": "material-part-026",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 26",
+        "facilities": [
+          {
+            "plant": "P2",
+            "status": "Active"
+          },
+          {
+            "plant": "P4",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Kilogram",
+        "partNumber": "MP-00026",
+        "weightLb": 49.604009
+      },
+      "runtime": "python",
+      "sample_id": "material-part-026",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 26",
+        "facilities": [
+          {
+            "plant": "P2",
+            "status": "Active"
+          },
+          {
+            "plant": "P4",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Kilogram",
+        "partNumber": "MP-00026",
+        "weightLb": 49.604009
+      },
+      "runtime": "typescript",
+      "sample_id": "material-part-026",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 27",
+        "facilities": [
+          {
+            "plant": "P3",
+            "status": "Inactive"
+          },
+          {
+            "plant": "P1",
+            "status": "Active"
+          }
+        ],
+        "inventoryUnit": "Kilogram",
+        "partNumber": "MP-00027",
+        "weightLb": 50.70632
+      },
+      "runtime": "interpreter",
+      "sample_id": "material-part-027",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 27",
+        "facilities": [
+          {
+            "plant": "P3",
+            "status": "Inactive"
+          },
+          {
+            "plant": "P1",
+            "status": "Active"
+          }
+        ],
+        "inventoryUnit": "Kilogram",
+        "partNumber": "MP-00027",
+        "weightLb": 50.70632
+      },
+      "runtime": "python",
+      "sample_id": "material-part-027",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 27",
+        "facilities": [
+          {
+            "plant": "P3",
+            "status": "Inactive"
+          },
+          {
+            "plant": "P1",
+            "status": "Active"
+          }
+        ],
+        "inventoryUnit": "Kilogram",
+        "partNumber": "MP-00027",
+        "weightLb": 50.70632
+      },
+      "runtime": "typescript",
+      "sample_id": "material-part-027",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 28",
+        "facilities": [
+          {
+            "plant": "P4",
+            "status": "Active"
+          },
+          {
+            "plant": "P2",
+            "status": "Active"
+          },
+          {
+            "plant": "P1",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Kilogram",
+        "partNumber": "MP-00028",
+        "weightLb": 51.808632
+      },
+      "runtime": "interpreter",
+      "sample_id": "material-part-028",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 28",
+        "facilities": [
+          {
+            "plant": "P4",
+            "status": "Active"
+          },
+          {
+            "plant": "P2",
+            "status": "Active"
+          },
+          {
+            "plant": "P1",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Kilogram",
+        "partNumber": "MP-00028",
+        "weightLb": 51.808632
+      },
+      "runtime": "python",
+      "sample_id": "material-part-028",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 28",
+        "facilities": [
+          {
+            "plant": "P4",
+            "status": "Active"
+          },
+          {
+            "plant": "P2",
+            "status": "Active"
+          },
+          {
+            "plant": "P1",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Kilogram",
+        "partNumber": "MP-00028",
+        "weightLb": 51.808632
+      },
+      "runtime": "typescript",
+      "sample_id": "material-part-028",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 29",
+        "facilities": [
+          {
+            "plant": "P1",
+            "status": "Active"
+          },
+          {
+            "plant": "P3",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Kilogram",
+        "partNumber": "MP-00029",
+        "weightLb": 52.910943
+      },
+      "runtime": "interpreter",
+      "sample_id": "material-part-029",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 29",
+        "facilities": [
+          {
+            "plant": "P1",
+            "status": "Active"
+          },
+          {
+            "plant": "P3",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Kilogram",
+        "partNumber": "MP-00029",
+        "weightLb": 52.910943
+      },
+      "runtime": "python",
+      "sample_id": "material-part-029",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 29",
+        "facilities": [
+          {
+            "plant": "P1",
+            "status": "Active"
+          },
+          {
+            "plant": "P3",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Kilogram",
+        "partNumber": "MP-00029",
+        "weightLb": 52.910943
+      },
+      "runtime": "typescript",
+      "sample_id": "material-part-029",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 30",
+        "facilities": [
+          {
+            "plant": "P2",
+            "status": "Inactive"
+          },
+          {
+            "plant": "P4",
+            "status": "Active"
+          }
+        ],
+        "inventoryUnit": "Kilogram",
+        "partNumber": "MP-00030",
+        "weightLb": 54.013254
+      },
+      "runtime": "interpreter",
+      "sample_id": "material-part-030",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 30",
+        "facilities": [
+          {
+            "plant": "P2",
+            "status": "Inactive"
+          },
+          {
+            "plant": "P4",
+            "status": "Active"
+          }
+        ],
+        "inventoryUnit": "Kilogram",
+        "partNumber": "MP-00030",
+        "weightLb": 54.013254
+      },
+      "runtime": "python",
+      "sample_id": "material-part-030",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 30",
+        "facilities": [
+          {
+            "plant": "P2",
+            "status": "Inactive"
+          },
+          {
+            "plant": "P4",
+            "status": "Active"
+          }
+        ],
+        "inventoryUnit": "Kilogram",
+        "partNumber": "MP-00030",
+        "weightLb": 54.013254
+      },
+      "runtime": "typescript",
+      "sample_id": "material-part-030",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 31",
+        "facilities": [
+          {
+            "plant": "P3",
+            "status": "Active"
+          },
+          {
+            "plant": "P1",
+            "status": "Active"
+          },
+          {
+            "plant": "P4",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Pound",
+        "partNumber": "MP-00031",
+        "weightLb": 25
+      },
+      "runtime": "interpreter",
+      "sample_id": "material-part-031",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 31",
+        "facilities": [
+          {
+            "plant": "P3",
+            "status": "Active"
+          },
+          {
+            "plant": "P1",
+            "status": "Active"
+          },
+          {
+            "plant": "P4",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Pound",
+        "partNumber": "MP-00031",
+        "weightLb": 25
+      },
+      "runtime": "python",
+      "sample_id": "material-part-031",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 31",
+        "facilities": [
+          {
+            "plant": "P3",
+            "status": "Active"
+          },
+          {
+            "plant": "P1",
+            "status": "Active"
+          },
+          {
+            "plant": "P4",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Pound",
+        "partNumber": "MP-00031",
+        "weightLb": 25
+      },
+      "runtime": "typescript",
+      "sample_id": "material-part-031",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 32",
+        "facilities": [
+          {
+            "plant": "P4",
+            "status": "Active"
+          },
+          {
+            "plant": "P2",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Pound",
+        "partNumber": "MP-00032",
+        "weightLb": 25.5
+      },
+      "runtime": "interpreter",
+      "sample_id": "material-part-032",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 32",
+        "facilities": [
+          {
+            "plant": "P4",
+            "status": "Active"
+          },
+          {
+            "plant": "P2",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Pound",
+        "partNumber": "MP-00032",
+        "weightLb": 25.5
+      },
+      "runtime": "python",
+      "sample_id": "material-part-032",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 32",
+        "facilities": [
+          {
+            "plant": "P4",
+            "status": "Active"
+          },
+          {
+            "plant": "P2",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Pound",
+        "partNumber": "MP-00032",
+        "weightLb": 25.5
+      },
+      "runtime": "typescript",
+      "sample_id": "material-part-032",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 33",
+        "facilities": [
+          {
+            "plant": "P1",
+            "status": "Inactive"
+          },
+          {
+            "plant": "P3",
+            "status": "Active"
+          }
+        ],
+        "inventoryUnit": "Pound",
+        "partNumber": "MP-00033",
+        "weightLb": 26
+      },
+      "runtime": "interpreter",
+      "sample_id": "material-part-033",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 33",
+        "facilities": [
+          {
+            "plant": "P1",
+            "status": "Inactive"
+          },
+          {
+            "plant": "P3",
+            "status": "Active"
+          }
+        ],
+        "inventoryUnit": "Pound",
+        "partNumber": "MP-00033",
+        "weightLb": 26
+      },
+      "runtime": "python",
+      "sample_id": "material-part-033",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 33",
+        "facilities": [
+          {
+            "plant": "P1",
+            "status": "Inactive"
+          },
+          {
+            "plant": "P3",
+            "status": "Active"
+          }
+        ],
+        "inventoryUnit": "Pound",
+        "partNumber": "MP-00033",
+        "weightLb": 26
+      },
+      "runtime": "typescript",
+      "sample_id": "material-part-033",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 34",
+        "facilities": [
+          {
+            "plant": "P2",
+            "status": "Active"
+          },
+          {
+            "plant": "P4",
+            "status": "Active"
+          },
+          {
+            "plant": "P3",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Pound",
+        "partNumber": "MP-00034",
+        "weightLb": 26.5
+      },
+      "runtime": "interpreter",
+      "sample_id": "material-part-034",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 34",
+        "facilities": [
+          {
+            "plant": "P2",
+            "status": "Active"
+          },
+          {
+            "plant": "P4",
+            "status": "Active"
+          },
+          {
+            "plant": "P3",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Pound",
+        "partNumber": "MP-00034",
+        "weightLb": 26.5
+      },
+      "runtime": "python",
+      "sample_id": "material-part-034",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 34",
+        "facilities": [
+          {
+            "plant": "P2",
+            "status": "Active"
+          },
+          {
+            "plant": "P4",
+            "status": "Active"
+          },
+          {
+            "plant": "P3",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Pound",
+        "partNumber": "MP-00034",
+        "weightLb": 26.5
+      },
+      "runtime": "typescript",
+      "sample_id": "material-part-034",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 35",
+        "facilities": [
+          {
+            "plant": "P3",
+            "status": "Active"
+          },
+          {
+            "plant": "P1",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Pound",
+        "partNumber": "MP-00035",
+        "weightLb": 27
+      },
+      "runtime": "interpreter",
+      "sample_id": "material-part-035",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 35",
+        "facilities": [
+          {
+            "plant": "P3",
+            "status": "Active"
+          },
+          {
+            "plant": "P1",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Pound",
+        "partNumber": "MP-00035",
+        "weightLb": 27
+      },
+      "runtime": "python",
+      "sample_id": "material-part-035",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 35",
+        "facilities": [
+          {
+            "plant": "P3",
+            "status": "Active"
+          },
+          {
+            "plant": "P1",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Pound",
+        "partNumber": "MP-00035",
+        "weightLb": 27
+      },
+      "runtime": "typescript",
+      "sample_id": "material-part-035",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 36",
+        "facilities": [
+          {
+            "plant": "P4",
+            "status": "Inactive"
+          },
+          {
+            "plant": "P2",
+            "status": "Active"
+          }
+        ],
+        "inventoryUnit": "Pound",
+        "partNumber": "MP-00036",
+        "weightLb": 27.5
+      },
+      "runtime": "interpreter",
+      "sample_id": "material-part-036",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 36",
+        "facilities": [
+          {
+            "plant": "P4",
+            "status": "Inactive"
+          },
+          {
+            "plant": "P2",
+            "status": "Active"
+          }
+        ],
+        "inventoryUnit": "Pound",
+        "partNumber": "MP-00036",
+        "weightLb": 27.5
+      },
+      "runtime": "python",
+      "sample_id": "material-part-036",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 36",
+        "facilities": [
+          {
+            "plant": "P4",
+            "status": "Inactive"
+          },
+          {
+            "plant": "P2",
+            "status": "Active"
+          }
+        ],
+        "inventoryUnit": "Pound",
+        "partNumber": "MP-00036",
+        "weightLb": 27.5
+      },
+      "runtime": "typescript",
+      "sample_id": "material-part-036",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 37",
+        "facilities": [
+          {
+            "plant": "P1",
+            "status": "Active"
+          },
+          {
+            "plant": "P3",
+            "status": "Active"
+          },
+          {
+            "plant": "P2",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Pound",
+        "partNumber": "MP-00037",
+        "weightLb": 28
+      },
+      "runtime": "interpreter",
+      "sample_id": "material-part-037",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 37",
+        "facilities": [
+          {
+            "plant": "P1",
+            "status": "Active"
+          },
+          {
+            "plant": "P3",
+            "status": "Active"
+          },
+          {
+            "plant": "P2",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Pound",
+        "partNumber": "MP-00037",
+        "weightLb": 28
+      },
+      "runtime": "python",
+      "sample_id": "material-part-037",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 37",
+        "facilities": [
+          {
+            "plant": "P1",
+            "status": "Active"
+          },
+          {
+            "plant": "P3",
+            "status": "Active"
+          },
+          {
+            "plant": "P2",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Pound",
+        "partNumber": "MP-00037",
+        "weightLb": 28
+      },
+      "runtime": "typescript",
+      "sample_id": "material-part-037",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 38",
+        "facilities": [
+          {
+            "plant": "P2",
+            "status": "Active"
+          },
+          {
+            "plant": "P4",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Pound",
+        "partNumber": "MP-00038",
+        "weightLb": 28.5
+      },
+      "runtime": "interpreter",
+      "sample_id": "material-part-038",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 38",
+        "facilities": [
+          {
+            "plant": "P2",
+            "status": "Active"
+          },
+          {
+            "plant": "P4",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Pound",
+        "partNumber": "MP-00038",
+        "weightLb": 28.5
+      },
+      "runtime": "python",
+      "sample_id": "material-part-038",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 38",
+        "facilities": [
+          {
+            "plant": "P2",
+            "status": "Active"
+          },
+          {
+            "plant": "P4",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Pound",
+        "partNumber": "MP-00038",
+        "weightLb": 28.5
+      },
+      "runtime": "typescript",
+      "sample_id": "material-part-038",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 39",
+        "facilities": [
+          {
+            "plant": "P3",
+            "status": "Inactive"
+          },
+          {
+            "plant": "P1",
+            "status": "Active"
+          }
+        ],
+        "inventoryUnit": "Pound",
+        "partNumber": "MP-00039",
+        "weightLb": 29
+      },
+      "runtime": "interpreter",
+      "sample_id": "material-part-039",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 39",
+        "facilities": [
+          {
+            "plant": "P3",
+            "status": "Inactive"
+          },
+          {
+            "plant": "P1",
+            "status": "Active"
+          }
+        ],
+        "inventoryUnit": "Pound",
+        "partNumber": "MP-00039",
+        "weightLb": 29
+      },
+      "runtime": "python",
+      "sample_id": "material-part-039",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 39",
+        "facilities": [
+          {
+            "plant": "P3",
+            "status": "Inactive"
+          },
+          {
+            "plant": "P1",
+            "status": "Active"
+          }
+        ],
+        "inventoryUnit": "Pound",
+        "partNumber": "MP-00039",
+        "weightLb": 29
+      },
+      "runtime": "typescript",
+      "sample_id": "material-part-039",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 40",
+        "facilities": [
+          {
+            "plant": "P4",
+            "status": "Active"
+          },
+          {
+            "plant": "P2",
+            "status": "Active"
+          },
+          {
+            "plant": "P1",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Pound",
+        "partNumber": "MP-00040",
+        "weightLb": 29.5
+      },
+      "runtime": "interpreter",
+      "sample_id": "material-part-040",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 40",
+        "facilities": [
+          {
+            "plant": "P4",
+            "status": "Active"
+          },
+          {
+            "plant": "P2",
+            "status": "Active"
+          },
+          {
+            "plant": "P1",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Pound",
+        "partNumber": "MP-00040",
+        "weightLb": 29.5
+      },
+      "runtime": "python",
+      "sample_id": "material-part-040",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 40",
+        "facilities": [
+          {
+            "plant": "P4",
+            "status": "Active"
+          },
+          {
+            "plant": "P2",
+            "status": "Active"
+          },
+          {
+            "plant": "P1",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Pound",
+        "partNumber": "MP-00040",
+        "weightLb": 29.5
+      },
+      "runtime": "typescript",
+      "sample_id": "material-part-040",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 41",
+        "facilities": [
+          {
+            "plant": "P1",
+            "status": "Active"
+          },
+          {
+            "plant": "P3",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Pound",
+        "partNumber": "MP-00041",
+        "weightLb": 30
+      },
+      "runtime": "interpreter",
+      "sample_id": "material-part-041",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 41",
+        "facilities": [
+          {
+            "plant": "P1",
+            "status": "Active"
+          },
+          {
+            "plant": "P3",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Pound",
+        "partNumber": "MP-00041",
+        "weightLb": 30
+      },
+      "runtime": "python",
+      "sample_id": "material-part-041",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 41",
+        "facilities": [
+          {
+            "plant": "P1",
+            "status": "Active"
+          },
+          {
+            "plant": "P3",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Pound",
+        "partNumber": "MP-00041",
+        "weightLb": 30
+      },
+      "runtime": "typescript",
+      "sample_id": "material-part-041",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 42",
+        "facilities": [
+          {
+            "plant": "P2",
+            "status": "Inactive"
+          },
+          {
+            "plant": "P4",
+            "status": "Active"
+          }
+        ],
+        "inventoryUnit": "Pound",
+        "partNumber": "MP-00042",
+        "weightLb": 30.5
+      },
+      "runtime": "interpreter",
+      "sample_id": "material-part-042",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 42",
+        "facilities": [
+          {
+            "plant": "P2",
+            "status": "Inactive"
+          },
+          {
+            "plant": "P4",
+            "status": "Active"
+          }
+        ],
+        "inventoryUnit": "Pound",
+        "partNumber": "MP-00042",
+        "weightLb": 30.5
+      },
+      "runtime": "python",
+      "sample_id": "material-part-042",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 42",
+        "facilities": [
+          {
+            "plant": "P2",
+            "status": "Inactive"
+          },
+          {
+            "plant": "P4",
+            "status": "Active"
+          }
+        ],
+        "inventoryUnit": "Pound",
+        "partNumber": "MP-00042",
+        "weightLb": 30.5
+      },
+      "runtime": "typescript",
+      "sample_id": "material-part-042",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 43",
+        "facilities": [
+          {
+            "plant": "P3",
+            "status": "Active"
+          },
+          {
+            "plant": "P1",
+            "status": "Active"
+          },
+          {
+            "plant": "P4",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Pound",
+        "partNumber": "MP-00043",
+        "weightLb": 31
+      },
+      "runtime": "interpreter",
+      "sample_id": "material-part-043",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 43",
+        "facilities": [
+          {
+            "plant": "P3",
+            "status": "Active"
+          },
+          {
+            "plant": "P1",
+            "status": "Active"
+          },
+          {
+            "plant": "P4",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Pound",
+        "partNumber": "MP-00043",
+        "weightLb": 31
+      },
+      "runtime": "python",
+      "sample_id": "material-part-043",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 43",
+        "facilities": [
+          {
+            "plant": "P3",
+            "status": "Active"
+          },
+          {
+            "plant": "P1",
+            "status": "Active"
+          },
+          {
+            "plant": "P4",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Pound",
+        "partNumber": "MP-00043",
+        "weightLb": 31
+      },
+      "runtime": "typescript",
+      "sample_id": "material-part-043",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 44",
+        "facilities": [
+          {
+            "plant": "P4",
+            "status": "Active"
+          },
+          {
+            "plant": "P2",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Pound",
+        "partNumber": "MP-00044",
+        "weightLb": 31.5
+      },
+      "runtime": "interpreter",
+      "sample_id": "material-part-044",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 44",
+        "facilities": [
+          {
+            "plant": "P4",
+            "status": "Active"
+          },
+          {
+            "plant": "P2",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Pound",
+        "partNumber": "MP-00044",
+        "weightLb": 31.5
+      },
+      "runtime": "python",
+      "sample_id": "material-part-044",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 44",
+        "facilities": [
+          {
+            "plant": "P4",
+            "status": "Active"
+          },
+          {
+            "plant": "P2",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Pound",
+        "partNumber": "MP-00044",
+        "weightLb": 31.5
+      },
+      "runtime": "typescript",
+      "sample_id": "material-part-044",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 45",
+        "facilities": [
+          {
+            "plant": "P1",
+            "status": "Inactive"
+          },
+          {
+            "plant": "P3",
+            "status": "Active"
+          }
+        ],
+        "inventoryUnit": "Pound",
+        "partNumber": "MP-00045",
+        "weightLb": 32
+      },
+      "runtime": "interpreter",
+      "sample_id": "material-part-045",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 45",
+        "facilities": [
+          {
+            "plant": "P1",
+            "status": "Inactive"
+          },
+          {
+            "plant": "P3",
+            "status": "Active"
+          }
+        ],
+        "inventoryUnit": "Pound",
+        "partNumber": "MP-00045",
+        "weightLb": 32
+      },
+      "runtime": "python",
+      "sample_id": "material-part-045",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 45",
+        "facilities": [
+          {
+            "plant": "P1",
+            "status": "Inactive"
+          },
+          {
+            "plant": "P3",
+            "status": "Active"
+          }
+        ],
+        "inventoryUnit": "Pound",
+        "partNumber": "MP-00045",
+        "weightLb": 32
+      },
+      "runtime": "typescript",
+      "sample_id": "material-part-045",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 46",
+        "facilities": [
+          {
+            "plant": "P2",
+            "status": "Active"
+          },
+          {
+            "plant": "P4",
+            "status": "Active"
+          },
+          {
+            "plant": "P3",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Pound",
+        "partNumber": "MP-00046",
+        "weightLb": 32.5
+      },
+      "runtime": "interpreter",
+      "sample_id": "material-part-046",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 46",
+        "facilities": [
+          {
+            "plant": "P2",
+            "status": "Active"
+          },
+          {
+            "plant": "P4",
+            "status": "Active"
+          },
+          {
+            "plant": "P3",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Pound",
+        "partNumber": "MP-00046",
+        "weightLb": 32.5
+      },
+      "runtime": "python",
+      "sample_id": "material-part-046",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 46",
+        "facilities": [
+          {
+            "plant": "P2",
+            "status": "Active"
+          },
+          {
+            "plant": "P4",
+            "status": "Active"
+          },
+          {
+            "plant": "P3",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Pound",
+        "partNumber": "MP-00046",
+        "weightLb": 32.5
+      },
+      "runtime": "typescript",
+      "sample_id": "material-part-046",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 47",
+        "facilities": [
+          {
+            "plant": "P3",
+            "status": "Active"
+          },
+          {
+            "plant": "P1",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Pound",
+        "partNumber": "MP-00047",
+        "weightLb": 33
+      },
+      "runtime": "interpreter",
+      "sample_id": "material-part-047",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 47",
+        "facilities": [
+          {
+            "plant": "P3",
+            "status": "Active"
+          },
+          {
+            "plant": "P1",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Pound",
+        "partNumber": "MP-00047",
+        "weightLb": 33
+      },
+      "runtime": "python",
+      "sample_id": "material-part-047",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 47",
+        "facilities": [
+          {
+            "plant": "P3",
+            "status": "Active"
+          },
+          {
+            "plant": "P1",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Pound",
+        "partNumber": "MP-00047",
+        "weightLb": 33
+      },
+      "runtime": "typescript",
+      "sample_id": "material-part-047",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 48",
+        "facilities": [
+          {
+            "plant": "P4",
+            "status": "Inactive"
+          },
+          {
+            "plant": "P2",
+            "status": "Active"
+          }
+        ],
+        "inventoryUnit": "Pound",
+        "partNumber": "MP-00048",
+        "weightLb": 33.5
+      },
+      "runtime": "interpreter",
+      "sample_id": "material-part-048",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 48",
+        "facilities": [
+          {
+            "plant": "P4",
+            "status": "Inactive"
+          },
+          {
+            "plant": "P2",
+            "status": "Active"
+          }
+        ],
+        "inventoryUnit": "Pound",
+        "partNumber": "MP-00048",
+        "weightLb": 33.5
+      },
+      "runtime": "python",
+      "sample_id": "material-part-048",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 48",
+        "facilities": [
+          {
+            "plant": "P4",
+            "status": "Inactive"
+          },
+          {
+            "plant": "P2",
+            "status": "Active"
+          }
+        ],
+        "inventoryUnit": "Pound",
+        "partNumber": "MP-00048",
+        "weightLb": 33.5
+      },
+      "runtime": "typescript",
+      "sample_id": "material-part-048",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 49",
+        "facilities": [
+          {
+            "plant": "P1",
+            "status": "Active"
+          },
+          {
+            "plant": "P3",
+            "status": "Active"
+          },
+          {
+            "plant": "P2",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Pound",
+        "partNumber": "MP-00049",
+        "weightLb": 34
+      },
+      "runtime": "interpreter",
+      "sample_id": "material-part-049",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 49",
+        "facilities": [
+          {
+            "plant": "P1",
+            "status": "Active"
+          },
+          {
+            "plant": "P3",
+            "status": "Active"
+          },
+          {
+            "plant": "P2",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Pound",
+        "partNumber": "MP-00049",
+        "weightLb": 34
+      },
+      "runtime": "python",
+      "sample_id": "material-part-049",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 49",
+        "facilities": [
+          {
+            "plant": "P1",
+            "status": "Active"
+          },
+          {
+            "plant": "P3",
+            "status": "Active"
+          },
+          {
+            "plant": "P2",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Pound",
+        "partNumber": "MP-00049",
+        "weightLb": 34
+      },
+      "runtime": "typescript",
+      "sample_id": "material-part-049",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 50",
+        "facilities": [
+          {
+            "plant": "P2",
+            "status": "Active"
+          },
+          {
+            "plant": "P4",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Pound",
+        "partNumber": "MP-00050",
+        "weightLb": 34.5
+      },
+      "runtime": "interpreter",
+      "sample_id": "material-part-050",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 50",
+        "facilities": [
+          {
+            "plant": "P2",
+            "status": "Active"
+          },
+          {
+            "plant": "P4",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Pound",
+        "partNumber": "MP-00050",
+        "weightLb": 34.5
+      },
+      "runtime": "python",
+      "sample_id": "material-part-050",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 50",
+        "facilities": [
+          {
+            "plant": "P2",
+            "status": "Active"
+          },
+          {
+            "plant": "P4",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Pound",
+        "partNumber": "MP-00050",
+        "weightLb": 34.5
+      },
+      "runtime": "typescript",
+      "sample_id": "material-part-050",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 51",
+        "facilities": [
+          {
+            "plant": "P3",
+            "status": "Inactive"
+          },
+          {
+            "plant": "P1",
+            "status": "Active"
+          }
+        ],
+        "inventoryUnit": "Pound",
+        "partNumber": "MP-00051",
+        "weightLb": 35
+      },
+      "runtime": "interpreter",
+      "sample_id": "material-part-051",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 51",
+        "facilities": [
+          {
+            "plant": "P3",
+            "status": "Inactive"
+          },
+          {
+            "plant": "P1",
+            "status": "Active"
+          }
+        ],
+        "inventoryUnit": "Pound",
+        "partNumber": "MP-00051",
+        "weightLb": 35
+      },
+      "runtime": "python",
+      "sample_id": "material-part-051",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 51",
+        "facilities": [
+          {
+            "plant": "P3",
+            "status": "Inactive"
+          },
+          {
+            "plant": "P1",
+            "status": "Active"
+          }
+        ],
+        "inventoryUnit": "Pound",
+        "partNumber": "MP-00051",
+        "weightLb": 35
+      },
+      "runtime": "typescript",
+      "sample_id": "material-part-051",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 52",
+        "facilities": [
+          {
+            "plant": "P4",
+            "status": "Active"
+          },
+          {
+            "plant": "P2",
+            "status": "Active"
+          },
+          {
+            "plant": "P1",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Pound",
+        "partNumber": "MP-00052",
+        "weightLb": 35.5
+      },
+      "runtime": "interpreter",
+      "sample_id": "material-part-052",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 52",
+        "facilities": [
+          {
+            "plant": "P4",
+            "status": "Active"
+          },
+          {
+            "plant": "P2",
+            "status": "Active"
+          },
+          {
+            "plant": "P1",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Pound",
+        "partNumber": "MP-00052",
+        "weightLb": 35.5
+      },
+      "runtime": "python",
+      "sample_id": "material-part-052",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 52",
+        "facilities": [
+          {
+            "plant": "P4",
+            "status": "Active"
+          },
+          {
+            "plant": "P2",
+            "status": "Active"
+          },
+          {
+            "plant": "P1",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Pound",
+        "partNumber": "MP-00052",
+        "weightLb": 35.5
+      },
+      "runtime": "typescript",
+      "sample_id": "material-part-052",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 53",
+        "facilities": [
+          {
+            "plant": "P1",
+            "status": "Active"
+          },
+          {
+            "plant": "P3",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Pound",
+        "partNumber": "MP-00053",
+        "weightLb": 36
+      },
+      "runtime": "interpreter",
+      "sample_id": "material-part-053",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 53",
+        "facilities": [
+          {
+            "plant": "P1",
+            "status": "Active"
+          },
+          {
+            "plant": "P3",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Pound",
+        "partNumber": "MP-00053",
+        "weightLb": 36
+      },
+      "runtime": "python",
+      "sample_id": "material-part-053",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 53",
+        "facilities": [
+          {
+            "plant": "P1",
+            "status": "Active"
+          },
+          {
+            "plant": "P3",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Pound",
+        "partNumber": "MP-00053",
+        "weightLb": 36
+      },
+      "runtime": "typescript",
+      "sample_id": "material-part-053",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 54",
+        "facilities": [
+          {
+            "plant": "P2",
+            "status": "Inactive"
+          },
+          {
+            "plant": "P4",
+            "status": "Active"
+          }
+        ],
+        "inventoryUnit": "Pound",
+        "partNumber": "MP-00054",
+        "weightLb": 36.5
+      },
+      "runtime": "interpreter",
+      "sample_id": "material-part-054",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 54",
+        "facilities": [
+          {
+            "plant": "P2",
+            "status": "Inactive"
+          },
+          {
+            "plant": "P4",
+            "status": "Active"
+          }
+        ],
+        "inventoryUnit": "Pound",
+        "partNumber": "MP-00054",
+        "weightLb": 36.5
+      },
+      "runtime": "python",
+      "sample_id": "material-part-054",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 54",
+        "facilities": [
+          {
+            "plant": "P2",
+            "status": "Inactive"
+          },
+          {
+            "plant": "P4",
+            "status": "Active"
+          }
+        ],
+        "inventoryUnit": "Pound",
+        "partNumber": "MP-00054",
+        "weightLb": 36.5
+      },
+      "runtime": "typescript",
+      "sample_id": "material-part-054",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 55",
+        "facilities": [
+          {
+            "plant": "P3",
+            "status": "Active"
+          },
+          {
+            "plant": "P1",
+            "status": "Active"
+          },
+          {
+            "plant": "P4",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Pound",
+        "partNumber": "MP-00055",
+        "weightLb": 37
+      },
+      "runtime": "interpreter",
+      "sample_id": "material-part-055",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 55",
+        "facilities": [
+          {
+            "plant": "P3",
+            "status": "Active"
+          },
+          {
+            "plant": "P1",
+            "status": "Active"
+          },
+          {
+            "plant": "P4",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Pound",
+        "partNumber": "MP-00055",
+        "weightLb": 37
+      },
+      "runtime": "python",
+      "sample_id": "material-part-055",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 55",
+        "facilities": [
+          {
+            "plant": "P3",
+            "status": "Active"
+          },
+          {
+            "plant": "P1",
+            "status": "Active"
+          },
+          {
+            "plant": "P4",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Pound",
+        "partNumber": "MP-00055",
+        "weightLb": 37
+      },
+      "runtime": "typescript",
+      "sample_id": "material-part-055",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 56",
+        "facilities": [
+          {
+            "plant": "P4",
+            "status": "Active"
+          },
+          {
+            "plant": "P2",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Pound",
+        "partNumber": "MP-00056",
+        "weightLb": 37.5
+      },
+      "runtime": "interpreter",
+      "sample_id": "material-part-056",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 56",
+        "facilities": [
+          {
+            "plant": "P4",
+            "status": "Active"
+          },
+          {
+            "plant": "P2",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Pound",
+        "partNumber": "MP-00056",
+        "weightLb": 37.5
+      },
+      "runtime": "python",
+      "sample_id": "material-part-056",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 56",
+        "facilities": [
+          {
+            "plant": "P4",
+            "status": "Active"
+          },
+          {
+            "plant": "P2",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Pound",
+        "partNumber": "MP-00056",
+        "weightLb": 37.5
+      },
+      "runtime": "typescript",
+      "sample_id": "material-part-056",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 57",
+        "facilities": [
+          {
+            "plant": "P1",
+            "status": "Inactive"
+          },
+          {
+            "plant": "P3",
+            "status": "Active"
+          }
+        ],
+        "inventoryUnit": "Pound",
+        "partNumber": "MP-00057",
+        "weightLb": 38
+      },
+      "runtime": "interpreter",
+      "sample_id": "material-part-057",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 57",
+        "facilities": [
+          {
+            "plant": "P1",
+            "status": "Inactive"
+          },
+          {
+            "plant": "P3",
+            "status": "Active"
+          }
+        ],
+        "inventoryUnit": "Pound",
+        "partNumber": "MP-00057",
+        "weightLb": 38
+      },
+      "runtime": "python",
+      "sample_id": "material-part-057",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 57",
+        "facilities": [
+          {
+            "plant": "P1",
+            "status": "Inactive"
+          },
+          {
+            "plant": "P3",
+            "status": "Active"
+          }
+        ],
+        "inventoryUnit": "Pound",
+        "partNumber": "MP-00057",
+        "weightLb": 38
+      },
+      "runtime": "typescript",
+      "sample_id": "material-part-057",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 58",
+        "facilities": [
+          {
+            "plant": "P2",
+            "status": "Active"
+          },
+          {
+            "plant": "P4",
+            "status": "Active"
+          },
+          {
+            "plant": "P3",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Pound",
+        "partNumber": "MP-00058",
+        "weightLb": 38.5
+      },
+      "runtime": "interpreter",
+      "sample_id": "material-part-058",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 58",
+        "facilities": [
+          {
+            "plant": "P2",
+            "status": "Active"
+          },
+          {
+            "plant": "P4",
+            "status": "Active"
+          },
+          {
+            "plant": "P3",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Pound",
+        "partNumber": "MP-00058",
+        "weightLb": 38.5
+      },
+      "runtime": "python",
+      "sample_id": "material-part-058",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 58",
+        "facilities": [
+          {
+            "plant": "P2",
+            "status": "Active"
+          },
+          {
+            "plant": "P4",
+            "status": "Active"
+          },
+          {
+            "plant": "P3",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Pound",
+        "partNumber": "MP-00058",
+        "weightLb": 38.5
+      },
+      "runtime": "typescript",
+      "sample_id": "material-part-058",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 59",
+        "facilities": [
+          {
+            "plant": "P3",
+            "status": "Active"
+          },
+          {
+            "plant": "P1",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Pound",
+        "partNumber": "MP-00059",
+        "weightLb": 39
+      },
+      "runtime": "interpreter",
+      "sample_id": "material-part-059",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 59",
+        "facilities": [
+          {
+            "plant": "P3",
+            "status": "Active"
+          },
+          {
+            "plant": "P1",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Pound",
+        "partNumber": "MP-00059",
+        "weightLb": 39
+      },
+      "runtime": "python",
+      "sample_id": "material-part-059",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 59",
+        "facilities": [
+          {
+            "plant": "P3",
+            "status": "Active"
+          },
+          {
+            "plant": "P1",
+            "status": "Inactive"
+          }
+        ],
+        "inventoryUnit": "Pound",
+        "partNumber": "MP-00059",
+        "weightLb": 39
+      },
+      "runtime": "typescript",
+      "sample_id": "material-part-059",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 60",
+        "facilities": [
+          {
+            "plant": "P4",
+            "status": "Inactive"
+          },
+          {
+            "plant": "P2",
+            "status": "Active"
+          }
+        ],
+        "inventoryUnit": "Pound",
+        "partNumber": "MP-00060",
+        "weightLb": 39.5
+      },
+      "runtime": "interpreter",
+      "sample_id": "material-part-060",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 60",
+        "facilities": [
+          {
+            "plant": "P4",
+            "status": "Inactive"
+          },
+          {
+            "plant": "P2",
+            "status": "Active"
+          }
+        ],
+        "inventoryUnit": "Pound",
+        "partNumber": "MP-00060",
+        "weightLb": 39.5
+      },
+      "runtime": "python",
+      "sample_id": "material-part-060",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "description": "Material 60",
+        "facilities": [
+          {
+            "plant": "P4",
+            "status": "Inactive"
+          },
+          {
+            "plant": "P2",
+            "status": "Active"
+          }
+        ],
+        "inventoryUnit": "Pound",
+        "partNumber": "MP-00060",
+        "weightLb": 39.5
+      },
+      "runtime": "typescript",
+      "sample_id": "material-part-060",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": "SOURCE_SCHEMA_VALIDATION",
+      "output": null,
+      "runtime": "interpreter",
+      "sample_id": "material-part-unsupported-unit",
+      "stderr_summary": "source sample value is outside the allowed enum at /baseUnit",
+      "success": false
+    },
+    {
+      "error_code": "SOURCE_SCHEMA_VALIDATION",
+      "output": null,
+      "runtime": "python",
+      "sample_id": "material-part-unsupported-unit",
+      "stderr_summary": "SOURCE_SCHEMA_VALIDATION",
+      "success": false
+    },
+    {
+      "error_code": "SOURCE_SCHEMA_VALIDATION",
+      "output": null,
+      "runtime": "typescript",
+      "sample_id": "material-part-unsupported-unit",
+      "stderr_summary": "SOURCE_SCHEMA_VALIDATION",
+      "success": false
+    }
+  ]
+}

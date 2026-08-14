@@ -1,0 +1,3640 @@
+{
+  "assisted_confidence_counts": {
+    "high": 0,
+    "low": 0,
+    "medium": 0,
+    "none": 5
+  },
+  "assisted_disposition_counts": {
+    "ambiguous": 0,
+    "manual": 5,
+    "no_match": 0,
+    "review_required": 0,
+    "suggested": 0
+  },
+  "baseline_confidence_counts": {
+    "high": 2,
+    "low": 0,
+    "medium": 0,
+    "none": 3
+  },
+  "baseline_disposition_counts": {
+    "ambiguous": 0,
+    "manual": 0,
+    "no_match": 3,
+    "review_required": 0,
+    "suggested": 2
+  },
+  "denominators": {
+    "ambiguity_precision": 0,
+    "compile_success_rate": 2,
+    "cross_runtime_equivalence": 82,
+    "direct_match_precision": 2,
+    "direct_match_recall": 3,
+    "duplicate_target_rejection": 1,
+    "expected_ambiguity_detection": 0,
+    "expected_no_match_detection": 0,
+    "high_confidence_false_positive_rate": 2,
+    "high_confidence_precision": 2,
+    "invalid_source_path_rejection": 1,
+    "invariant_pass_rate": 240,
+    "low_confidence_precision": 0,
+    "medium_confidence_precision": 0,
+    "no_match_precision": 3,
+    "no_match_recall": 0,
+    "required_target_coverage": 5,
+    "review_application_correctness": 0,
+    "target_outcome_coverage": 5,
+    "target_schema_pass_rate": 240,
+    "transformation_exact_match_rate": 2
+  },
+  "gate_results": [
+    {
+      "maximum": null,
+      "metric": "cross_runtime_equivalence",
+      "minimum": 1.0,
+      "passed": true,
+      "value": 1.0
+    },
+    {
+      "maximum": null,
+      "metric": "duplicate_target_rejection",
+      "minimum": 1.0,
+      "passed": true,
+      "value": 1.0
+    },
+    {
+      "maximum": null,
+      "metric": "expected_ambiguity_detection",
+      "minimum": 1.0,
+      "passed": true,
+      "value": 1.0
+    },
+    {
+      "maximum": null,
+      "metric": "expected_no_match_detection",
+      "minimum": 1.0,
+      "passed": true,
+      "value": 1.0
+    },
+    {
+      "maximum": 0.02,
+      "metric": "high_confidence_false_positive_rate",
+      "minimum": null,
+      "passed": true,
+      "value": 0.0
+    },
+    {
+      "maximum": null,
+      "metric": "high_confidence_precision",
+      "minimum": 0.9,
+      "passed": true,
+      "value": 1.0
+    },
+    {
+      "maximum": null,
+      "metric": "invalid_source_path_rejection",
+      "minimum": 1.0,
+      "passed": true,
+      "value": 1.0
+    },
+    {
+      "maximum": null,
+      "metric": "review_application_correctness",
+      "minimum": 1.0,
+      "passed": true,
+      "value": 1.0
+    },
+    {
+      "maximum": null,
+      "metric": "target_outcome_coverage",
+      "minimum": 1.0,
+      "passed": true,
+      "value": 1.0
+    }
+  ],
+  "gate_thresholds": {
+    "cross_runtime_equivalence": {
+      "maximum": null,
+      "minimum": 1.0
+    },
+    "duplicate_target_rejection": {
+      "maximum": null,
+      "minimum": 1.0
+    },
+    "expected_ambiguity_detection": {
+      "maximum": null,
+      "minimum": 1.0
+    },
+    "expected_no_match_detection": {
+      "maximum": null,
+      "minimum": 1.0
+    },
+    "high_confidence_false_positive_rate": {
+      "maximum": 0.02,
+      "minimum": null
+    },
+    "high_confidence_precision": {
+      "maximum": null,
+      "minimum": 0.9
+    },
+    "invalid_source_path_rejection": {
+      "maximum": null,
+      "minimum": 1.0
+    },
+    "review_application_correctness": {
+      "maximum": null,
+      "minimum": 1.0
+    },
+    "target_outcome_coverage": {
+      "maximum": null,
+      "minimum": 1.0
+    }
+  },
+  "id": "account-segments",
+  "issues": [
+    {
+      "code": "INVALID_INPUT",
+      "component": "benchmark.metrics",
+      "correction": "Declare an explicit zero expectation or add benchmark cases.",
+      "mapping_id": null,
+      "message": "metric 'low_confidence_precision' has no observed cases",
+      "rule_index": null,
+      "sample_id": null,
+      "schema_id": null,
+      "severity": "warning",
+      "source_path": null,
+      "target_path": null
+    },
+    {
+      "code": "INVALID_INPUT",
+      "component": "benchmark.metrics",
+      "correction": "Declare an explicit zero expectation or add benchmark cases.",
+      "mapping_id": null,
+      "message": "metric 'medium_confidence_precision' has no observed cases",
+      "rule_index": null,
+      "sample_id": null,
+      "schema_id": null,
+      "severity": "warning",
+      "source_path": null,
+      "target_path": null
+    }
+  ],
+  "metrics": {
+    "ambiguity_precision": 1.0,
+    "compile_success_rate": 1.0,
+    "cross_runtime_equivalence": 1.0,
+    "direct_match_precision": 1.0,
+    "direct_match_recall": 0.6666666666666666,
+    "duplicate_target_rejection": 1.0,
+    "expected_ambiguity_detection": 1.0,
+    "expected_no_match_detection": 1.0,
+    "high_confidence_false_positive_rate": 0.0,
+    "high_confidence_precision": 1.0,
+    "invalid_source_path_rejection": 1.0,
+    "invariant_pass_rate": 1.0,
+    "low_confidence_precision": 0.0,
+    "medium_confidence_precision": 0.0,
+    "no_match_precision": 0.0,
+    "no_match_recall": 1.0,
+    "required_target_coverage": 1.0,
+    "review_application_correctness": 1.0,
+    "target_outcome_coverage": 1.0,
+    "target_schema_pass_rate": 1.0,
+    "transformation_exact_match_rate": 1.0
+  },
+  "numerators": {
+    "ambiguity_precision": 0,
+    "compile_success_rate": 2,
+    "cross_runtime_equivalence": 82,
+    "direct_match_precision": 2,
+    "direct_match_recall": 2,
+    "duplicate_target_rejection": 1,
+    "expected_ambiguity_detection": 0,
+    "expected_no_match_detection": 0,
+    "high_confidence_false_positive_rate": 0,
+    "high_confidence_precision": 2,
+    "invalid_source_path_rejection": 1,
+    "invariant_pass_rate": 240,
+    "low_confidence_precision": 0,
+    "medium_confidence_precision": 0,
+    "no_match_precision": 0,
+    "no_match_recall": 0,
+    "required_target_coverage": 5,
+    "review_application_correctness": 0,
+    "target_outcome_coverage": 5,
+    "target_schema_pass_rate": 240,
+    "transformation_exact_match_rate": 2
+  },
+  "report_version": "0.1",
+  "runtime_observations": [
+    {
+      "error_code": null,
+      "output": {
+        "account": "000007000008000009",
+        "company": "000001",
+        "costCenter": "000004-000005",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "interpreter",
+      "sample_id": "account-segments-leading-zero",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "000007000008000009",
+        "company": "000001",
+        "costCenter": "000004-000005",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "python",
+      "sample_id": "account-segments-leading-zero",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "000007000008000009",
+        "company": "000001",
+        "costCenter": "000004-000005",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "typescript",
+      "sample_id": "account-segments-leading-zero",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "612868453840730059",
+        "company": "837981",
+        "costCenter": "601690-061568",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "interpreter",
+      "sample_id": "account-segments-002",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "612868453840730059",
+        "company": "837981",
+        "costCenter": "601690-061568",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "python",
+      "sample_id": "account-segments-002",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "612868453840730059",
+        "company": "837981",
+        "costCenter": "601690-061568",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "typescript",
+      "sample_id": "account-segments-002",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "210237140492714667",
+        "company": "123720",
+        "costCenter": "980629-270560",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "interpreter",
+      "sample_id": "account-segments-003",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "210237140492714667",
+        "company": "123720",
+        "costCenter": "980629-270560",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "python",
+      "sample_id": "account-segments-003",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "210237140492714667",
+        "company": "123720",
+        "costCenter": "980629-270560",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "typescript",
+      "sample_id": "account-segments-003",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "526551225589482445",
+        "company": "016723",
+        "costCenter": "669082-725995",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "interpreter",
+      "sample_id": "account-segments-004",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "526551225589482445",
+        "company": "016723",
+        "costCenter": "669082-725995",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "python",
+      "sample_id": "account-segments-004",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "526551225589482445",
+        "company": "016723",
+        "costCenter": "669082-725995",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "typescript",
+      "sample_id": "account-segments-004",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "853846532746386400",
+        "company": "638432",
+        "costCenter": "992536-053236",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "interpreter",
+      "sample_id": "account-segments-005",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "853846532746386400",
+        "company": "638432",
+        "costCenter": "992536-053236",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "python",
+      "sample_id": "account-segments-005",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "853846532746386400",
+        "company": "638432",
+        "costCenter": "992536-053236",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "typescript",
+      "sample_id": "account-segments-005",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "907527094610392615",
+        "company": "618777",
+        "costCenter": "371686-450702",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "interpreter",
+      "sample_id": "account-segments-006",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "907527094610392615",
+        "company": "618777",
+        "costCenter": "371686-450702",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "python",
+      "sample_id": "account-segments-006",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "907527094610392615",
+        "company": "618777",
+        "costCenter": "371686-450702",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "typescript",
+      "sample_id": "account-segments-006",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "109309023968020133",
+        "company": "048249",
+        "costCenter": "586548-908102",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "interpreter",
+      "sample_id": "account-segments-007",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "109309023968020133",
+        "company": "048249",
+        "costCenter": "586548-908102",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "python",
+      "sample_id": "account-segments-007",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "109309023968020133",
+        "company": "048249",
+        "costCenter": "586548-908102",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "typescript",
+      "sample_id": "account-segments-007",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "262329014861074443",
+        "company": "959823",
+        "costCenter": "301682-335966",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "interpreter",
+      "sample_id": "account-segments-008",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "262329014861074443",
+        "company": "959823",
+        "costCenter": "301682-335966",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "python",
+      "sample_id": "account-segments-008",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "262329014861074443",
+        "company": "959823",
+        "costCenter": "301682-335966",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "typescript",
+      "sample_id": "account-segments-008",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "898583070909922815",
+        "company": "643127",
+        "costCenter": "233337-854814",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "interpreter",
+      "sample_id": "account-segments-009",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "898583070909922815",
+        "company": "643127",
+        "costCenter": "233337-854814",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "python",
+      "sample_id": "account-segments-009",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "898583070909922815",
+        "company": "643127",
+        "costCenter": "233337-854814",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "typescript",
+      "sample_id": "account-segments-009",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "486297449159827862",
+        "company": "726326",
+        "costCenter": "877898-417894",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "interpreter",
+      "sample_id": "account-segments-010",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "486297449159827862",
+        "company": "726326",
+        "costCenter": "877898-417894",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "python",
+      "sample_id": "account-segments-010",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "486297449159827862",
+        "company": "726326",
+        "costCenter": "877898-417894",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "typescript",
+      "sample_id": "account-segments-010",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "187817425842329171",
+        "company": "859036",
+        "costCenter": "095983-315568",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "interpreter",
+      "sample_id": "account-segments-011",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "187817425842329171",
+        "company": "859036",
+        "costCenter": "095983-315568",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "python",
+      "sample_id": "account-segments-011",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "187817425842329171",
+        "company": "859036",
+        "costCenter": "095983-315568",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "typescript",
+      "sample_id": "account-segments-011",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "985484903106362713",
+        "company": "022587",
+        "costCenter": "292621-903247",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "interpreter",
+      "sample_id": "account-segments-012",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "985484903106362713",
+        "company": "022587",
+        "costCenter": "292621-903247",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "python",
+      "sample_id": "account-segments-012",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "985484903106362713",
+        "company": "022587",
+        "costCenter": "292621-903247",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "typescript",
+      "sample_id": "account-segments-012",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "746155521865235924",
+        "company": "720876",
+        "costCenter": "461742-727244",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "interpreter",
+      "sample_id": "account-segments-013",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "746155521865235924",
+        "company": "720876",
+        "costCenter": "461742-727244",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "python",
+      "sample_id": "account-segments-013",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "746155521865235924",
+        "company": "720876",
+        "costCenter": "461742-727244",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "typescript",
+      "sample_id": "account-segments-013",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "835422307212047022",
+        "company": "078417",
+        "costCenter": "237721-369613",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "interpreter",
+      "sample_id": "account-segments-014",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "835422307212047022",
+        "company": "078417",
+        "costCenter": "237721-369613",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "python",
+      "sample_id": "account-segments-014",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "835422307212047022",
+        "company": "078417",
+        "costCenter": "237721-369613",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "typescript",
+      "sample_id": "account-segments-014",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "210779633906631066",
+        "company": "617235",
+        "costCenter": "218937-432760",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "interpreter",
+      "sample_id": "account-segments-015",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "210779633906631066",
+        "company": "617235",
+        "costCenter": "218937-432760",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "python",
+      "sample_id": "account-segments-015",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "210779633906631066",
+        "company": "617235",
+        "costCenter": "218937-432760",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "typescript",
+      "sample_id": "account-segments-015",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "719952853762132389",
+        "company": "591864",
+        "costCenter": "995547-403664",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "interpreter",
+      "sample_id": "account-segments-016",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "719952853762132389",
+        "company": "591864",
+        "costCenter": "995547-403664",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "python",
+      "sample_id": "account-segments-016",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "719952853762132389",
+        "company": "591864",
+        "costCenter": "995547-403664",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "typescript",
+      "sample_id": "account-segments-016",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "131358658513852248",
+        "company": "926376",
+        "costCenter": "284417-025987",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "interpreter",
+      "sample_id": "account-segments-017",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "131358658513852248",
+        "company": "926376",
+        "costCenter": "284417-025987",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "python",
+      "sample_id": "account-segments-017",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "131358658513852248",
+        "company": "926376",
+        "costCenter": "284417-025987",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "typescript",
+      "sample_id": "account-segments-017",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "267073102014283606",
+        "company": "968220",
+        "costCenter": "649286-144282",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "interpreter",
+      "sample_id": "account-segments-018",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "267073102014283606",
+        "company": "968220",
+        "costCenter": "649286-144282",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "python",
+      "sample_id": "account-segments-018",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "267073102014283606",
+        "company": "968220",
+        "costCenter": "649286-144282",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "typescript",
+      "sample_id": "account-segments-018",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "500965627482429154",
+        "company": "477546",
+        "costCenter": "136001-049312",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "interpreter",
+      "sample_id": "account-segments-019",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "500965627482429154",
+        "company": "477546",
+        "costCenter": "136001-049312",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "python",
+      "sample_id": "account-segments-019",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "500965627482429154",
+        "company": "477546",
+        "costCenter": "136001-049312",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "typescript",
+      "sample_id": "account-segments-019",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "832406443700649418",
+        "company": "961609",
+        "costCenter": "982208-622152",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "interpreter",
+      "sample_id": "account-segments-020",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "832406443700649418",
+        "company": "961609",
+        "costCenter": "982208-622152",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "python",
+      "sample_id": "account-segments-020",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "832406443700649418",
+        "company": "961609",
+        "costCenter": "982208-622152",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "typescript",
+      "sample_id": "account-segments-020",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "350130967747664301",
+        "company": "132739",
+        "costCenter": "580415-722116",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "interpreter",
+      "sample_id": "account-segments-021",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "350130967747664301",
+        "company": "132739",
+        "costCenter": "580415-722116",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "python",
+      "sample_id": "account-segments-021",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "350130967747664301",
+        "company": "132739",
+        "costCenter": "580415-722116",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "typescript",
+      "sample_id": "account-segments-021",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "015831040449807437",
+        "company": "138052",
+        "costCenter": "588153-543904",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "interpreter",
+      "sample_id": "account-segments-022",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "015831040449807437",
+        "company": "138052",
+        "costCenter": "588153-543904",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "python",
+      "sample_id": "account-segments-022",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "015831040449807437",
+        "company": "138052",
+        "costCenter": "588153-543904",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "typescript",
+      "sample_id": "account-segments-022",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "841829266472273487",
+        "company": "186834",
+        "costCenter": "744593-184620",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "interpreter",
+      "sample_id": "account-segments-023",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "841829266472273487",
+        "company": "186834",
+        "costCenter": "744593-184620",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "python",
+      "sample_id": "account-segments-023",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "841829266472273487",
+        "company": "186834",
+        "costCenter": "744593-184620",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "typescript",
+      "sample_id": "account-segments-023",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "241837370755530112",
+        "company": "248214",
+        "costCenter": "200679-364853",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "interpreter",
+      "sample_id": "account-segments-024",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "241837370755530112",
+        "company": "248214",
+        "costCenter": "200679-364853",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "python",
+      "sample_id": "account-segments-024",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "241837370755530112",
+        "company": "248214",
+        "costCenter": "200679-364853",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "typescript",
+      "sample_id": "account-segments-024",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "954529913935328162",
+        "company": "966341",
+        "costCenter": "730496-230903",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "interpreter",
+      "sample_id": "account-segments-025",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "954529913935328162",
+        "company": "966341",
+        "costCenter": "730496-230903",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "python",
+      "sample_id": "account-segments-025",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "954529913935328162",
+        "company": "966341",
+        "costCenter": "730496-230903",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "typescript",
+      "sample_id": "account-segments-025",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "110505600726119753",
+        "company": "621094",
+        "costCenter": "819255-912474",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "interpreter",
+      "sample_id": "account-segments-026",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "110505600726119753",
+        "company": "621094",
+        "costCenter": "819255-912474",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "python",
+      "sample_id": "account-segments-026",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "110505600726119753",
+        "company": "621094",
+        "costCenter": "819255-912474",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "typescript",
+      "sample_id": "account-segments-026",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "674562588637652160",
+        "company": "565711",
+        "costCenter": "761555-406914",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "interpreter",
+      "sample_id": "account-segments-027",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "674562588637652160",
+        "company": "565711",
+        "costCenter": "761555-406914",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "python",
+      "sample_id": "account-segments-027",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "674562588637652160",
+        "company": "565711",
+        "costCenter": "761555-406914",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "typescript",
+      "sample_id": "account-segments-027",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "186346648254169065",
+        "company": "599694",
+        "costCenter": "586104-471585",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "interpreter",
+      "sample_id": "account-segments-028",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "186346648254169065",
+        "company": "599694",
+        "costCenter": "586104-471585",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "python",
+      "sample_id": "account-segments-028",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "186346648254169065",
+        "company": "599694",
+        "costCenter": "586104-471585",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "typescript",
+      "sample_id": "account-segments-028",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "618681544279371154",
+        "company": "816783",
+        "costCenter": "793394-444979",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "interpreter",
+      "sample_id": "account-segments-029",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "618681544279371154",
+        "company": "816783",
+        "costCenter": "793394-444979",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "python",
+      "sample_id": "account-segments-029",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "618681544279371154",
+        "company": "816783",
+        "costCenter": "793394-444979",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "typescript",
+      "sample_id": "account-segments-029",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "665191742535493672",
+        "company": "325198",
+        "costCenter": "157067-180163",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "interpreter",
+      "sample_id": "account-segments-030",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "665191742535493672",
+        "company": "325198",
+        "costCenter": "157067-180163",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "python",
+      "sample_id": "account-segments-030",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "665191742535493672",
+        "company": "325198",
+        "costCenter": "157067-180163",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "typescript",
+      "sample_id": "account-segments-030",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "979984705926367917",
+        "company": "365538",
+        "costCenter": "105970-291974",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "interpreter",
+      "sample_id": "account-segments-031",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "979984705926367917",
+        "company": "365538",
+        "costCenter": "105970-291974",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "python",
+      "sample_id": "account-segments-031",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "979984705926367917",
+        "company": "365538",
+        "costCenter": "105970-291974",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "typescript",
+      "sample_id": "account-segments-031",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "729524048000520444",
+        "company": "970035",
+        "costCenter": "838940-935289",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "interpreter",
+      "sample_id": "account-segments-032",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "729524048000520444",
+        "company": "970035",
+        "costCenter": "838940-935289",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "python",
+      "sample_id": "account-segments-032",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "729524048000520444",
+        "company": "970035",
+        "costCenter": "838940-935289",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "typescript",
+      "sample_id": "account-segments-032",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "501423694179075898",
+        "company": "720097",
+        "costCenter": "348274-929007",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "interpreter",
+      "sample_id": "account-segments-033",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "501423694179075898",
+        "company": "720097",
+        "costCenter": "348274-929007",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "python",
+      "sample_id": "account-segments-033",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "501423694179075898",
+        "company": "720097",
+        "costCenter": "348274-929007",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "typescript",
+      "sample_id": "account-segments-033",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "919311142983187482",
+        "company": "623622",
+        "costCenter": "147016-681164",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "interpreter",
+      "sample_id": "account-segments-034",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "919311142983187482",
+        "company": "623622",
+        "costCenter": "147016-681164",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "python",
+      "sample_id": "account-segments-034",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "919311142983187482",
+        "company": "623622",
+        "costCenter": "147016-681164",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "typescript",
+      "sample_id": "account-segments-034",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "746165709123338541",
+        "company": "432695",
+        "costCenter": "269991-187827",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "interpreter",
+      "sample_id": "account-segments-035",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "746165709123338541",
+        "company": "432695",
+        "costCenter": "269991-187827",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "python",
+      "sample_id": "account-segments-035",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "746165709123338541",
+        "company": "432695",
+        "costCenter": "269991-187827",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "typescript",
+      "sample_id": "account-segments-035",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "164860133865589562",
+        "company": "004134",
+        "costCenter": "756178-799030",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "interpreter",
+      "sample_id": "account-segments-036",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "164860133865589562",
+        "company": "004134",
+        "costCenter": "756178-799030",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "python",
+      "sample_id": "account-segments-036",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "164860133865589562",
+        "company": "004134",
+        "costCenter": "756178-799030",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "typescript",
+      "sample_id": "account-segments-036",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "929564079283478360",
+        "company": "797502",
+        "costCenter": "239650-181855",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "interpreter",
+      "sample_id": "account-segments-037",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "929564079283478360",
+        "company": "797502",
+        "costCenter": "239650-181855",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "python",
+      "sample_id": "account-segments-037",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "929564079283478360",
+        "company": "797502",
+        "costCenter": "239650-181855",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "typescript",
+      "sample_id": "account-segments-037",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "579374217063107970",
+        "company": "544929",
+        "costCenter": "884228-653387",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "interpreter",
+      "sample_id": "account-segments-038",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "579374217063107970",
+        "company": "544929",
+        "costCenter": "884228-653387",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "python",
+      "sample_id": "account-segments-038",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "579374217063107970",
+        "company": "544929",
+        "costCenter": "884228-653387",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "typescript",
+      "sample_id": "account-segments-038",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "585549712589428162",
+        "company": "363663",
+        "costCenter": "139292-174376",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "interpreter",
+      "sample_id": "account-segments-039",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "585549712589428162",
+        "company": "363663",
+        "costCenter": "139292-174376",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "python",
+      "sample_id": "account-segments-039",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "585549712589428162",
+        "company": "363663",
+        "costCenter": "139292-174376",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "typescript",
+      "sample_id": "account-segments-039",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "314848037414615317",
+        "company": "881204",
+        "costCenter": "463579-449127",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "interpreter",
+      "sample_id": "account-segments-040",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "314848037414615317",
+        "company": "881204",
+        "costCenter": "463579-449127",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "python",
+      "sample_id": "account-segments-040",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "314848037414615317",
+        "company": "881204",
+        "costCenter": "463579-449127",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "typescript",
+      "sample_id": "account-segments-040",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "031263266054156600",
+        "company": "840808",
+        "costCenter": "196751-527850",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "interpreter",
+      "sample_id": "account-segments-041",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "031263266054156600",
+        "company": "840808",
+        "costCenter": "196751-527850",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "python",
+      "sample_id": "account-segments-041",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "031263266054156600",
+        "company": "840808",
+        "costCenter": "196751-527850",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "typescript",
+      "sample_id": "account-segments-041",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "993356904621151559",
+        "company": "384163",
+        "costCenter": "112313-440917",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "interpreter",
+      "sample_id": "account-segments-042",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "993356904621151559",
+        "company": "384163",
+        "costCenter": "112313-440917",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "python",
+      "sample_id": "account-segments-042",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "993356904621151559",
+        "company": "384163",
+        "costCenter": "112313-440917",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "typescript",
+      "sample_id": "account-segments-042",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "634499527421000857",
+        "company": "428986",
+        "costCenter": "786815-380757",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "interpreter",
+      "sample_id": "account-segments-043",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "634499527421000857",
+        "company": "428986",
+        "costCenter": "786815-380757",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "python",
+      "sample_id": "account-segments-043",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "634499527421000857",
+        "company": "428986",
+        "costCenter": "786815-380757",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "typescript",
+      "sample_id": "account-segments-043",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "378107111304334332",
+        "company": "941237",
+        "costCenter": "012916-613625",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "interpreter",
+      "sample_id": "account-segments-044",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "378107111304334332",
+        "company": "941237",
+        "costCenter": "012916-613625",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "python",
+      "sample_id": "account-segments-044",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "378107111304334332",
+        "company": "941237",
+        "costCenter": "012916-613625",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "typescript",
+      "sample_id": "account-segments-044",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "333880236186349569",
+        "company": "136290",
+        "costCenter": "404417-580463",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "interpreter",
+      "sample_id": "account-segments-045",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "333880236186349569",
+        "company": "136290",
+        "costCenter": "404417-580463",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "python",
+      "sample_id": "account-segments-045",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "333880236186349569",
+        "company": "136290",
+        "costCenter": "404417-580463",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "typescript",
+      "sample_id": "account-segments-045",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "527864440303775721",
+        "company": "563757",
+        "costCenter": "287685-806411",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "interpreter",
+      "sample_id": "account-segments-046",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "527864440303775721",
+        "company": "563757",
+        "costCenter": "287685-806411",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "python",
+      "sample_id": "account-segments-046",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "527864440303775721",
+        "company": "563757",
+        "costCenter": "287685-806411",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "typescript",
+      "sample_id": "account-segments-046",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "826252968696142174",
+        "company": "162695",
+        "costCenter": "333210-147860",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "interpreter",
+      "sample_id": "account-segments-047",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "826252968696142174",
+        "company": "162695",
+        "costCenter": "333210-147860",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "python",
+      "sample_id": "account-segments-047",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "826252968696142174",
+        "company": "162695",
+        "costCenter": "333210-147860",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "typescript",
+      "sample_id": "account-segments-047",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "408098665315511532",
+        "company": "554165",
+        "costCenter": "301803-480869",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "interpreter",
+      "sample_id": "account-segments-048",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "408098665315511532",
+        "company": "554165",
+        "costCenter": "301803-480869",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "python",
+      "sample_id": "account-segments-048",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "408098665315511532",
+        "company": "554165",
+        "costCenter": "301803-480869",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "typescript",
+      "sample_id": "account-segments-048",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "836278812476261648",
+        "company": "116623",
+        "costCenter": "742085-731994",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "interpreter",
+      "sample_id": "account-segments-049",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "836278812476261648",
+        "company": "116623",
+        "costCenter": "742085-731994",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "python",
+      "sample_id": "account-segments-049",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "836278812476261648",
+        "company": "116623",
+        "costCenter": "742085-731994",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "typescript",
+      "sample_id": "account-segments-049",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "662841019035995366",
+        "company": "118865",
+        "costCenter": "768559-773576",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "interpreter",
+      "sample_id": "account-segments-050",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "662841019035995366",
+        "company": "118865",
+        "costCenter": "768559-773576",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "python",
+      "sample_id": "account-segments-050",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "662841019035995366",
+        "company": "118865",
+        "costCenter": "768559-773576",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "typescript",
+      "sample_id": "account-segments-050",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "681780711505548726",
+        "company": "495567",
+        "costCenter": "980190-245709",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "interpreter",
+      "sample_id": "account-segments-051",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "681780711505548726",
+        "company": "495567",
+        "costCenter": "980190-245709",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "python",
+      "sample_id": "account-segments-051",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "681780711505548726",
+        "company": "495567",
+        "costCenter": "980190-245709",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "typescript",
+      "sample_id": "account-segments-051",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "952217277360595466",
+        "company": "739334",
+        "costCenter": "130858-609669",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "interpreter",
+      "sample_id": "account-segments-052",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "952217277360595466",
+        "company": "739334",
+        "costCenter": "130858-609669",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "python",
+      "sample_id": "account-segments-052",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "952217277360595466",
+        "company": "739334",
+        "costCenter": "130858-609669",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "typescript",
+      "sample_id": "account-segments-052",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "850455364534692744",
+        "company": "608058",
+        "costCenter": "932539-804416",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "interpreter",
+      "sample_id": "account-segments-053",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "850455364534692744",
+        "company": "608058",
+        "costCenter": "932539-804416",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "python",
+      "sample_id": "account-segments-053",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "850455364534692744",
+        "company": "608058",
+        "costCenter": "932539-804416",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "typescript",
+      "sample_id": "account-segments-053",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "034483863113022748",
+        "company": "634269",
+        "costCenter": "152209-362868",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "interpreter",
+      "sample_id": "account-segments-054",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "034483863113022748",
+        "company": "634269",
+        "costCenter": "152209-362868",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "python",
+      "sample_id": "account-segments-054",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "034483863113022748",
+        "company": "634269",
+        "costCenter": "152209-362868",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "typescript",
+      "sample_id": "account-segments-054",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "160986610530480985",
+        "company": "385776",
+        "costCenter": "011188-329105",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "interpreter",
+      "sample_id": "account-segments-055",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "160986610530480985",
+        "company": "385776",
+        "costCenter": "011188-329105",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "python",
+      "sample_id": "account-segments-055",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "160986610530480985",
+        "company": "385776",
+        "costCenter": "011188-329105",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "typescript",
+      "sample_id": "account-segments-055",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "995472394589533123",
+        "company": "098555",
+        "costCenter": "636355-659947",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "interpreter",
+      "sample_id": "account-segments-056",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "995472394589533123",
+        "company": "098555",
+        "costCenter": "636355-659947",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "python",
+      "sample_id": "account-segments-056",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "995472394589533123",
+        "company": "098555",
+        "costCenter": "636355-659947",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "typescript",
+      "sample_id": "account-segments-056",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "310298212835187528",
+        "company": "991292",
+        "costCenter": "039297-494695",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "interpreter",
+      "sample_id": "account-segments-057",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "310298212835187528",
+        "company": "991292",
+        "costCenter": "039297-494695",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "python",
+      "sample_id": "account-segments-057",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "310298212835187528",
+        "company": "991292",
+        "costCenter": "039297-494695",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "typescript",
+      "sample_id": "account-segments-057",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "246281768277883243",
+        "company": "671459",
+        "costCenter": "067153-101697",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "interpreter",
+      "sample_id": "account-segments-058",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "246281768277883243",
+        "company": "671459",
+        "costCenter": "067153-101697",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "python",
+      "sample_id": "account-segments-058",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "246281768277883243",
+        "company": "671459",
+        "costCenter": "067153-101697",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "typescript",
+      "sample_id": "account-segments-058",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "076779760157968516",
+        "company": "677914",
+        "costCenter": "695893-413652",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "interpreter",
+      "sample_id": "account-segments-059",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "076779760157968516",
+        "company": "677914",
+        "costCenter": "695893-413652",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "python",
+      "sample_id": "account-segments-059",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "076779760157968516",
+        "company": "677914",
+        "costCenter": "695893-413652",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "typescript",
+      "sample_id": "account-segments-059",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "493910472161308475",
+        "company": "490975",
+        "costCenter": "954193-965268",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "interpreter",
+      "sample_id": "account-segments-060",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "493910472161308475",
+        "company": "490975",
+        "costCenter": "954193-965268",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "python",
+      "sample_id": "account-segments-060",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "493910472161308475",
+        "company": "490975",
+        "costCenter": "954193-965268",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "typescript",
+      "sample_id": "account-segments-060",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "200104355952149524",
+        "company": "655708",
+        "costCenter": "329886-685020",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "interpreter",
+      "sample_id": "account-segments-061",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "200104355952149524",
+        "company": "655708",
+        "costCenter": "329886-685020",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "python",
+      "sample_id": "account-segments-061",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "200104355952149524",
+        "company": "655708",
+        "costCenter": "329886-685020",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "typescript",
+      "sample_id": "account-segments-061",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "748694439766883603",
+        "company": "992553",
+        "costCenter": "419904-126848",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "interpreter",
+      "sample_id": "account-segments-062",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "748694439766883603",
+        "company": "992553",
+        "costCenter": "419904-126848",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "python",
+      "sample_id": "account-segments-062",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "748694439766883603",
+        "company": "992553",
+        "costCenter": "419904-126848",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "typescript",
+      "sample_id": "account-segments-062",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "193841575627430397",
+        "company": "090362",
+        "costCenter": "900939-745879",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "interpreter",
+      "sample_id": "account-segments-063",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "193841575627430397",
+        "company": "090362",
+        "costCenter": "900939-745879",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "python",
+      "sample_id": "account-segments-063",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "193841575627430397",
+        "company": "090362",
+        "costCenter": "900939-745879",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "typescript",
+      "sample_id": "account-segments-063",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "356435411644999477",
+        "company": "723361",
+        "costCenter": "761766-218860",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "interpreter",
+      "sample_id": "account-segments-064",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "356435411644999477",
+        "company": "723361",
+        "costCenter": "761766-218860",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "python",
+      "sample_id": "account-segments-064",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "356435411644999477",
+        "company": "723361",
+        "costCenter": "761766-218860",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "typescript",
+      "sample_id": "account-segments-064",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "301890250703769988",
+        "company": "991889",
+        "costCenter": "838119-115391",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "interpreter",
+      "sample_id": "account-segments-065",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "301890250703769988",
+        "company": "991889",
+        "costCenter": "838119-115391",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "python",
+      "sample_id": "account-segments-065",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "301890250703769988",
+        "company": "991889",
+        "costCenter": "838119-115391",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "typescript",
+      "sample_id": "account-segments-065",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "748735613096866757",
+        "company": "227514",
+        "costCenter": "500010-300315",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "interpreter",
+      "sample_id": "account-segments-066",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "748735613096866757",
+        "company": "227514",
+        "costCenter": "500010-300315",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "python",
+      "sample_id": "account-segments-066",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "748735613096866757",
+        "company": "227514",
+        "costCenter": "500010-300315",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "typescript",
+      "sample_id": "account-segments-066",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "561556124076590045",
+        "company": "522133",
+        "costCenter": "166176-521510",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "interpreter",
+      "sample_id": "account-segments-067",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "561556124076590045",
+        "company": "522133",
+        "costCenter": "166176-521510",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "python",
+      "sample_id": "account-segments-067",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "561556124076590045",
+        "company": "522133",
+        "costCenter": "166176-521510",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "typescript",
+      "sample_id": "account-segments-067",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "200115158556923171",
+        "company": "186849",
+        "costCenter": "362085-919213",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "interpreter",
+      "sample_id": "account-segments-068",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "200115158556923171",
+        "company": "186849",
+        "costCenter": "362085-919213",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "python",
+      "sample_id": "account-segments-068",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "200115158556923171",
+        "company": "186849",
+        "costCenter": "362085-919213",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "typescript",
+      "sample_id": "account-segments-068",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "051779092200556301",
+        "company": "916096",
+        "costCenter": "227815-623525",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "interpreter",
+      "sample_id": "account-segments-069",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "051779092200556301",
+        "company": "916096",
+        "costCenter": "227815-623525",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "python",
+      "sample_id": "account-segments-069",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "051779092200556301",
+        "company": "916096",
+        "costCenter": "227815-623525",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "typescript",
+      "sample_id": "account-segments-069",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "517758895360569828",
+        "company": "901066",
+        "costCenter": "977627-707905",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "interpreter",
+      "sample_id": "account-segments-070",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "517758895360569828",
+        "company": "901066",
+        "costCenter": "977627-707905",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "python",
+      "sample_id": "account-segments-070",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "517758895360569828",
+        "company": "901066",
+        "costCenter": "977627-707905",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "typescript",
+      "sample_id": "account-segments-070",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "298539386164505254",
+        "company": "534506",
+        "costCenter": "481034-818014",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "interpreter",
+      "sample_id": "account-segments-071",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "298539386164505254",
+        "company": "534506",
+        "costCenter": "481034-818014",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "python",
+      "sample_id": "account-segments-071",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "298539386164505254",
+        "company": "534506",
+        "costCenter": "481034-818014",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "typescript",
+      "sample_id": "account-segments-071",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "106686442956830826",
+        "company": "728822",
+        "costCenter": "040914-352761",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "interpreter",
+      "sample_id": "account-segments-072",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "106686442956830826",
+        "company": "728822",
+        "costCenter": "040914-352761",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "python",
+      "sample_id": "account-segments-072",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "106686442956830826",
+        "company": "728822",
+        "costCenter": "040914-352761",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "typescript",
+      "sample_id": "account-segments-072",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "536855932707649802",
+        "company": "952051",
+        "costCenter": "311075-405966",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "interpreter",
+      "sample_id": "account-segments-073",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "536855932707649802",
+        "company": "952051",
+        "costCenter": "311075-405966",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "python",
+      "sample_id": "account-segments-073",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "536855932707649802",
+        "company": "952051",
+        "costCenter": "311075-405966",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "typescript",
+      "sample_id": "account-segments-073",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "337403141601130393",
+        "company": "198665",
+        "costCenter": "601119-763834",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "interpreter",
+      "sample_id": "account-segments-074",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "337403141601130393",
+        "company": "198665",
+        "costCenter": "601119-763834",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "python",
+      "sample_id": "account-segments-074",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "337403141601130393",
+        "company": "198665",
+        "costCenter": "601119-763834",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "typescript",
+      "sample_id": "account-segments-074",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "068647123063623232",
+        "company": "483036",
+        "costCenter": "295602-767070",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "interpreter",
+      "sample_id": "account-segments-075",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "068647123063623232",
+        "company": "483036",
+        "costCenter": "295602-767070",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "python",
+      "sample_id": "account-segments-075",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "068647123063623232",
+        "company": "483036",
+        "costCenter": "295602-767070",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "typescript",
+      "sample_id": "account-segments-075",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "789006111438988633",
+        "company": "198356",
+        "costCenter": "417319-155161",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "interpreter",
+      "sample_id": "account-segments-076",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "789006111438988633",
+        "company": "198356",
+        "costCenter": "417319-155161",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "python",
+      "sample_id": "account-segments-076",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "789006111438988633",
+        "company": "198356",
+        "costCenter": "417319-155161",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "typescript",
+      "sample_id": "account-segments-076",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "811956271776490405",
+        "company": "918211",
+        "costCenter": "909751-307371",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "interpreter",
+      "sample_id": "account-segments-077",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "811956271776490405",
+        "company": "918211",
+        "costCenter": "909751-307371",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "python",
+      "sample_id": "account-segments-077",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "811956271776490405",
+        "company": "918211",
+        "costCenter": "909751-307371",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "typescript",
+      "sample_id": "account-segments-077",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "673475714627881810",
+        "company": "311636",
+        "costCenter": "598576-062703",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "interpreter",
+      "sample_id": "account-segments-078",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "673475714627881810",
+        "company": "311636",
+        "costCenter": "598576-062703",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "python",
+      "sample_id": "account-segments-078",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "673475714627881810",
+        "company": "311636",
+        "costCenter": "598576-062703",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "typescript",
+      "sample_id": "account-segments-078",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "942686119669644224",
+        "company": "310426",
+        "costCenter": "078393-105836",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "interpreter",
+      "sample_id": "account-segments-079",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "942686119669644224",
+        "company": "310426",
+        "costCenter": "078393-105836",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "python",
+      "sample_id": "account-segments-079",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "942686119669644224",
+        "company": "310426",
+        "costCenter": "078393-105836",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "typescript",
+      "sample_id": "account-segments-079",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "287130061247452490",
+        "company": "386141",
+        "costCenter": "690678-386378",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "interpreter",
+      "sample_id": "account-segments-080",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "287130061247452490",
+        "company": "386141",
+        "costCenter": "690678-386378",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "python",
+      "sample_id": "account-segments-080",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "account": "287130061247452490",
+        "company": "386141",
+        "costCenter": "690678-386378",
+        "currency": "USD",
+        "effectiveDate": "2026-08-11"
+      },
+      "runtime": "typescript",
+      "sample_id": "account-segments-080",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": "SOURCE_SCHEMA_VALIDATION",
+      "output": null,
+      "runtime": "interpreter",
+      "sample_id": "account-segments-missing-segment",
+      "stderr_summary": "source sample violates required-property constraint at /segments/segment10",
+      "success": false
+    },
+    {
+      "error_code": "SOURCE_SCHEMA_VALIDATION",
+      "output": null,
+      "runtime": "python",
+      "sample_id": "account-segments-missing-segment",
+      "stderr_summary": "SOURCE_SCHEMA_VALIDATION",
+      "success": false
+    },
+    {
+      "error_code": "SOURCE_SCHEMA_VALIDATION",
+      "output": null,
+      "runtime": "typescript",
+      "sample_id": "account-segments-missing-segment",
+      "stderr_summary": "SOURCE_SCHEMA_VALIDATION",
+      "success": false
+    },
+    {
+      "error_code": "SOURCE_SCHEMA_VALIDATION",
+      "output": null,
+      "runtime": "interpreter",
+      "sample_id": "account-segments-malformed-length",
+      "stderr_summary": "source sample string violates a length constraint at /segments/segment01",
+      "success": false
+    },
+    {
+      "error_code": "SOURCE_SCHEMA_VALIDATION",
+      "output": null,
+      "runtime": "python",
+      "sample_id": "account-segments-malformed-length",
+      "stderr_summary": "SOURCE_SCHEMA_VALIDATION",
+      "success": false
+    },
+    {
+      "error_code": "SOURCE_SCHEMA_VALIDATION",
+      "output": null,
+      "runtime": "typescript",
+      "sample_id": "account-segments-malformed-length",
+      "stderr_summary": "SOURCE_SCHEMA_VALIDATION",
+      "success": false
+    }
+  ]
+}

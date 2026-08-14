@@ -1,0 +1,49 @@
+mapping_version: "0.1"
+id: ten-segment-to-three-segment-account
+source_schema: gl-account-segments
+source_schema_version: "unversioned"
+target_schema: target-account
+target_schema_version: "unversioned"
+rules:
+  - target: /company
+    expression: { op: get, path: /segments/segment01, document: input }
+    confidence: 0.99
+  - target: /costCenter
+    expression:
+      op: concat
+      separator: "-"
+      operands:
+        - { op: get, path: /segments/segment04, document: input }
+        - { op: get, path: /segments/segment05, document: input }
+    confidence: 0.99
+  - target: /account
+    expression:
+      op: concat
+      separator: ""
+      operands:
+        - { op: get, path: /segments/segment07, document: input }
+        - { op: get, path: /segments/segment08, document: input }
+        - { op: get, path: /segments/segment09, document: input }
+    confidence: 0.99
+  - target: /effectiveDate
+    expression: { op: get, path: /effectiveDate, document: input }
+    confidence: 0.99
+  - target: /currency
+    expression: { op: get, path: /currency, document: input }
+    confidence: 0.99
+invariants:
+  - id: company-length
+    assertion:
+      op: length_equals
+      value: { op: get, path: /company, document: output }
+      expected: 6
+  - id: cost-center-length
+    assertion:
+      op: length_equals
+      value: { op: get, path: /costCenter, document: output }
+      expected: 13
+  - id: account-length
+    assertion:
+      op: length_equals
+      value: { op: get, path: /account, document: output }
+      expected: 18

@@ -1,0 +1,256 @@
+{
+  "$defs": {
+    "ContextMode": {
+      "description": "Requested source-schema context packing strategy.",
+      "enum": [
+        "auto",
+        "full",
+        "targeted"
+      ],
+      "title": "ContextMode",
+      "type": "string"
+    },
+    "ModelDefinition": {
+      "additionalProperties": false,
+      "description": "A named model alias and its provider-neutral invocation settings.",
+      "properties": {
+        "candidate_limit_per_target": {
+          "default": 20,
+          "exclusiveMinimum": 0,
+          "title": "Candidate Limit Per Target",
+          "type": "integer"
+        },
+        "context_mode": {
+          "$ref": "#/$defs/ContextMode",
+          "default": "auto"
+        },
+        "input_token_budget": {
+          "default": 64000,
+          "exclusiveMinimum": 0,
+          "title": "Input Token Budget",
+          "type": "integer"
+        },
+        "max_output_tokens": {
+          "default": 12000,
+          "exclusiveMinimum": 0,
+          "title": "Max Output Tokens",
+          "type": "integer"
+        },
+        "model_id": {
+          "minLength": 1,
+          "title": "Model Id",
+          "type": "string"
+        },
+        "parameters": {
+          "$ref": "#/$defs/ModelParameters"
+        },
+        "provider": {
+          "minLength": 1,
+          "title": "Provider",
+          "type": "string"
+        },
+        "structured_output": {
+          "$ref": "#/$defs/StructuredOutputMode",
+          "default": "auto"
+        },
+        "target_batch_size": {
+          "default": 25,
+          "exclusiveMinimum": 0,
+          "title": "Target Batch Size",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "provider",
+        "model_id"
+      ],
+      "title": "ModelDefinition",
+      "type": "object"
+    },
+    "ModelParameters": {
+      "additionalProperties": false,
+      "description": "Optional provider-neutral model sampling parameters.",
+      "properties": {
+        "reasoning_effort": {
+          "anyOf": [
+            {
+              "enum": [
+                "minimal",
+                "low",
+                "medium",
+                "high"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reasoning Effort"
+        },
+        "seed": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Seed"
+        },
+        "temperature": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Temperature"
+        },
+        "top_p": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Top P"
+        }
+      },
+      "title": "ModelParameters",
+      "type": "object"
+    },
+    "ProviderDefinition": {
+      "additionalProperties": false,
+      "description": "One named connection to a model provider.",
+      "properties": {
+        "api_key_env": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Api Key Env"
+        },
+        "base_url": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Base Url"
+        },
+        "headers_from_env": {
+          "additionalProperties": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "propertyNames": {
+            "minLength": 1
+          },
+          "title": "Headers From Env",
+          "type": "object"
+        },
+        "kind": {
+          "$ref": "#/$defs/ProviderKind"
+        },
+        "max_retries": {
+          "default": 1,
+          "minimum": 0,
+          "title": "Max Retries",
+          "type": "integer"
+        },
+        "timeout_seconds": {
+          "default": 120,
+          "exclusiveMinimum": 0,
+          "title": "Timeout Seconds",
+          "type": "number"
+        }
+      },
+      "required": [
+        "kind"
+      ],
+      "title": "ProviderDefinition",
+      "type": "object"
+    },
+    "ProviderKind": {
+      "description": "Provider transport families supported by the model configuration.",
+      "enum": [
+        "openai",
+        "anthropic",
+        "google",
+        "openai-compatible",
+        "custom-http"
+      ],
+      "title": "ProviderKind",
+      "type": "string"
+    },
+    "StructuredOutputMode": {
+      "description": "Requested structured-output mechanism for a configured model.",
+      "enum": [
+        "auto",
+        "json-schema",
+        "tool",
+        "json"
+      ],
+      "title": "StructuredOutputMode",
+      "type": "string"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "The complete versioned provider and model-alias configuration.",
+  "properties": {
+    "config_version": {
+      "const": "0.1",
+      "title": "Config Version",
+      "type": "string"
+    },
+    "models": {
+      "additionalProperties": {
+        "$ref": "#/$defs/ModelDefinition"
+      },
+      "propertyNames": {
+        "minLength": 1
+      },
+      "title": "Models",
+      "type": "object"
+    },
+    "providers": {
+      "additionalProperties": {
+        "$ref": "#/$defs/ProviderDefinition"
+      },
+      "propertyNames": {
+        "minLength": 1
+      },
+      "title": "Providers",
+      "type": "object"
+    }
+  },
+  "required": [
+    "config_version",
+    "providers",
+    "models"
+  ],
+  "title": "ModelProviderConfig",
+  "type": "object"
+}

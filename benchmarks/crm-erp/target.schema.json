@@ -1,0 +1,27 @@
+{
+  "$id": "erp-business-partner",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["businessPartnerId", "displayName", "primaryAddress", "billingAddress", "contactEmail", "payerBusinessPartnerId"],
+  "properties": {
+    "businessPartnerId": { "type": "string", "title": "Business Partner ID", "description": "ERP business partner identifier." },
+    "displayName": { "type": "string", "title": "Display Name", "description": "Business partner display name." },
+    "primaryAddress": { "$ref": "#/$defs/address", "title": "Primary Address", "description": "Primary address role." },
+    "billingAddress": { "$ref": "#/$defs/address", "title": "Billing Address", "description": "Billing address role." },
+    "contactEmail": { "type": "string", "format": "email", "title": "Contact Email", "description": "Business partner email address." },
+    "payerBusinessPartnerId": { "type": "string", "title": "Payer Business Partner ID", "description": "Payer business partner identifier." }
+  },
+  "$defs": {
+    "address": {
+      "type": "object",
+      "required": ["street", "city", "region", "postalCode", "country"],
+      "properties": {
+        "street": { "type": "string" },
+        "city": { "type": "string" },
+        "region": { "type": "string" },
+        "postalCode": { "type": "string" },
+        "country": { "type": "string" }
+      }
+    }
+  }
+}

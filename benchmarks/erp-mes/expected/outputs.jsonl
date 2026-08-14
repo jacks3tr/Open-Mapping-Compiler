@@ -1,0 +1,10 @@
+{"facility":"PLANT-01","jobNumber":"MO-00001","line":"LINE-A","lotNumber":"BATCH-001","partNumber":"MAT-1000","quantity":12,"scheduledStartUtc":"2026-08-11T08:30:00.000Z","status":"Released"}
+{"facility":"PLANT-02","jobNumber":"MO-00002","line":"LINE-B","lotNumber":"BATCH-002","partNumber":"MAT-2000","quantity":24,"scheduledStartUtc":"2026-08-12T17:30:00.000Z","status":"Pending"}
+{"facility":"PLANT-03","jobNumber":"MO-00003","line":"LINE-C","lotNumber":"BATCH-003","partNumber":"MAT-3000","quantity":36,"scheduledStartUtc":"2026-08-13T08:30:00.000Z","status":"Released"}
+{"facility":"PLANT-04","jobNumber":"MO-00004","line":"LINE-A","lotNumber":"BATCH-001","partNumber":"MAT-4000","quantity":48,"scheduledStartUtc":"2026-08-14T11:30:00.000Z","status":"Pending"}
+{"facility":"PLANT-01","jobNumber":"MO-00005","line":"LINE-B","lotNumber":"BATCH-002","partNumber":"MAT-1000","quantity":60,"scheduledStartUtc":"2026-08-15T20:30:00.000Z","status":"Released"}
+{"facility":"PLANT-02","jobNumber":"MO-00006","line":"LINE-C","lotNumber":"BATCH-003","partNumber":"MAT-2000","quantity":72,"scheduledStartUtc":"2026-08-16T06:30:00.000Z","status":"Pending"}
+{"facility":"PLANT-03","jobNumber":"MO-00007","line":"LINE-A","lotNumber":"BATCH-001","partNumber":"MAT-3000","quantity":84,"scheduledStartUtc":"2026-08-17T09:30:00.000Z","status":"Released"}
+{"facility":"PLANT-04","jobNumber":"MO-00008","line":"LINE-B","lotNumber":"BATCH-002","partNumber":"MAT-4000","quantity":96,"scheduledStartUtc":"2026-08-18T18:30:00.000Z","status":"Pending"}
+{"facility":"PLANT-01","jobNumber":"MO-00009","line":"LINE-C","lotNumber":"BATCH-003","partNumber":"MAT-1000","quantity":108,"scheduledStartUtc":"2026-08-19T09:30:00.000Z","status":"Released"}
+{"facility":"PLANT-02","jobNumber":"MO-00010","line":"LINE-A","lotNumber":null,"partNumber":"MAT-2000","quantity":120,"scheduledStartUtc":"2026-08-20T12:30:00.000Z","status":"Pending"}

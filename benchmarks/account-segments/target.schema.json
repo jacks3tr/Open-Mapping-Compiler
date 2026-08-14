@@ -1,0 +1,13 @@
+{
+  "$id": "target-account",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["company", "costCenter", "account", "effectiveDate", "currency"],
+  "properties": {
+    "company": { "type": "string", "title": "Company", "description": "Company segment." },
+    "costCenter": { "type": "string", "title": "Cost Center", "description": "Concatenated cost center." },
+    "account": { "type": "string", "title": "Account", "description": "Concatenated account." },
+    "effectiveDate": { "type": "string", "format": "date", "title": "Effective Date", "description": "Account effective date." },
+    "currency": { "type": "string", "enum": ["USD"], "title": "Currency", "description": "Account currency." }
+  }
+}

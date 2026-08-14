@@ -1,0 +1,14 @@
+hints_version: "0.1"
+id: customer-to-account-hints
+lookups:
+  - target: /state
+    source: /status
+    values:
+      ACTIVE: Open
+      INACTIVE: Closed
+    default: Closed
+    reason: Approved source status translation.
+constants:
+  - target: /source_system
+    value: CRM
+    reason: These account records come from CRM.

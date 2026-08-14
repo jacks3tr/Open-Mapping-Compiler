@@ -1,0 +1,5319 @@
+{
+  "assisted_confidence_counts": {
+    "high": 3,
+    "low": 1,
+    "medium": 0,
+    "none": 5
+  },
+  "assisted_disposition_counts": {
+    "ambiguous": 0,
+    "manual": 4,
+    "no_match": 1,
+    "review_required": 1,
+    "suggested": 3
+  },
+  "baseline_confidence_counts": {
+    "high": 3,
+    "low": 2,
+    "medium": 1,
+    "none": 3
+  },
+  "baseline_disposition_counts": {
+    "ambiguous": 1,
+    "manual": 0,
+    "no_match": 3,
+    "review_required": 2,
+    "suggested": 3
+  },
+  "denominators": {
+    "ambiguity_precision": 1,
+    "compile_success_rate": 2,
+    "cross_runtime_equivalence": 100,
+    "direct_match_precision": 5,
+    "direct_match_recall": 4,
+    "duplicate_target_rejection": 1,
+    "expected_ambiguity_detection": 1,
+    "expected_no_match_detection": 1,
+    "high_confidence_false_positive_rate": 3,
+    "high_confidence_precision": 3,
+    "invalid_source_path_rejection": 1,
+    "invariant_pass_rate": 0,
+    "low_confidence_precision": 1,
+    "medium_confidence_precision": 1,
+    "no_match_precision": 3,
+    "no_match_recall": 1,
+    "required_target_coverage": 7,
+    "review_application_correctness": 5,
+    "target_outcome_coverage": 9,
+    "target_schema_pass_rate": 300,
+    "transformation_exact_match_rate": 3
+  },
+  "gate_results": [
+    {
+      "maximum": null,
+      "metric": "cross_runtime_equivalence",
+      "minimum": 1.0,
+      "passed": true,
+      "value": 1.0
+    },
+    {
+      "maximum": null,
+      "metric": "duplicate_target_rejection",
+      "minimum": 1.0,
+      "passed": true,
+      "value": 1.0
+    },
+    {
+      "maximum": null,
+      "metric": "expected_ambiguity_detection",
+      "minimum": 1.0,
+      "passed": true,
+      "value": 1.0
+    },
+    {
+      "maximum": null,
+      "metric": "expected_no_match_detection",
+      "minimum": 1.0,
+      "passed": true,
+      "value": 1.0
+    },
+    {
+      "maximum": 0.02,
+      "metric": "high_confidence_false_positive_rate",
+      "minimum": null,
+      "passed": true,
+      "value": 0.0
+    },
+    {
+      "maximum": null,
+      "metric": "high_confidence_precision",
+      "minimum": 0.9,
+      "passed": true,
+      "value": 1.0
+    },
+    {
+      "maximum": null,
+      "metric": "invalid_source_path_rejection",
+      "minimum": 1.0,
+      "passed": true,
+      "value": 1.0
+    },
+    {
+      "maximum": null,
+      "metric": "review_application_correctness",
+      "minimum": 1.0,
+      "passed": true,
+      "value": 1.0
+    },
+    {
+      "maximum": null,
+      "metric": "target_outcome_coverage",
+      "minimum": 1.0,
+      "passed": true,
+      "value": 1.0
+    }
+  ],
+  "gate_thresholds": {
+    "cross_runtime_equivalence": {
+      "maximum": null,
+      "minimum": 1.0
+    },
+    "duplicate_target_rejection": {
+      "maximum": null,
+      "minimum": 1.0
+    },
+    "expected_ambiguity_detection": {
+      "maximum": null,
+      "minimum": 1.0
+    },
+    "expected_no_match_detection": {
+      "maximum": null,
+      "minimum": 1.0
+    },
+    "high_confidence_false_positive_rate": {
+      "maximum": 0.02,
+      "minimum": null
+    },
+    "high_confidence_precision": {
+      "maximum": null,
+      "minimum": 0.9
+    },
+    "invalid_source_path_rejection": {
+      "maximum": null,
+      "minimum": 1.0
+    },
+    "review_application_correctness": {
+      "maximum": null,
+      "minimum": 1.0
+    },
+    "target_outcome_coverage": {
+      "maximum": null,
+      "minimum": 1.0
+    }
+  },
+  "id": "erp-mes",
+  "issues": [
+    {
+      "code": "LOSSY_CAST",
+      "component": "verification.static",
+      "correction": "Confirm source values are exact before casting.",
+      "mapping_id": "erp-production-order-to-mes-job",
+      "message": "cast may lose information",
+      "rule_index": 5,
+      "sample_id": null,
+      "schema_id": null,
+      "severity": "warning",
+      "source_path": null,
+      "target_path": "/quantity"
+    }
+  ],
+  "metrics": {
+    "ambiguity_precision": 1.0,
+    "compile_success_rate": 1.0,
+    "cross_runtime_equivalence": 1.0,
+    "direct_match_precision": 0.8,
+    "direct_match_recall": 1.0,
+    "duplicate_target_rejection": 1.0,
+    "expected_ambiguity_detection": 1.0,
+    "expected_no_match_detection": 1.0,
+    "high_confidence_false_positive_rate": 0.0,
+    "high_confidence_precision": 1.0,
+    "invalid_source_path_rejection": 1.0,
+    "invariant_pass_rate": 1.0,
+    "low_confidence_precision": 1.0,
+    "medium_confidence_precision": 0.0,
+    "no_match_precision": 0.3333333333333333,
+    "no_match_recall": 1.0,
+    "required_target_coverage": 1.0,
+    "review_application_correctness": 1.0,
+    "target_outcome_coverage": 1.0,
+    "target_schema_pass_rate": 1.0,
+    "transformation_exact_match_rate": 1.0
+  },
+  "numerators": {
+    "ambiguity_precision": 1,
+    "compile_success_rate": 2,
+    "cross_runtime_equivalence": 100,
+    "direct_match_precision": 4,
+    "direct_match_recall": 4,
+    "duplicate_target_rejection": 1,
+    "expected_ambiguity_detection": 1,
+    "expected_no_match_detection": 1,
+    "high_confidence_false_positive_rate": 0,
+    "high_confidence_precision": 3,
+    "invalid_source_path_rejection": 1,
+    "invariant_pass_rate": 0,
+    "low_confidence_precision": 1,
+    "medium_confidence_precision": 0,
+    "no_match_precision": 1,
+    "no_match_recall": 1,
+    "required_target_coverage": 7,
+    "review_application_correctness": 5,
+    "target_outcome_coverage": 9,
+    "target_schema_pass_rate": 300,
+    "transformation_exact_match_rate": 3
+  },
+  "report_version": "0.1",
+  "runtime_observations": [
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-01",
+        "jobNumber": "MO-00001",
+        "line": "LINE-A",
+        "lotNumber": "BATCH-001",
+        "partNumber": "MAT-1000",
+        "quantity": 12,
+        "scheduledStartUtc": "2026-08-11T08:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-001",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-01",
+        "jobNumber": "MO-00001",
+        "line": "LINE-A",
+        "lotNumber": "BATCH-001",
+        "partNumber": "MAT-1000",
+        "quantity": 12,
+        "scheduledStartUtc": "2026-08-11T08:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-001",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-01",
+        "jobNumber": "MO-00001",
+        "line": "LINE-A",
+        "lotNumber": "BATCH-001",
+        "partNumber": "MAT-1000",
+        "quantity": 12,
+        "scheduledStartUtc": "2026-08-11T08:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-001",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-02",
+        "jobNumber": "MO-00002",
+        "line": "LINE-B",
+        "lotNumber": "BATCH-002",
+        "partNumber": "MAT-2000",
+        "quantity": 24,
+        "scheduledStartUtc": "2026-08-12T17:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-002",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-02",
+        "jobNumber": "MO-00002",
+        "line": "LINE-B",
+        "lotNumber": "BATCH-002",
+        "partNumber": "MAT-2000",
+        "quantity": 24,
+        "scheduledStartUtc": "2026-08-12T17:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-002",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-02",
+        "jobNumber": "MO-00002",
+        "line": "LINE-B",
+        "lotNumber": "BATCH-002",
+        "partNumber": "MAT-2000",
+        "quantity": 24,
+        "scheduledStartUtc": "2026-08-12T17:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-002",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-03",
+        "jobNumber": "MO-00003",
+        "line": "LINE-C",
+        "lotNumber": "BATCH-003",
+        "partNumber": "MAT-3000",
+        "quantity": 36,
+        "scheduledStartUtc": "2026-08-13T08:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-003",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-03",
+        "jobNumber": "MO-00003",
+        "line": "LINE-C",
+        "lotNumber": "BATCH-003",
+        "partNumber": "MAT-3000",
+        "quantity": 36,
+        "scheduledStartUtc": "2026-08-13T08:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-003",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-03",
+        "jobNumber": "MO-00003",
+        "line": "LINE-C",
+        "lotNumber": "BATCH-003",
+        "partNumber": "MAT-3000",
+        "quantity": 36,
+        "scheduledStartUtc": "2026-08-13T08:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-003",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-04",
+        "jobNumber": "MO-00004",
+        "line": "LINE-A",
+        "lotNumber": "BATCH-001",
+        "partNumber": "MAT-4000",
+        "quantity": 48,
+        "scheduledStartUtc": "2026-08-14T11:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-004",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-04",
+        "jobNumber": "MO-00004",
+        "line": "LINE-A",
+        "lotNumber": "BATCH-001",
+        "partNumber": "MAT-4000",
+        "quantity": 48,
+        "scheduledStartUtc": "2026-08-14T11:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-004",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-04",
+        "jobNumber": "MO-00004",
+        "line": "LINE-A",
+        "lotNumber": "BATCH-001",
+        "partNumber": "MAT-4000",
+        "quantity": 48,
+        "scheduledStartUtc": "2026-08-14T11:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-004",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-01",
+        "jobNumber": "MO-00005",
+        "line": "LINE-B",
+        "lotNumber": "BATCH-002",
+        "partNumber": "MAT-1000",
+        "quantity": 60,
+        "scheduledStartUtc": "2026-08-15T20:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-005",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-01",
+        "jobNumber": "MO-00005",
+        "line": "LINE-B",
+        "lotNumber": "BATCH-002",
+        "partNumber": "MAT-1000",
+        "quantity": 60,
+        "scheduledStartUtc": "2026-08-15T20:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-005",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-01",
+        "jobNumber": "MO-00005",
+        "line": "LINE-B",
+        "lotNumber": "BATCH-002",
+        "partNumber": "MAT-1000",
+        "quantity": 60,
+        "scheduledStartUtc": "2026-08-15T20:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-005",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-02",
+        "jobNumber": "MO-00006",
+        "line": "LINE-C",
+        "lotNumber": "BATCH-003",
+        "partNumber": "MAT-2000",
+        "quantity": 72,
+        "scheduledStartUtc": "2026-08-16T06:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-006",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-02",
+        "jobNumber": "MO-00006",
+        "line": "LINE-C",
+        "lotNumber": "BATCH-003",
+        "partNumber": "MAT-2000",
+        "quantity": 72,
+        "scheduledStartUtc": "2026-08-16T06:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-006",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-02",
+        "jobNumber": "MO-00006",
+        "line": "LINE-C",
+        "lotNumber": "BATCH-003",
+        "partNumber": "MAT-2000",
+        "quantity": 72,
+        "scheduledStartUtc": "2026-08-16T06:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-006",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-03",
+        "jobNumber": "MO-00007",
+        "line": "LINE-A",
+        "lotNumber": "BATCH-001",
+        "partNumber": "MAT-3000",
+        "quantity": 84,
+        "scheduledStartUtc": "2026-08-17T09:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-007",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-03",
+        "jobNumber": "MO-00007",
+        "line": "LINE-A",
+        "lotNumber": "BATCH-001",
+        "partNumber": "MAT-3000",
+        "quantity": 84,
+        "scheduledStartUtc": "2026-08-17T09:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-007",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-03",
+        "jobNumber": "MO-00007",
+        "line": "LINE-A",
+        "lotNumber": "BATCH-001",
+        "partNumber": "MAT-3000",
+        "quantity": 84,
+        "scheduledStartUtc": "2026-08-17T09:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-007",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-04",
+        "jobNumber": "MO-00008",
+        "line": "LINE-B",
+        "lotNumber": "BATCH-002",
+        "partNumber": "MAT-4000",
+        "quantity": 96,
+        "scheduledStartUtc": "2026-08-18T18:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-008",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-04",
+        "jobNumber": "MO-00008",
+        "line": "LINE-B",
+        "lotNumber": "BATCH-002",
+        "partNumber": "MAT-4000",
+        "quantity": 96,
+        "scheduledStartUtc": "2026-08-18T18:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-008",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-04",
+        "jobNumber": "MO-00008",
+        "line": "LINE-B",
+        "lotNumber": "BATCH-002",
+        "partNumber": "MAT-4000",
+        "quantity": 96,
+        "scheduledStartUtc": "2026-08-18T18:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-008",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-01",
+        "jobNumber": "MO-00009",
+        "line": "LINE-C",
+        "lotNumber": "BATCH-003",
+        "partNumber": "MAT-1000",
+        "quantity": 108,
+        "scheduledStartUtc": "2026-08-19T09:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-009",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-01",
+        "jobNumber": "MO-00009",
+        "line": "LINE-C",
+        "lotNumber": "BATCH-003",
+        "partNumber": "MAT-1000",
+        "quantity": 108,
+        "scheduledStartUtc": "2026-08-19T09:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-009",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-01",
+        "jobNumber": "MO-00009",
+        "line": "LINE-C",
+        "lotNumber": "BATCH-003",
+        "partNumber": "MAT-1000",
+        "quantity": 108,
+        "scheduledStartUtc": "2026-08-19T09:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-009",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-02",
+        "jobNumber": "MO-00010",
+        "line": "LINE-A",
+        "lotNumber": null,
+        "partNumber": "MAT-2000",
+        "quantity": 120,
+        "scheduledStartUtc": "2026-08-20T12:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-010",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-02",
+        "jobNumber": "MO-00010",
+        "line": "LINE-A",
+        "lotNumber": null,
+        "partNumber": "MAT-2000",
+        "quantity": 120,
+        "scheduledStartUtc": "2026-08-20T12:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-010",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-02",
+        "jobNumber": "MO-00010",
+        "line": "LINE-A",
+        "lotNumber": null,
+        "partNumber": "MAT-2000",
+        "quantity": 120,
+        "scheduledStartUtc": "2026-08-20T12:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-010",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-03",
+        "jobNumber": "MO-00011",
+        "line": "LINE-B",
+        "lotNumber": "BATCH-002",
+        "partNumber": "MAT-3000",
+        "quantity": 132,
+        "scheduledStartUtc": "2026-08-21T16:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-011",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-03",
+        "jobNumber": "MO-00011",
+        "line": "LINE-B",
+        "lotNumber": "BATCH-002",
+        "partNumber": "MAT-3000",
+        "quantity": 132,
+        "scheduledStartUtc": "2026-08-21T16:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-011",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-03",
+        "jobNumber": "MO-00011",
+        "line": "LINE-B",
+        "lotNumber": "BATCH-002",
+        "partNumber": "MAT-3000",
+        "quantity": 132,
+        "scheduledStartUtc": "2026-08-21T16:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-011",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-04",
+        "jobNumber": "MO-00012",
+        "line": "LINE-C",
+        "lotNumber": "BATCH-003",
+        "partNumber": "MAT-4000",
+        "quantity": 144,
+        "scheduledStartUtc": "2026-08-22T07:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-012",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-04",
+        "jobNumber": "MO-00012",
+        "line": "LINE-C",
+        "lotNumber": "BATCH-003",
+        "partNumber": "MAT-4000",
+        "quantity": 144,
+        "scheduledStartUtc": "2026-08-22T07:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-012",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-04",
+        "jobNumber": "MO-00012",
+        "line": "LINE-C",
+        "lotNumber": "BATCH-003",
+        "partNumber": "MAT-4000",
+        "quantity": 144,
+        "scheduledStartUtc": "2026-08-22T07:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-012",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-01",
+        "jobNumber": "MO-00013",
+        "line": "LINE-A",
+        "lotNumber": "BATCH-001",
+        "partNumber": "MAT-1000",
+        "quantity": 156,
+        "scheduledStartUtc": "2026-08-23T10:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-013",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-01",
+        "jobNumber": "MO-00013",
+        "line": "LINE-A",
+        "lotNumber": "BATCH-001",
+        "partNumber": "MAT-1000",
+        "quantity": 156,
+        "scheduledStartUtc": "2026-08-23T10:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-013",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-01",
+        "jobNumber": "MO-00013",
+        "line": "LINE-A",
+        "lotNumber": "BATCH-001",
+        "partNumber": "MAT-1000",
+        "quantity": 156,
+        "scheduledStartUtc": "2026-08-23T10:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-013",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-02",
+        "jobNumber": "MO-00014",
+        "line": "LINE-B",
+        "lotNumber": "BATCH-002",
+        "partNumber": "MAT-2000",
+        "quantity": 168,
+        "scheduledStartUtc": "2026-08-24T19:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-014",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-02",
+        "jobNumber": "MO-00014",
+        "line": "LINE-B",
+        "lotNumber": "BATCH-002",
+        "partNumber": "MAT-2000",
+        "quantity": 168,
+        "scheduledStartUtc": "2026-08-24T19:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-014",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-02",
+        "jobNumber": "MO-00014",
+        "line": "LINE-B",
+        "lotNumber": "BATCH-002",
+        "partNumber": "MAT-2000",
+        "quantity": 168,
+        "scheduledStartUtc": "2026-08-24T19:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-014",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-03",
+        "jobNumber": "MO-00015",
+        "line": "LINE-C",
+        "lotNumber": "BATCH-003",
+        "partNumber": "MAT-3000",
+        "quantity": 180,
+        "scheduledStartUtc": "2026-08-25T10:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-015",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-03",
+        "jobNumber": "MO-00015",
+        "line": "LINE-C",
+        "lotNumber": "BATCH-003",
+        "partNumber": "MAT-3000",
+        "quantity": 180,
+        "scheduledStartUtc": "2026-08-25T10:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-015",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-03",
+        "jobNumber": "MO-00015",
+        "line": "LINE-C",
+        "lotNumber": "BATCH-003",
+        "partNumber": "MAT-3000",
+        "quantity": 180,
+        "scheduledStartUtc": "2026-08-25T10:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-015",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-04",
+        "jobNumber": "MO-00016",
+        "line": "LINE-A",
+        "lotNumber": "BATCH-001",
+        "partNumber": "MAT-4000",
+        "quantity": 192,
+        "scheduledStartUtc": "2026-08-26T08:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-016",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-04",
+        "jobNumber": "MO-00016",
+        "line": "LINE-A",
+        "lotNumber": "BATCH-001",
+        "partNumber": "MAT-4000",
+        "quantity": 192,
+        "scheduledStartUtc": "2026-08-26T08:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-016",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-04",
+        "jobNumber": "MO-00016",
+        "line": "LINE-A",
+        "lotNumber": "BATCH-001",
+        "partNumber": "MAT-4000",
+        "quantity": 192,
+        "scheduledStartUtc": "2026-08-26T08:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-016",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-01",
+        "jobNumber": "MO-00017",
+        "line": "LINE-B",
+        "lotNumber": "BATCH-002",
+        "partNumber": "MAT-1000",
+        "quantity": 204,
+        "scheduledStartUtc": "2026-08-27T17:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-017",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-01",
+        "jobNumber": "MO-00017",
+        "line": "LINE-B",
+        "lotNumber": "BATCH-002",
+        "partNumber": "MAT-1000",
+        "quantity": 204,
+        "scheduledStartUtc": "2026-08-27T17:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-017",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-01",
+        "jobNumber": "MO-00017",
+        "line": "LINE-B",
+        "lotNumber": "BATCH-002",
+        "partNumber": "MAT-1000",
+        "quantity": 204,
+        "scheduledStartUtc": "2026-08-27T17:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-017",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-02",
+        "jobNumber": "MO-00018",
+        "line": "LINE-C",
+        "lotNumber": "BATCH-003",
+        "partNumber": "MAT-2000",
+        "quantity": 216,
+        "scheduledStartUtc": "2026-08-28T08:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-018",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-02",
+        "jobNumber": "MO-00018",
+        "line": "LINE-C",
+        "lotNumber": "BATCH-003",
+        "partNumber": "MAT-2000",
+        "quantity": 216,
+        "scheduledStartUtc": "2026-08-28T08:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-018",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-02",
+        "jobNumber": "MO-00018",
+        "line": "LINE-C",
+        "lotNumber": "BATCH-003",
+        "partNumber": "MAT-2000",
+        "quantity": 216,
+        "scheduledStartUtc": "2026-08-28T08:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-018",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-03",
+        "jobNumber": "MO-00019",
+        "line": "LINE-A",
+        "lotNumber": "BATCH-001",
+        "partNumber": "MAT-3000",
+        "quantity": 228,
+        "scheduledStartUtc": "2026-08-29T11:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-019",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-03",
+        "jobNumber": "MO-00019",
+        "line": "LINE-A",
+        "lotNumber": "BATCH-001",
+        "partNumber": "MAT-3000",
+        "quantity": 228,
+        "scheduledStartUtc": "2026-08-29T11:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-019",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-03",
+        "jobNumber": "MO-00019",
+        "line": "LINE-A",
+        "lotNumber": "BATCH-001",
+        "partNumber": "MAT-3000",
+        "quantity": 228,
+        "scheduledStartUtc": "2026-08-29T11:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-019",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-04",
+        "jobNumber": "MO-00020",
+        "line": "LINE-B",
+        "lotNumber": null,
+        "partNumber": "MAT-4000",
+        "quantity": 240,
+        "scheduledStartUtc": "2026-08-30T20:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-020",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-04",
+        "jobNumber": "MO-00020",
+        "line": "LINE-B",
+        "lotNumber": null,
+        "partNumber": "MAT-4000",
+        "quantity": 240,
+        "scheduledStartUtc": "2026-08-30T20:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-020",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-04",
+        "jobNumber": "MO-00020",
+        "line": "LINE-B",
+        "lotNumber": null,
+        "partNumber": "MAT-4000",
+        "quantity": 240,
+        "scheduledStartUtc": "2026-08-30T20:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-020",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-01",
+        "jobNumber": "MO-00021",
+        "line": "LINE-C",
+        "lotNumber": "BATCH-003",
+        "partNumber": "MAT-1000",
+        "quantity": 21,
+        "scheduledStartUtc": "2026-08-31T06:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-021",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-01",
+        "jobNumber": "MO-00021",
+        "line": "LINE-C",
+        "lotNumber": "BATCH-003",
+        "partNumber": "MAT-1000",
+        "quantity": 21,
+        "scheduledStartUtc": "2026-08-31T06:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-021",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-01",
+        "jobNumber": "MO-00021",
+        "line": "LINE-C",
+        "lotNumber": "BATCH-003",
+        "partNumber": "MAT-1000",
+        "quantity": 21,
+        "scheduledStartUtc": "2026-08-31T06:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-021",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-02",
+        "jobNumber": "MO-00022",
+        "line": "LINE-A",
+        "lotNumber": "BATCH-001",
+        "partNumber": "MAT-2000",
+        "quantity": 22,
+        "scheduledStartUtc": "2026-09-01T09:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-022",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-02",
+        "jobNumber": "MO-00022",
+        "line": "LINE-A",
+        "lotNumber": "BATCH-001",
+        "partNumber": "MAT-2000",
+        "quantity": 22,
+        "scheduledStartUtc": "2026-09-01T09:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-022",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-02",
+        "jobNumber": "MO-00022",
+        "line": "LINE-A",
+        "lotNumber": "BATCH-001",
+        "partNumber": "MAT-2000",
+        "quantity": 22,
+        "scheduledStartUtc": "2026-09-01T09:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-022",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-03",
+        "jobNumber": "MO-00023",
+        "line": "LINE-B",
+        "lotNumber": "BATCH-002",
+        "partNumber": "MAT-3000",
+        "quantity": 23,
+        "scheduledStartUtc": "2026-09-02T18:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-023",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-03",
+        "jobNumber": "MO-00023",
+        "line": "LINE-B",
+        "lotNumber": "BATCH-002",
+        "partNumber": "MAT-3000",
+        "quantity": 23,
+        "scheduledStartUtc": "2026-09-02T18:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-023",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-03",
+        "jobNumber": "MO-00023",
+        "line": "LINE-B",
+        "lotNumber": "BATCH-002",
+        "partNumber": "MAT-3000",
+        "quantity": 23,
+        "scheduledStartUtc": "2026-09-02T18:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-023",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-04",
+        "jobNumber": "MO-00024",
+        "line": "LINE-C",
+        "lotNumber": "BATCH-003",
+        "partNumber": "MAT-4000",
+        "quantity": 24,
+        "scheduledStartUtc": "2026-09-03T09:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-024",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-04",
+        "jobNumber": "MO-00024",
+        "line": "LINE-C",
+        "lotNumber": "BATCH-003",
+        "partNumber": "MAT-4000",
+        "quantity": 24,
+        "scheduledStartUtc": "2026-09-03T09:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-024",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-04",
+        "jobNumber": "MO-00024",
+        "line": "LINE-C",
+        "lotNumber": "BATCH-003",
+        "partNumber": "MAT-4000",
+        "quantity": 24,
+        "scheduledStartUtc": "2026-09-03T09:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-024",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-01",
+        "jobNumber": "MO-00025",
+        "line": "LINE-A",
+        "lotNumber": "BATCH-001",
+        "partNumber": "MAT-1000",
+        "quantity": 25,
+        "scheduledStartUtc": "2026-09-04T12:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-025",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-01",
+        "jobNumber": "MO-00025",
+        "line": "LINE-A",
+        "lotNumber": "BATCH-001",
+        "partNumber": "MAT-1000",
+        "quantity": 25,
+        "scheduledStartUtc": "2026-09-04T12:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-025",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-01",
+        "jobNumber": "MO-00025",
+        "line": "LINE-A",
+        "lotNumber": "BATCH-001",
+        "partNumber": "MAT-1000",
+        "quantity": 25,
+        "scheduledStartUtc": "2026-09-04T12:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-025",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-02",
+        "jobNumber": "MO-00026",
+        "line": "LINE-B",
+        "lotNumber": "BATCH-002",
+        "partNumber": "MAT-2000",
+        "quantity": 26,
+        "scheduledStartUtc": "2026-09-05T16:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-026",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-02",
+        "jobNumber": "MO-00026",
+        "line": "LINE-B",
+        "lotNumber": "BATCH-002",
+        "partNumber": "MAT-2000",
+        "quantity": 26,
+        "scheduledStartUtc": "2026-09-05T16:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-026",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-02",
+        "jobNumber": "MO-00026",
+        "line": "LINE-B",
+        "lotNumber": "BATCH-002",
+        "partNumber": "MAT-2000",
+        "quantity": 26,
+        "scheduledStartUtc": "2026-09-05T16:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-026",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-03",
+        "jobNumber": "MO-00027",
+        "line": "LINE-C",
+        "lotNumber": "BATCH-003",
+        "partNumber": "MAT-3000",
+        "quantity": 27,
+        "scheduledStartUtc": "2026-09-06T07:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-027",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-03",
+        "jobNumber": "MO-00027",
+        "line": "LINE-C",
+        "lotNumber": "BATCH-003",
+        "partNumber": "MAT-3000",
+        "quantity": 27,
+        "scheduledStartUtc": "2026-09-06T07:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-027",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-03",
+        "jobNumber": "MO-00027",
+        "line": "LINE-C",
+        "lotNumber": "BATCH-003",
+        "partNumber": "MAT-3000",
+        "quantity": 27,
+        "scheduledStartUtc": "2026-09-06T07:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-027",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-04",
+        "jobNumber": "MO-00028",
+        "line": "LINE-A",
+        "lotNumber": "BATCH-001",
+        "partNumber": "MAT-4000",
+        "quantity": 28,
+        "scheduledStartUtc": "2026-09-07T10:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-028",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-04",
+        "jobNumber": "MO-00028",
+        "line": "LINE-A",
+        "lotNumber": "BATCH-001",
+        "partNumber": "MAT-4000",
+        "quantity": 28,
+        "scheduledStartUtc": "2026-09-07T10:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-028",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-04",
+        "jobNumber": "MO-00028",
+        "line": "LINE-A",
+        "lotNumber": "BATCH-001",
+        "partNumber": "MAT-4000",
+        "quantity": 28,
+        "scheduledStartUtc": "2026-09-07T10:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-028",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-01",
+        "jobNumber": "MO-00029",
+        "line": "LINE-B",
+        "lotNumber": "BATCH-002",
+        "partNumber": "MAT-1000",
+        "quantity": 29,
+        "scheduledStartUtc": "2026-09-08T19:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-029",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-01",
+        "jobNumber": "MO-00029",
+        "line": "LINE-B",
+        "lotNumber": "BATCH-002",
+        "partNumber": "MAT-1000",
+        "quantity": 29,
+        "scheduledStartUtc": "2026-09-08T19:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-029",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-01",
+        "jobNumber": "MO-00029",
+        "line": "LINE-B",
+        "lotNumber": "BATCH-002",
+        "partNumber": "MAT-1000",
+        "quantity": 29,
+        "scheduledStartUtc": "2026-09-08T19:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-029",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-02",
+        "jobNumber": "MO-00030",
+        "line": "LINE-C",
+        "lotNumber": null,
+        "partNumber": "MAT-2000",
+        "quantity": 30,
+        "scheduledStartUtc": "2026-09-09T10:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-030",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-02",
+        "jobNumber": "MO-00030",
+        "line": "LINE-C",
+        "lotNumber": null,
+        "partNumber": "MAT-2000",
+        "quantity": 30,
+        "scheduledStartUtc": "2026-09-09T10:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-030",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-02",
+        "jobNumber": "MO-00030",
+        "line": "LINE-C",
+        "lotNumber": null,
+        "partNumber": "MAT-2000",
+        "quantity": 30,
+        "scheduledStartUtc": "2026-09-09T10:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-030",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-03",
+        "jobNumber": "MO-00031",
+        "line": "LINE-A",
+        "lotNumber": "BATCH-001",
+        "partNumber": "MAT-3000",
+        "quantity": 31,
+        "scheduledStartUtc": "2026-09-10T08:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-031",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-03",
+        "jobNumber": "MO-00031",
+        "line": "LINE-A",
+        "lotNumber": "BATCH-001",
+        "partNumber": "MAT-3000",
+        "quantity": 31,
+        "scheduledStartUtc": "2026-09-10T08:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-031",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-03",
+        "jobNumber": "MO-00031",
+        "line": "LINE-A",
+        "lotNumber": "BATCH-001",
+        "partNumber": "MAT-3000",
+        "quantity": 31,
+        "scheduledStartUtc": "2026-09-10T08:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-031",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-04",
+        "jobNumber": "MO-00032",
+        "line": "LINE-B",
+        "lotNumber": "BATCH-002",
+        "partNumber": "MAT-4000",
+        "quantity": 32,
+        "scheduledStartUtc": "2026-09-11T17:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-032",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-04",
+        "jobNumber": "MO-00032",
+        "line": "LINE-B",
+        "lotNumber": "BATCH-002",
+        "partNumber": "MAT-4000",
+        "quantity": 32,
+        "scheduledStartUtc": "2026-09-11T17:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-032",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-04",
+        "jobNumber": "MO-00032",
+        "line": "LINE-B",
+        "lotNumber": "BATCH-002",
+        "partNumber": "MAT-4000",
+        "quantity": 32,
+        "scheduledStartUtc": "2026-09-11T17:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-032",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-01",
+        "jobNumber": "MO-00033",
+        "line": "LINE-C",
+        "lotNumber": "BATCH-003",
+        "partNumber": "MAT-1000",
+        "quantity": 33,
+        "scheduledStartUtc": "2026-09-12T08:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-033",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-01",
+        "jobNumber": "MO-00033",
+        "line": "LINE-C",
+        "lotNumber": "BATCH-003",
+        "partNumber": "MAT-1000",
+        "quantity": 33,
+        "scheduledStartUtc": "2026-09-12T08:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-033",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-01",
+        "jobNumber": "MO-00033",
+        "line": "LINE-C",
+        "lotNumber": "BATCH-003",
+        "partNumber": "MAT-1000",
+        "quantity": 33,
+        "scheduledStartUtc": "2026-09-12T08:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-033",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-02",
+        "jobNumber": "MO-00034",
+        "line": "LINE-A",
+        "lotNumber": "BATCH-001",
+        "partNumber": "MAT-2000",
+        "quantity": 34,
+        "scheduledStartUtc": "2026-09-13T11:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-034",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-02",
+        "jobNumber": "MO-00034",
+        "line": "LINE-A",
+        "lotNumber": "BATCH-001",
+        "partNumber": "MAT-2000",
+        "quantity": 34,
+        "scheduledStartUtc": "2026-09-13T11:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-034",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-02",
+        "jobNumber": "MO-00034",
+        "line": "LINE-A",
+        "lotNumber": "BATCH-001",
+        "partNumber": "MAT-2000",
+        "quantity": 34,
+        "scheduledStartUtc": "2026-09-13T11:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-034",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-03",
+        "jobNumber": "MO-00035",
+        "line": "LINE-B",
+        "lotNumber": "BATCH-002",
+        "partNumber": "MAT-3000",
+        "quantity": 35,
+        "scheduledStartUtc": "2026-09-14T20:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-035",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-03",
+        "jobNumber": "MO-00035",
+        "line": "LINE-B",
+        "lotNumber": "BATCH-002",
+        "partNumber": "MAT-3000",
+        "quantity": 35,
+        "scheduledStartUtc": "2026-09-14T20:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-035",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-03",
+        "jobNumber": "MO-00035",
+        "line": "LINE-B",
+        "lotNumber": "BATCH-002",
+        "partNumber": "MAT-3000",
+        "quantity": 35,
+        "scheduledStartUtc": "2026-09-14T20:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-035",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-04",
+        "jobNumber": "MO-00036",
+        "line": "LINE-C",
+        "lotNumber": "BATCH-003",
+        "partNumber": "MAT-4000",
+        "quantity": 36,
+        "scheduledStartUtc": "2026-09-15T06:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-036",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-04",
+        "jobNumber": "MO-00036",
+        "line": "LINE-C",
+        "lotNumber": "BATCH-003",
+        "partNumber": "MAT-4000",
+        "quantity": 36,
+        "scheduledStartUtc": "2026-09-15T06:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-036",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-04",
+        "jobNumber": "MO-00036",
+        "line": "LINE-C",
+        "lotNumber": "BATCH-003",
+        "partNumber": "MAT-4000",
+        "quantity": 36,
+        "scheduledStartUtc": "2026-09-15T06:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-036",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-01",
+        "jobNumber": "MO-00037",
+        "line": "LINE-A",
+        "lotNumber": "BATCH-001",
+        "partNumber": "MAT-1000",
+        "quantity": 37,
+        "scheduledStartUtc": "2026-09-16T09:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-037",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-01",
+        "jobNumber": "MO-00037",
+        "line": "LINE-A",
+        "lotNumber": "BATCH-001",
+        "partNumber": "MAT-1000",
+        "quantity": 37,
+        "scheduledStartUtc": "2026-09-16T09:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-037",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-01",
+        "jobNumber": "MO-00037",
+        "line": "LINE-A",
+        "lotNumber": "BATCH-001",
+        "partNumber": "MAT-1000",
+        "quantity": 37,
+        "scheduledStartUtc": "2026-09-16T09:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-037",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-02",
+        "jobNumber": "MO-00038",
+        "line": "LINE-B",
+        "lotNumber": "BATCH-002",
+        "partNumber": "MAT-2000",
+        "quantity": 38,
+        "scheduledStartUtc": "2026-09-17T18:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-038",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-02",
+        "jobNumber": "MO-00038",
+        "line": "LINE-B",
+        "lotNumber": "BATCH-002",
+        "partNumber": "MAT-2000",
+        "quantity": 38,
+        "scheduledStartUtc": "2026-09-17T18:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-038",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-02",
+        "jobNumber": "MO-00038",
+        "line": "LINE-B",
+        "lotNumber": "BATCH-002",
+        "partNumber": "MAT-2000",
+        "quantity": 38,
+        "scheduledStartUtc": "2026-09-17T18:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-038",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-03",
+        "jobNumber": "MO-00039",
+        "line": "LINE-C",
+        "lotNumber": "BATCH-003",
+        "partNumber": "MAT-3000",
+        "quantity": 39,
+        "scheduledStartUtc": "2026-09-18T09:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-039",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-03",
+        "jobNumber": "MO-00039",
+        "line": "LINE-C",
+        "lotNumber": "BATCH-003",
+        "partNumber": "MAT-3000",
+        "quantity": 39,
+        "scheduledStartUtc": "2026-09-18T09:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-039",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-03",
+        "jobNumber": "MO-00039",
+        "line": "LINE-C",
+        "lotNumber": "BATCH-003",
+        "partNumber": "MAT-3000",
+        "quantity": 39,
+        "scheduledStartUtc": "2026-09-18T09:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-039",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-04",
+        "jobNumber": "MO-00040",
+        "line": "LINE-A",
+        "lotNumber": null,
+        "partNumber": "MAT-4000",
+        "quantity": 40,
+        "scheduledStartUtc": "2026-09-19T12:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-040",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-04",
+        "jobNumber": "MO-00040",
+        "line": "LINE-A",
+        "lotNumber": null,
+        "partNumber": "MAT-4000",
+        "quantity": 40,
+        "scheduledStartUtc": "2026-09-19T12:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-040",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-04",
+        "jobNumber": "MO-00040",
+        "line": "LINE-A",
+        "lotNumber": null,
+        "partNumber": "MAT-4000",
+        "quantity": 40,
+        "scheduledStartUtc": "2026-09-19T12:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-040",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-01",
+        "jobNumber": "MO-00041",
+        "line": "LINE-B",
+        "lotNumber": "BATCH-002",
+        "partNumber": "MAT-1000",
+        "quantity": 41,
+        "scheduledStartUtc": "2026-09-20T16:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-041",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-01",
+        "jobNumber": "MO-00041",
+        "line": "LINE-B",
+        "lotNumber": "BATCH-002",
+        "partNumber": "MAT-1000",
+        "quantity": 41,
+        "scheduledStartUtc": "2026-09-20T16:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-041",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-01",
+        "jobNumber": "MO-00041",
+        "line": "LINE-B",
+        "lotNumber": "BATCH-002",
+        "partNumber": "MAT-1000",
+        "quantity": 41,
+        "scheduledStartUtc": "2026-09-20T16:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-041",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-02",
+        "jobNumber": "MO-00042",
+        "line": "LINE-C",
+        "lotNumber": "BATCH-003",
+        "partNumber": "MAT-2000",
+        "quantity": 42,
+        "scheduledStartUtc": "2026-09-21T07:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-042",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-02",
+        "jobNumber": "MO-00042",
+        "line": "LINE-C",
+        "lotNumber": "BATCH-003",
+        "partNumber": "MAT-2000",
+        "quantity": 42,
+        "scheduledStartUtc": "2026-09-21T07:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-042",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-02",
+        "jobNumber": "MO-00042",
+        "line": "LINE-C",
+        "lotNumber": "BATCH-003",
+        "partNumber": "MAT-2000",
+        "quantity": 42,
+        "scheduledStartUtc": "2026-09-21T07:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-042",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-03",
+        "jobNumber": "MO-00043",
+        "line": "LINE-A",
+        "lotNumber": "BATCH-001",
+        "partNumber": "MAT-3000",
+        "quantity": 43,
+        "scheduledStartUtc": "2026-09-22T10:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-043",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-03",
+        "jobNumber": "MO-00043",
+        "line": "LINE-A",
+        "lotNumber": "BATCH-001",
+        "partNumber": "MAT-3000",
+        "quantity": 43,
+        "scheduledStartUtc": "2026-09-22T10:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-043",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-03",
+        "jobNumber": "MO-00043",
+        "line": "LINE-A",
+        "lotNumber": "BATCH-001",
+        "partNumber": "MAT-3000",
+        "quantity": 43,
+        "scheduledStartUtc": "2026-09-22T10:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-043",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-04",
+        "jobNumber": "MO-00044",
+        "line": "LINE-B",
+        "lotNumber": "BATCH-002",
+        "partNumber": "MAT-4000",
+        "quantity": 44,
+        "scheduledStartUtc": "2026-09-23T19:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-044",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-04",
+        "jobNumber": "MO-00044",
+        "line": "LINE-B",
+        "lotNumber": "BATCH-002",
+        "partNumber": "MAT-4000",
+        "quantity": 44,
+        "scheduledStartUtc": "2026-09-23T19:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-044",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-04",
+        "jobNumber": "MO-00044",
+        "line": "LINE-B",
+        "lotNumber": "BATCH-002",
+        "partNumber": "MAT-4000",
+        "quantity": 44,
+        "scheduledStartUtc": "2026-09-23T19:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-044",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-01",
+        "jobNumber": "MO-00045",
+        "line": "LINE-C",
+        "lotNumber": "BATCH-003",
+        "partNumber": "MAT-1000",
+        "quantity": 45,
+        "scheduledStartUtc": "2026-09-24T10:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-045",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-01",
+        "jobNumber": "MO-00045",
+        "line": "LINE-C",
+        "lotNumber": "BATCH-003",
+        "partNumber": "MAT-1000",
+        "quantity": 45,
+        "scheduledStartUtc": "2026-09-24T10:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-045",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-01",
+        "jobNumber": "MO-00045",
+        "line": "LINE-C",
+        "lotNumber": "BATCH-003",
+        "partNumber": "MAT-1000",
+        "quantity": 45,
+        "scheduledStartUtc": "2026-09-24T10:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-045",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-02",
+        "jobNumber": "MO-00046",
+        "line": "LINE-A",
+        "lotNumber": "BATCH-001",
+        "partNumber": "MAT-2000",
+        "quantity": 46,
+        "scheduledStartUtc": "2026-09-25T08:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-046",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-02",
+        "jobNumber": "MO-00046",
+        "line": "LINE-A",
+        "lotNumber": "BATCH-001",
+        "partNumber": "MAT-2000",
+        "quantity": 46,
+        "scheduledStartUtc": "2026-09-25T08:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-046",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-02",
+        "jobNumber": "MO-00046",
+        "line": "LINE-A",
+        "lotNumber": "BATCH-001",
+        "partNumber": "MAT-2000",
+        "quantity": 46,
+        "scheduledStartUtc": "2026-09-25T08:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-046",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-03",
+        "jobNumber": "MO-00047",
+        "line": "LINE-B",
+        "lotNumber": "BATCH-002",
+        "partNumber": "MAT-3000",
+        "quantity": 47,
+        "scheduledStartUtc": "2026-09-26T17:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-047",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-03",
+        "jobNumber": "MO-00047",
+        "line": "LINE-B",
+        "lotNumber": "BATCH-002",
+        "partNumber": "MAT-3000",
+        "quantity": 47,
+        "scheduledStartUtc": "2026-09-26T17:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-047",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-03",
+        "jobNumber": "MO-00047",
+        "line": "LINE-B",
+        "lotNumber": "BATCH-002",
+        "partNumber": "MAT-3000",
+        "quantity": 47,
+        "scheduledStartUtc": "2026-09-26T17:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-047",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-04",
+        "jobNumber": "MO-00048",
+        "line": "LINE-C",
+        "lotNumber": "BATCH-003",
+        "partNumber": "MAT-4000",
+        "quantity": 48,
+        "scheduledStartUtc": "2026-09-27T08:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-048",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-04",
+        "jobNumber": "MO-00048",
+        "line": "LINE-C",
+        "lotNumber": "BATCH-003",
+        "partNumber": "MAT-4000",
+        "quantity": 48,
+        "scheduledStartUtc": "2026-09-27T08:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-048",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-04",
+        "jobNumber": "MO-00048",
+        "line": "LINE-C",
+        "lotNumber": "BATCH-003",
+        "partNumber": "MAT-4000",
+        "quantity": 48,
+        "scheduledStartUtc": "2026-09-27T08:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-048",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-01",
+        "jobNumber": "MO-00049",
+        "line": "LINE-A",
+        "lotNumber": "BATCH-001",
+        "partNumber": "MAT-1000",
+        "quantity": 49,
+        "scheduledStartUtc": "2026-09-28T11:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-049",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-01",
+        "jobNumber": "MO-00049",
+        "line": "LINE-A",
+        "lotNumber": "BATCH-001",
+        "partNumber": "MAT-1000",
+        "quantity": 49,
+        "scheduledStartUtc": "2026-09-28T11:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-049",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-01",
+        "jobNumber": "MO-00049",
+        "line": "LINE-A",
+        "lotNumber": "BATCH-001",
+        "partNumber": "MAT-1000",
+        "quantity": 49,
+        "scheduledStartUtc": "2026-09-28T11:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-049",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-02",
+        "jobNumber": "MO-00050",
+        "line": "LINE-B",
+        "lotNumber": null,
+        "partNumber": "MAT-2000",
+        "quantity": 50,
+        "scheduledStartUtc": "2026-09-29T20:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-050",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-02",
+        "jobNumber": "MO-00050",
+        "line": "LINE-B",
+        "lotNumber": null,
+        "partNumber": "MAT-2000",
+        "quantity": 50,
+        "scheduledStartUtc": "2026-09-29T20:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-050",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-02",
+        "jobNumber": "MO-00050",
+        "line": "LINE-B",
+        "lotNumber": null,
+        "partNumber": "MAT-2000",
+        "quantity": 50,
+        "scheduledStartUtc": "2026-09-29T20:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-050",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-03",
+        "jobNumber": "MO-00051",
+        "line": "LINE-C",
+        "lotNumber": "BATCH-003",
+        "partNumber": "MAT-3000",
+        "quantity": 1,
+        "scheduledStartUtc": "2026-09-30T06:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-051",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-03",
+        "jobNumber": "MO-00051",
+        "line": "LINE-C",
+        "lotNumber": "BATCH-003",
+        "partNumber": "MAT-3000",
+        "quantity": 1,
+        "scheduledStartUtc": "2026-09-30T06:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-051",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-03",
+        "jobNumber": "MO-00051",
+        "line": "LINE-C",
+        "lotNumber": "BATCH-003",
+        "partNumber": "MAT-3000",
+        "quantity": 1,
+        "scheduledStartUtc": "2026-09-30T06:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-051",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-04",
+        "jobNumber": "MO-00052",
+        "line": "LINE-A",
+        "lotNumber": "BATCH-001",
+        "partNumber": "MAT-4000",
+        "quantity": 2,
+        "scheduledStartUtc": "2026-10-01T09:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-052",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-04",
+        "jobNumber": "MO-00052",
+        "line": "LINE-A",
+        "lotNumber": "BATCH-001",
+        "partNumber": "MAT-4000",
+        "quantity": 2,
+        "scheduledStartUtc": "2026-10-01T09:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-052",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-04",
+        "jobNumber": "MO-00052",
+        "line": "LINE-A",
+        "lotNumber": "BATCH-001",
+        "partNumber": "MAT-4000",
+        "quantity": 2,
+        "scheduledStartUtc": "2026-10-01T09:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-052",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-01",
+        "jobNumber": "MO-00053",
+        "line": "LINE-B",
+        "lotNumber": "BATCH-002",
+        "partNumber": "MAT-1000",
+        "quantity": 3,
+        "scheduledStartUtc": "2026-10-02T18:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-053",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-01",
+        "jobNumber": "MO-00053",
+        "line": "LINE-B",
+        "lotNumber": "BATCH-002",
+        "partNumber": "MAT-1000",
+        "quantity": 3,
+        "scheduledStartUtc": "2026-10-02T18:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-053",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-01",
+        "jobNumber": "MO-00053",
+        "line": "LINE-B",
+        "lotNumber": "BATCH-002",
+        "partNumber": "MAT-1000",
+        "quantity": 3,
+        "scheduledStartUtc": "2026-10-02T18:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-053",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-02",
+        "jobNumber": "MO-00054",
+        "line": "LINE-C",
+        "lotNumber": "BATCH-003",
+        "partNumber": "MAT-2000",
+        "quantity": 4,
+        "scheduledStartUtc": "2026-10-03T09:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-054",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-02",
+        "jobNumber": "MO-00054",
+        "line": "LINE-C",
+        "lotNumber": "BATCH-003",
+        "partNumber": "MAT-2000",
+        "quantity": 4,
+        "scheduledStartUtc": "2026-10-03T09:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-054",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-02",
+        "jobNumber": "MO-00054",
+        "line": "LINE-C",
+        "lotNumber": "BATCH-003",
+        "partNumber": "MAT-2000",
+        "quantity": 4,
+        "scheduledStartUtc": "2026-10-03T09:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-054",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-03",
+        "jobNumber": "MO-00055",
+        "line": "LINE-A",
+        "lotNumber": "BATCH-001",
+        "partNumber": "MAT-3000",
+        "quantity": 5,
+        "scheduledStartUtc": "2026-10-04T12:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-055",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-03",
+        "jobNumber": "MO-00055",
+        "line": "LINE-A",
+        "lotNumber": "BATCH-001",
+        "partNumber": "MAT-3000",
+        "quantity": 5,
+        "scheduledStartUtc": "2026-10-04T12:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-055",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-03",
+        "jobNumber": "MO-00055",
+        "line": "LINE-A",
+        "lotNumber": "BATCH-001",
+        "partNumber": "MAT-3000",
+        "quantity": 5,
+        "scheduledStartUtc": "2026-10-04T12:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-055",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-04",
+        "jobNumber": "MO-00056",
+        "line": "LINE-B",
+        "lotNumber": "BATCH-002",
+        "partNumber": "MAT-4000",
+        "quantity": 6,
+        "scheduledStartUtc": "2026-10-05T16:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-056",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-04",
+        "jobNumber": "MO-00056",
+        "line": "LINE-B",
+        "lotNumber": "BATCH-002",
+        "partNumber": "MAT-4000",
+        "quantity": 6,
+        "scheduledStartUtc": "2026-10-05T16:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-056",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-04",
+        "jobNumber": "MO-00056",
+        "line": "LINE-B",
+        "lotNumber": "BATCH-002",
+        "partNumber": "MAT-4000",
+        "quantity": 6,
+        "scheduledStartUtc": "2026-10-05T16:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-056",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-01",
+        "jobNumber": "MO-00057",
+        "line": "LINE-C",
+        "lotNumber": "BATCH-003",
+        "partNumber": "MAT-1000",
+        "quantity": 7,
+        "scheduledStartUtc": "2026-10-06T07:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-057",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-01",
+        "jobNumber": "MO-00057",
+        "line": "LINE-C",
+        "lotNumber": "BATCH-003",
+        "partNumber": "MAT-1000",
+        "quantity": 7,
+        "scheduledStartUtc": "2026-10-06T07:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-057",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-01",
+        "jobNumber": "MO-00057",
+        "line": "LINE-C",
+        "lotNumber": "BATCH-003",
+        "partNumber": "MAT-1000",
+        "quantity": 7,
+        "scheduledStartUtc": "2026-10-06T07:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-057",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-02",
+        "jobNumber": "MO-00058",
+        "line": "LINE-A",
+        "lotNumber": "BATCH-001",
+        "partNumber": "MAT-2000",
+        "quantity": 8,
+        "scheduledStartUtc": "2026-10-07T10:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-058",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-02",
+        "jobNumber": "MO-00058",
+        "line": "LINE-A",
+        "lotNumber": "BATCH-001",
+        "partNumber": "MAT-2000",
+        "quantity": 8,
+        "scheduledStartUtc": "2026-10-07T10:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-058",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-02",
+        "jobNumber": "MO-00058",
+        "line": "LINE-A",
+        "lotNumber": "BATCH-001",
+        "partNumber": "MAT-2000",
+        "quantity": 8,
+        "scheduledStartUtc": "2026-10-07T10:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-058",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-03",
+        "jobNumber": "MO-00059",
+        "line": "LINE-B",
+        "lotNumber": "BATCH-002",
+        "partNumber": "MAT-3000",
+        "quantity": 9,
+        "scheduledStartUtc": "2026-10-08T19:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-059",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-03",
+        "jobNumber": "MO-00059",
+        "line": "LINE-B",
+        "lotNumber": "BATCH-002",
+        "partNumber": "MAT-3000",
+        "quantity": 9,
+        "scheduledStartUtc": "2026-10-08T19:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-059",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-03",
+        "jobNumber": "MO-00059",
+        "line": "LINE-B",
+        "lotNumber": "BATCH-002",
+        "partNumber": "MAT-3000",
+        "quantity": 9,
+        "scheduledStartUtc": "2026-10-08T19:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-059",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-04",
+        "jobNumber": "MO-00060",
+        "line": "LINE-C",
+        "lotNumber": null,
+        "partNumber": "MAT-4000",
+        "quantity": 10,
+        "scheduledStartUtc": "2026-10-09T10:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-060",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-04",
+        "jobNumber": "MO-00060",
+        "line": "LINE-C",
+        "lotNumber": null,
+        "partNumber": "MAT-4000",
+        "quantity": 10,
+        "scheduledStartUtc": "2026-10-09T10:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-060",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-04",
+        "jobNumber": "MO-00060",
+        "line": "LINE-C",
+        "lotNumber": null,
+        "partNumber": "MAT-4000",
+        "quantity": 10,
+        "scheduledStartUtc": "2026-10-09T10:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-060",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-01",
+        "jobNumber": "MO-00061",
+        "line": "LINE-A",
+        "lotNumber": "BATCH-001",
+        "partNumber": "MAT-1000",
+        "quantity": 11,
+        "scheduledStartUtc": "2026-10-10T08:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-061",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-01",
+        "jobNumber": "MO-00061",
+        "line": "LINE-A",
+        "lotNumber": "BATCH-001",
+        "partNumber": "MAT-1000",
+        "quantity": 11,
+        "scheduledStartUtc": "2026-10-10T08:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-061",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-01",
+        "jobNumber": "MO-00061",
+        "line": "LINE-A",
+        "lotNumber": "BATCH-001",
+        "partNumber": "MAT-1000",
+        "quantity": 11,
+        "scheduledStartUtc": "2026-10-10T08:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-061",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-02",
+        "jobNumber": "MO-00062",
+        "line": "LINE-B",
+        "lotNumber": "BATCH-002",
+        "partNumber": "MAT-2000",
+        "quantity": 12,
+        "scheduledStartUtc": "2026-10-11T17:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-062",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-02",
+        "jobNumber": "MO-00062",
+        "line": "LINE-B",
+        "lotNumber": "BATCH-002",
+        "partNumber": "MAT-2000",
+        "quantity": 12,
+        "scheduledStartUtc": "2026-10-11T17:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-062",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-02",
+        "jobNumber": "MO-00062",
+        "line": "LINE-B",
+        "lotNumber": "BATCH-002",
+        "partNumber": "MAT-2000",
+        "quantity": 12,
+        "scheduledStartUtc": "2026-10-11T17:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-062",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-03",
+        "jobNumber": "MO-00063",
+        "line": "LINE-C",
+        "lotNumber": "BATCH-003",
+        "partNumber": "MAT-3000",
+        "quantity": 13,
+        "scheduledStartUtc": "2026-10-12T08:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-063",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-03",
+        "jobNumber": "MO-00063",
+        "line": "LINE-C",
+        "lotNumber": "BATCH-003",
+        "partNumber": "MAT-3000",
+        "quantity": 13,
+        "scheduledStartUtc": "2026-10-12T08:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-063",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-03",
+        "jobNumber": "MO-00063",
+        "line": "LINE-C",
+        "lotNumber": "BATCH-003",
+        "partNumber": "MAT-3000",
+        "quantity": 13,
+        "scheduledStartUtc": "2026-10-12T08:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-063",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-04",
+        "jobNumber": "MO-00064",
+        "line": "LINE-A",
+        "lotNumber": "BATCH-001",
+        "partNumber": "MAT-4000",
+        "quantity": 14,
+        "scheduledStartUtc": "2026-10-13T11:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-064",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-04",
+        "jobNumber": "MO-00064",
+        "line": "LINE-A",
+        "lotNumber": "BATCH-001",
+        "partNumber": "MAT-4000",
+        "quantity": 14,
+        "scheduledStartUtc": "2026-10-13T11:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-064",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-04",
+        "jobNumber": "MO-00064",
+        "line": "LINE-A",
+        "lotNumber": "BATCH-001",
+        "partNumber": "MAT-4000",
+        "quantity": 14,
+        "scheduledStartUtc": "2026-10-13T11:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-064",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-01",
+        "jobNumber": "MO-00065",
+        "line": "LINE-B",
+        "lotNumber": "BATCH-002",
+        "partNumber": "MAT-1000",
+        "quantity": 15,
+        "scheduledStartUtc": "2026-10-14T20:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-065",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-01",
+        "jobNumber": "MO-00065",
+        "line": "LINE-B",
+        "lotNumber": "BATCH-002",
+        "partNumber": "MAT-1000",
+        "quantity": 15,
+        "scheduledStartUtc": "2026-10-14T20:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-065",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-01",
+        "jobNumber": "MO-00065",
+        "line": "LINE-B",
+        "lotNumber": "BATCH-002",
+        "partNumber": "MAT-1000",
+        "quantity": 15,
+        "scheduledStartUtc": "2026-10-14T20:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-065",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-02",
+        "jobNumber": "MO-00066",
+        "line": "LINE-C",
+        "lotNumber": "BATCH-003",
+        "partNumber": "MAT-2000",
+        "quantity": 16,
+        "scheduledStartUtc": "2026-10-15T06:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-066",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-02",
+        "jobNumber": "MO-00066",
+        "line": "LINE-C",
+        "lotNumber": "BATCH-003",
+        "partNumber": "MAT-2000",
+        "quantity": 16,
+        "scheduledStartUtc": "2026-10-15T06:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-066",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-02",
+        "jobNumber": "MO-00066",
+        "line": "LINE-C",
+        "lotNumber": "BATCH-003",
+        "partNumber": "MAT-2000",
+        "quantity": 16,
+        "scheduledStartUtc": "2026-10-15T06:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-066",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-03",
+        "jobNumber": "MO-00067",
+        "line": "LINE-A",
+        "lotNumber": "BATCH-001",
+        "partNumber": "MAT-3000",
+        "quantity": 17,
+        "scheduledStartUtc": "2026-10-16T09:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-067",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-03",
+        "jobNumber": "MO-00067",
+        "line": "LINE-A",
+        "lotNumber": "BATCH-001",
+        "partNumber": "MAT-3000",
+        "quantity": 17,
+        "scheduledStartUtc": "2026-10-16T09:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-067",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-03",
+        "jobNumber": "MO-00067",
+        "line": "LINE-A",
+        "lotNumber": "BATCH-001",
+        "partNumber": "MAT-3000",
+        "quantity": 17,
+        "scheduledStartUtc": "2026-10-16T09:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-067",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-04",
+        "jobNumber": "MO-00068",
+        "line": "LINE-B",
+        "lotNumber": "BATCH-002",
+        "partNumber": "MAT-4000",
+        "quantity": 18,
+        "scheduledStartUtc": "2026-10-17T18:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-068",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-04",
+        "jobNumber": "MO-00068",
+        "line": "LINE-B",
+        "lotNumber": "BATCH-002",
+        "partNumber": "MAT-4000",
+        "quantity": 18,
+        "scheduledStartUtc": "2026-10-17T18:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-068",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-04",
+        "jobNumber": "MO-00068",
+        "line": "LINE-B",
+        "lotNumber": "BATCH-002",
+        "partNumber": "MAT-4000",
+        "quantity": 18,
+        "scheduledStartUtc": "2026-10-17T18:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-068",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-01",
+        "jobNumber": "MO-00069",
+        "line": "LINE-C",
+        "lotNumber": "BATCH-003",
+        "partNumber": "MAT-1000",
+        "quantity": 19,
+        "scheduledStartUtc": "2026-10-18T09:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-069",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-01",
+        "jobNumber": "MO-00069",
+        "line": "LINE-C",
+        "lotNumber": "BATCH-003",
+        "partNumber": "MAT-1000",
+        "quantity": 19,
+        "scheduledStartUtc": "2026-10-18T09:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-069",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-01",
+        "jobNumber": "MO-00069",
+        "line": "LINE-C",
+        "lotNumber": "BATCH-003",
+        "partNumber": "MAT-1000",
+        "quantity": 19,
+        "scheduledStartUtc": "2026-10-18T09:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-069",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-02",
+        "jobNumber": "MO-00070",
+        "line": "LINE-A",
+        "lotNumber": null,
+        "partNumber": "MAT-2000",
+        "quantity": 20,
+        "scheduledStartUtc": "2026-10-19T12:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-070",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-02",
+        "jobNumber": "MO-00070",
+        "line": "LINE-A",
+        "lotNumber": null,
+        "partNumber": "MAT-2000",
+        "quantity": 20,
+        "scheduledStartUtc": "2026-10-19T12:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-070",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-02",
+        "jobNumber": "MO-00070",
+        "line": "LINE-A",
+        "lotNumber": null,
+        "partNumber": "MAT-2000",
+        "quantity": 20,
+        "scheduledStartUtc": "2026-10-19T12:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-070",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-03",
+        "jobNumber": "MO-00071",
+        "line": "LINE-B",
+        "lotNumber": "BATCH-002",
+        "partNumber": "MAT-3000",
+        "quantity": 21,
+        "scheduledStartUtc": "2026-10-20T16:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-071",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-03",
+        "jobNumber": "MO-00071",
+        "line": "LINE-B",
+        "lotNumber": "BATCH-002",
+        "partNumber": "MAT-3000",
+        "quantity": 21,
+        "scheduledStartUtc": "2026-10-20T16:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-071",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-03",
+        "jobNumber": "MO-00071",
+        "line": "LINE-B",
+        "lotNumber": "BATCH-002",
+        "partNumber": "MAT-3000",
+        "quantity": 21,
+        "scheduledStartUtc": "2026-10-20T16:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-071",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-04",
+        "jobNumber": "MO-00072",
+        "line": "LINE-C",
+        "lotNumber": "BATCH-003",
+        "partNumber": "MAT-4000",
+        "quantity": 22,
+        "scheduledStartUtc": "2026-10-21T07:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-072",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-04",
+        "jobNumber": "MO-00072",
+        "line": "LINE-C",
+        "lotNumber": "BATCH-003",
+        "partNumber": "MAT-4000",
+        "quantity": 22,
+        "scheduledStartUtc": "2026-10-21T07:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-072",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-04",
+        "jobNumber": "MO-00072",
+        "line": "LINE-C",
+        "lotNumber": "BATCH-003",
+        "partNumber": "MAT-4000",
+        "quantity": 22,
+        "scheduledStartUtc": "2026-10-21T07:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-072",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-01",
+        "jobNumber": "MO-00073",
+        "line": "LINE-A",
+        "lotNumber": "BATCH-001",
+        "partNumber": "MAT-1000",
+        "quantity": 23,
+        "scheduledStartUtc": "2026-10-22T10:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-073",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-01",
+        "jobNumber": "MO-00073",
+        "line": "LINE-A",
+        "lotNumber": "BATCH-001",
+        "partNumber": "MAT-1000",
+        "quantity": 23,
+        "scheduledStartUtc": "2026-10-22T10:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-073",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-01",
+        "jobNumber": "MO-00073",
+        "line": "LINE-A",
+        "lotNumber": "BATCH-001",
+        "partNumber": "MAT-1000",
+        "quantity": 23,
+        "scheduledStartUtc": "2026-10-22T10:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-073",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-02",
+        "jobNumber": "MO-00074",
+        "line": "LINE-B",
+        "lotNumber": "BATCH-002",
+        "partNumber": "MAT-2000",
+        "quantity": 24,
+        "scheduledStartUtc": "2026-10-23T19:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-074",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-02",
+        "jobNumber": "MO-00074",
+        "line": "LINE-B",
+        "lotNumber": "BATCH-002",
+        "partNumber": "MAT-2000",
+        "quantity": 24,
+        "scheduledStartUtc": "2026-10-23T19:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-074",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-02",
+        "jobNumber": "MO-00074",
+        "line": "LINE-B",
+        "lotNumber": "BATCH-002",
+        "partNumber": "MAT-2000",
+        "quantity": 24,
+        "scheduledStartUtc": "2026-10-23T19:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-074",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-03",
+        "jobNumber": "MO-00075",
+        "line": "LINE-C",
+        "lotNumber": "BATCH-003",
+        "partNumber": "MAT-3000",
+        "quantity": 25,
+        "scheduledStartUtc": "2026-10-24T10:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-075",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-03",
+        "jobNumber": "MO-00075",
+        "line": "LINE-C",
+        "lotNumber": "BATCH-003",
+        "partNumber": "MAT-3000",
+        "quantity": 25,
+        "scheduledStartUtc": "2026-10-24T10:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-075",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-03",
+        "jobNumber": "MO-00075",
+        "line": "LINE-C",
+        "lotNumber": "BATCH-003",
+        "partNumber": "MAT-3000",
+        "quantity": 25,
+        "scheduledStartUtc": "2026-10-24T10:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-075",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-04",
+        "jobNumber": "MO-00076",
+        "line": "LINE-A",
+        "lotNumber": "BATCH-001",
+        "partNumber": "MAT-4000",
+        "quantity": 26,
+        "scheduledStartUtc": "2026-10-25T08:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-076",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-04",
+        "jobNumber": "MO-00076",
+        "line": "LINE-A",
+        "lotNumber": "BATCH-001",
+        "partNumber": "MAT-4000",
+        "quantity": 26,
+        "scheduledStartUtc": "2026-10-25T08:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-076",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-04",
+        "jobNumber": "MO-00076",
+        "line": "LINE-A",
+        "lotNumber": "BATCH-001",
+        "partNumber": "MAT-4000",
+        "quantity": 26,
+        "scheduledStartUtc": "2026-10-25T08:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-076",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-01",
+        "jobNumber": "MO-00077",
+        "line": "LINE-B",
+        "lotNumber": "BATCH-002",
+        "partNumber": "MAT-1000",
+        "quantity": 27,
+        "scheduledStartUtc": "2026-10-26T17:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-077",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-01",
+        "jobNumber": "MO-00077",
+        "line": "LINE-B",
+        "lotNumber": "BATCH-002",
+        "partNumber": "MAT-1000",
+        "quantity": 27,
+        "scheduledStartUtc": "2026-10-26T17:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-077",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-01",
+        "jobNumber": "MO-00077",
+        "line": "LINE-B",
+        "lotNumber": "BATCH-002",
+        "partNumber": "MAT-1000",
+        "quantity": 27,
+        "scheduledStartUtc": "2026-10-26T17:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-077",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-02",
+        "jobNumber": "MO-00078",
+        "line": "LINE-C",
+        "lotNumber": "BATCH-003",
+        "partNumber": "MAT-2000",
+        "quantity": 28,
+        "scheduledStartUtc": "2026-10-27T08:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-078",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-02",
+        "jobNumber": "MO-00078",
+        "line": "LINE-C",
+        "lotNumber": "BATCH-003",
+        "partNumber": "MAT-2000",
+        "quantity": 28,
+        "scheduledStartUtc": "2026-10-27T08:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-078",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-02",
+        "jobNumber": "MO-00078",
+        "line": "LINE-C",
+        "lotNumber": "BATCH-003",
+        "partNumber": "MAT-2000",
+        "quantity": 28,
+        "scheduledStartUtc": "2026-10-27T08:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-078",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-03",
+        "jobNumber": "MO-00079",
+        "line": "LINE-A",
+        "lotNumber": "BATCH-001",
+        "partNumber": "MAT-3000",
+        "quantity": 29,
+        "scheduledStartUtc": "2026-10-28T11:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-079",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-03",
+        "jobNumber": "MO-00079",
+        "line": "LINE-A",
+        "lotNumber": "BATCH-001",
+        "partNumber": "MAT-3000",
+        "quantity": 29,
+        "scheduledStartUtc": "2026-10-28T11:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-079",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-03",
+        "jobNumber": "MO-00079",
+        "line": "LINE-A",
+        "lotNumber": "BATCH-001",
+        "partNumber": "MAT-3000",
+        "quantity": 29,
+        "scheduledStartUtc": "2026-10-28T11:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-079",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-04",
+        "jobNumber": "MO-00080",
+        "line": "LINE-B",
+        "lotNumber": null,
+        "partNumber": "MAT-4000",
+        "quantity": 30,
+        "scheduledStartUtc": "2026-10-29T20:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-080",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-04",
+        "jobNumber": "MO-00080",
+        "line": "LINE-B",
+        "lotNumber": null,
+        "partNumber": "MAT-4000",
+        "quantity": 30,
+        "scheduledStartUtc": "2026-10-29T20:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-080",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-04",
+        "jobNumber": "MO-00080",
+        "line": "LINE-B",
+        "lotNumber": null,
+        "partNumber": "MAT-4000",
+        "quantity": 30,
+        "scheduledStartUtc": "2026-10-29T20:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-080",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-01",
+        "jobNumber": "MO-00081",
+        "line": "LINE-C",
+        "lotNumber": "BATCH-003",
+        "partNumber": "MAT-1000",
+        "quantity": 31,
+        "scheduledStartUtc": "2026-10-30T06:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-081",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-01",
+        "jobNumber": "MO-00081",
+        "line": "LINE-C",
+        "lotNumber": "BATCH-003",
+        "partNumber": "MAT-1000",
+        "quantity": 31,
+        "scheduledStartUtc": "2026-10-30T06:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-081",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-01",
+        "jobNumber": "MO-00081",
+        "line": "LINE-C",
+        "lotNumber": "BATCH-003",
+        "partNumber": "MAT-1000",
+        "quantity": 31,
+        "scheduledStartUtc": "2026-10-30T06:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-081",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-02",
+        "jobNumber": "MO-00082",
+        "line": "LINE-A",
+        "lotNumber": "BATCH-001",
+        "partNumber": "MAT-2000",
+        "quantity": 32,
+        "scheduledStartUtc": "2026-10-31T09:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-082",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-02",
+        "jobNumber": "MO-00082",
+        "line": "LINE-A",
+        "lotNumber": "BATCH-001",
+        "partNumber": "MAT-2000",
+        "quantity": 32,
+        "scheduledStartUtc": "2026-10-31T09:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-082",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-02",
+        "jobNumber": "MO-00082",
+        "line": "LINE-A",
+        "lotNumber": "BATCH-001",
+        "partNumber": "MAT-2000",
+        "quantity": 32,
+        "scheduledStartUtc": "2026-10-31T09:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-082",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-03",
+        "jobNumber": "MO-00083",
+        "line": "LINE-B",
+        "lotNumber": "BATCH-002",
+        "partNumber": "MAT-3000",
+        "quantity": 33,
+        "scheduledStartUtc": "2026-11-01T18:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-083",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-03",
+        "jobNumber": "MO-00083",
+        "line": "LINE-B",
+        "lotNumber": "BATCH-002",
+        "partNumber": "MAT-3000",
+        "quantity": 33,
+        "scheduledStartUtc": "2026-11-01T18:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-083",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-03",
+        "jobNumber": "MO-00083",
+        "line": "LINE-B",
+        "lotNumber": "BATCH-002",
+        "partNumber": "MAT-3000",
+        "quantity": 33,
+        "scheduledStartUtc": "2026-11-01T18:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-083",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-04",
+        "jobNumber": "MO-00084",
+        "line": "LINE-C",
+        "lotNumber": "BATCH-003",
+        "partNumber": "MAT-4000",
+        "quantity": 34,
+        "scheduledStartUtc": "2026-11-02T09:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-084",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-04",
+        "jobNumber": "MO-00084",
+        "line": "LINE-C",
+        "lotNumber": "BATCH-003",
+        "partNumber": "MAT-4000",
+        "quantity": 34,
+        "scheduledStartUtc": "2026-11-02T09:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-084",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-04",
+        "jobNumber": "MO-00084",
+        "line": "LINE-C",
+        "lotNumber": "BATCH-003",
+        "partNumber": "MAT-4000",
+        "quantity": 34,
+        "scheduledStartUtc": "2026-11-02T09:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-084",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-01",
+        "jobNumber": "MO-00085",
+        "line": "LINE-A",
+        "lotNumber": "BATCH-001",
+        "partNumber": "MAT-1000",
+        "quantity": 35,
+        "scheduledStartUtc": "2026-11-03T12:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-085",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-01",
+        "jobNumber": "MO-00085",
+        "line": "LINE-A",
+        "lotNumber": "BATCH-001",
+        "partNumber": "MAT-1000",
+        "quantity": 35,
+        "scheduledStartUtc": "2026-11-03T12:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-085",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-01",
+        "jobNumber": "MO-00085",
+        "line": "LINE-A",
+        "lotNumber": "BATCH-001",
+        "partNumber": "MAT-1000",
+        "quantity": 35,
+        "scheduledStartUtc": "2026-11-03T12:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-085",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-02",
+        "jobNumber": "MO-00086",
+        "line": "LINE-B",
+        "lotNumber": "BATCH-002",
+        "partNumber": "MAT-2000",
+        "quantity": 36,
+        "scheduledStartUtc": "2026-11-04T16:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-086",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-02",
+        "jobNumber": "MO-00086",
+        "line": "LINE-B",
+        "lotNumber": "BATCH-002",
+        "partNumber": "MAT-2000",
+        "quantity": 36,
+        "scheduledStartUtc": "2026-11-04T16:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-086",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-02",
+        "jobNumber": "MO-00086",
+        "line": "LINE-B",
+        "lotNumber": "BATCH-002",
+        "partNumber": "MAT-2000",
+        "quantity": 36,
+        "scheduledStartUtc": "2026-11-04T16:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-086",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-03",
+        "jobNumber": "MO-00087",
+        "line": "LINE-C",
+        "lotNumber": "BATCH-003",
+        "partNumber": "MAT-3000",
+        "quantity": 37,
+        "scheduledStartUtc": "2026-11-05T07:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-087",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-03",
+        "jobNumber": "MO-00087",
+        "line": "LINE-C",
+        "lotNumber": "BATCH-003",
+        "partNumber": "MAT-3000",
+        "quantity": 37,
+        "scheduledStartUtc": "2026-11-05T07:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-087",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-03",
+        "jobNumber": "MO-00087",
+        "line": "LINE-C",
+        "lotNumber": "BATCH-003",
+        "partNumber": "MAT-3000",
+        "quantity": 37,
+        "scheduledStartUtc": "2026-11-05T07:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-087",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-04",
+        "jobNumber": "MO-00088",
+        "line": "LINE-A",
+        "lotNumber": "BATCH-001",
+        "partNumber": "MAT-4000",
+        "quantity": 38,
+        "scheduledStartUtc": "2026-11-06T10:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-088",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-04",
+        "jobNumber": "MO-00088",
+        "line": "LINE-A",
+        "lotNumber": "BATCH-001",
+        "partNumber": "MAT-4000",
+        "quantity": 38,
+        "scheduledStartUtc": "2026-11-06T10:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-088",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-04",
+        "jobNumber": "MO-00088",
+        "line": "LINE-A",
+        "lotNumber": "BATCH-001",
+        "partNumber": "MAT-4000",
+        "quantity": 38,
+        "scheduledStartUtc": "2026-11-06T10:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-088",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-01",
+        "jobNumber": "MO-00089",
+        "line": "LINE-B",
+        "lotNumber": "BATCH-002",
+        "partNumber": "MAT-1000",
+        "quantity": 39,
+        "scheduledStartUtc": "2026-11-07T19:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-089",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-01",
+        "jobNumber": "MO-00089",
+        "line": "LINE-B",
+        "lotNumber": "BATCH-002",
+        "partNumber": "MAT-1000",
+        "quantity": 39,
+        "scheduledStartUtc": "2026-11-07T19:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-089",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-01",
+        "jobNumber": "MO-00089",
+        "line": "LINE-B",
+        "lotNumber": "BATCH-002",
+        "partNumber": "MAT-1000",
+        "quantity": 39,
+        "scheduledStartUtc": "2026-11-07T19:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-089",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-02",
+        "jobNumber": "MO-00090",
+        "line": "LINE-C",
+        "lotNumber": null,
+        "partNumber": "MAT-2000",
+        "quantity": 40,
+        "scheduledStartUtc": "2026-11-08T10:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-090",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-02",
+        "jobNumber": "MO-00090",
+        "line": "LINE-C",
+        "lotNumber": null,
+        "partNumber": "MAT-2000",
+        "quantity": 40,
+        "scheduledStartUtc": "2026-11-08T10:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-090",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-02",
+        "jobNumber": "MO-00090",
+        "line": "LINE-C",
+        "lotNumber": null,
+        "partNumber": "MAT-2000",
+        "quantity": 40,
+        "scheduledStartUtc": "2026-11-08T10:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-090",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-03",
+        "jobNumber": "MO-00091",
+        "line": "LINE-A",
+        "lotNumber": "BATCH-001",
+        "partNumber": "MAT-3000",
+        "quantity": 41,
+        "scheduledStartUtc": "2026-11-09T08:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-091",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-03",
+        "jobNumber": "MO-00091",
+        "line": "LINE-A",
+        "lotNumber": "BATCH-001",
+        "partNumber": "MAT-3000",
+        "quantity": 41,
+        "scheduledStartUtc": "2026-11-09T08:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-091",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-03",
+        "jobNumber": "MO-00091",
+        "line": "LINE-A",
+        "lotNumber": "BATCH-001",
+        "partNumber": "MAT-3000",
+        "quantity": 41,
+        "scheduledStartUtc": "2026-11-09T08:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-091",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-04",
+        "jobNumber": "MO-00092",
+        "line": "LINE-B",
+        "lotNumber": "BATCH-002",
+        "partNumber": "MAT-4000",
+        "quantity": 42,
+        "scheduledStartUtc": "2026-11-10T17:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-092",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-04",
+        "jobNumber": "MO-00092",
+        "line": "LINE-B",
+        "lotNumber": "BATCH-002",
+        "partNumber": "MAT-4000",
+        "quantity": 42,
+        "scheduledStartUtc": "2026-11-10T17:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-092",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-04",
+        "jobNumber": "MO-00092",
+        "line": "LINE-B",
+        "lotNumber": "BATCH-002",
+        "partNumber": "MAT-4000",
+        "quantity": 42,
+        "scheduledStartUtc": "2026-11-10T17:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-092",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-01",
+        "jobNumber": "MO-00093",
+        "line": "LINE-C",
+        "lotNumber": "BATCH-003",
+        "partNumber": "MAT-1000",
+        "quantity": 43,
+        "scheduledStartUtc": "2026-11-11T08:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-093",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-01",
+        "jobNumber": "MO-00093",
+        "line": "LINE-C",
+        "lotNumber": "BATCH-003",
+        "partNumber": "MAT-1000",
+        "quantity": 43,
+        "scheduledStartUtc": "2026-11-11T08:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-093",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-01",
+        "jobNumber": "MO-00093",
+        "line": "LINE-C",
+        "lotNumber": "BATCH-003",
+        "partNumber": "MAT-1000",
+        "quantity": 43,
+        "scheduledStartUtc": "2026-11-11T08:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-093",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-02",
+        "jobNumber": "MO-00094",
+        "line": "LINE-A",
+        "lotNumber": "BATCH-001",
+        "partNumber": "MAT-2000",
+        "quantity": 44,
+        "scheduledStartUtc": "2026-11-12T11:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-094",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-02",
+        "jobNumber": "MO-00094",
+        "line": "LINE-A",
+        "lotNumber": "BATCH-001",
+        "partNumber": "MAT-2000",
+        "quantity": 44,
+        "scheduledStartUtc": "2026-11-12T11:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-094",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-02",
+        "jobNumber": "MO-00094",
+        "line": "LINE-A",
+        "lotNumber": "BATCH-001",
+        "partNumber": "MAT-2000",
+        "quantity": 44,
+        "scheduledStartUtc": "2026-11-12T11:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-094",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-03",
+        "jobNumber": "MO-00095",
+        "line": "LINE-B",
+        "lotNumber": "BATCH-002",
+        "partNumber": "MAT-3000",
+        "quantity": 45,
+        "scheduledStartUtc": "2026-11-13T20:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-095",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-03",
+        "jobNumber": "MO-00095",
+        "line": "LINE-B",
+        "lotNumber": "BATCH-002",
+        "partNumber": "MAT-3000",
+        "quantity": 45,
+        "scheduledStartUtc": "2026-11-13T20:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-095",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-03",
+        "jobNumber": "MO-00095",
+        "line": "LINE-B",
+        "lotNumber": "BATCH-002",
+        "partNumber": "MAT-3000",
+        "quantity": 45,
+        "scheduledStartUtc": "2026-11-13T20:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-095",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-04",
+        "jobNumber": "MO-00096",
+        "line": "LINE-C",
+        "lotNumber": "BATCH-003",
+        "partNumber": "MAT-4000",
+        "quantity": 46,
+        "scheduledStartUtc": "2026-11-14T06:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-096",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-04",
+        "jobNumber": "MO-00096",
+        "line": "LINE-C",
+        "lotNumber": "BATCH-003",
+        "partNumber": "MAT-4000",
+        "quantity": 46,
+        "scheduledStartUtc": "2026-11-14T06:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-096",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-04",
+        "jobNumber": "MO-00096",
+        "line": "LINE-C",
+        "lotNumber": "BATCH-003",
+        "partNumber": "MAT-4000",
+        "quantity": 46,
+        "scheduledStartUtc": "2026-11-14T06:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-096",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-01",
+        "jobNumber": "MO-00097",
+        "line": "LINE-A",
+        "lotNumber": "BATCH-001",
+        "partNumber": "MAT-1000",
+        "quantity": 47,
+        "scheduledStartUtc": "2026-11-15T09:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-097",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-01",
+        "jobNumber": "MO-00097",
+        "line": "LINE-A",
+        "lotNumber": "BATCH-001",
+        "partNumber": "MAT-1000",
+        "quantity": 47,
+        "scheduledStartUtc": "2026-11-15T09:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-097",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-01",
+        "jobNumber": "MO-00097",
+        "line": "LINE-A",
+        "lotNumber": "BATCH-001",
+        "partNumber": "MAT-1000",
+        "quantity": 47,
+        "scheduledStartUtc": "2026-11-15T09:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-097",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-02",
+        "jobNumber": "MO-00098",
+        "line": "LINE-B",
+        "lotNumber": "BATCH-002",
+        "partNumber": "MAT-2000",
+        "quantity": 48,
+        "scheduledStartUtc": "2026-11-16T18:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-098",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-02",
+        "jobNumber": "MO-00098",
+        "line": "LINE-B",
+        "lotNumber": "BATCH-002",
+        "partNumber": "MAT-2000",
+        "quantity": 48,
+        "scheduledStartUtc": "2026-11-16T18:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-098",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-02",
+        "jobNumber": "MO-00098",
+        "line": "LINE-B",
+        "lotNumber": "BATCH-002",
+        "partNumber": "MAT-2000",
+        "quantity": 48,
+        "scheduledStartUtc": "2026-11-16T18:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-098",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-03",
+        "jobNumber": "MO-00099",
+        "line": "LINE-C",
+        "lotNumber": "BATCH-003",
+        "partNumber": "MAT-3000",
+        "quantity": 49,
+        "scheduledStartUtc": "2026-11-17T09:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-099",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-03",
+        "jobNumber": "MO-00099",
+        "line": "LINE-C",
+        "lotNumber": "BATCH-003",
+        "partNumber": "MAT-3000",
+        "quantity": 49,
+        "scheduledStartUtc": "2026-11-17T09:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-099",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-03",
+        "jobNumber": "MO-00099",
+        "line": "LINE-C",
+        "lotNumber": "BATCH-003",
+        "partNumber": "MAT-3000",
+        "quantity": 49,
+        "scheduledStartUtc": "2026-11-17T09:30:00.000Z",
+        "status": "Released"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-099",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-04",
+        "jobNumber": "MO-00100",
+        "line": "LINE-A",
+        "lotNumber": null,
+        "partNumber": "MAT-4000",
+        "quantity": 50,
+        "scheduledStartUtc": "2026-11-18T12:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "interpreter",
+      "sample_id": "erp-mes-100",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-04",
+        "jobNumber": "MO-00100",
+        "line": "LINE-A",
+        "lotNumber": null,
+        "partNumber": "MAT-4000",
+        "quantity": 50,
+        "scheduledStartUtc": "2026-11-18T12:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "python",
+      "sample_id": "erp-mes-100",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "facility": "PLANT-04",
+        "jobNumber": "MO-00100",
+        "line": "LINE-A",
+        "lotNumber": null,
+        "partNumber": "MAT-4000",
+        "quantity": 50,
+        "scheduledStartUtc": "2026-11-18T12:30:00.000Z",
+        "status": "Pending"
+      },
+      "runtime": "typescript",
+      "sample_id": "erp-mes-100",
+      "stderr_summary": null,
+      "success": true
+    }
+  ]
+}

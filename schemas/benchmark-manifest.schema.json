@@ -1,0 +1,134 @@
+{
+  "$defs": {
+    "BenchmarkGate": {
+      "additionalProperties": false,
+      "properties": {
+        "maximum": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Maximum"
+        },
+        "minimum": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Minimum"
+        }
+      },
+      "title": "BenchmarkGate",
+      "type": "object"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "benchmark_version": {
+      "const": "0.1",
+      "title": "Benchmark Version",
+      "type": "string"
+    },
+    "description": {
+      "default": "",
+      "title": "Description",
+      "type": "string"
+    },
+    "expected_ambiguous_targets": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Expected Ambiguous Targets",
+      "type": "array"
+    },
+    "expected_mapping": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Expected Mapping"
+    },
+    "expected_no_match_targets": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Expected No Match Targets",
+      "type": "array"
+    },
+    "hints": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Hints"
+    },
+    "id": {
+      "title": "Id",
+      "type": "string"
+    },
+    "release_gates": {
+      "additionalProperties": {
+        "$ref": "#/$defs/BenchmarkGate"
+      },
+      "default": {},
+      "title": "Release Gates",
+      "type": "object"
+    },
+    "review": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Review"
+    },
+    "samples": {
+      "title": "Samples",
+      "type": "string"
+    },
+    "source_schema": {
+      "title": "Source Schema",
+      "type": "string"
+    },
+    "target_schema": {
+      "title": "Target Schema",
+      "type": "string"
+    }
+  },
+  "required": [
+    "benchmark_version",
+    "id",
+    "source_schema",
+    "target_schema",
+    "samples"
+  ],
+  "title": "BenchmarkManifest",
+  "type": "object"
+}

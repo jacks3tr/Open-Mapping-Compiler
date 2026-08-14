@@ -1,0 +1,23 @@
+{
+  "$id": "mes-part",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["partNumber", "description", "inventoryUnit", "weightLb", "facilities"],
+  "properties": {
+    "partNumber": { "type": "string", "title": "Part Number", "description": "Unique part identifier." },
+    "description": { "type": "string", "title": "Description", "description": "Part description." },
+    "inventoryUnit": { "type": "string", "title": "Inventory Unit", "description": "Inventory unit of measure." },
+    "weightLb": { "type": "number", "title": "Weight Pounds", "description": "Gross weight in pounds." },
+    "facilities": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["plant", "status"],
+        "properties": {
+          "plant": { "type": "string", "title": "Plant" },
+          "status": { "type": "string", "enum": ["Active", "Inactive"], "title": "Status" }
+        }
+      }
+    }
+  }
+}

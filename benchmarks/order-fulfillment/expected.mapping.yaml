@@ -1,0 +1,42 @@
+mapping_version: "0.1"
+id: sales-order-to-fulfillment-request
+source_schema: sales-order
+source_schema_version: "unversioned"
+target_schema: fulfillment-request
+target_schema_version: "unversioned"
+rules:
+  - target: /requestId
+    expression: { op: get, path: /orderNumber, document: input }
+    confidence: 0.99
+  - target: /customerId
+    expression: { op: get, path: /customer/id, document: input }
+    confidence: 0.99
+  - target: /shipDate
+    expression: { op: get, path: /requestedShipDate, document: input }
+    confidence: 0.99
+  - target: /lines
+    expression:
+      op: map
+      collection: { op: get, path: /items, document: input }
+      expression:
+        op: object
+        fields:
+          lineNumber: { op: get, path: /lineNumber, document: current }
+          partNumber: { op: get, path: /sku, document: current }
+          quantityEach:
+            op: multiply
+            left: { op: get, path: /orderedQuantity, document: current }
+            right:
+              op: lookup
+              key: { op: get, path: /unit, document: current }
+              values: { EA: 1, DZ: 12 }
+          facility: { op: get, path: /warehouse, document: current }
+    confidence: 0.99
+invariants:
+  - id: unique-line-numbers
+    assertion:
+      op: unique
+      value:
+        op: map
+        collection: { op: get, path: /lines, document: output }
+        expression: { op: get, path: /lineNumber, document: current }

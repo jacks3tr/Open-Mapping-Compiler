@@ -1,0 +1,49 @@
+hints_version: "0.1"
+id: crm-erp-hints
+direct:
+  - target: /businessPartnerId
+    source: /customerId
+    reason: Direct business partner mapping.
+  - target: /displayName
+    source: /name
+    reason: Direct business partner mapping.
+  - target: /contactEmail
+    source: /email
+    reason: Direct business partner mapping.
+  - target: /payerBusinessPartnerId
+    source: /payerId
+    reason: Direct business partner mapping.
+  - target: /primaryAddress/street
+    source: /shipToAddress/street
+    reason: Address role mapping.
+  - target: /primaryAddress/city
+    source: /shipToAddress/city
+    reason: Address role mapping.
+  - target: /primaryAddress/region
+    source: /shipToAddress/region
+    reason: Address role mapping.
+  - target: /primaryAddress/postalCode
+    source: /shipToAddress/postalCode
+    reason: Address role mapping.
+  - target: /primaryAddress/country
+    source: /shipToAddress/country
+    reason: Address role mapping.
+  - target: /billingAddress/street
+    source: /billToAddress/street
+    reason: Address role mapping.
+  - target: /billingAddress/city
+    source: /billToAddress/city
+    reason: Address role mapping.
+  - target: /billingAddress/region
+    source: /billToAddress/region
+    reason: Address role mapping.
+  - target: /billingAddress/postalCode
+    source: /billToAddress/postalCode
+    reason: Address role mapping.
+  - target: /billingAddress/country
+    source: /billToAddress/country
+    reason: Address role mapping.
+lookups: []
+unit_conversions: []
+dates: []
+constants: []

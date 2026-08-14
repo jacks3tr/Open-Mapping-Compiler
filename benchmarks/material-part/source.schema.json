@@ -1,0 +1,31 @@
+{
+  "$id": "erp-material-master",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["materialNumber", "materialDescription", "baseUnit", "grossWeight", "plantData"],
+  "properties": {
+    "materialNumber": { "type": "string", "title": "Part Number", "description": "Unique part identifier." },
+    "materialDescription": { "type": "string", "title": "Description", "description": "Human-readable material description." },
+    "partDescription": { "type": "string", "title": "Part Narrative", "description": "Legacy part description retained for reference." },
+    "baseUnit": { "type": "string", "enum": ["KG", "LB"], "title": "Base Unit", "description": "Base unit of measure." },
+    "grossWeight": {
+      "type": "object",
+      "required": ["value", "unit"],
+      "properties": {
+        "value": { "type": "number", "title": "Gross Weight Value" },
+        "unit": { "type": "string", "enum": ["KG", "LB"], "title": "Gross Weight Unit" }
+      }
+    },
+    "plantData": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["plant", "status"],
+        "properties": {
+          "plant": { "type": "string", "title": "Plant" },
+          "status": { "type": "string", "enum": ["ACT", "INA"], "title": "Status" }
+        }
+      }
+    }
+  }
+}

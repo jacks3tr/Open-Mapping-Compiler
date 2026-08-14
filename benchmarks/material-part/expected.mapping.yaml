@@ -1,0 +1,45 @@
+mapping_version: "0.1"
+id: material-master-to-mes-part
+source_schema: erp-material-master
+source_schema_version: "unversioned"
+target_schema: mes-part
+target_schema_version: "unversioned"
+rules:
+  - target: /partNumber
+    expression: { op: get, path: /materialNumber, document: input }
+    confidence: 0.9
+  - target: /description
+    expression: { op: get, path: /materialDescription, document: input }
+    confidence: 0.9
+  - target: /inventoryUnit
+    expression:
+      op: lookup
+      key: { op: get, path: /baseUnit, document: input }
+      values: { KG: Kilogram, LB: Pound }
+    confidence: 0.99
+  - target: /weightLb
+    expression:
+      op: round
+      digits: 6
+      value:
+        op: multiply
+        left: { op: get, path: /grossWeight/value, document: input }
+        right:
+          op: lookup
+          key: { op: get, path: /grossWeight/unit, document: input }
+          values: { KG: 2.2046226218, LB: 1 }
+    confidence: 0.99
+  - target: /facilities
+    expression:
+      op: map
+      collection: { op: get, path: /plantData, document: input }
+      expression:
+        op: object
+        fields:
+          plant: { op: get, path: /plant, document: current }
+          status:
+            op: lookup
+            key: { op: get, path: /status, document: current }
+            values: { ACT: Active, INA: Inactive }
+    confidence: 0.99
+invariants: []

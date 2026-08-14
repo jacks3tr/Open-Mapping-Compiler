@@ -1,0 +1,23 @@
+{
+  "$id": "model-assisted-account",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["account_number", "state", "source_system"],
+  "properties": {
+    "account_number": {
+      "type": "string",
+      "title": "Account number",
+      "description": "Stable account identifier."
+    },
+    "state": {
+      "type": "string",
+      "enum": ["Open", "Closed"],
+      "description": "Account state used by the target system."
+    },
+    "source_system": {
+      "type": "string",
+      "enum": ["CRM"],
+      "description": "System that supplied the account record."
+    }
+  }
+}

@@ -1,0 +1,2 @@
+{"id":"active-customer","input":{"customer_id":"C-1001","status":"ACTIVE"},"expected":{"account_number":"C-1001","state":"Open","source_system":"CRM"}}
+{"id":"inactive-customer","input":{"customer_id":"C-1002","status":"INACTIVE"},"expected":{"account_number":"C-1002","state":"Closed","source_system":"CRM"}}

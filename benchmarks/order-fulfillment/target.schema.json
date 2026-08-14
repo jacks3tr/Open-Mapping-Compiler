@@ -1,0 +1,24 @@
+{
+  "$id": "fulfillment-request",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["requestId", "customerId", "shipDate", "lines"],
+  "properties": {
+    "requestId": { "type": "string", "title": "Request ID" },
+    "customerId": { "type": "string", "title": "Customer ID", "description": "Customer identifier for fulfillment." },
+    "shipDate": { "type": "string", "format": "date-time", "title": "Ship Date" },
+    "lines": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["lineNumber", "partNumber", "quantityEach", "facility"],
+        "properties": {
+          "lineNumber": { "type": "integer", "title": "Line Number" },
+          "partNumber": { "type": "string", "title": "Part Number" },
+          "quantityEach": { "type": "integer", "title": "Quantity Each" },
+          "facility": { "type": "string", "title": "Facility" }
+        }
+      }
+    }
+  }
+}

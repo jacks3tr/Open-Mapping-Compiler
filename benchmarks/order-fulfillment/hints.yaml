@@ -1,0 +1,35 @@
+hints_version: "0.1"
+id: order-fulfillment-hints
+direct:
+  - target: /requestId
+    source: /orderNumber
+    reason: Order number maps to request ID.
+  - target: /customerId
+    source: /customer/id
+    reason: Customer ID maps directly.
+  - target: /shipDate
+    source: /requestedShipDate
+    reason: Requested ship date maps directly.
+lookups: []
+unit_conversions: []
+dates: []
+constants: []
+expressions:
+  - target: /lines
+    reason: Each sales-order item becomes a fulfillment line with quantity converted to eaches.
+    expression:
+      op: map
+      collection: { op: get, path: /items, document: input }
+      expression:
+        op: object
+        fields:
+          lineNumber: { op: get, path: /lineNumber, document: current }
+          partNumber: { op: get, path: /sku, document: current }
+          quantityEach:
+            op: multiply
+            left: { op: get, path: /orderedQuantity, document: current }
+            right:
+              op: lookup
+              key: { op: get, path: /unit, document: current }
+              values: { EA: 1, DZ: 12 }
+          facility: { op: get, path: /warehouse, document: current }

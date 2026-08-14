@@ -1,0 +1,28 @@
+hints_version: "0.1"
+id: erp-mes-hints
+direct:
+  - target: /line
+    source: /productionLine
+    reason: MES line means the ERP production line, not the work center.
+lookups:
+  - target: /status
+    source: /systemStatus
+    values:
+      REL: Released
+      CRTD: Pending
+    default: Unknown
+    reason: Approved status translation.
+unit_conversions:
+  - target: /quantity
+    value_source: /plannedQuantity/value
+    unit_source: /plannedQuantity/unit
+    factors:
+      EA: 1
+      DZ: 12
+    reason: MES stores quantity in individual units.
+dates:
+  - target: /scheduledStartUtc
+    source: /scheduledStart
+    pattern: "YYYY-MM-DDThh:mm:ss.SSSZ"
+    reason: MES requires canonical UTC.
+constants: []

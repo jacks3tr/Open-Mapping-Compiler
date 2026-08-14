@@ -1,0 +1,70 @@
+mapping_version: "0.1"
+id: crm-customer-to-erp-business-partner
+source_schema: crm-customer
+source_schema_version: "unversioned"
+target_schema: erp-business-partner
+target_schema_version: "unversioned"
+rules:
+  - target: /businessPartnerId
+    expression: { op: get, path: /customerId, document: input }
+    confidence: 0.95
+  - target: /displayName
+    expression: { op: get, path: /name, document: input }
+    confidence: 0.95
+  - target: /contactEmail
+    expression: { op: get, path: /email, document: input }
+    confidence: 0.95
+  - target: /payerBusinessPartnerId
+    expression: { op: get, path: /payerId, document: input }
+    confidence: 0.95
+  - target: /primaryAddress/street
+    expression: { op: get, path: /shipToAddress/street, document: input }
+    confidence: 0.99
+  - target: /primaryAddress/city
+    expression: { op: get, path: /shipToAddress/city, document: input }
+    confidence: 0.99
+  - target: /primaryAddress/region
+    expression: { op: get, path: /shipToAddress/region, document: input }
+    confidence: 0.99
+  - target: /primaryAddress/postalCode
+    expression: { op: get, path: /shipToAddress/postalCode, document: input }
+    confidence: 0.99
+  - target: /primaryAddress/country
+    expression: { op: get, path: /shipToAddress/country, document: input }
+    confidence: 0.99
+  - target: /billingAddress/street
+    expression: { op: get, path: /billToAddress/street, document: input }
+    confidence: 0.99
+  - target: /billingAddress/city
+    expression: { op: get, path: /billToAddress/city, document: input }
+    confidence: 0.99
+  - target: /billingAddress/region
+    expression: { op: get, path: /billToAddress/region, document: input }
+    confidence: 0.99
+  - target: /billingAddress/postalCode
+    expression: { op: get, path: /billToAddress/postalCode, document: input }
+    confidence: 0.99
+  - target: /billingAddress/country
+    expression: { op: get, path: /billToAddress/country, document: input }
+    confidence: 0.99
+invariants:
+  - id: primary-address-is-ship-to
+    assertion:
+      op: equals
+      left: { op: get, path: /primaryAddress, document: output }
+      right: { op: get, path: /shipToAddress, document: input }
+  - id: billing-address-is-bill-to
+    assertion:
+      op: equals
+      left: { op: get, path: /billingAddress, document: output }
+      right: { op: get, path: /billToAddress, document: input }
+  - id: business-partner-is-customer
+    assertion:
+      op: equals
+      left: { op: get, path: /businessPartnerId, document: output }
+      right: { op: get, path: /customerId, document: input }
+  - id: payer-business-partner-is-payer
+    assertion:
+      op: equals
+      left: { op: get, path: /payerBusinessPartnerId, document: output }
+      right: { op: get, path: /payerId, document: input }

@@ -1,0 +1,81 @@
+{
+  "$defs": {
+    "ReviewAction": {
+      "enum": [
+        "accept_selected",
+        "select_candidate",
+        "reject",
+        "defer"
+      ],
+      "title": "ReviewAction",
+      "type": "string"
+    },
+    "SuggestionReviewDecision": {
+      "additionalProperties": false,
+      "properties": {
+        "action": {
+          "$ref": "#/$defs/ReviewAction"
+        },
+        "reason": {
+          "title": "Reason",
+          "type": "string"
+        },
+        "source_path": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Path"
+        },
+        "target_path": {
+          "title": "Target Path",
+          "type": "string"
+        }
+      },
+      "required": [
+        "target_path",
+        "action",
+        "reason"
+      ],
+      "title": "SuggestionReviewDecision",
+      "type": "object"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "decisions": {
+      "items": {
+        "$ref": "#/$defs/SuggestionReviewDecision"
+      },
+      "title": "Decisions",
+      "type": "array"
+    },
+    "mapping_id": {
+      "title": "Mapping Id",
+      "type": "string"
+    },
+    "review_version": {
+      "const": "0.1",
+      "title": "Review Version",
+      "type": "string"
+    },
+    "suggestion_report_sha256": {
+      "title": "Suggestion Report Sha256",
+      "type": "string"
+    }
+  },
+  "required": [
+    "review_version",
+    "suggestion_report_sha256",
+    "mapping_id",
+    "decisions"
+  ],
+  "title": "SuggestionReviewDocument",
+  "type": "object"
+}

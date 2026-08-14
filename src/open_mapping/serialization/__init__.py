@@ -1,0 +1,1 @@
+"""Deterministic serialization helpers."""

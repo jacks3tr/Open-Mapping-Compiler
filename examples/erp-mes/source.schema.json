@@ -1,0 +1,33 @@
+{
+  "$id": "erp-production-order",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "manufacturingOrder",
+    "material",
+    "plant",
+    "workCenter",
+    "productionLine",
+    "plannedQuantity",
+    "systemStatus",
+    "scheduledStart"
+  ],
+  "properties": {
+    "manufacturingOrder": { "type": "string", "title": "Manufacturing Order", "description": "Unique manufacturing order identifier." },
+    "material": { "type": "string", "title": "Material", "description": "Material identifier used by production planning." },
+    "plant": { "type": "string", "title": "Plant", "description": "Plant code where work is scheduled." },
+    "workCenter": { "type": "string", "title": "Execution Resource", "description": "Resource that executes the operation." },
+    "productionLine": { "type": "string", "title": "Execution Resource", "description": "Resource that executes the operation." },
+    "plannedQuantity": {
+      "type": "object",
+      "required": ["value", "unit"],
+      "properties": {
+        "value": { "type": "number", "title": "Planned Quantity Value" },
+        "unit": { "type": "string", "enum": ["EA", "DZ"], "title": "Planned Quantity Unit" }
+      }
+    },
+    "batch": { "type": "string", "title": "Batch", "description": "Batch identifier used for traceability." },
+    "systemStatus": { "type": "string", "enum": ["REL", "CRTD"], "title": "System Status" },
+    "scheduledStart": { "type": "string", "format": "date-time", "title": "Scheduled Start" }
+  }
+}

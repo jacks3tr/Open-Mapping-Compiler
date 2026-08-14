@@ -1,0 +1,27 @@
+config_version: "0.1"
+providers:
+  native:
+    kind: openai
+    api_key_env: OPEN_MAPPING_GOLDEN_OPENAI_KEY
+  local:
+    kind: custom-http
+    base_url: http://127.0.0.1:8080/v1
+    headers_from_env:
+      X-Workspace-Key: OPEN_MAPPING_GOLDEN_WORKSPACE_KEY
+models:
+  accurate-mapper:
+    provider: native
+    model_id: synthetic-accurate-mapper
+    parameters:
+      reasoning_effort: high
+  local-mapper:
+    provider: local
+    model_id: synthetic-local-mapper
+    structured_output: json-schema
+    context_mode: targeted
+    input_token_budget: 8192
+    max_output_tokens: 2048
+    target_batch_size: 10
+    candidate_limit_per_target: 5
+    parameters:
+      temperature: 0.25

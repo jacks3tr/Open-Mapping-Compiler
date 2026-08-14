@@ -1,0 +1,26 @@
+{
+  "$id": "gl-account-segments",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["segments", "effectiveDate", "currency"],
+  "properties": {
+    "segments": {
+      "type": "object",
+      "required": ["segment01", "segment02", "segment03", "segment04", "segment05", "segment06", "segment07", "segment08", "segment09", "segment10"],
+      "properties": {
+        "segment01": { "type": "string", "minLength": 6, "maxLength": 6, "title": "Segment 01" },
+        "segment02": { "type": "string", "minLength": 6, "maxLength": 6, "title": "Segment 02" },
+        "segment03": { "type": "string", "minLength": 6, "maxLength": 6, "title": "Segment 03" },
+        "segment04": { "type": "string", "minLength": 6, "maxLength": 6, "title": "Segment 04" },
+        "segment05": { "type": "string", "minLength": 6, "maxLength": 6, "title": "Segment 05" },
+        "segment06": { "type": "string", "minLength": 6, "maxLength": 6, "title": "Segment 06" },
+        "segment07": { "type": "string", "minLength": 6, "maxLength": 6, "title": "Segment 07" },
+        "segment08": { "type": "string", "minLength": 6, "maxLength": 6, "title": "Segment 08" },
+        "segment09": { "type": "string", "minLength": 6, "maxLength": 6, "title": "Segment 09" },
+        "segment10": { "type": "string", "minLength": 6, "maxLength": 6, "title": "Segment 10" }
+      }
+    },
+    "effectiveDate": { "type": "string", "format": "date", "description": "Account effective date." },
+    "currency": { "type": "string", "enum": ["USD"], "description": "Account currency." }
+  }
+}

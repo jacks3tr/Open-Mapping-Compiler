@@ -1,0 +1,25 @@
+{
+  "$id": "sales-order",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["orderNumber", "customer", "requestedShipDate", "items"],
+  "properties": {
+    "orderNumber": { "type": "string", "title": "Order Number" },
+    "customer": { "type": "object", "required": ["id"], "properties": { "id": { "type": "string", "title": "Customer ID", "description": "Customer identifier for fulfillment." } } },
+    "requestedShipDate": { "type": "string", "format": "date-time", "title": "Requested Ship Date" },
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["lineNumber", "sku", "orderedQuantity", "unit", "warehouse"],
+        "properties": {
+          "lineNumber": { "type": "integer", "title": "Line Number" },
+          "sku": { "type": "string", "title": "SKU" },
+          "orderedQuantity": { "type": "integer", "title": "Ordered Quantity" },
+          "unit": { "type": "string", "enum": ["EA", "DZ"], "title": "Unit" },
+          "warehouse": { "type": "string", "title": "Warehouse" }
+        }
+      }
+    }
+  }
+}

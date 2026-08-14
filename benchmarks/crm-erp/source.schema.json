@@ -1,0 +1,28 @@
+{
+  "$id": "crm-customer",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["customerId", "name", "soldToAddress", "shipToAddress", "billToAddress", "payerId", "email"],
+  "properties": {
+    "customerId": { "type": "string", "title": "Customer ID", "description": "Unique customer identifier." },
+    "name": { "type": "string", "title": "Customer Name", "description": "Customer display name." },
+    "soldToAddress": { "$ref": "#/$defs/address", "title": "Sold To Address", "description": "Address where goods are sold." },
+    "shipToAddress": { "$ref": "#/$defs/address", "title": "Ship To Address", "description": "Address where goods are shipped." },
+    "billToAddress": { "$ref": "#/$defs/address", "title": "Bill To Address", "description": "Address where invoices are sent." },
+    "payerId": { "type": "string", "title": "Payer ID", "description": "Payer business partner identifier." },
+    "email": { "type": "string", "format": "email", "title": "Email", "description": "Customer email address." }
+  },
+  "$defs": {
+    "address": {
+      "type": "object",
+      "required": ["street", "city", "region", "postalCode", "country"],
+      "properties": {
+        "street": { "type": "string" },
+        "city": { "type": "string" },
+        "region": { "type": "string" },
+        "postalCode": { "type": "string" },
+        "country": { "type": "string" }
+      }
+    }
+  }
+}

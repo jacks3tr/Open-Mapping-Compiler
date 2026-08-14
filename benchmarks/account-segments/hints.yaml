@@ -1,0 +1,34 @@
+hints_version: "0.1"
+id: account-segments-hints
+direct:
+  - target: /company
+    source: /segments/segment01
+    reason: Company segment is segment 01.
+  - target: /effectiveDate
+    source: /effectiveDate
+    reason: Effective date maps directly.
+  - target: /currency
+    source: /currency
+    reason: Currency maps directly.
+lookups: []
+unit_conversions: []
+dates: []
+constants: []
+expressions:
+  - target: /costCenter
+    reason: Cost center concatenates segments 04 and 05 with a hyphen.
+    expression:
+      op: concat
+      separator: "-"
+      operands:
+        - { op: get, path: /segments/segment04, document: input }
+        - { op: get, path: /segments/segment05, document: input }
+  - target: /account
+    reason: Account concatenates segments 07, 08, and 09 without numeric conversion.
+    expression:
+      op: concat
+      separator: ""
+      operands:
+        - { op: get, path: /segments/segment07, document: input }
+        - { op: get, path: /segments/segment08, document: input }
+        - { op: get, path: /segments/segment09, document: input }

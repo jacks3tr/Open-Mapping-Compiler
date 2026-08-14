@@ -1,0 +1,3963 @@
+{
+  "$defs": {
+    "ArrayExpression": {
+      "additionalProperties": false,
+      "properties": {
+        "items": {
+          "items": {
+            "discriminator": {
+              "mapping": {
+                "add": "#/$defs/NumericExpression",
+                "and": "#/$defs/BooleanExpression",
+                "array": "#/$defs/ArrayExpression",
+                "cast": "#/$defs/CastExpression",
+                "coalesce": "#/$defs/CoalesceExpression",
+                "concat": "#/$defs/ConcatExpression",
+                "divide": "#/$defs/NumericExpression",
+                "equals": "#/$defs/EqualsExpression",
+                "format_date": "#/$defs/FormatDateExpression",
+                "get": "#/$defs/GetExpression",
+                "if": "#/$defs/IfExpression",
+                "literal": "#/$defs/LiteralExpression",
+                "lookup": "#/$defs/LookupExpression",
+                "map": "#/$defs/MapExpression",
+                "multiply": "#/$defs/NumericExpression",
+                "not": "#/$defs/NotExpression",
+                "object": "#/$defs/ObjectExpression",
+                "or": "#/$defs/BooleanExpression",
+                "parse_date": "#/$defs/ParseDateExpression",
+                "round": "#/$defs/RoundExpression",
+                "subtract": "#/$defs/NumericExpression"
+              },
+              "propertyName": "op"
+            },
+            "oneOf": [
+              {
+                "$ref": "#/$defs/GetExpression"
+              },
+              {
+                "$ref": "#/$defs/LiteralExpression"
+              },
+              {
+                "$ref": "#/$defs/ObjectExpression"
+              },
+              {
+                "$ref": "#/$defs/ArrayExpression"
+              },
+              {
+                "$ref": "#/$defs/MapExpression"
+              },
+              {
+                "$ref": "#/$defs/CoalesceExpression"
+              },
+              {
+                "$ref": "#/$defs/ConcatExpression"
+              },
+              {
+                "$ref": "#/$defs/CastExpression"
+              },
+              {
+                "$ref": "#/$defs/IfExpression"
+              },
+              {
+                "$ref": "#/$defs/EqualsExpression"
+              },
+              {
+                "$ref": "#/$defs/NotExpression"
+              },
+              {
+                "$ref": "#/$defs/BooleanExpression"
+              },
+              {
+                "$ref": "#/$defs/LookupExpression"
+              },
+              {
+                "$ref": "#/$defs/NumericExpression"
+              },
+              {
+                "$ref": "#/$defs/RoundExpression"
+              },
+              {
+                "$ref": "#/$defs/ParseDateExpression"
+              },
+              {
+                "$ref": "#/$defs/FormatDateExpression"
+              }
+            ]
+          },
+          "title": "Items",
+          "type": "array"
+        },
+        "op": {
+          "const": "array",
+          "title": "Op",
+          "type": "string"
+        }
+      },
+      "required": [
+        "op",
+        "items"
+      ],
+      "title": "ArrayExpression",
+      "type": "object"
+    },
+    "BooleanExpression": {
+      "additionalProperties": false,
+      "properties": {
+        "op": {
+          "enum": [
+            "and",
+            "or"
+          ],
+          "title": "Op",
+          "type": "string"
+        },
+        "operands": {
+          "items": {
+            "discriminator": {
+              "mapping": {
+                "add": "#/$defs/NumericExpression",
+                "and": "#/$defs/BooleanExpression",
+                "array": "#/$defs/ArrayExpression",
+                "cast": "#/$defs/CastExpression",
+                "coalesce": "#/$defs/CoalesceExpression",
+                "concat": "#/$defs/ConcatExpression",
+                "divide": "#/$defs/NumericExpression",
+                "equals": "#/$defs/EqualsExpression",
+                "format_date": "#/$defs/FormatDateExpression",
+                "get": "#/$defs/GetExpression",
+                "if": "#/$defs/IfExpression",
+                "literal": "#/$defs/LiteralExpression",
+                "lookup": "#/$defs/LookupExpression",
+                "map": "#/$defs/MapExpression",
+                "multiply": "#/$defs/NumericExpression",
+                "not": "#/$defs/NotExpression",
+                "object": "#/$defs/ObjectExpression",
+                "or": "#/$defs/BooleanExpression",
+                "parse_date": "#/$defs/ParseDateExpression",
+                "round": "#/$defs/RoundExpression",
+                "subtract": "#/$defs/NumericExpression"
+              },
+              "propertyName": "op"
+            },
+            "oneOf": [
+              {
+                "$ref": "#/$defs/GetExpression"
+              },
+              {
+                "$ref": "#/$defs/LiteralExpression"
+              },
+              {
+                "$ref": "#/$defs/ObjectExpression"
+              },
+              {
+                "$ref": "#/$defs/ArrayExpression"
+              },
+              {
+                "$ref": "#/$defs/MapExpression"
+              },
+              {
+                "$ref": "#/$defs/CoalesceExpression"
+              },
+              {
+                "$ref": "#/$defs/ConcatExpression"
+              },
+              {
+                "$ref": "#/$defs/CastExpression"
+              },
+              {
+                "$ref": "#/$defs/IfExpression"
+              },
+              {
+                "$ref": "#/$defs/EqualsExpression"
+              },
+              {
+                "$ref": "#/$defs/NotExpression"
+              },
+              {
+                "$ref": "#/$defs/BooleanExpression"
+              },
+              {
+                "$ref": "#/$defs/LookupExpression"
+              },
+              {
+                "$ref": "#/$defs/NumericExpression"
+              },
+              {
+                "$ref": "#/$defs/RoundExpression"
+              },
+              {
+                "$ref": "#/$defs/ParseDateExpression"
+              },
+              {
+                "$ref": "#/$defs/FormatDateExpression"
+              }
+            ]
+          },
+          "minItems": 2,
+          "title": "Operands",
+          "type": "array"
+        }
+      },
+      "required": [
+        "op",
+        "operands"
+      ],
+      "title": "BooleanExpression",
+      "type": "object"
+    },
+    "CandidateSignals": {
+      "additionalProperties": false,
+      "properties": {
+        "description_similarity": {
+          "default": 0.0,
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Description Similarity",
+          "type": "number"
+        },
+        "enum_overlap": {
+          "default": 0.0,
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Enum Overlap",
+          "type": "number"
+        },
+        "exact_name": {
+          "default": 0.0,
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Exact Name",
+          "type": "number"
+        },
+        "name_similarity": {
+          "default": 0.0,
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Name Similarity",
+          "type": "number"
+        },
+        "sample_profile": {
+          "default": 0.0,
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Sample Profile",
+          "type": "number"
+        },
+        "structural_context": {
+          "default": 0.0,
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Structural Context",
+          "type": "number"
+        },
+        "type_compatibility": {
+          "default": 0.0,
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Type Compatibility",
+          "type": "number"
+        }
+      },
+      "title": "CandidateSignals",
+      "type": "object"
+    },
+    "CastExpression": {
+      "additionalProperties": false,
+      "properties": {
+        "op": {
+          "const": "cast",
+          "title": "Op",
+          "type": "string"
+        },
+        "target_type": {
+          "enum": [
+            "string",
+            "integer",
+            "number",
+            "boolean"
+          ],
+          "title": "Target Type",
+          "type": "string"
+        },
+        "value": {
+          "discriminator": {
+            "mapping": {
+              "add": "#/$defs/NumericExpression",
+              "and": "#/$defs/BooleanExpression",
+              "array": "#/$defs/ArrayExpression",
+              "cast": "#/$defs/CastExpression",
+              "coalesce": "#/$defs/CoalesceExpression",
+              "concat": "#/$defs/ConcatExpression",
+              "divide": "#/$defs/NumericExpression",
+              "equals": "#/$defs/EqualsExpression",
+              "format_date": "#/$defs/FormatDateExpression",
+              "get": "#/$defs/GetExpression",
+              "if": "#/$defs/IfExpression",
+              "literal": "#/$defs/LiteralExpression",
+              "lookup": "#/$defs/LookupExpression",
+              "map": "#/$defs/MapExpression",
+              "multiply": "#/$defs/NumericExpression",
+              "not": "#/$defs/NotExpression",
+              "object": "#/$defs/ObjectExpression",
+              "or": "#/$defs/BooleanExpression",
+              "parse_date": "#/$defs/ParseDateExpression",
+              "round": "#/$defs/RoundExpression",
+              "subtract": "#/$defs/NumericExpression"
+            },
+            "propertyName": "op"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/GetExpression"
+            },
+            {
+              "$ref": "#/$defs/LiteralExpression"
+            },
+            {
+              "$ref": "#/$defs/ObjectExpression"
+            },
+            {
+              "$ref": "#/$defs/ArrayExpression"
+            },
+            {
+              "$ref": "#/$defs/MapExpression"
+            },
+            {
+              "$ref": "#/$defs/CoalesceExpression"
+            },
+            {
+              "$ref": "#/$defs/ConcatExpression"
+            },
+            {
+              "$ref": "#/$defs/CastExpression"
+            },
+            {
+              "$ref": "#/$defs/IfExpression"
+            },
+            {
+              "$ref": "#/$defs/EqualsExpression"
+            },
+            {
+              "$ref": "#/$defs/NotExpression"
+            },
+            {
+              "$ref": "#/$defs/BooleanExpression"
+            },
+            {
+              "$ref": "#/$defs/LookupExpression"
+            },
+            {
+              "$ref": "#/$defs/NumericExpression"
+            },
+            {
+              "$ref": "#/$defs/RoundExpression"
+            },
+            {
+              "$ref": "#/$defs/ParseDateExpression"
+            },
+            {
+              "$ref": "#/$defs/FormatDateExpression"
+            }
+          ],
+          "title": "Value"
+        }
+      },
+      "required": [
+        "op",
+        "value",
+        "target_type"
+      ],
+      "title": "CastExpression",
+      "type": "object"
+    },
+    "CoalesceExpression": {
+      "additionalProperties": false,
+      "properties": {
+        "op": {
+          "const": "coalesce",
+          "title": "Op",
+          "type": "string"
+        },
+        "operands": {
+          "items": {
+            "discriminator": {
+              "mapping": {
+                "add": "#/$defs/NumericExpression",
+                "and": "#/$defs/BooleanExpression",
+                "array": "#/$defs/ArrayExpression",
+                "cast": "#/$defs/CastExpression",
+                "coalesce": "#/$defs/CoalesceExpression",
+                "concat": "#/$defs/ConcatExpression",
+                "divide": "#/$defs/NumericExpression",
+                "equals": "#/$defs/EqualsExpression",
+                "format_date": "#/$defs/FormatDateExpression",
+                "get": "#/$defs/GetExpression",
+                "if": "#/$defs/IfExpression",
+                "literal": "#/$defs/LiteralExpression",
+                "lookup": "#/$defs/LookupExpression",
+                "map": "#/$defs/MapExpression",
+                "multiply": "#/$defs/NumericExpression",
+                "not": "#/$defs/NotExpression",
+                "object": "#/$defs/ObjectExpression",
+                "or": "#/$defs/BooleanExpression",
+                "parse_date": "#/$defs/ParseDateExpression",
+                "round": "#/$defs/RoundExpression",
+                "subtract": "#/$defs/NumericExpression"
+              },
+              "propertyName": "op"
+            },
+            "oneOf": [
+              {
+                "$ref": "#/$defs/GetExpression"
+              },
+              {
+                "$ref": "#/$defs/LiteralExpression"
+              },
+              {
+                "$ref": "#/$defs/ObjectExpression"
+              },
+              {
+                "$ref": "#/$defs/ArrayExpression"
+              },
+              {
+                "$ref": "#/$defs/MapExpression"
+              },
+              {
+                "$ref": "#/$defs/CoalesceExpression"
+              },
+              {
+                "$ref": "#/$defs/ConcatExpression"
+              },
+              {
+                "$ref": "#/$defs/CastExpression"
+              },
+              {
+                "$ref": "#/$defs/IfExpression"
+              },
+              {
+                "$ref": "#/$defs/EqualsExpression"
+              },
+              {
+                "$ref": "#/$defs/NotExpression"
+              },
+              {
+                "$ref": "#/$defs/BooleanExpression"
+              },
+              {
+                "$ref": "#/$defs/LookupExpression"
+              },
+              {
+                "$ref": "#/$defs/NumericExpression"
+              },
+              {
+                "$ref": "#/$defs/RoundExpression"
+              },
+              {
+                "$ref": "#/$defs/ParseDateExpression"
+              },
+              {
+                "$ref": "#/$defs/FormatDateExpression"
+              }
+            ]
+          },
+          "minItems": 1,
+          "title": "Operands",
+          "type": "array"
+        }
+      },
+      "required": [
+        "op",
+        "operands"
+      ],
+      "title": "CoalesceExpression",
+      "type": "object"
+    },
+    "ConcatExpression": {
+      "additionalProperties": false,
+      "properties": {
+        "op": {
+          "const": "concat",
+          "title": "Op",
+          "type": "string"
+        },
+        "operands": {
+          "items": {
+            "discriminator": {
+              "mapping": {
+                "add": "#/$defs/NumericExpression",
+                "and": "#/$defs/BooleanExpression",
+                "array": "#/$defs/ArrayExpression",
+                "cast": "#/$defs/CastExpression",
+                "coalesce": "#/$defs/CoalesceExpression",
+                "concat": "#/$defs/ConcatExpression",
+                "divide": "#/$defs/NumericExpression",
+                "equals": "#/$defs/EqualsExpression",
+                "format_date": "#/$defs/FormatDateExpression",
+                "get": "#/$defs/GetExpression",
+                "if": "#/$defs/IfExpression",
+                "literal": "#/$defs/LiteralExpression",
+                "lookup": "#/$defs/LookupExpression",
+                "map": "#/$defs/MapExpression",
+                "multiply": "#/$defs/NumericExpression",
+                "not": "#/$defs/NotExpression",
+                "object": "#/$defs/ObjectExpression",
+                "or": "#/$defs/BooleanExpression",
+                "parse_date": "#/$defs/ParseDateExpression",
+                "round": "#/$defs/RoundExpression",
+                "subtract": "#/$defs/NumericExpression"
+              },
+              "propertyName": "op"
+            },
+            "oneOf": [
+              {
+                "$ref": "#/$defs/GetExpression"
+              },
+              {
+                "$ref": "#/$defs/LiteralExpression"
+              },
+              {
+                "$ref": "#/$defs/ObjectExpression"
+              },
+              {
+                "$ref": "#/$defs/ArrayExpression"
+              },
+              {
+                "$ref": "#/$defs/MapExpression"
+              },
+              {
+                "$ref": "#/$defs/CoalesceExpression"
+              },
+              {
+                "$ref": "#/$defs/ConcatExpression"
+              },
+              {
+                "$ref": "#/$defs/CastExpression"
+              },
+              {
+                "$ref": "#/$defs/IfExpression"
+              },
+              {
+                "$ref": "#/$defs/EqualsExpression"
+              },
+              {
+                "$ref": "#/$defs/NotExpression"
+              },
+              {
+                "$ref": "#/$defs/BooleanExpression"
+              },
+              {
+                "$ref": "#/$defs/LookupExpression"
+              },
+              {
+                "$ref": "#/$defs/NumericExpression"
+              },
+              {
+                "$ref": "#/$defs/RoundExpression"
+              },
+              {
+                "$ref": "#/$defs/ParseDateExpression"
+              },
+              {
+                "$ref": "#/$defs/FormatDateExpression"
+              }
+            ]
+          },
+          "title": "Operands",
+          "type": "array"
+        },
+        "separator": {
+          "default": "",
+          "title": "Separator",
+          "type": "string"
+        }
+      },
+      "required": [
+        "op",
+        "operands"
+      ],
+      "title": "ConcatExpression",
+      "type": "object"
+    },
+    "ConfidenceBand": {
+      "enum": [
+        "high",
+        "medium",
+        "low",
+        "none"
+      ],
+      "title": "ConfidenceBand",
+      "type": "string"
+    },
+    "ContextMode": {
+      "description": "Requested source-schema context packing strategy.",
+      "enum": [
+        "auto",
+        "full",
+        "targeted"
+      ],
+      "title": "ContextMode",
+      "type": "string"
+    },
+    "EqualsExpression": {
+      "additionalProperties": false,
+      "properties": {
+        "left": {
+          "discriminator": {
+            "mapping": {
+              "add": "#/$defs/NumericExpression",
+              "and": "#/$defs/BooleanExpression",
+              "array": "#/$defs/ArrayExpression",
+              "cast": "#/$defs/CastExpression",
+              "coalesce": "#/$defs/CoalesceExpression",
+              "concat": "#/$defs/ConcatExpression",
+              "divide": "#/$defs/NumericExpression",
+              "equals": "#/$defs/EqualsExpression",
+              "format_date": "#/$defs/FormatDateExpression",
+              "get": "#/$defs/GetExpression",
+              "if": "#/$defs/IfExpression",
+              "literal": "#/$defs/LiteralExpression",
+              "lookup": "#/$defs/LookupExpression",
+              "map": "#/$defs/MapExpression",
+              "multiply": "#/$defs/NumericExpression",
+              "not": "#/$defs/NotExpression",
+              "object": "#/$defs/ObjectExpression",
+              "or": "#/$defs/BooleanExpression",
+              "parse_date": "#/$defs/ParseDateExpression",
+              "round": "#/$defs/RoundExpression",
+              "subtract": "#/$defs/NumericExpression"
+            },
+            "propertyName": "op"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/GetExpression"
+            },
+            {
+              "$ref": "#/$defs/LiteralExpression"
+            },
+            {
+              "$ref": "#/$defs/ObjectExpression"
+            },
+            {
+              "$ref": "#/$defs/ArrayExpression"
+            },
+            {
+              "$ref": "#/$defs/MapExpression"
+            },
+            {
+              "$ref": "#/$defs/CoalesceExpression"
+            },
+            {
+              "$ref": "#/$defs/ConcatExpression"
+            },
+            {
+              "$ref": "#/$defs/CastExpression"
+            },
+            {
+              "$ref": "#/$defs/IfExpression"
+            },
+            {
+              "$ref": "#/$defs/EqualsExpression"
+            },
+            {
+              "$ref": "#/$defs/NotExpression"
+            },
+            {
+              "$ref": "#/$defs/BooleanExpression"
+            },
+            {
+              "$ref": "#/$defs/LookupExpression"
+            },
+            {
+              "$ref": "#/$defs/NumericExpression"
+            },
+            {
+              "$ref": "#/$defs/RoundExpression"
+            },
+            {
+              "$ref": "#/$defs/ParseDateExpression"
+            },
+            {
+              "$ref": "#/$defs/FormatDateExpression"
+            }
+          ],
+          "title": "Left"
+        },
+        "op": {
+          "const": "equals",
+          "title": "Op",
+          "type": "string"
+        },
+        "right": {
+          "discriminator": {
+            "mapping": {
+              "add": "#/$defs/NumericExpression",
+              "and": "#/$defs/BooleanExpression",
+              "array": "#/$defs/ArrayExpression",
+              "cast": "#/$defs/CastExpression",
+              "coalesce": "#/$defs/CoalesceExpression",
+              "concat": "#/$defs/ConcatExpression",
+              "divide": "#/$defs/NumericExpression",
+              "equals": "#/$defs/EqualsExpression",
+              "format_date": "#/$defs/FormatDateExpression",
+              "get": "#/$defs/GetExpression",
+              "if": "#/$defs/IfExpression",
+              "literal": "#/$defs/LiteralExpression",
+              "lookup": "#/$defs/LookupExpression",
+              "map": "#/$defs/MapExpression",
+              "multiply": "#/$defs/NumericExpression",
+              "not": "#/$defs/NotExpression",
+              "object": "#/$defs/ObjectExpression",
+              "or": "#/$defs/BooleanExpression",
+              "parse_date": "#/$defs/ParseDateExpression",
+              "round": "#/$defs/RoundExpression",
+              "subtract": "#/$defs/NumericExpression"
+            },
+            "propertyName": "op"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/GetExpression"
+            },
+            {
+              "$ref": "#/$defs/LiteralExpression"
+            },
+            {
+              "$ref": "#/$defs/ObjectExpression"
+            },
+            {
+              "$ref": "#/$defs/ArrayExpression"
+            },
+            {
+              "$ref": "#/$defs/MapExpression"
+            },
+            {
+              "$ref": "#/$defs/CoalesceExpression"
+            },
+            {
+              "$ref": "#/$defs/ConcatExpression"
+            },
+            {
+              "$ref": "#/$defs/CastExpression"
+            },
+            {
+              "$ref": "#/$defs/IfExpression"
+            },
+            {
+              "$ref": "#/$defs/EqualsExpression"
+            },
+            {
+              "$ref": "#/$defs/NotExpression"
+            },
+            {
+              "$ref": "#/$defs/BooleanExpression"
+            },
+            {
+              "$ref": "#/$defs/LookupExpression"
+            },
+            {
+              "$ref": "#/$defs/NumericExpression"
+            },
+            {
+              "$ref": "#/$defs/RoundExpression"
+            },
+            {
+              "$ref": "#/$defs/ParseDateExpression"
+            },
+            {
+              "$ref": "#/$defs/FormatDateExpression"
+            }
+          ],
+          "title": "Right"
+        }
+      },
+      "required": [
+        "op",
+        "left",
+        "right"
+      ],
+      "title": "EqualsExpression",
+      "type": "object"
+    },
+    "Evidence": {
+      "additionalProperties": false,
+      "properties": {
+        "detail": {
+          "title": "Detail",
+          "type": "string"
+        },
+        "kind": {
+          "$ref": "#/$defs/EvidenceKind"
+        },
+        "score": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Score"
+        }
+      },
+      "required": [
+        "kind",
+        "detail"
+      ],
+      "title": "Evidence",
+      "type": "object"
+    },
+    "EvidenceKind": {
+      "enum": [
+        "exact_name",
+        "name_similarity",
+        "description_similarity",
+        "type_compatibility",
+        "enum_compatibility",
+        "structural_context",
+        "sample_profile",
+        "business_instruction",
+        "model_rerank",
+        "verifier_result"
+      ],
+      "title": "EvidenceKind",
+      "type": "string"
+    },
+    "FormatDateExpression": {
+      "additionalProperties": false,
+      "properties": {
+        "op": {
+          "const": "format_date",
+          "title": "Op",
+          "type": "string"
+        },
+        "pattern": {
+          "title": "Pattern",
+          "type": "string"
+        },
+        "value": {
+          "discriminator": {
+            "mapping": {
+              "add": "#/$defs/NumericExpression",
+              "and": "#/$defs/BooleanExpression",
+              "array": "#/$defs/ArrayExpression",
+              "cast": "#/$defs/CastExpression",
+              "coalesce": "#/$defs/CoalesceExpression",
+              "concat": "#/$defs/ConcatExpression",
+              "divide": "#/$defs/NumericExpression",
+              "equals": "#/$defs/EqualsExpression",
+              "format_date": "#/$defs/FormatDateExpression",
+              "get": "#/$defs/GetExpression",
+              "if": "#/$defs/IfExpression",
+              "literal": "#/$defs/LiteralExpression",
+              "lookup": "#/$defs/LookupExpression",
+              "map": "#/$defs/MapExpression",
+              "multiply": "#/$defs/NumericExpression",
+              "not": "#/$defs/NotExpression",
+              "object": "#/$defs/ObjectExpression",
+              "or": "#/$defs/BooleanExpression",
+              "parse_date": "#/$defs/ParseDateExpression",
+              "round": "#/$defs/RoundExpression",
+              "subtract": "#/$defs/NumericExpression"
+            },
+            "propertyName": "op"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/GetExpression"
+            },
+            {
+              "$ref": "#/$defs/LiteralExpression"
+            },
+            {
+              "$ref": "#/$defs/ObjectExpression"
+            },
+            {
+              "$ref": "#/$defs/ArrayExpression"
+            },
+            {
+              "$ref": "#/$defs/MapExpression"
+            },
+            {
+              "$ref": "#/$defs/CoalesceExpression"
+            },
+            {
+              "$ref": "#/$defs/ConcatExpression"
+            },
+            {
+              "$ref": "#/$defs/CastExpression"
+            },
+            {
+              "$ref": "#/$defs/IfExpression"
+            },
+            {
+              "$ref": "#/$defs/EqualsExpression"
+            },
+            {
+              "$ref": "#/$defs/NotExpression"
+            },
+            {
+              "$ref": "#/$defs/BooleanExpression"
+            },
+            {
+              "$ref": "#/$defs/LookupExpression"
+            },
+            {
+              "$ref": "#/$defs/NumericExpression"
+            },
+            {
+              "$ref": "#/$defs/RoundExpression"
+            },
+            {
+              "$ref": "#/$defs/ParseDateExpression"
+            },
+            {
+              "$ref": "#/$defs/FormatDateExpression"
+            }
+          ],
+          "title": "Value"
+        }
+      },
+      "required": [
+        "op",
+        "value",
+        "pattern"
+      ],
+      "title": "FormatDateExpression",
+      "type": "object"
+    },
+    "GetExpression": {
+      "additionalProperties": false,
+      "properties": {
+        "document": {
+          "default": "input",
+          "enum": [
+            "input",
+            "output",
+            "current"
+          ],
+          "title": "Document",
+          "type": "string"
+        },
+        "op": {
+          "const": "get",
+          "title": "Op",
+          "type": "string"
+        },
+        "path": {
+          "title": "Path",
+          "type": "string"
+        }
+      },
+      "required": [
+        "op",
+        "path"
+      ],
+      "title": "GetExpression",
+      "type": "object"
+    },
+    "IfExpression": {
+      "additionalProperties": false,
+      "properties": {
+        "condition": {
+          "discriminator": {
+            "mapping": {
+              "add": "#/$defs/NumericExpression",
+              "and": "#/$defs/BooleanExpression",
+              "array": "#/$defs/ArrayExpression",
+              "cast": "#/$defs/CastExpression",
+              "coalesce": "#/$defs/CoalesceExpression",
+              "concat": "#/$defs/ConcatExpression",
+              "divide": "#/$defs/NumericExpression",
+              "equals": "#/$defs/EqualsExpression",
+              "format_date": "#/$defs/FormatDateExpression",
+              "get": "#/$defs/GetExpression",
+              "if": "#/$defs/IfExpression",
+              "literal": "#/$defs/LiteralExpression",
+              "lookup": "#/$defs/LookupExpression",
+              "map": "#/$defs/MapExpression",
+              "multiply": "#/$defs/NumericExpression",
+              "not": "#/$defs/NotExpression",
+              "object": "#/$defs/ObjectExpression",
+              "or": "#/$defs/BooleanExpression",
+              "parse_date": "#/$defs/ParseDateExpression",
+              "round": "#/$defs/RoundExpression",
+              "subtract": "#/$defs/NumericExpression"
+            },
+            "propertyName": "op"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/GetExpression"
+            },
+            {
+              "$ref": "#/$defs/LiteralExpression"
+            },
+            {
+              "$ref": "#/$defs/ObjectExpression"
+            },
+            {
+              "$ref": "#/$defs/ArrayExpression"
+            },
+            {
+              "$ref": "#/$defs/MapExpression"
+            },
+            {
+              "$ref": "#/$defs/CoalesceExpression"
+            },
+            {
+              "$ref": "#/$defs/ConcatExpression"
+            },
+            {
+              "$ref": "#/$defs/CastExpression"
+            },
+            {
+              "$ref": "#/$defs/IfExpression"
+            },
+            {
+              "$ref": "#/$defs/EqualsExpression"
+            },
+            {
+              "$ref": "#/$defs/NotExpression"
+            },
+            {
+              "$ref": "#/$defs/BooleanExpression"
+            },
+            {
+              "$ref": "#/$defs/LookupExpression"
+            },
+            {
+              "$ref": "#/$defs/NumericExpression"
+            },
+            {
+              "$ref": "#/$defs/RoundExpression"
+            },
+            {
+              "$ref": "#/$defs/ParseDateExpression"
+            },
+            {
+              "$ref": "#/$defs/FormatDateExpression"
+            }
+          ],
+          "title": "Condition"
+        },
+        "op": {
+          "const": "if",
+          "title": "Op",
+          "type": "string"
+        },
+        "otherwise": {
+          "discriminator": {
+            "mapping": {
+              "add": "#/$defs/NumericExpression",
+              "and": "#/$defs/BooleanExpression",
+              "array": "#/$defs/ArrayExpression",
+              "cast": "#/$defs/CastExpression",
+              "coalesce": "#/$defs/CoalesceExpression",
+              "concat": "#/$defs/ConcatExpression",
+              "divide": "#/$defs/NumericExpression",
+              "equals": "#/$defs/EqualsExpression",
+              "format_date": "#/$defs/FormatDateExpression",
+              "get": "#/$defs/GetExpression",
+              "if": "#/$defs/IfExpression",
+              "literal": "#/$defs/LiteralExpression",
+              "lookup": "#/$defs/LookupExpression",
+              "map": "#/$defs/MapExpression",
+              "multiply": "#/$defs/NumericExpression",
+              "not": "#/$defs/NotExpression",
+              "object": "#/$defs/ObjectExpression",
+              "or": "#/$defs/BooleanExpression",
+              "parse_date": "#/$defs/ParseDateExpression",
+              "round": "#/$defs/RoundExpression",
+              "subtract": "#/$defs/NumericExpression"
+            },
+            "propertyName": "op"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/GetExpression"
+            },
+            {
+              "$ref": "#/$defs/LiteralExpression"
+            },
+            {
+              "$ref": "#/$defs/ObjectExpression"
+            },
+            {
+              "$ref": "#/$defs/ArrayExpression"
+            },
+            {
+              "$ref": "#/$defs/MapExpression"
+            },
+            {
+              "$ref": "#/$defs/CoalesceExpression"
+            },
+            {
+              "$ref": "#/$defs/ConcatExpression"
+            },
+            {
+              "$ref": "#/$defs/CastExpression"
+            },
+            {
+              "$ref": "#/$defs/IfExpression"
+            },
+            {
+              "$ref": "#/$defs/EqualsExpression"
+            },
+            {
+              "$ref": "#/$defs/NotExpression"
+            },
+            {
+              "$ref": "#/$defs/BooleanExpression"
+            },
+            {
+              "$ref": "#/$defs/LookupExpression"
+            },
+            {
+              "$ref": "#/$defs/NumericExpression"
+            },
+            {
+              "$ref": "#/$defs/RoundExpression"
+            },
+            {
+              "$ref": "#/$defs/ParseDateExpression"
+            },
+            {
+              "$ref": "#/$defs/FormatDateExpression"
+            }
+          ],
+          "title": "Otherwise"
+        },
+        "then": {
+          "discriminator": {
+            "mapping": {
+              "add": "#/$defs/NumericExpression",
+              "and": "#/$defs/BooleanExpression",
+              "array": "#/$defs/ArrayExpression",
+              "cast": "#/$defs/CastExpression",
+              "coalesce": "#/$defs/CoalesceExpression",
+              "concat": "#/$defs/ConcatExpression",
+              "divide": "#/$defs/NumericExpression",
+              "equals": "#/$defs/EqualsExpression",
+              "format_date": "#/$defs/FormatDateExpression",
+              "get": "#/$defs/GetExpression",
+              "if": "#/$defs/IfExpression",
+              "literal": "#/$defs/LiteralExpression",
+              "lookup": "#/$defs/LookupExpression",
+              "map": "#/$defs/MapExpression",
+              "multiply": "#/$defs/NumericExpression",
+              "not": "#/$defs/NotExpression",
+              "object": "#/$defs/ObjectExpression",
+              "or": "#/$defs/BooleanExpression",
+              "parse_date": "#/$defs/ParseDateExpression",
+              "round": "#/$defs/RoundExpression",
+              "subtract": "#/$defs/NumericExpression"
+            },
+            "propertyName": "op"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/GetExpression"
+            },
+            {
+              "$ref": "#/$defs/LiteralExpression"
+            },
+            {
+              "$ref": "#/$defs/ObjectExpression"
+            },
+            {
+              "$ref": "#/$defs/ArrayExpression"
+            },
+            {
+              "$ref": "#/$defs/MapExpression"
+            },
+            {
+              "$ref": "#/$defs/CoalesceExpression"
+            },
+            {
+              "$ref": "#/$defs/ConcatExpression"
+            },
+            {
+              "$ref": "#/$defs/CastExpression"
+            },
+            {
+              "$ref": "#/$defs/IfExpression"
+            },
+            {
+              "$ref": "#/$defs/EqualsExpression"
+            },
+            {
+              "$ref": "#/$defs/NotExpression"
+            },
+            {
+              "$ref": "#/$defs/BooleanExpression"
+            },
+            {
+              "$ref": "#/$defs/LookupExpression"
+            },
+            {
+              "$ref": "#/$defs/NumericExpression"
+            },
+            {
+              "$ref": "#/$defs/RoundExpression"
+            },
+            {
+              "$ref": "#/$defs/ParseDateExpression"
+            },
+            {
+              "$ref": "#/$defs/FormatDateExpression"
+            }
+          ],
+          "title": "Then"
+        }
+      },
+      "required": [
+        "op",
+        "condition",
+        "then",
+        "otherwise"
+      ],
+      "title": "IfExpression",
+      "type": "object"
+    },
+    "Issue": {
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "$ref": "#/$defs/IssueCode"
+        },
+        "component": {
+          "title": "Component",
+          "type": "string"
+        },
+        "correction": {
+          "title": "Correction",
+          "type": "string"
+        },
+        "mapping_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Mapping Id"
+        },
+        "message": {
+          "title": "Message",
+          "type": "string"
+        },
+        "rule_index": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Rule Index"
+        },
+        "sample_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sample Id"
+        },
+        "schema_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Schema Id"
+        },
+        "severity": {
+          "$ref": "#/$defs/Severity"
+        },
+        "source_path": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Path"
+        },
+        "target_path": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Target Path"
+        }
+      },
+      "required": [
+        "code",
+        "severity",
+        "component",
+        "message",
+        "correction"
+      ],
+      "title": "Issue",
+      "type": "object"
+    },
+    "IssueCode": {
+      "enum": [
+        "INVALID_INPUT",
+        "UNSUPPORTED_MAPPING_VERSION",
+        "SOURCE_PATH_NOT_FOUND",
+        "TARGET_PATH_NOT_FOUND",
+        "DUPLICATE_TARGET_ASSIGNMENT",
+        "OVERLAPPING_TARGET_ASSIGNMENT",
+        "TYPE_MISMATCH",
+        "LOSSY_CAST",
+        "NUMERIC_PRECISION_RISK",
+        "REQUIRED_TARGET_UNMAPPED",
+        "AMBIGUOUS_MAPPING",
+        "NO_MATCH",
+        "SUGGESTION_TARGET_MISSING",
+        "SUGGESTION_TARGET_DUPLICATE",
+        "STALE_SUGGESTION_REPORT",
+        "INVALID_REVIEW_DECISION",
+        "REVIEW_TARGET_NOT_FOUND",
+        "REVIEW_CANDIDATE_NOT_FOUND",
+        "INVALID_EXPRESSION",
+        "EVALUATION_LIMIT_EXCEEDED",
+        "DIVIDE_BY_ZERO",
+        "INVALID_DATE",
+        "REMOTE_REF_DISABLED",
+        "CYCLIC_REF",
+        "UNSUPPORTED_SCHEMA_FEATURE",
+        "SOURCE_SCHEMA_VALIDATION",
+        "TARGET_SCHEMA_VALIDATION",
+        "INVARIANT_FAILED",
+        "GOLDEN_OUTPUT_MISMATCH",
+        "PROVIDER_FAILURE",
+        "PROVIDER_RESPONSE_INVALID",
+        "MODEL_CONTEXT_TOO_LARGE",
+        "CODEGEN_BLOCKED",
+        "CODEGEN_SEMANTIC_MISMATCH",
+        "BENCHMARK_GATE_FAILED"
+      ],
+      "title": "IssueCode",
+      "type": "string"
+    },
+    "LiteralExpression": {
+      "additionalProperties": false,
+      "properties": {
+        "op": {
+          "const": "literal",
+          "title": "Op",
+          "type": "string"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "integer"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "boolean"
+            },
+            {
+              "items": {},
+              "type": "array"
+            },
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Value"
+        }
+      },
+      "required": [
+        "op",
+        "value"
+      ],
+      "title": "LiteralExpression",
+      "type": "object"
+    },
+    "LookupExpression": {
+      "additionalProperties": false,
+      "properties": {
+        "default": {
+          "anyOf": [
+            {
+              "discriminator": {
+                "mapping": {
+                  "add": "#/$defs/NumericExpression",
+                  "and": "#/$defs/BooleanExpression",
+                  "array": "#/$defs/ArrayExpression",
+                  "cast": "#/$defs/CastExpression",
+                  "coalesce": "#/$defs/CoalesceExpression",
+                  "concat": "#/$defs/ConcatExpression",
+                  "divide": "#/$defs/NumericExpression",
+                  "equals": "#/$defs/EqualsExpression",
+                  "format_date": "#/$defs/FormatDateExpression",
+                  "get": "#/$defs/GetExpression",
+                  "if": "#/$defs/IfExpression",
+                  "literal": "#/$defs/LiteralExpression",
+                  "lookup": "#/$defs/LookupExpression",
+                  "map": "#/$defs/MapExpression",
+                  "multiply": "#/$defs/NumericExpression",
+                  "not": "#/$defs/NotExpression",
+                  "object": "#/$defs/ObjectExpression",
+                  "or": "#/$defs/BooleanExpression",
+                  "parse_date": "#/$defs/ParseDateExpression",
+                  "round": "#/$defs/RoundExpression",
+                  "subtract": "#/$defs/NumericExpression"
+                },
+                "propertyName": "op"
+              },
+              "oneOf": [
+                {
+                  "$ref": "#/$defs/GetExpression"
+                },
+                {
+                  "$ref": "#/$defs/LiteralExpression"
+                },
+                {
+                  "$ref": "#/$defs/ObjectExpression"
+                },
+                {
+                  "$ref": "#/$defs/ArrayExpression"
+                },
+                {
+                  "$ref": "#/$defs/MapExpression"
+                },
+                {
+                  "$ref": "#/$defs/CoalesceExpression"
+                },
+                {
+                  "$ref": "#/$defs/ConcatExpression"
+                },
+                {
+                  "$ref": "#/$defs/CastExpression"
+                },
+                {
+                  "$ref": "#/$defs/IfExpression"
+                },
+                {
+                  "$ref": "#/$defs/EqualsExpression"
+                },
+                {
+                  "$ref": "#/$defs/NotExpression"
+                },
+                {
+                  "$ref": "#/$defs/BooleanExpression"
+                },
+                {
+                  "$ref": "#/$defs/LookupExpression"
+                },
+                {
+                  "$ref": "#/$defs/NumericExpression"
+                },
+                {
+                  "$ref": "#/$defs/RoundExpression"
+                },
+                {
+                  "$ref": "#/$defs/ParseDateExpression"
+                },
+                {
+                  "$ref": "#/$defs/FormatDateExpression"
+                }
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Default"
+        },
+        "key": {
+          "discriminator": {
+            "mapping": {
+              "add": "#/$defs/NumericExpression",
+              "and": "#/$defs/BooleanExpression",
+              "array": "#/$defs/ArrayExpression",
+              "cast": "#/$defs/CastExpression",
+              "coalesce": "#/$defs/CoalesceExpression",
+              "concat": "#/$defs/ConcatExpression",
+              "divide": "#/$defs/NumericExpression",
+              "equals": "#/$defs/EqualsExpression",
+              "format_date": "#/$defs/FormatDateExpression",
+              "get": "#/$defs/GetExpression",
+              "if": "#/$defs/IfExpression",
+              "literal": "#/$defs/LiteralExpression",
+              "lookup": "#/$defs/LookupExpression",
+              "map": "#/$defs/MapExpression",
+              "multiply": "#/$defs/NumericExpression",
+              "not": "#/$defs/NotExpression",
+              "object": "#/$defs/ObjectExpression",
+              "or": "#/$defs/BooleanExpression",
+              "parse_date": "#/$defs/ParseDateExpression",
+              "round": "#/$defs/RoundExpression",
+              "subtract": "#/$defs/NumericExpression"
+            },
+            "propertyName": "op"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/GetExpression"
+            },
+            {
+              "$ref": "#/$defs/LiteralExpression"
+            },
+            {
+              "$ref": "#/$defs/ObjectExpression"
+            },
+            {
+              "$ref": "#/$defs/ArrayExpression"
+            },
+            {
+              "$ref": "#/$defs/MapExpression"
+            },
+            {
+              "$ref": "#/$defs/CoalesceExpression"
+            },
+            {
+              "$ref": "#/$defs/ConcatExpression"
+            },
+            {
+              "$ref": "#/$defs/CastExpression"
+            },
+            {
+              "$ref": "#/$defs/IfExpression"
+            },
+            {
+              "$ref": "#/$defs/EqualsExpression"
+            },
+            {
+              "$ref": "#/$defs/NotExpression"
+            },
+            {
+              "$ref": "#/$defs/BooleanExpression"
+            },
+            {
+              "$ref": "#/$defs/LookupExpression"
+            },
+            {
+              "$ref": "#/$defs/NumericExpression"
+            },
+            {
+              "$ref": "#/$defs/RoundExpression"
+            },
+            {
+              "$ref": "#/$defs/ParseDateExpression"
+            },
+            {
+              "$ref": "#/$defs/FormatDateExpression"
+            }
+          ],
+          "title": "Key"
+        },
+        "op": {
+          "const": "lookup",
+          "title": "Op",
+          "type": "string"
+        },
+        "values": {
+          "additionalProperties": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "integer"
+              },
+              {
+                "type": "number"
+              },
+              {
+                "type": "boolean"
+              },
+              {
+                "items": {},
+                "type": "array"
+              },
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "title": "Values",
+          "type": "object"
+        }
+      },
+      "required": [
+        "op",
+        "key",
+        "values"
+      ],
+      "title": "LookupExpression",
+      "type": "object"
+    },
+    "MapExpression": {
+      "additionalProperties": false,
+      "properties": {
+        "collection": {
+          "discriminator": {
+            "mapping": {
+              "add": "#/$defs/NumericExpression",
+              "and": "#/$defs/BooleanExpression",
+              "array": "#/$defs/ArrayExpression",
+              "cast": "#/$defs/CastExpression",
+              "coalesce": "#/$defs/CoalesceExpression",
+              "concat": "#/$defs/ConcatExpression",
+              "divide": "#/$defs/NumericExpression",
+              "equals": "#/$defs/EqualsExpression",
+              "format_date": "#/$defs/FormatDateExpression",
+              "get": "#/$defs/GetExpression",
+              "if": "#/$defs/IfExpression",
+              "literal": "#/$defs/LiteralExpression",
+              "lookup": "#/$defs/LookupExpression",
+              "map": "#/$defs/MapExpression",
+              "multiply": "#/$defs/NumericExpression",
+              "not": "#/$defs/NotExpression",
+              "object": "#/$defs/ObjectExpression",
+              "or": "#/$defs/BooleanExpression",
+              "parse_date": "#/$defs/ParseDateExpression",
+              "round": "#/$defs/RoundExpression",
+              "subtract": "#/$defs/NumericExpression"
+            },
+            "propertyName": "op"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/GetExpression"
+            },
+            {
+              "$ref": "#/$defs/LiteralExpression"
+            },
+            {
+              "$ref": "#/$defs/ObjectExpression"
+            },
+            {
+              "$ref": "#/$defs/ArrayExpression"
+            },
+            {
+              "$ref": "#/$defs/MapExpression"
+            },
+            {
+              "$ref": "#/$defs/CoalesceExpression"
+            },
+            {
+              "$ref": "#/$defs/ConcatExpression"
+            },
+            {
+              "$ref": "#/$defs/CastExpression"
+            },
+            {
+              "$ref": "#/$defs/IfExpression"
+            },
+            {
+              "$ref": "#/$defs/EqualsExpression"
+            },
+            {
+              "$ref": "#/$defs/NotExpression"
+            },
+            {
+              "$ref": "#/$defs/BooleanExpression"
+            },
+            {
+              "$ref": "#/$defs/LookupExpression"
+            },
+            {
+              "$ref": "#/$defs/NumericExpression"
+            },
+            {
+              "$ref": "#/$defs/RoundExpression"
+            },
+            {
+              "$ref": "#/$defs/ParseDateExpression"
+            },
+            {
+              "$ref": "#/$defs/FormatDateExpression"
+            }
+          ],
+          "title": "Collection"
+        },
+        "expression": {
+          "discriminator": {
+            "mapping": {
+              "add": "#/$defs/NumericExpression",
+              "and": "#/$defs/BooleanExpression",
+              "array": "#/$defs/ArrayExpression",
+              "cast": "#/$defs/CastExpression",
+              "coalesce": "#/$defs/CoalesceExpression",
+              "concat": "#/$defs/ConcatExpression",
+              "divide": "#/$defs/NumericExpression",
+              "equals": "#/$defs/EqualsExpression",
+              "format_date": "#/$defs/FormatDateExpression",
+              "get": "#/$defs/GetExpression",
+              "if": "#/$defs/IfExpression",
+              "literal": "#/$defs/LiteralExpression",
+              "lookup": "#/$defs/LookupExpression",
+              "map": "#/$defs/MapExpression",
+              "multiply": "#/$defs/NumericExpression",
+              "not": "#/$defs/NotExpression",
+              "object": "#/$defs/ObjectExpression",
+              "or": "#/$defs/BooleanExpression",
+              "parse_date": "#/$defs/ParseDateExpression",
+              "round": "#/$defs/RoundExpression",
+              "subtract": "#/$defs/NumericExpression"
+            },
+            "propertyName": "op"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/GetExpression"
+            },
+            {
+              "$ref": "#/$defs/LiteralExpression"
+            },
+            {
+              "$ref": "#/$defs/ObjectExpression"
+            },
+            {
+              "$ref": "#/$defs/ArrayExpression"
+            },
+            {
+              "$ref": "#/$defs/MapExpression"
+            },
+            {
+              "$ref": "#/$defs/CoalesceExpression"
+            },
+            {
+              "$ref": "#/$defs/ConcatExpression"
+            },
+            {
+              "$ref": "#/$defs/CastExpression"
+            },
+            {
+              "$ref": "#/$defs/IfExpression"
+            },
+            {
+              "$ref": "#/$defs/EqualsExpression"
+            },
+            {
+              "$ref": "#/$defs/NotExpression"
+            },
+            {
+              "$ref": "#/$defs/BooleanExpression"
+            },
+            {
+              "$ref": "#/$defs/LookupExpression"
+            },
+            {
+              "$ref": "#/$defs/NumericExpression"
+            },
+            {
+              "$ref": "#/$defs/RoundExpression"
+            },
+            {
+              "$ref": "#/$defs/ParseDateExpression"
+            },
+            {
+              "$ref": "#/$defs/FormatDateExpression"
+            }
+          ],
+          "title": "Expression"
+        },
+        "op": {
+          "const": "map",
+          "title": "Op",
+          "type": "string"
+        }
+      },
+      "required": [
+        "op",
+        "collection",
+        "expression"
+      ],
+      "title": "MapExpression",
+      "type": "object"
+    },
+    "MappingSuggestion": {
+      "additionalProperties": false,
+      "properties": {
+        "candidates": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/MatchCandidate"
+          },
+          "title": "Candidates",
+          "type": "array"
+        },
+        "confidence_band": {
+          "$ref": "#/$defs/ConfidenceBand"
+        },
+        "confidence_method": {
+          "default": "unknown",
+          "title": "Confidence Method",
+          "type": "string"
+        },
+        "confidence_score": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Confidence Score"
+        },
+        "disposition": {
+          "$ref": "#/$defs/SuggestionDisposition"
+        },
+        "evidence": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/Evidence"
+          },
+          "title": "Evidence",
+          "type": "array"
+        },
+        "expression": {
+          "anyOf": [
+            {
+              "discriminator": {
+                "mapping": {
+                  "add": "#/$defs/NumericExpression",
+                  "and": "#/$defs/BooleanExpression",
+                  "array": "#/$defs/ArrayExpression",
+                  "cast": "#/$defs/CastExpression",
+                  "coalesce": "#/$defs/CoalesceExpression",
+                  "concat": "#/$defs/ConcatExpression",
+                  "divide": "#/$defs/NumericExpression",
+                  "equals": "#/$defs/EqualsExpression",
+                  "format_date": "#/$defs/FormatDateExpression",
+                  "get": "#/$defs/GetExpression",
+                  "if": "#/$defs/IfExpression",
+                  "literal": "#/$defs/LiteralExpression",
+                  "lookup": "#/$defs/LookupExpression",
+                  "map": "#/$defs/MapExpression",
+                  "multiply": "#/$defs/NumericExpression",
+                  "not": "#/$defs/NotExpression",
+                  "object": "#/$defs/ObjectExpression",
+                  "or": "#/$defs/BooleanExpression",
+                  "parse_date": "#/$defs/ParseDateExpression",
+                  "round": "#/$defs/RoundExpression",
+                  "subtract": "#/$defs/NumericExpression"
+                },
+                "propertyName": "op"
+              },
+              "oneOf": [
+                {
+                  "$ref": "#/$defs/GetExpression"
+                },
+                {
+                  "$ref": "#/$defs/LiteralExpression"
+                },
+                {
+                  "$ref": "#/$defs/ObjectExpression"
+                },
+                {
+                  "$ref": "#/$defs/ArrayExpression"
+                },
+                {
+                  "$ref": "#/$defs/MapExpression"
+                },
+                {
+                  "$ref": "#/$defs/CoalesceExpression"
+                },
+                {
+                  "$ref": "#/$defs/ConcatExpression"
+                },
+                {
+                  "$ref": "#/$defs/CastExpression"
+                },
+                {
+                  "$ref": "#/$defs/IfExpression"
+                },
+                {
+                  "$ref": "#/$defs/EqualsExpression"
+                },
+                {
+                  "$ref": "#/$defs/NotExpression"
+                },
+                {
+                  "$ref": "#/$defs/BooleanExpression"
+                },
+                {
+                  "$ref": "#/$defs/LookupExpression"
+                },
+                {
+                  "$ref": "#/$defs/NumericExpression"
+                },
+                {
+                  "$ref": "#/$defs/RoundExpression"
+                },
+                {
+                  "$ref": "#/$defs/ParseDateExpression"
+                },
+                {
+                  "$ref": "#/$defs/FormatDateExpression"
+                }
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Expression"
+        },
+        "issues": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/Issue"
+          },
+          "title": "Issues",
+          "type": "array"
+        },
+        "origin": {
+          "$ref": "#/$defs/SuggestionOrigin",
+          "default": "deterministic"
+        },
+        "reason": {
+          "default": "",
+          "title": "Reason",
+          "type": "string"
+        },
+        "selected_source_path": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Selected Source Path"
+        },
+        "selected_source_paths": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Selected Source Paths",
+          "type": "array"
+        },
+        "target_path": {
+          "title": "Target Path",
+          "type": "string"
+        }
+      },
+      "required": [
+        "target_path",
+        "confidence_band",
+        "disposition"
+      ],
+      "title": "MappingSuggestion",
+      "type": "object"
+    },
+    "MatchCandidate": {
+      "additionalProperties": false,
+      "properties": {
+        "evidence": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/Evidence"
+          },
+          "title": "Evidence",
+          "type": "array"
+        },
+        "raw_score": {
+          "default": 0.0,
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Raw Score",
+          "type": "number"
+        },
+        "signals": {
+          "$ref": "#/$defs/CandidateSignals",
+          "default": {
+            "description_similarity": 0.0,
+            "enum_overlap": 0.0,
+            "exact_name": 0.0,
+            "name_similarity": 0.0,
+            "sample_profile": 0.0,
+            "structural_context": 0.0,
+            "type_compatibility": 0.0
+          }
+        },
+        "source_path": {
+          "title": "Source Path",
+          "type": "string"
+        },
+        "target_path": {
+          "title": "Target Path",
+          "type": "string"
+        }
+      },
+      "required": [
+        "source_path",
+        "target_path"
+      ],
+      "title": "MatchCandidate",
+      "type": "object"
+    },
+    "ModelBatchRun": {
+      "additionalProperties": false,
+      "description": "Validated outcome and bounded provenance for one context batch.",
+      "properties": {
+        "attempts": {
+          "maximum": 2,
+          "minimum": 0,
+          "title": "Attempts",
+          "type": "integer"
+        },
+        "batch_id": {
+          "title": "Batch Id",
+          "type": "string"
+        },
+        "context_sha256": {
+          "title": "Context Sha256",
+          "type": "string"
+        },
+        "format_repairs": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Format Repairs",
+          "type": "integer"
+        },
+        "issues": {
+          "items": {
+            "$ref": "#/$defs/Issue"
+          },
+          "title": "Issues",
+          "type": "array"
+        },
+        "latency_ms": {
+          "minimum": 0,
+          "title": "Latency Ms",
+          "type": "integer"
+        },
+        "response": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ModelMappingResponse"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "response_sha256": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Response Sha256"
+        },
+        "usage": {
+          "$ref": "#/$defs/ModelUsage"
+        }
+      },
+      "required": [
+        "batch_id",
+        "context_sha256",
+        "response_sha256",
+        "response",
+        "issues",
+        "attempts",
+        "format_repairs",
+        "usage",
+        "latency_ms"
+      ],
+      "title": "ModelBatchRun",
+      "type": "object"
+    },
+    "ModelMappingResponse": {
+      "additionalProperties": false,
+      "description": "The response contract every model provider must return unchanged.",
+      "properties": {
+        "batch_id": {
+          "title": "Batch Id",
+          "type": "string"
+        },
+        "context_sha256": {
+          "title": "Context Sha256",
+          "type": "string"
+        },
+        "prompt_version": {
+          "const": "mapping-agent-v1",
+          "title": "Prompt Version",
+          "type": "string"
+        },
+        "proposals": {
+          "items": {
+            "$ref": "#/$defs/ModelTargetProposal"
+          },
+          "title": "Proposals",
+          "type": "array"
+        },
+        "protocol_version": {
+          "const": "0.1",
+          "title": "Protocol Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "protocol_version",
+        "prompt_version",
+        "context_sha256",
+        "batch_id",
+        "proposals"
+      ],
+      "title": "ModelMappingResponse",
+      "type": "object"
+    },
+    "ModelProposalAction": {
+      "description": "The only actions a model may return for a requested target.",
+      "enum": [
+        "propose",
+        "abstain"
+      ],
+      "title": "ModelProposalAction",
+      "type": "string"
+    },
+    "ModelRunDisclosure": {
+      "additionalProperties": false,
+      "description": "Provider-neutral provenance for one ordered model-assisted run.",
+      "properties": {
+        "batch_runs": {
+          "items": {
+            "$ref": "#/$defs/ModelBatchRun"
+          },
+          "title": "Batch Runs",
+          "type": "array"
+        },
+        "config_sha256": {
+          "title": "Config Sha256",
+          "type": "string"
+        },
+        "context_mode": {
+          "$ref": "#/$defs/ContextMode"
+        },
+        "model_alias": {
+          "title": "Model Alias",
+          "type": "string"
+        },
+        "model_id": {
+          "title": "Model Id",
+          "type": "string"
+        },
+        "prompt_version": {
+          "title": "Prompt Version",
+          "type": "string"
+        },
+        "provider_kind": {
+          "$ref": "#/$defs/ProviderKind"
+        },
+        "provider_name": {
+          "title": "Provider Name",
+          "type": "string"
+        },
+        "raw_samples_included": {
+          "title": "Raw Samples Included",
+          "type": "boolean"
+        },
+        "redaction_count": {
+          "minimum": 0,
+          "title": "Redaction Count",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "model_alias",
+        "provider_name",
+        "provider_kind",
+        "model_id",
+        "prompt_version",
+        "config_sha256",
+        "context_mode",
+        "raw_samples_included",
+        "redaction_count",
+        "batch_runs"
+      ],
+      "title": "ModelRunDisclosure",
+      "type": "object"
+    },
+    "ModelTargetProposal": {
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "action": {
+                "const": "abstain"
+              }
+            },
+            "required": [
+              "action"
+            ]
+          },
+          "then": {
+            "properties": {
+              "expression": {
+                "type": "null"
+              },
+              "selected_source_paths": {
+                "maxItems": 0
+              }
+            },
+            "required": [
+              "selected_source_paths",
+              "expression"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "action": {
+                "const": "propose"
+              }
+            },
+            "required": [
+              "action"
+            ]
+          },
+          "then": {
+            "oneOf": [
+              {
+                "properties": {
+                  "expression": {
+                    "allOf": [
+                      {
+                        "not": {
+                          "type": "null"
+                        }
+                      },
+                      {
+                        "not": {
+                          "$dynamicAnchor": "pureConstantExpressionWithSelectedPaths",
+                          "oneOf": [
+                            {
+                              "additionalProperties": false,
+                              "properties": {
+                                "op": {
+                                  "const": "literal"
+                                },
+                                "value": {}
+                              },
+                              "required": [
+                                "op",
+                                "value"
+                              ],
+                              "type": "object"
+                            },
+                            {
+                              "additionalProperties": false,
+                              "properties": {
+                                "fields": {
+                                  "additionalProperties": {
+                                    "$dynamicRef": "#pureConstantExpressionWithSelectedPaths"
+                                  },
+                                  "type": "object"
+                                },
+                                "op": {
+                                  "const": "object"
+                                }
+                              },
+                              "required": [
+                                "op",
+                                "fields"
+                              ],
+                              "type": "object"
+                            },
+                            {
+                              "additionalProperties": false,
+                              "properties": {
+                                "items": {
+                                  "items": {
+                                    "$dynamicRef": "#pureConstantExpressionWithSelectedPaths"
+                                  },
+                                  "type": "array"
+                                },
+                                "op": {
+                                  "const": "array"
+                                }
+                              },
+                              "required": [
+                                "op",
+                                "items"
+                              ],
+                              "type": "object"
+                            },
+                            {
+                              "additionalProperties": false,
+                              "properties": {
+                                "collection": {
+                                  "$dynamicRef": "#pureConstantExpressionWithSelectedPaths"
+                                },
+                                "expression": {
+                                  "$dynamicRef": "#pureConstantExpressionWithSelectedPaths"
+                                },
+                                "op": {
+                                  "const": "map"
+                                }
+                              },
+                              "required": [
+                                "op",
+                                "collection",
+                                "expression"
+                              ],
+                              "type": "object"
+                            },
+                            {
+                              "additionalProperties": false,
+                              "properties": {
+                                "op": {
+                                  "const": "coalesce"
+                                },
+                                "operands": {
+                                  "items": {
+                                    "$dynamicRef": "#pureConstantExpressionWithSelectedPaths"
+                                  },
+                                  "minItems": 1,
+                                  "type": "array"
+                                }
+                              },
+                              "required": [
+                                "op",
+                                "operands"
+                              ],
+                              "type": "object"
+                            },
+                            {
+                              "additionalProperties": false,
+                              "properties": {
+                                "op": {
+                                  "const": "concat"
+                                },
+                                "operands": {
+                                  "items": {
+                                    "$dynamicRef": "#pureConstantExpressionWithSelectedPaths"
+                                  },
+                                  "type": "array"
+                                },
+                                "separator": {
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "op",
+                                "operands"
+                              ],
+                              "type": "object"
+                            },
+                            {
+                              "additionalProperties": false,
+                              "properties": {
+                                "op": {
+                                  "const": "cast"
+                                },
+                                "target_type": {
+                                  "enum": [
+                                    "string",
+                                    "integer",
+                                    "number",
+                                    "boolean"
+                                  ],
+                                  "type": "string"
+                                },
+                                "value": {
+                                  "$dynamicRef": "#pureConstantExpressionWithSelectedPaths"
+                                }
+                              },
+                              "required": [
+                                "op",
+                                "value",
+                                "target_type"
+                              ],
+                              "type": "object"
+                            },
+                            {
+                              "additionalProperties": false,
+                              "properties": {
+                                "condition": {
+                                  "$dynamicRef": "#pureConstantExpressionWithSelectedPaths"
+                                },
+                                "op": {
+                                  "const": "if"
+                                },
+                                "otherwise": {
+                                  "$dynamicRef": "#pureConstantExpressionWithSelectedPaths"
+                                },
+                                "then": {
+                                  "$dynamicRef": "#pureConstantExpressionWithSelectedPaths"
+                                }
+                              },
+                              "required": [
+                                "op",
+                                "condition",
+                                "then",
+                                "otherwise"
+                              ],
+                              "type": "object"
+                            },
+                            {
+                              "additionalProperties": false,
+                              "properties": {
+                                "left": {
+                                  "$dynamicRef": "#pureConstantExpressionWithSelectedPaths"
+                                },
+                                "op": {
+                                  "const": "equals"
+                                },
+                                "right": {
+                                  "$dynamicRef": "#pureConstantExpressionWithSelectedPaths"
+                                }
+                              },
+                              "required": [
+                                "op",
+                                "left",
+                                "right"
+                              ],
+                              "type": "object"
+                            },
+                            {
+                              "additionalProperties": false,
+                              "properties": {
+                                "op": {
+                                  "const": "not"
+                                },
+                                "value": {
+                                  "$dynamicRef": "#pureConstantExpressionWithSelectedPaths"
+                                }
+                              },
+                              "required": [
+                                "op",
+                                "value"
+                              ],
+                              "type": "object"
+                            },
+                            {
+                              "additionalProperties": false,
+                              "properties": {
+                                "op": {
+                                  "enum": [
+                                    "and",
+                                    "or"
+                                  ]
+                                },
+                                "operands": {
+                                  "items": {
+                                    "$dynamicRef": "#pureConstantExpressionWithSelectedPaths"
+                                  },
+                                  "minItems": 2,
+                                  "type": "array"
+                                }
+                              },
+                              "required": [
+                                "op",
+                                "operands"
+                              ],
+                              "type": "object"
+                            },
+                            {
+                              "additionalProperties": false,
+                              "properties": {
+                                "default": {
+                                  "anyOf": [
+                                    {
+                                      "$dynamicRef": "#pureConstantExpressionWithSelectedPaths"
+                                    },
+                                    {
+                                      "type": "null"
+                                    }
+                                  ]
+                                },
+                                "key": {
+                                  "$dynamicRef": "#pureConstantExpressionWithSelectedPaths"
+                                },
+                                "op": {
+                                  "const": "lookup"
+                                },
+                                "values": {
+                                  "additionalProperties": {},
+                                  "type": "object"
+                                }
+                              },
+                              "required": [
+                                "op",
+                                "key",
+                                "values"
+                              ],
+                              "type": "object"
+                            },
+                            {
+                              "additionalProperties": false,
+                              "properties": {
+                                "left": {
+                                  "$dynamicRef": "#pureConstantExpressionWithSelectedPaths"
+                                },
+                                "op": {
+                                  "enum": [
+                                    "add",
+                                    "subtract",
+                                    "multiply",
+                                    "divide"
+                                  ]
+                                },
+                                "right": {
+                                  "$dynamicRef": "#pureConstantExpressionWithSelectedPaths"
+                                }
+                              },
+                              "required": [
+                                "op",
+                                "left",
+                                "right"
+                              ],
+                              "type": "object"
+                            },
+                            {
+                              "additionalProperties": false,
+                              "properties": {
+                                "digits": {
+                                  "maximum": 12,
+                                  "minimum": 0,
+                                  "type": "integer"
+                                },
+                                "op": {
+                                  "const": "round"
+                                },
+                                "value": {
+                                  "$dynamicRef": "#pureConstantExpressionWithSelectedPaths"
+                                }
+                              },
+                              "required": [
+                                "op",
+                                "value"
+                              ],
+                              "type": "object"
+                            },
+                            {
+                              "additionalProperties": false,
+                              "properties": {
+                                "op": {
+                                  "const": "parse_date"
+                                },
+                                "value": {
+                                  "$dynamicRef": "#pureConstantExpressionWithSelectedPaths"
+                                }
+                              },
+                              "required": [
+                                "op",
+                                "value"
+                              ],
+                              "type": "object"
+                            },
+                            {
+                              "additionalProperties": false,
+                              "properties": {
+                                "op": {
+                                  "const": "format_date"
+                                },
+                                "pattern": {
+                                  "type": "string"
+                                },
+                                "value": {
+                                  "$dynamicRef": "#pureConstantExpressionWithSelectedPaths"
+                                }
+                              },
+                              "required": [
+                                "op",
+                                "value",
+                                "pattern"
+                              ],
+                              "type": "object"
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  },
+                  "selected_source_paths": {
+                    "minItems": 1
+                  }
+                },
+                "required": [
+                  "selected_source_paths",
+                  "expression"
+                ]
+              },
+              {
+                "properties": {
+                  "expression": {
+                    "$dynamicAnchor": "pureConstantExpression",
+                    "oneOf": [
+                      {
+                        "additionalProperties": false,
+                        "properties": {
+                          "op": {
+                            "const": "literal"
+                          },
+                          "value": {}
+                        },
+                        "required": [
+                          "op",
+                          "value"
+                        ],
+                        "type": "object"
+                      },
+                      {
+                        "additionalProperties": false,
+                        "properties": {
+                          "fields": {
+                            "additionalProperties": {
+                              "$dynamicRef": "#pureConstantExpression"
+                            },
+                            "type": "object"
+                          },
+                          "op": {
+                            "const": "object"
+                          }
+                        },
+                        "required": [
+                          "op",
+                          "fields"
+                        ],
+                        "type": "object"
+                      },
+                      {
+                        "additionalProperties": false,
+                        "properties": {
+                          "items": {
+                            "items": {
+                              "$dynamicRef": "#pureConstantExpression"
+                            },
+                            "type": "array"
+                          },
+                          "op": {
+                            "const": "array"
+                          }
+                        },
+                        "required": [
+                          "op",
+                          "items"
+                        ],
+                        "type": "object"
+                      },
+                      {
+                        "additionalProperties": false,
+                        "properties": {
+                          "collection": {
+                            "$dynamicRef": "#pureConstantExpression"
+                          },
+                          "expression": {
+                            "$dynamicRef": "#pureConstantExpression"
+                          },
+                          "op": {
+                            "const": "map"
+                          }
+                        },
+                        "required": [
+                          "op",
+                          "collection",
+                          "expression"
+                        ],
+                        "type": "object"
+                      },
+                      {
+                        "additionalProperties": false,
+                        "properties": {
+                          "op": {
+                            "const": "coalesce"
+                          },
+                          "operands": {
+                            "items": {
+                              "$dynamicRef": "#pureConstantExpression"
+                            },
+                            "minItems": 1,
+                            "type": "array"
+                          }
+                        },
+                        "required": [
+                          "op",
+                          "operands"
+                        ],
+                        "type": "object"
+                      },
+                      {
+                        "additionalProperties": false,
+                        "properties": {
+                          "op": {
+                            "const": "concat"
+                          },
+                          "operands": {
+                            "items": {
+                              "$dynamicRef": "#pureConstantExpression"
+                            },
+                            "type": "array"
+                          },
+                          "separator": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "op",
+                          "operands"
+                        ],
+                        "type": "object"
+                      },
+                      {
+                        "additionalProperties": false,
+                        "properties": {
+                          "op": {
+                            "const": "cast"
+                          },
+                          "target_type": {
+                            "enum": [
+                              "string",
+                              "integer",
+                              "number",
+                              "boolean"
+                            ],
+                            "type": "string"
+                          },
+                          "value": {
+                            "$dynamicRef": "#pureConstantExpression"
+                          }
+                        },
+                        "required": [
+                          "op",
+                          "value",
+                          "target_type"
+                        ],
+                        "type": "object"
+                      },
+                      {
+                        "additionalProperties": false,
+                        "properties": {
+                          "condition": {
+                            "$dynamicRef": "#pureConstantExpression"
+                          },
+                          "op": {
+                            "const": "if"
+                          },
+                          "otherwise": {
+                            "$dynamicRef": "#pureConstantExpression"
+                          },
+                          "then": {
+                            "$dynamicRef": "#pureConstantExpression"
+                          }
+                        },
+                        "required": [
+                          "op",
+                          "condition",
+                          "then",
+                          "otherwise"
+                        ],
+                        "type": "object"
+                      },
+                      {
+                        "additionalProperties": false,
+                        "properties": {
+                          "left": {
+                            "$dynamicRef": "#pureConstantExpression"
+                          },
+                          "op": {
+                            "const": "equals"
+                          },
+                          "right": {
+                            "$dynamicRef": "#pureConstantExpression"
+                          }
+                        },
+                        "required": [
+                          "op",
+                          "left",
+                          "right"
+                        ],
+                        "type": "object"
+                      },
+                      {
+                        "additionalProperties": false,
+                        "properties": {
+                          "op": {
+                            "const": "not"
+                          },
+                          "value": {
+                            "$dynamicRef": "#pureConstantExpression"
+                          }
+                        },
+                        "required": [
+                          "op",
+                          "value"
+                        ],
+                        "type": "object"
+                      },
+                      {
+                        "additionalProperties": false,
+                        "properties": {
+                          "op": {
+                            "enum": [
+                              "and",
+                              "or"
+                            ]
+                          },
+                          "operands": {
+                            "items": {
+                              "$dynamicRef": "#pureConstantExpression"
+                            },
+                            "minItems": 2,
+                            "type": "array"
+                          }
+                        },
+                        "required": [
+                          "op",
+                          "operands"
+                        ],
+                        "type": "object"
+                      },
+                      {
+                        "additionalProperties": false,
+                        "properties": {
+                          "default": {
+                            "anyOf": [
+                              {
+                                "$dynamicRef": "#pureConstantExpression"
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ]
+                          },
+                          "key": {
+                            "$dynamicRef": "#pureConstantExpression"
+                          },
+                          "op": {
+                            "const": "lookup"
+                          },
+                          "values": {
+                            "additionalProperties": {},
+                            "type": "object"
+                          }
+                        },
+                        "required": [
+                          "op",
+                          "key",
+                          "values"
+                        ],
+                        "type": "object"
+                      },
+                      {
+                        "additionalProperties": false,
+                        "properties": {
+                          "left": {
+                            "$dynamicRef": "#pureConstantExpression"
+                          },
+                          "op": {
+                            "enum": [
+                              "add",
+                              "subtract",
+                              "multiply",
+                              "divide"
+                            ]
+                          },
+                          "right": {
+                            "$dynamicRef": "#pureConstantExpression"
+                          }
+                        },
+                        "required": [
+                          "op",
+                          "left",
+                          "right"
+                        ],
+                        "type": "object"
+                      },
+                      {
+                        "additionalProperties": false,
+                        "properties": {
+                          "digits": {
+                            "maximum": 12,
+                            "minimum": 0,
+                            "type": "integer"
+                          },
+                          "op": {
+                            "const": "round"
+                          },
+                          "value": {
+                            "$dynamicRef": "#pureConstantExpression"
+                          }
+                        },
+                        "required": [
+                          "op",
+                          "value"
+                        ],
+                        "type": "object"
+                      },
+                      {
+                        "additionalProperties": false,
+                        "properties": {
+                          "op": {
+                            "const": "parse_date"
+                          },
+                          "value": {
+                            "$dynamicRef": "#pureConstantExpression"
+                          }
+                        },
+                        "required": [
+                          "op",
+                          "value"
+                        ],
+                        "type": "object"
+                      },
+                      {
+                        "additionalProperties": false,
+                        "properties": {
+                          "op": {
+                            "const": "format_date"
+                          },
+                          "pattern": {
+                            "type": "string"
+                          },
+                          "value": {
+                            "$dynamicRef": "#pureConstantExpression"
+                          }
+                        },
+                        "required": [
+                          "op",
+                          "value",
+                          "pattern"
+                        ],
+                        "type": "object"
+                      }
+                    ]
+                  },
+                  "selected_source_paths": {
+                    "maxItems": 0
+                  }
+                },
+                "required": [
+                  "selected_source_paths",
+                  "expression"
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "description": "A typed proposal or abstention for exactly one requested target.",
+      "properties": {
+        "action": {
+          "$ref": "#/$defs/ModelProposalAction"
+        },
+        "evidence": {
+          "items": {
+            "maxLength": 300,
+            "type": "string"
+          },
+          "maxItems": 8,
+          "title": "Evidence",
+          "type": "array"
+        },
+        "expression": {
+          "anyOf": [
+            {
+              "discriminator": {
+                "mapping": {
+                  "add": "#/$defs/NumericExpression",
+                  "and": "#/$defs/BooleanExpression",
+                  "array": "#/$defs/ArrayExpression",
+                  "cast": "#/$defs/CastExpression",
+                  "coalesce": "#/$defs/CoalesceExpression",
+                  "concat": "#/$defs/ConcatExpression",
+                  "divide": "#/$defs/NumericExpression",
+                  "equals": "#/$defs/EqualsExpression",
+                  "format_date": "#/$defs/FormatDateExpression",
+                  "get": "#/$defs/GetExpression",
+                  "if": "#/$defs/IfExpression",
+                  "literal": "#/$defs/LiteralExpression",
+                  "lookup": "#/$defs/LookupExpression",
+                  "map": "#/$defs/MapExpression",
+                  "multiply": "#/$defs/NumericExpression",
+                  "not": "#/$defs/NotExpression",
+                  "object": "#/$defs/ObjectExpression",
+                  "or": "#/$defs/BooleanExpression",
+                  "parse_date": "#/$defs/ParseDateExpression",
+                  "round": "#/$defs/RoundExpression",
+                  "subtract": "#/$defs/NumericExpression"
+                },
+                "propertyName": "op"
+              },
+              "oneOf": [
+                {
+                  "$ref": "#/$defs/GetExpression"
+                },
+                {
+                  "$ref": "#/$defs/LiteralExpression"
+                },
+                {
+                  "$ref": "#/$defs/ObjectExpression"
+                },
+                {
+                  "$ref": "#/$defs/ArrayExpression"
+                },
+                {
+                  "$ref": "#/$defs/MapExpression"
+                },
+                {
+                  "$ref": "#/$defs/CoalesceExpression"
+                },
+                {
+                  "$ref": "#/$defs/ConcatExpression"
+                },
+                {
+                  "$ref": "#/$defs/CastExpression"
+                },
+                {
+                  "$ref": "#/$defs/IfExpression"
+                },
+                {
+                  "$ref": "#/$defs/EqualsExpression"
+                },
+                {
+                  "$ref": "#/$defs/NotExpression"
+                },
+                {
+                  "$ref": "#/$defs/BooleanExpression"
+                },
+                {
+                  "$ref": "#/$defs/LookupExpression"
+                },
+                {
+                  "$ref": "#/$defs/NumericExpression"
+                },
+                {
+                  "$ref": "#/$defs/RoundExpression"
+                },
+                {
+                  "$ref": "#/$defs/ParseDateExpression"
+                },
+                {
+                  "$ref": "#/$defs/FormatDateExpression"
+                }
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Expression"
+        },
+        "reason": {
+          "maxLength": 1000,
+          "title": "Reason",
+          "type": "string"
+        },
+        "selected_source_paths": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Selected Source Paths",
+          "type": "array"
+        },
+        "target_path": {
+          "title": "Target Path",
+          "type": "string"
+        }
+      },
+      "required": [
+        "target_path",
+        "action",
+        "selected_source_paths",
+        "expression",
+        "reason",
+        "evidence"
+      ],
+      "title": "ModelTargetProposal",
+      "type": "object"
+    },
+    "ModelUsage": {
+      "additionalProperties": false,
+      "description": "Bounded provider usage metadata, when the provider exposes it.",
+      "properties": {
+        "input_tokens": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Input Tokens"
+        },
+        "output_tokens": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Output Tokens"
+        }
+      },
+      "required": [
+        "input_tokens",
+        "output_tokens"
+      ],
+      "title": "ModelUsage",
+      "type": "object"
+    },
+    "NotExpression": {
+      "additionalProperties": false,
+      "properties": {
+        "op": {
+          "const": "not",
+          "title": "Op",
+          "type": "string"
+        },
+        "value": {
+          "discriminator": {
+            "mapping": {
+              "add": "#/$defs/NumericExpression",
+              "and": "#/$defs/BooleanExpression",
+              "array": "#/$defs/ArrayExpression",
+              "cast": "#/$defs/CastExpression",
+              "coalesce": "#/$defs/CoalesceExpression",
+              "concat": "#/$defs/ConcatExpression",
+              "divide": "#/$defs/NumericExpression",
+              "equals": "#/$defs/EqualsExpression",
+              "format_date": "#/$defs/FormatDateExpression",
+              "get": "#/$defs/GetExpression",
+              "if": "#/$defs/IfExpression",
+              "literal": "#/$defs/LiteralExpression",
+              "lookup": "#/$defs/LookupExpression",
+              "map": "#/$defs/MapExpression",
+              "multiply": "#/$defs/NumericExpression",
+              "not": "#/$defs/NotExpression",
+              "object": "#/$defs/ObjectExpression",
+              "or": "#/$defs/BooleanExpression",
+              "parse_date": "#/$defs/ParseDateExpression",
+              "round": "#/$defs/RoundExpression",
+              "subtract": "#/$defs/NumericExpression"
+            },
+            "propertyName": "op"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/GetExpression"
+            },
+            {
+              "$ref": "#/$defs/LiteralExpression"
+            },
+            {
+              "$ref": "#/$defs/ObjectExpression"
+            },
+            {
+              "$ref": "#/$defs/ArrayExpression"
+            },
+            {
+              "$ref": "#/$defs/MapExpression"
+            },
+            {
+              "$ref": "#/$defs/CoalesceExpression"
+            },
+            {
+              "$ref": "#/$defs/ConcatExpression"
+            },
+            {
+              "$ref": "#/$defs/CastExpression"
+            },
+            {
+              "$ref": "#/$defs/IfExpression"
+            },
+            {
+              "$ref": "#/$defs/EqualsExpression"
+            },
+            {
+              "$ref": "#/$defs/NotExpression"
+            },
+            {
+              "$ref": "#/$defs/BooleanExpression"
+            },
+            {
+              "$ref": "#/$defs/LookupExpression"
+            },
+            {
+              "$ref": "#/$defs/NumericExpression"
+            },
+            {
+              "$ref": "#/$defs/RoundExpression"
+            },
+            {
+              "$ref": "#/$defs/ParseDateExpression"
+            },
+            {
+              "$ref": "#/$defs/FormatDateExpression"
+            }
+          ],
+          "title": "Value"
+        }
+      },
+      "required": [
+        "op",
+        "value"
+      ],
+      "title": "NotExpression",
+      "type": "object"
+    },
+    "NumericExpression": {
+      "additionalProperties": false,
+      "properties": {
+        "left": {
+          "discriminator": {
+            "mapping": {
+              "add": "#/$defs/NumericExpression",
+              "and": "#/$defs/BooleanExpression",
+              "array": "#/$defs/ArrayExpression",
+              "cast": "#/$defs/CastExpression",
+              "coalesce": "#/$defs/CoalesceExpression",
+              "concat": "#/$defs/ConcatExpression",
+              "divide": "#/$defs/NumericExpression",
+              "equals": "#/$defs/EqualsExpression",
+              "format_date": "#/$defs/FormatDateExpression",
+              "get": "#/$defs/GetExpression",
+              "if": "#/$defs/IfExpression",
+              "literal": "#/$defs/LiteralExpression",
+              "lookup": "#/$defs/LookupExpression",
+              "map": "#/$defs/MapExpression",
+              "multiply": "#/$defs/NumericExpression",
+              "not": "#/$defs/NotExpression",
+              "object": "#/$defs/ObjectExpression",
+              "or": "#/$defs/BooleanExpression",
+              "parse_date": "#/$defs/ParseDateExpression",
+              "round": "#/$defs/RoundExpression",
+              "subtract": "#/$defs/NumericExpression"
+            },
+            "propertyName": "op"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/GetExpression"
+            },
+            {
+              "$ref": "#/$defs/LiteralExpression"
+            },
+            {
+              "$ref": "#/$defs/ObjectExpression"
+            },
+            {
+              "$ref": "#/$defs/ArrayExpression"
+            },
+            {
+              "$ref": "#/$defs/MapExpression"
+            },
+            {
+              "$ref": "#/$defs/CoalesceExpression"
+            },
+            {
+              "$ref": "#/$defs/ConcatExpression"
+            },
+            {
+              "$ref": "#/$defs/CastExpression"
+            },
+            {
+              "$ref": "#/$defs/IfExpression"
+            },
+            {
+              "$ref": "#/$defs/EqualsExpression"
+            },
+            {
+              "$ref": "#/$defs/NotExpression"
+            },
+            {
+              "$ref": "#/$defs/BooleanExpression"
+            },
+            {
+              "$ref": "#/$defs/LookupExpression"
+            },
+            {
+              "$ref": "#/$defs/NumericExpression"
+            },
+            {
+              "$ref": "#/$defs/RoundExpression"
+            },
+            {
+              "$ref": "#/$defs/ParseDateExpression"
+            },
+            {
+              "$ref": "#/$defs/FormatDateExpression"
+            }
+          ],
+          "title": "Left"
+        },
+        "op": {
+          "enum": [
+            "add",
+            "subtract",
+            "multiply",
+            "divide"
+          ],
+          "title": "Op",
+          "type": "string"
+        },
+        "right": {
+          "discriminator": {
+            "mapping": {
+              "add": "#/$defs/NumericExpression",
+              "and": "#/$defs/BooleanExpression",
+              "array": "#/$defs/ArrayExpression",
+              "cast": "#/$defs/CastExpression",
+              "coalesce": "#/$defs/CoalesceExpression",
+              "concat": "#/$defs/ConcatExpression",
+              "divide": "#/$defs/NumericExpression",
+              "equals": "#/$defs/EqualsExpression",
+              "format_date": "#/$defs/FormatDateExpression",
+              "get": "#/$defs/GetExpression",
+              "if": "#/$defs/IfExpression",
+              "literal": "#/$defs/LiteralExpression",
+              "lookup": "#/$defs/LookupExpression",
+              "map": "#/$defs/MapExpression",
+              "multiply": "#/$defs/NumericExpression",
+              "not": "#/$defs/NotExpression",
+              "object": "#/$defs/ObjectExpression",
+              "or": "#/$defs/BooleanExpression",
+              "parse_date": "#/$defs/ParseDateExpression",
+              "round": "#/$defs/RoundExpression",
+              "subtract": "#/$defs/NumericExpression"
+            },
+            "propertyName": "op"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/GetExpression"
+            },
+            {
+              "$ref": "#/$defs/LiteralExpression"
+            },
+            {
+              "$ref": "#/$defs/ObjectExpression"
+            },
+            {
+              "$ref": "#/$defs/ArrayExpression"
+            },
+            {
+              "$ref": "#/$defs/MapExpression"
+            },
+            {
+              "$ref": "#/$defs/CoalesceExpression"
+            },
+            {
+              "$ref": "#/$defs/ConcatExpression"
+            },
+            {
+              "$ref": "#/$defs/CastExpression"
+            },
+            {
+              "$ref": "#/$defs/IfExpression"
+            },
+            {
+              "$ref": "#/$defs/EqualsExpression"
+            },
+            {
+              "$ref": "#/$defs/NotExpression"
+            },
+            {
+              "$ref": "#/$defs/BooleanExpression"
+            },
+            {
+              "$ref": "#/$defs/LookupExpression"
+            },
+            {
+              "$ref": "#/$defs/NumericExpression"
+            },
+            {
+              "$ref": "#/$defs/RoundExpression"
+            },
+            {
+              "$ref": "#/$defs/ParseDateExpression"
+            },
+            {
+              "$ref": "#/$defs/FormatDateExpression"
+            }
+          ],
+          "title": "Right"
+        }
+      },
+      "required": [
+        "op",
+        "left",
+        "right"
+      ],
+      "title": "NumericExpression",
+      "type": "object"
+    },
+    "ObjectExpression": {
+      "additionalProperties": false,
+      "properties": {
+        "fields": {
+          "additionalProperties": {
+            "discriminator": {
+              "mapping": {
+                "add": "#/$defs/NumericExpression",
+                "and": "#/$defs/BooleanExpression",
+                "array": "#/$defs/ArrayExpression",
+                "cast": "#/$defs/CastExpression",
+                "coalesce": "#/$defs/CoalesceExpression",
+                "concat": "#/$defs/ConcatExpression",
+                "divide": "#/$defs/NumericExpression",
+                "equals": "#/$defs/EqualsExpression",
+                "format_date": "#/$defs/FormatDateExpression",
+                "get": "#/$defs/GetExpression",
+                "if": "#/$defs/IfExpression",
+                "literal": "#/$defs/LiteralExpression",
+                "lookup": "#/$defs/LookupExpression",
+                "map": "#/$defs/MapExpression",
+                "multiply": "#/$defs/NumericExpression",
+                "not": "#/$defs/NotExpression",
+                "object": "#/$defs/ObjectExpression",
+                "or": "#/$defs/BooleanExpression",
+                "parse_date": "#/$defs/ParseDateExpression",
+                "round": "#/$defs/RoundExpression",
+                "subtract": "#/$defs/NumericExpression"
+              },
+              "propertyName": "op"
+            },
+            "oneOf": [
+              {
+                "$ref": "#/$defs/GetExpression"
+              },
+              {
+                "$ref": "#/$defs/LiteralExpression"
+              },
+              {
+                "$ref": "#/$defs/ObjectExpression"
+              },
+              {
+                "$ref": "#/$defs/ArrayExpression"
+              },
+              {
+                "$ref": "#/$defs/MapExpression"
+              },
+              {
+                "$ref": "#/$defs/CoalesceExpression"
+              },
+              {
+                "$ref": "#/$defs/ConcatExpression"
+              },
+              {
+                "$ref": "#/$defs/CastExpression"
+              },
+              {
+                "$ref": "#/$defs/IfExpression"
+              },
+              {
+                "$ref": "#/$defs/EqualsExpression"
+              },
+              {
+                "$ref": "#/$defs/NotExpression"
+              },
+              {
+                "$ref": "#/$defs/BooleanExpression"
+              },
+              {
+                "$ref": "#/$defs/LookupExpression"
+              },
+              {
+                "$ref": "#/$defs/NumericExpression"
+              },
+              {
+                "$ref": "#/$defs/RoundExpression"
+              },
+              {
+                "$ref": "#/$defs/ParseDateExpression"
+              },
+              {
+                "$ref": "#/$defs/FormatDateExpression"
+              }
+            ]
+          },
+          "title": "Fields",
+          "type": "object"
+        },
+        "op": {
+          "const": "object",
+          "title": "Op",
+          "type": "string"
+        }
+      },
+      "required": [
+        "op",
+        "fields"
+      ],
+      "title": "ObjectExpression",
+      "type": "object"
+    },
+    "ParseDateExpression": {
+      "additionalProperties": false,
+      "properties": {
+        "op": {
+          "const": "parse_date",
+          "title": "Op",
+          "type": "string"
+        },
+        "value": {
+          "discriminator": {
+            "mapping": {
+              "add": "#/$defs/NumericExpression",
+              "and": "#/$defs/BooleanExpression",
+              "array": "#/$defs/ArrayExpression",
+              "cast": "#/$defs/CastExpression",
+              "coalesce": "#/$defs/CoalesceExpression",
+              "concat": "#/$defs/ConcatExpression",
+              "divide": "#/$defs/NumericExpression",
+              "equals": "#/$defs/EqualsExpression",
+              "format_date": "#/$defs/FormatDateExpression",
+              "get": "#/$defs/GetExpression",
+              "if": "#/$defs/IfExpression",
+              "literal": "#/$defs/LiteralExpression",
+              "lookup": "#/$defs/LookupExpression",
+              "map": "#/$defs/MapExpression",
+              "multiply": "#/$defs/NumericExpression",
+              "not": "#/$defs/NotExpression",
+              "object": "#/$defs/ObjectExpression",
+              "or": "#/$defs/BooleanExpression",
+              "parse_date": "#/$defs/ParseDateExpression",
+              "round": "#/$defs/RoundExpression",
+              "subtract": "#/$defs/NumericExpression"
+            },
+            "propertyName": "op"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/GetExpression"
+            },
+            {
+              "$ref": "#/$defs/LiteralExpression"
+            },
+            {
+              "$ref": "#/$defs/ObjectExpression"
+            },
+            {
+              "$ref": "#/$defs/ArrayExpression"
+            },
+            {
+              "$ref": "#/$defs/MapExpression"
+            },
+            {
+              "$ref": "#/$defs/CoalesceExpression"
+            },
+            {
+              "$ref": "#/$defs/ConcatExpression"
+            },
+            {
+              "$ref": "#/$defs/CastExpression"
+            },
+            {
+              "$ref": "#/$defs/IfExpression"
+            },
+            {
+              "$ref": "#/$defs/EqualsExpression"
+            },
+            {
+              "$ref": "#/$defs/NotExpression"
+            },
+            {
+              "$ref": "#/$defs/BooleanExpression"
+            },
+            {
+              "$ref": "#/$defs/LookupExpression"
+            },
+            {
+              "$ref": "#/$defs/NumericExpression"
+            },
+            {
+              "$ref": "#/$defs/RoundExpression"
+            },
+            {
+              "$ref": "#/$defs/ParseDateExpression"
+            },
+            {
+              "$ref": "#/$defs/FormatDateExpression"
+            }
+          ],
+          "title": "Value"
+        }
+      },
+      "required": [
+        "op",
+        "value"
+      ],
+      "title": "ParseDateExpression",
+      "type": "object"
+    },
+    "ProviderDisclosure": {
+      "additionalProperties": false,
+      "properties": {
+        "candidate_count": {
+          "title": "Candidate Count",
+          "type": "integer"
+        },
+        "endpoint_origin": {
+          "title": "Endpoint Origin",
+          "type": "string"
+        },
+        "raw_samples_included": {
+          "title": "Raw Samples Included",
+          "type": "boolean"
+        },
+        "redaction_count": {
+          "title": "Redaction Count",
+          "type": "integer"
+        },
+        "request_sha256": {
+          "title": "Request Sha256",
+          "type": "string"
+        },
+        "sample_profile_count": {
+          "title": "Sample Profile Count",
+          "type": "integer"
+        },
+        "source_field_count": {
+          "title": "Source Field Count",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "endpoint_origin",
+        "raw_samples_included",
+        "source_field_count",
+        "candidate_count",
+        "sample_profile_count",
+        "redaction_count",
+        "request_sha256"
+      ],
+      "title": "ProviderDisclosure",
+      "type": "object"
+    },
+    "ProviderKind": {
+      "description": "Provider transport families supported by the model configuration.",
+      "enum": [
+        "openai",
+        "anthropic",
+        "google",
+        "openai-compatible",
+        "custom-http"
+      ],
+      "title": "ProviderKind",
+      "type": "string"
+    },
+    "RoundExpression": {
+      "additionalProperties": false,
+      "properties": {
+        "digits": {
+          "default": 0,
+          "maximum": 12,
+          "minimum": 0,
+          "title": "Digits",
+          "type": "integer"
+        },
+        "op": {
+          "const": "round",
+          "title": "Op",
+          "type": "string"
+        },
+        "value": {
+          "discriminator": {
+            "mapping": {
+              "add": "#/$defs/NumericExpression",
+              "and": "#/$defs/BooleanExpression",
+              "array": "#/$defs/ArrayExpression",
+              "cast": "#/$defs/CastExpression",
+              "coalesce": "#/$defs/CoalesceExpression",
+              "concat": "#/$defs/ConcatExpression",
+              "divide": "#/$defs/NumericExpression",
+              "equals": "#/$defs/EqualsExpression",
+              "format_date": "#/$defs/FormatDateExpression",
+              "get": "#/$defs/GetExpression",
+              "if": "#/$defs/IfExpression",
+              "literal": "#/$defs/LiteralExpression",
+              "lookup": "#/$defs/LookupExpression",
+              "map": "#/$defs/MapExpression",
+              "multiply": "#/$defs/NumericExpression",
+              "not": "#/$defs/NotExpression",
+              "object": "#/$defs/ObjectExpression",
+              "or": "#/$defs/BooleanExpression",
+              "parse_date": "#/$defs/ParseDateExpression",
+              "round": "#/$defs/RoundExpression",
+              "subtract": "#/$defs/NumericExpression"
+            },
+            "propertyName": "op"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/GetExpression"
+            },
+            {
+              "$ref": "#/$defs/LiteralExpression"
+            },
+            {
+              "$ref": "#/$defs/ObjectExpression"
+            },
+            {
+              "$ref": "#/$defs/ArrayExpression"
+            },
+            {
+              "$ref": "#/$defs/MapExpression"
+            },
+            {
+              "$ref": "#/$defs/CoalesceExpression"
+            },
+            {
+              "$ref": "#/$defs/ConcatExpression"
+            },
+            {
+              "$ref": "#/$defs/CastExpression"
+            },
+            {
+              "$ref": "#/$defs/IfExpression"
+            },
+            {
+              "$ref": "#/$defs/EqualsExpression"
+            },
+            {
+              "$ref": "#/$defs/NotExpression"
+            },
+            {
+              "$ref": "#/$defs/BooleanExpression"
+            },
+            {
+              "$ref": "#/$defs/LookupExpression"
+            },
+            {
+              "$ref": "#/$defs/NumericExpression"
+            },
+            {
+              "$ref": "#/$defs/RoundExpression"
+            },
+            {
+              "$ref": "#/$defs/ParseDateExpression"
+            },
+            {
+              "$ref": "#/$defs/FormatDateExpression"
+            }
+          ],
+          "title": "Value"
+        }
+      },
+      "required": [
+        "op",
+        "value"
+      ],
+      "title": "RoundExpression",
+      "type": "object"
+    },
+    "Severity": {
+      "enum": [
+        "error",
+        "warning",
+        "info"
+      ],
+      "title": "Severity",
+      "type": "string"
+    },
+    "SuggestionDisposition": {
+      "enum": [
+        "suggested",
+        "review_required",
+        "ambiguous",
+        "no_match",
+        "manual"
+      ],
+      "title": "SuggestionDisposition",
+      "type": "string"
+    },
+    "SuggestionOrigin": {
+      "enum": [
+        "deterministic",
+        "model",
+        "manual"
+      ],
+      "title": "SuggestionOrigin",
+      "type": "string"
+    },
+    "SuggestionSummary": {
+      "additionalProperties": false,
+      "properties": {
+        "ambiguous": {
+          "default": 0,
+          "title": "Ambiguous",
+          "type": "integer"
+        },
+        "high": {
+          "default": 0,
+          "title": "High",
+          "type": "integer"
+        },
+        "low": {
+          "default": 0,
+          "title": "Low",
+          "type": "integer"
+        },
+        "manual": {
+          "default": 0,
+          "title": "Manual",
+          "type": "integer"
+        },
+        "medium": {
+          "default": 0,
+          "title": "Medium",
+          "type": "integer"
+        },
+        "no_match": {
+          "default": 0,
+          "title": "No Match",
+          "type": "integer"
+        },
+        "none": {
+          "default": 0,
+          "title": "None",
+          "type": "integer"
+        },
+        "review_required": {
+          "default": 0,
+          "title": "Review Required",
+          "type": "integer"
+        },
+        "suggested": {
+          "default": 0,
+          "title": "Suggested",
+          "type": "integer"
+        },
+        "total_targets": {
+          "default": 0,
+          "title": "Total Targets",
+          "type": "integer"
+        }
+      },
+      "title": "SuggestionSummary",
+      "type": "object"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "issues": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/Issue"
+      },
+      "title": "Issues",
+      "type": "array"
+    },
+    "model_run_disclosure": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ModelRunDisclosure"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "provider_disclosure": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ProviderDisclosure"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "report_version": {
+      "const": "0.1",
+      "title": "Report Version",
+      "type": "string"
+    },
+    "source_schema_id": {
+      "title": "Source Schema Id",
+      "type": "string"
+    },
+    "source_schema_version": {
+      "title": "Source Schema Version",
+      "type": "string"
+    },
+    "suggestions": {
+      "items": {
+        "$ref": "#/$defs/MappingSuggestion"
+      },
+      "title": "Suggestions",
+      "type": "array"
+    },
+    "summary": {
+      "$ref": "#/$defs/SuggestionSummary"
+    },
+    "target_schema_id": {
+      "title": "Target Schema Id",
+      "type": "string"
+    },
+    "target_schema_version": {
+      "title": "Target Schema Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "report_version",
+    "source_schema_id",
+    "source_schema_version",
+    "target_schema_id",
+    "target_schema_version",
+    "suggestions",
+    "summary"
+  ],
+  "title": "SuggestionReport",
+  "type": "object"
+}

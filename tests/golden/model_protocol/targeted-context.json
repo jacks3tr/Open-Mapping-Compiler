@@ -1,0 +1,129 @@
+{
+  "allowed_source_paths": [
+    "/customer",
+    "/customer/id",
+    "/customer/name"
+  ],
+  "batch_id": "__BATCH_ID__",
+  "business_instructions": [
+    "CLI instruction: Prefer the customer's full name."
+  ],
+  "context_mode": "targeted",
+  "expression_operation_semantics": {
+    "add": "Add two numeric values.",
+    "and": "Require every boolean operand to be true.",
+    "array": "Build an array from item expressions.",
+    "cast": "Convert a value to a supported scalar type.",
+    "coalesce": "Return the first non-null operand.",
+    "concat": "Join string operands with an optional separator.",
+    "divide": "Divide the left numeric value by the right.",
+    "equals": "Compare two values for equality.",
+    "format_date": "Format a parsed date with a declared pattern.",
+    "get": "Read an allowlisted JSON Pointer from the input.",
+    "if": "Choose between expressions using a boolean condition.",
+    "literal": "Produce a JSON literal value.",
+    "lookup": "Map a key through a finite value table.",
+    "map": "Apply an expression to each collection item.",
+    "multiply": "Multiply two numeric values.",
+    "not": "Negate a boolean value.",
+    "object": "Build an object from named expressions.",
+    "or": "Require at least one boolean operand to be true.",
+    "parse_date": "Parse a supported date string.",
+    "round": "Round a numeric value to bounded digits.",
+    "subtract": "Subtract the right numeric value from the left."
+  },
+  "expression_operations": [
+    "add",
+    "and",
+    "array",
+    "cast",
+    "coalesce",
+    "concat",
+    "divide",
+    "equals",
+    "format_date",
+    "get",
+    "if",
+    "literal",
+    "lookup",
+    "map",
+    "multiply",
+    "not",
+    "object",
+    "or",
+    "parse_date",
+    "round",
+    "subtract"
+  ],
+  "prompt_version": "mapping-agent-v1",
+  "protocol_version": "0.1",
+  "raw_samples": null,
+  "raw_samples_included": false,
+  "redaction_count": 0,
+  "sample_profiles": [
+    {
+      "distinct_count": 2,
+      "maximum_string_length": 8,
+      "minimum_string_length": 3,
+      "missing_count": 0,
+      "null_count": 0,
+      "observed_types": ["string"],
+      "pattern_classes": ["mixed-text"],
+      "pointer": "/customer/name",
+      "sample_count": 2
+    }
+  ],
+  "source_fields": [
+    {
+      "description": "Customer record.",
+      "pointer": "/customer",
+      "required": true,
+      "types": ["object"]
+    },
+    {
+      "constraints": {"maximum": 999.0, "minimum": 1.0},
+      "pointer": "/customer/id",
+      "required": true,
+      "types": ["integer"]
+    },
+    {
+      "constraints": {
+        "max_length": 80,
+        "min_length": 1,
+        "pattern": "^[A-Za-z ]+$"
+      },
+      "description": "Full display name.",
+      "pointer": "/customer/name",
+      "required": true,
+      "title": "Customer name",
+      "types": ["string"]
+    }
+  ],
+  "source_schema_id": "source",
+  "source_schema_version": "1",
+  "target_requests": [
+    {
+      "candidates": [
+        {
+          "evidence": [
+            "exact_name: Names match. (score=0.9)",
+            "type_compatibility: Types agree. (score=1)"
+          ],
+          "raw_score": 0.92,
+          "source_path": "/customer/name"
+        }
+      ],
+      "target": {
+        "constraints": {"min_length": 1},
+        "description": "Requested display name.",
+        "pointer": "/displayName",
+        "required": true,
+        "title": "Display Name",
+        "types": ["string"]
+      }
+    }
+  ],
+  "target_schema_id": "target",
+  "target_schema_version": "1",
+  "truncation_count": 0
+}

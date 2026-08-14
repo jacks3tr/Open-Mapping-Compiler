@@ -1,0 +1,1 @@
+"""Industrial benchmark contract tests."""

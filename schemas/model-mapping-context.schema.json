@@ -1,0 +1,428 @@
+{
+  "$defs": {
+    "ContextMode": {
+      "description": "Requested source-schema context packing strategy.",
+      "enum": [
+        "auto",
+        "full",
+        "targeted"
+      ],
+      "title": "ContextMode",
+      "type": "string"
+    },
+    "FieldProfile": {
+      "additionalProperties": false,
+      "properties": {
+        "distinct_count": {
+          "title": "Distinct Count",
+          "type": "integer"
+        },
+        "maximum_string_length": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Maximum String Length"
+        },
+        "minimum_string_length": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Minimum String Length"
+        },
+        "missing_count": {
+          "title": "Missing Count",
+          "type": "integer"
+        },
+        "null_count": {
+          "title": "Null Count",
+          "type": "integer"
+        },
+        "observed_types": {
+          "items": {
+            "$ref": "#/$defs/JsonType"
+          },
+          "title": "Observed Types",
+          "type": "array",
+          "uniqueItems": true
+        },
+        "pattern_classes": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Pattern Classes",
+          "type": "array"
+        },
+        "pointer": {
+          "title": "Pointer",
+          "type": "string"
+        },
+        "sample_count": {
+          "title": "Sample Count",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "pointer",
+        "observed_types",
+        "sample_count",
+        "missing_count",
+        "null_count",
+        "distinct_count"
+      ],
+      "title": "FieldProfile",
+      "type": "object"
+    },
+    "JsonType": {
+      "enum": [
+        "null",
+        "boolean",
+        "integer",
+        "number",
+        "string",
+        "array",
+        "object"
+      ],
+      "title": "JsonType",
+      "type": "string"
+    },
+    "ModelCandidateSummary": {
+      "additionalProperties": false,
+      "description": "One deterministic source-field candidate for a target field.",
+      "properties": {
+        "evidence": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence",
+          "type": "array"
+        },
+        "raw_score": {
+          "title": "Raw Score",
+          "type": "number"
+        },
+        "source_path": {
+          "title": "Source Path",
+          "type": "string"
+        }
+      },
+      "required": [
+        "source_path",
+        "raw_score",
+        "evidence"
+      ],
+      "title": "ModelCandidateSummary",
+      "type": "object"
+    },
+    "ModelFieldSummary": {
+      "additionalProperties": false,
+      "description": "Compact, provider-neutral summary of one schema field.",
+      "properties": {
+        "constraints": {
+          "additionalProperties": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "integer"
+              },
+              {
+                "type": "number"
+              },
+              {
+                "type": "boolean"
+              },
+              {
+                "items": {},
+                "type": "array"
+              },
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "title": "Constraints",
+          "type": "object"
+        },
+        "description": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Description"
+        },
+        "enum_values": {
+          "default": [],
+          "items": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "integer"
+              },
+              {
+                "type": "number"
+              },
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "title": "Enum Values",
+          "type": "array"
+        },
+        "item_types": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Item Types",
+          "type": "array"
+        },
+        "pointer": {
+          "title": "Pointer",
+          "type": "string"
+        },
+        "required": {
+          "title": "Required",
+          "type": "boolean"
+        },
+        "title": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Title"
+        },
+        "types": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Types",
+          "type": "array"
+        }
+      },
+      "required": [
+        "pointer",
+        "types",
+        "required"
+      ],
+      "title": "ModelFieldSummary",
+      "type": "object"
+    },
+    "ModelTargetRequest": {
+      "additionalProperties": false,
+      "description": "The target field and bounded candidates for one model proposal.",
+      "properties": {
+        "candidates": {
+          "items": {
+            "$ref": "#/$defs/ModelCandidateSummary"
+          },
+          "title": "Candidates",
+          "type": "array"
+        },
+        "target": {
+          "$ref": "#/$defs/ModelFieldSummary"
+        }
+      },
+      "required": [
+        "target",
+        "candidates"
+      ],
+      "title": "ModelTargetRequest",
+      "type": "object"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "The versioned request contract shared by all model providers.",
+  "properties": {
+    "allowed_source_paths": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Allowed Source Paths",
+      "type": "array"
+    },
+    "batch_id": {
+      "title": "Batch Id",
+      "type": "string"
+    },
+    "business_instructions": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Business Instructions",
+      "type": "array"
+    },
+    "context_mode": {
+      "$ref": "#/$defs/ContextMode"
+    },
+    "expression_operation_semantics": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Expression Operation Semantics",
+      "type": "object"
+    },
+    "expression_operations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Expression Operations",
+      "type": "array"
+    },
+    "prompt_version": {
+      "const": "mapping-agent-v1",
+      "title": "Prompt Version",
+      "type": "string"
+    },
+    "protocol_version": {
+      "const": "0.1",
+      "title": "Protocol Version",
+      "type": "string"
+    },
+    "raw_samples": {
+      "anyOf": [
+        {
+          "items": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "integer"
+              },
+              {
+                "type": "number"
+              },
+              {
+                "type": "boolean"
+              },
+              {
+                "items": {},
+                "type": "array"
+              },
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "type": "array"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Raw Samples"
+    },
+    "raw_samples_included": {
+      "default": false,
+      "title": "Raw Samples Included",
+      "type": "boolean"
+    },
+    "redaction_count": {
+      "default": 0,
+      "minimum": 0,
+      "title": "Redaction Count",
+      "type": "integer"
+    },
+    "sample_profiles": {
+      "items": {
+        "$ref": "#/$defs/FieldProfile"
+      },
+      "title": "Sample Profiles",
+      "type": "array"
+    },
+    "source_fields": {
+      "items": {
+        "$ref": "#/$defs/ModelFieldSummary"
+      },
+      "title": "Source Fields",
+      "type": "array"
+    },
+    "source_schema_id": {
+      "title": "Source Schema Id",
+      "type": "string"
+    },
+    "source_schema_version": {
+      "title": "Source Schema Version",
+      "type": "string"
+    },
+    "target_requests": {
+      "items": {
+        "$ref": "#/$defs/ModelTargetRequest"
+      },
+      "title": "Target Requests",
+      "type": "array"
+    },
+    "target_schema_id": {
+      "title": "Target Schema Id",
+      "type": "string"
+    },
+    "target_schema_version": {
+      "title": "Target Schema Version",
+      "type": "string"
+    },
+    "truncation_count": {
+      "default": 0,
+      "minimum": 0,
+      "title": "Truncation Count",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "protocol_version",
+    "prompt_version",
+    "batch_id",
+    "context_mode",
+    "source_schema_id",
+    "source_schema_version",
+    "target_schema_id",
+    "target_schema_version",
+    "source_fields",
+    "target_requests",
+    "sample_profiles",
+    "business_instructions",
+    "expression_operations",
+    "allowed_source_paths",
+    "raw_samples"
+  ],
+  "title": "MappingContextPackage",
+  "type": "object"
+}

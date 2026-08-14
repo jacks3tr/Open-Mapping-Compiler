@@ -1,0 +1,18 @@
+{
+  "$id": "model-assisted-customer",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["customer_id", "status"],
+  "properties": {
+    "customer_id": {
+      "type": "string",
+      "title": "Customer identifier",
+      "description": "Stable identifier from the source customer system."
+    },
+    "status": {
+      "type": "string",
+      "enum": ["ACTIVE", "INACTIVE"],
+      "description": "Current source customer status."
+    }
+  }
+}

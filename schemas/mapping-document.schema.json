@@ -1,0 +1,3403 @@
+{
+  "$defs": {
+    "ArrayExpression": {
+      "additionalProperties": false,
+      "properties": {
+        "items": {
+          "items": {
+            "discriminator": {
+              "mapping": {
+                "add": "#/$defs/NumericExpression",
+                "and": "#/$defs/BooleanExpression",
+                "array": "#/$defs/ArrayExpression",
+                "cast": "#/$defs/CastExpression",
+                "coalesce": "#/$defs/CoalesceExpression",
+                "concat": "#/$defs/ConcatExpression",
+                "divide": "#/$defs/NumericExpression",
+                "equals": "#/$defs/EqualsExpression",
+                "format_date": "#/$defs/FormatDateExpression",
+                "get": "#/$defs/GetExpression",
+                "if": "#/$defs/IfExpression",
+                "literal": "#/$defs/LiteralExpression",
+                "lookup": "#/$defs/LookupExpression",
+                "map": "#/$defs/MapExpression",
+                "multiply": "#/$defs/NumericExpression",
+                "not": "#/$defs/NotExpression",
+                "object": "#/$defs/ObjectExpression",
+                "or": "#/$defs/BooleanExpression",
+                "parse_date": "#/$defs/ParseDateExpression",
+                "round": "#/$defs/RoundExpression",
+                "subtract": "#/$defs/NumericExpression"
+              },
+              "propertyName": "op"
+            },
+            "oneOf": [
+              {
+                "$ref": "#/$defs/GetExpression"
+              },
+              {
+                "$ref": "#/$defs/LiteralExpression"
+              },
+              {
+                "$ref": "#/$defs/ObjectExpression"
+              },
+              {
+                "$ref": "#/$defs/ArrayExpression"
+              },
+              {
+                "$ref": "#/$defs/MapExpression"
+              },
+              {
+                "$ref": "#/$defs/CoalesceExpression"
+              },
+              {
+                "$ref": "#/$defs/ConcatExpression"
+              },
+              {
+                "$ref": "#/$defs/CastExpression"
+              },
+              {
+                "$ref": "#/$defs/IfExpression"
+              },
+              {
+                "$ref": "#/$defs/EqualsExpression"
+              },
+              {
+                "$ref": "#/$defs/NotExpression"
+              },
+              {
+                "$ref": "#/$defs/BooleanExpression"
+              },
+              {
+                "$ref": "#/$defs/LookupExpression"
+              },
+              {
+                "$ref": "#/$defs/NumericExpression"
+              },
+              {
+                "$ref": "#/$defs/RoundExpression"
+              },
+              {
+                "$ref": "#/$defs/ParseDateExpression"
+              },
+              {
+                "$ref": "#/$defs/FormatDateExpression"
+              }
+            ]
+          },
+          "title": "Items",
+          "type": "array"
+        },
+        "op": {
+          "const": "array",
+          "title": "Op",
+          "type": "string"
+        }
+      },
+      "required": [
+        "op",
+        "items"
+      ],
+      "title": "ArrayExpression",
+      "type": "object"
+    },
+    "BooleanExpression": {
+      "additionalProperties": false,
+      "properties": {
+        "op": {
+          "enum": [
+            "and",
+            "or"
+          ],
+          "title": "Op",
+          "type": "string"
+        },
+        "operands": {
+          "items": {
+            "discriminator": {
+              "mapping": {
+                "add": "#/$defs/NumericExpression",
+                "and": "#/$defs/BooleanExpression",
+                "array": "#/$defs/ArrayExpression",
+                "cast": "#/$defs/CastExpression",
+                "coalesce": "#/$defs/CoalesceExpression",
+                "concat": "#/$defs/ConcatExpression",
+                "divide": "#/$defs/NumericExpression",
+                "equals": "#/$defs/EqualsExpression",
+                "format_date": "#/$defs/FormatDateExpression",
+                "get": "#/$defs/GetExpression",
+                "if": "#/$defs/IfExpression",
+                "literal": "#/$defs/LiteralExpression",
+                "lookup": "#/$defs/LookupExpression",
+                "map": "#/$defs/MapExpression",
+                "multiply": "#/$defs/NumericExpression",
+                "not": "#/$defs/NotExpression",
+                "object": "#/$defs/ObjectExpression",
+                "or": "#/$defs/BooleanExpression",
+                "parse_date": "#/$defs/ParseDateExpression",
+                "round": "#/$defs/RoundExpression",
+                "subtract": "#/$defs/NumericExpression"
+              },
+              "propertyName": "op"
+            },
+            "oneOf": [
+              {
+                "$ref": "#/$defs/GetExpression"
+              },
+              {
+                "$ref": "#/$defs/LiteralExpression"
+              },
+              {
+                "$ref": "#/$defs/ObjectExpression"
+              },
+              {
+                "$ref": "#/$defs/ArrayExpression"
+              },
+              {
+                "$ref": "#/$defs/MapExpression"
+              },
+              {
+                "$ref": "#/$defs/CoalesceExpression"
+              },
+              {
+                "$ref": "#/$defs/ConcatExpression"
+              },
+              {
+                "$ref": "#/$defs/CastExpression"
+              },
+              {
+                "$ref": "#/$defs/IfExpression"
+              },
+              {
+                "$ref": "#/$defs/EqualsExpression"
+              },
+              {
+                "$ref": "#/$defs/NotExpression"
+              },
+              {
+                "$ref": "#/$defs/BooleanExpression"
+              },
+              {
+                "$ref": "#/$defs/LookupExpression"
+              },
+              {
+                "$ref": "#/$defs/NumericExpression"
+              },
+              {
+                "$ref": "#/$defs/RoundExpression"
+              },
+              {
+                "$ref": "#/$defs/ParseDateExpression"
+              },
+              {
+                "$ref": "#/$defs/FormatDateExpression"
+              }
+            ]
+          },
+          "minItems": 2,
+          "title": "Operands",
+          "type": "array"
+        }
+      },
+      "required": [
+        "op",
+        "operands"
+      ],
+      "title": "BooleanExpression",
+      "type": "object"
+    },
+    "CastExpression": {
+      "additionalProperties": false,
+      "properties": {
+        "op": {
+          "const": "cast",
+          "title": "Op",
+          "type": "string"
+        },
+        "target_type": {
+          "enum": [
+            "string",
+            "integer",
+            "number",
+            "boolean"
+          ],
+          "title": "Target Type",
+          "type": "string"
+        },
+        "value": {
+          "discriminator": {
+            "mapping": {
+              "add": "#/$defs/NumericExpression",
+              "and": "#/$defs/BooleanExpression",
+              "array": "#/$defs/ArrayExpression",
+              "cast": "#/$defs/CastExpression",
+              "coalesce": "#/$defs/CoalesceExpression",
+              "concat": "#/$defs/ConcatExpression",
+              "divide": "#/$defs/NumericExpression",
+              "equals": "#/$defs/EqualsExpression",
+              "format_date": "#/$defs/FormatDateExpression",
+              "get": "#/$defs/GetExpression",
+              "if": "#/$defs/IfExpression",
+              "literal": "#/$defs/LiteralExpression",
+              "lookup": "#/$defs/LookupExpression",
+              "map": "#/$defs/MapExpression",
+              "multiply": "#/$defs/NumericExpression",
+              "not": "#/$defs/NotExpression",
+              "object": "#/$defs/ObjectExpression",
+              "or": "#/$defs/BooleanExpression",
+              "parse_date": "#/$defs/ParseDateExpression",
+              "round": "#/$defs/RoundExpression",
+              "subtract": "#/$defs/NumericExpression"
+            },
+            "propertyName": "op"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/GetExpression"
+            },
+            {
+              "$ref": "#/$defs/LiteralExpression"
+            },
+            {
+              "$ref": "#/$defs/ObjectExpression"
+            },
+            {
+              "$ref": "#/$defs/ArrayExpression"
+            },
+            {
+              "$ref": "#/$defs/MapExpression"
+            },
+            {
+              "$ref": "#/$defs/CoalesceExpression"
+            },
+            {
+              "$ref": "#/$defs/ConcatExpression"
+            },
+            {
+              "$ref": "#/$defs/CastExpression"
+            },
+            {
+              "$ref": "#/$defs/IfExpression"
+            },
+            {
+              "$ref": "#/$defs/EqualsExpression"
+            },
+            {
+              "$ref": "#/$defs/NotExpression"
+            },
+            {
+              "$ref": "#/$defs/BooleanExpression"
+            },
+            {
+              "$ref": "#/$defs/LookupExpression"
+            },
+            {
+              "$ref": "#/$defs/NumericExpression"
+            },
+            {
+              "$ref": "#/$defs/RoundExpression"
+            },
+            {
+              "$ref": "#/$defs/ParseDateExpression"
+            },
+            {
+              "$ref": "#/$defs/FormatDateExpression"
+            }
+          ],
+          "title": "Value"
+        }
+      },
+      "required": [
+        "op",
+        "value",
+        "target_type"
+      ],
+      "title": "CastExpression",
+      "type": "object"
+    },
+    "CoalesceExpression": {
+      "additionalProperties": false,
+      "properties": {
+        "op": {
+          "const": "coalesce",
+          "title": "Op",
+          "type": "string"
+        },
+        "operands": {
+          "items": {
+            "discriminator": {
+              "mapping": {
+                "add": "#/$defs/NumericExpression",
+                "and": "#/$defs/BooleanExpression",
+                "array": "#/$defs/ArrayExpression",
+                "cast": "#/$defs/CastExpression",
+                "coalesce": "#/$defs/CoalesceExpression",
+                "concat": "#/$defs/ConcatExpression",
+                "divide": "#/$defs/NumericExpression",
+                "equals": "#/$defs/EqualsExpression",
+                "format_date": "#/$defs/FormatDateExpression",
+                "get": "#/$defs/GetExpression",
+                "if": "#/$defs/IfExpression",
+                "literal": "#/$defs/LiteralExpression",
+                "lookup": "#/$defs/LookupExpression",
+                "map": "#/$defs/MapExpression",
+                "multiply": "#/$defs/NumericExpression",
+                "not": "#/$defs/NotExpression",
+                "object": "#/$defs/ObjectExpression",
+                "or": "#/$defs/BooleanExpression",
+                "parse_date": "#/$defs/ParseDateExpression",
+                "round": "#/$defs/RoundExpression",
+                "subtract": "#/$defs/NumericExpression"
+              },
+              "propertyName": "op"
+            },
+            "oneOf": [
+              {
+                "$ref": "#/$defs/GetExpression"
+              },
+              {
+                "$ref": "#/$defs/LiteralExpression"
+              },
+              {
+                "$ref": "#/$defs/ObjectExpression"
+              },
+              {
+                "$ref": "#/$defs/ArrayExpression"
+              },
+              {
+                "$ref": "#/$defs/MapExpression"
+              },
+              {
+                "$ref": "#/$defs/CoalesceExpression"
+              },
+              {
+                "$ref": "#/$defs/ConcatExpression"
+              },
+              {
+                "$ref": "#/$defs/CastExpression"
+              },
+              {
+                "$ref": "#/$defs/IfExpression"
+              },
+              {
+                "$ref": "#/$defs/EqualsExpression"
+              },
+              {
+                "$ref": "#/$defs/NotExpression"
+              },
+              {
+                "$ref": "#/$defs/BooleanExpression"
+              },
+              {
+                "$ref": "#/$defs/LookupExpression"
+              },
+              {
+                "$ref": "#/$defs/NumericExpression"
+              },
+              {
+                "$ref": "#/$defs/RoundExpression"
+              },
+              {
+                "$ref": "#/$defs/ParseDateExpression"
+              },
+              {
+                "$ref": "#/$defs/FormatDateExpression"
+              }
+            ]
+          },
+          "minItems": 1,
+          "title": "Operands",
+          "type": "array"
+        }
+      },
+      "required": [
+        "op",
+        "operands"
+      ],
+      "title": "CoalesceExpression",
+      "type": "object"
+    },
+    "ConcatExpression": {
+      "additionalProperties": false,
+      "properties": {
+        "op": {
+          "const": "concat",
+          "title": "Op",
+          "type": "string"
+        },
+        "operands": {
+          "items": {
+            "discriminator": {
+              "mapping": {
+                "add": "#/$defs/NumericExpression",
+                "and": "#/$defs/BooleanExpression",
+                "array": "#/$defs/ArrayExpression",
+                "cast": "#/$defs/CastExpression",
+                "coalesce": "#/$defs/CoalesceExpression",
+                "concat": "#/$defs/ConcatExpression",
+                "divide": "#/$defs/NumericExpression",
+                "equals": "#/$defs/EqualsExpression",
+                "format_date": "#/$defs/FormatDateExpression",
+                "get": "#/$defs/GetExpression",
+                "if": "#/$defs/IfExpression",
+                "literal": "#/$defs/LiteralExpression",
+                "lookup": "#/$defs/LookupExpression",
+                "map": "#/$defs/MapExpression",
+                "multiply": "#/$defs/NumericExpression",
+                "not": "#/$defs/NotExpression",
+                "object": "#/$defs/ObjectExpression",
+                "or": "#/$defs/BooleanExpression",
+                "parse_date": "#/$defs/ParseDateExpression",
+                "round": "#/$defs/RoundExpression",
+                "subtract": "#/$defs/NumericExpression"
+              },
+              "propertyName": "op"
+            },
+            "oneOf": [
+              {
+                "$ref": "#/$defs/GetExpression"
+              },
+              {
+                "$ref": "#/$defs/LiteralExpression"
+              },
+              {
+                "$ref": "#/$defs/ObjectExpression"
+              },
+              {
+                "$ref": "#/$defs/ArrayExpression"
+              },
+              {
+                "$ref": "#/$defs/MapExpression"
+              },
+              {
+                "$ref": "#/$defs/CoalesceExpression"
+              },
+              {
+                "$ref": "#/$defs/ConcatExpression"
+              },
+              {
+                "$ref": "#/$defs/CastExpression"
+              },
+              {
+                "$ref": "#/$defs/IfExpression"
+              },
+              {
+                "$ref": "#/$defs/EqualsExpression"
+              },
+              {
+                "$ref": "#/$defs/NotExpression"
+              },
+              {
+                "$ref": "#/$defs/BooleanExpression"
+              },
+              {
+                "$ref": "#/$defs/LookupExpression"
+              },
+              {
+                "$ref": "#/$defs/NumericExpression"
+              },
+              {
+                "$ref": "#/$defs/RoundExpression"
+              },
+              {
+                "$ref": "#/$defs/ParseDateExpression"
+              },
+              {
+                "$ref": "#/$defs/FormatDateExpression"
+              }
+            ]
+          },
+          "title": "Operands",
+          "type": "array"
+        },
+        "separator": {
+          "default": "",
+          "title": "Separator",
+          "type": "string"
+        }
+      },
+      "required": [
+        "op",
+        "operands"
+      ],
+      "title": "ConcatExpression",
+      "type": "object"
+    },
+    "EqualsAssertion": {
+      "additionalProperties": false,
+      "properties": {
+        "left": {
+          "discriminator": {
+            "mapping": {
+              "add": "#/$defs/NumericExpression",
+              "and": "#/$defs/BooleanExpression",
+              "array": "#/$defs/ArrayExpression",
+              "cast": "#/$defs/CastExpression",
+              "coalesce": "#/$defs/CoalesceExpression",
+              "concat": "#/$defs/ConcatExpression",
+              "divide": "#/$defs/NumericExpression",
+              "equals": "#/$defs/EqualsExpression",
+              "format_date": "#/$defs/FormatDateExpression",
+              "get": "#/$defs/GetExpression",
+              "if": "#/$defs/IfExpression",
+              "literal": "#/$defs/LiteralExpression",
+              "lookup": "#/$defs/LookupExpression",
+              "map": "#/$defs/MapExpression",
+              "multiply": "#/$defs/NumericExpression",
+              "not": "#/$defs/NotExpression",
+              "object": "#/$defs/ObjectExpression",
+              "or": "#/$defs/BooleanExpression",
+              "parse_date": "#/$defs/ParseDateExpression",
+              "round": "#/$defs/RoundExpression",
+              "subtract": "#/$defs/NumericExpression"
+            },
+            "propertyName": "op"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/GetExpression"
+            },
+            {
+              "$ref": "#/$defs/LiteralExpression"
+            },
+            {
+              "$ref": "#/$defs/ObjectExpression"
+            },
+            {
+              "$ref": "#/$defs/ArrayExpression"
+            },
+            {
+              "$ref": "#/$defs/MapExpression"
+            },
+            {
+              "$ref": "#/$defs/CoalesceExpression"
+            },
+            {
+              "$ref": "#/$defs/ConcatExpression"
+            },
+            {
+              "$ref": "#/$defs/CastExpression"
+            },
+            {
+              "$ref": "#/$defs/IfExpression"
+            },
+            {
+              "$ref": "#/$defs/EqualsExpression"
+            },
+            {
+              "$ref": "#/$defs/NotExpression"
+            },
+            {
+              "$ref": "#/$defs/BooleanExpression"
+            },
+            {
+              "$ref": "#/$defs/LookupExpression"
+            },
+            {
+              "$ref": "#/$defs/NumericExpression"
+            },
+            {
+              "$ref": "#/$defs/RoundExpression"
+            },
+            {
+              "$ref": "#/$defs/ParseDateExpression"
+            },
+            {
+              "$ref": "#/$defs/FormatDateExpression"
+            }
+          ],
+          "title": "Left"
+        },
+        "op": {
+          "const": "equals",
+          "title": "Op",
+          "type": "string"
+        },
+        "right": {
+          "discriminator": {
+            "mapping": {
+              "add": "#/$defs/NumericExpression",
+              "and": "#/$defs/BooleanExpression",
+              "array": "#/$defs/ArrayExpression",
+              "cast": "#/$defs/CastExpression",
+              "coalesce": "#/$defs/CoalesceExpression",
+              "concat": "#/$defs/ConcatExpression",
+              "divide": "#/$defs/NumericExpression",
+              "equals": "#/$defs/EqualsExpression",
+              "format_date": "#/$defs/FormatDateExpression",
+              "get": "#/$defs/GetExpression",
+              "if": "#/$defs/IfExpression",
+              "literal": "#/$defs/LiteralExpression",
+              "lookup": "#/$defs/LookupExpression",
+              "map": "#/$defs/MapExpression",
+              "multiply": "#/$defs/NumericExpression",
+              "not": "#/$defs/NotExpression",
+              "object": "#/$defs/ObjectExpression",
+              "or": "#/$defs/BooleanExpression",
+              "parse_date": "#/$defs/ParseDateExpression",
+              "round": "#/$defs/RoundExpression",
+              "subtract": "#/$defs/NumericExpression"
+            },
+            "propertyName": "op"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/GetExpression"
+            },
+            {
+              "$ref": "#/$defs/LiteralExpression"
+            },
+            {
+              "$ref": "#/$defs/ObjectExpression"
+            },
+            {
+              "$ref": "#/$defs/ArrayExpression"
+            },
+            {
+              "$ref": "#/$defs/MapExpression"
+            },
+            {
+              "$ref": "#/$defs/CoalesceExpression"
+            },
+            {
+              "$ref": "#/$defs/ConcatExpression"
+            },
+            {
+              "$ref": "#/$defs/CastExpression"
+            },
+            {
+              "$ref": "#/$defs/IfExpression"
+            },
+            {
+              "$ref": "#/$defs/EqualsExpression"
+            },
+            {
+              "$ref": "#/$defs/NotExpression"
+            },
+            {
+              "$ref": "#/$defs/BooleanExpression"
+            },
+            {
+              "$ref": "#/$defs/LookupExpression"
+            },
+            {
+              "$ref": "#/$defs/NumericExpression"
+            },
+            {
+              "$ref": "#/$defs/RoundExpression"
+            },
+            {
+              "$ref": "#/$defs/ParseDateExpression"
+            },
+            {
+              "$ref": "#/$defs/FormatDateExpression"
+            }
+          ],
+          "title": "Right"
+        }
+      },
+      "required": [
+        "op",
+        "left",
+        "right"
+      ],
+      "title": "EqualsAssertion",
+      "type": "object"
+    },
+    "EqualsExpression": {
+      "additionalProperties": false,
+      "properties": {
+        "left": {
+          "discriminator": {
+            "mapping": {
+              "add": "#/$defs/NumericExpression",
+              "and": "#/$defs/BooleanExpression",
+              "array": "#/$defs/ArrayExpression",
+              "cast": "#/$defs/CastExpression",
+              "coalesce": "#/$defs/CoalesceExpression",
+              "concat": "#/$defs/ConcatExpression",
+              "divide": "#/$defs/NumericExpression",
+              "equals": "#/$defs/EqualsExpression",
+              "format_date": "#/$defs/FormatDateExpression",
+              "get": "#/$defs/GetExpression",
+              "if": "#/$defs/IfExpression",
+              "literal": "#/$defs/LiteralExpression",
+              "lookup": "#/$defs/LookupExpression",
+              "map": "#/$defs/MapExpression",
+              "multiply": "#/$defs/NumericExpression",
+              "not": "#/$defs/NotExpression",
+              "object": "#/$defs/ObjectExpression",
+              "or": "#/$defs/BooleanExpression",
+              "parse_date": "#/$defs/ParseDateExpression",
+              "round": "#/$defs/RoundExpression",
+              "subtract": "#/$defs/NumericExpression"
+            },
+            "propertyName": "op"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/GetExpression"
+            },
+            {
+              "$ref": "#/$defs/LiteralExpression"
+            },
+            {
+              "$ref": "#/$defs/ObjectExpression"
+            },
+            {
+              "$ref": "#/$defs/ArrayExpression"
+            },
+            {
+              "$ref": "#/$defs/MapExpression"
+            },
+            {
+              "$ref": "#/$defs/CoalesceExpression"
+            },
+            {
+              "$ref": "#/$defs/ConcatExpression"
+            },
+            {
+              "$ref": "#/$defs/CastExpression"
+            },
+            {
+              "$ref": "#/$defs/IfExpression"
+            },
+            {
+              "$ref": "#/$defs/EqualsExpression"
+            },
+            {
+              "$ref": "#/$defs/NotExpression"
+            },
+            {
+              "$ref": "#/$defs/BooleanExpression"
+            },
+            {
+              "$ref": "#/$defs/LookupExpression"
+            },
+            {
+              "$ref": "#/$defs/NumericExpression"
+            },
+            {
+              "$ref": "#/$defs/RoundExpression"
+            },
+            {
+              "$ref": "#/$defs/ParseDateExpression"
+            },
+            {
+              "$ref": "#/$defs/FormatDateExpression"
+            }
+          ],
+          "title": "Left"
+        },
+        "op": {
+          "const": "equals",
+          "title": "Op",
+          "type": "string"
+        },
+        "right": {
+          "discriminator": {
+            "mapping": {
+              "add": "#/$defs/NumericExpression",
+              "and": "#/$defs/BooleanExpression",
+              "array": "#/$defs/ArrayExpression",
+              "cast": "#/$defs/CastExpression",
+              "coalesce": "#/$defs/CoalesceExpression",
+              "concat": "#/$defs/ConcatExpression",
+              "divide": "#/$defs/NumericExpression",
+              "equals": "#/$defs/EqualsExpression",
+              "format_date": "#/$defs/FormatDateExpression",
+              "get": "#/$defs/GetExpression",
+              "if": "#/$defs/IfExpression",
+              "literal": "#/$defs/LiteralExpression",
+              "lookup": "#/$defs/LookupExpression",
+              "map": "#/$defs/MapExpression",
+              "multiply": "#/$defs/NumericExpression",
+              "not": "#/$defs/NotExpression",
+              "object": "#/$defs/ObjectExpression",
+              "or": "#/$defs/BooleanExpression",
+              "parse_date": "#/$defs/ParseDateExpression",
+              "round": "#/$defs/RoundExpression",
+              "subtract": "#/$defs/NumericExpression"
+            },
+            "propertyName": "op"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/GetExpression"
+            },
+            {
+              "$ref": "#/$defs/LiteralExpression"
+            },
+            {
+              "$ref": "#/$defs/ObjectExpression"
+            },
+            {
+              "$ref": "#/$defs/ArrayExpression"
+            },
+            {
+              "$ref": "#/$defs/MapExpression"
+            },
+            {
+              "$ref": "#/$defs/CoalesceExpression"
+            },
+            {
+              "$ref": "#/$defs/ConcatExpression"
+            },
+            {
+              "$ref": "#/$defs/CastExpression"
+            },
+            {
+              "$ref": "#/$defs/IfExpression"
+            },
+            {
+              "$ref": "#/$defs/EqualsExpression"
+            },
+            {
+              "$ref": "#/$defs/NotExpression"
+            },
+            {
+              "$ref": "#/$defs/BooleanExpression"
+            },
+            {
+              "$ref": "#/$defs/LookupExpression"
+            },
+            {
+              "$ref": "#/$defs/NumericExpression"
+            },
+            {
+              "$ref": "#/$defs/RoundExpression"
+            },
+            {
+              "$ref": "#/$defs/ParseDateExpression"
+            },
+            {
+              "$ref": "#/$defs/FormatDateExpression"
+            }
+          ],
+          "title": "Right"
+        }
+      },
+      "required": [
+        "op",
+        "left",
+        "right"
+      ],
+      "title": "EqualsExpression",
+      "type": "object"
+    },
+    "Evidence": {
+      "additionalProperties": false,
+      "properties": {
+        "detail": {
+          "title": "Detail",
+          "type": "string"
+        },
+        "kind": {
+          "$ref": "#/$defs/EvidenceKind"
+        },
+        "score": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Score"
+        }
+      },
+      "required": [
+        "kind",
+        "detail"
+      ],
+      "title": "Evidence",
+      "type": "object"
+    },
+    "EvidenceKind": {
+      "enum": [
+        "exact_name",
+        "name_similarity",
+        "description_similarity",
+        "type_compatibility",
+        "enum_compatibility",
+        "structural_context",
+        "sample_profile",
+        "business_instruction",
+        "model_rerank",
+        "verifier_result"
+      ],
+      "title": "EvidenceKind",
+      "type": "string"
+    },
+    "FormatDateExpression": {
+      "additionalProperties": false,
+      "properties": {
+        "op": {
+          "const": "format_date",
+          "title": "Op",
+          "type": "string"
+        },
+        "pattern": {
+          "title": "Pattern",
+          "type": "string"
+        },
+        "value": {
+          "discriminator": {
+            "mapping": {
+              "add": "#/$defs/NumericExpression",
+              "and": "#/$defs/BooleanExpression",
+              "array": "#/$defs/ArrayExpression",
+              "cast": "#/$defs/CastExpression",
+              "coalesce": "#/$defs/CoalesceExpression",
+              "concat": "#/$defs/ConcatExpression",
+              "divide": "#/$defs/NumericExpression",
+              "equals": "#/$defs/EqualsExpression",
+              "format_date": "#/$defs/FormatDateExpression",
+              "get": "#/$defs/GetExpression",
+              "if": "#/$defs/IfExpression",
+              "literal": "#/$defs/LiteralExpression",
+              "lookup": "#/$defs/LookupExpression",
+              "map": "#/$defs/MapExpression",
+              "multiply": "#/$defs/NumericExpression",
+              "not": "#/$defs/NotExpression",
+              "object": "#/$defs/ObjectExpression",
+              "or": "#/$defs/BooleanExpression",
+              "parse_date": "#/$defs/ParseDateExpression",
+              "round": "#/$defs/RoundExpression",
+              "subtract": "#/$defs/NumericExpression"
+            },
+            "propertyName": "op"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/GetExpression"
+            },
+            {
+              "$ref": "#/$defs/LiteralExpression"
+            },
+            {
+              "$ref": "#/$defs/ObjectExpression"
+            },
+            {
+              "$ref": "#/$defs/ArrayExpression"
+            },
+            {
+              "$ref": "#/$defs/MapExpression"
+            },
+            {
+              "$ref": "#/$defs/CoalesceExpression"
+            },
+            {
+              "$ref": "#/$defs/ConcatExpression"
+            },
+            {
+              "$ref": "#/$defs/CastExpression"
+            },
+            {
+              "$ref": "#/$defs/IfExpression"
+            },
+            {
+              "$ref": "#/$defs/EqualsExpression"
+            },
+            {
+              "$ref": "#/$defs/NotExpression"
+            },
+            {
+              "$ref": "#/$defs/BooleanExpression"
+            },
+            {
+              "$ref": "#/$defs/LookupExpression"
+            },
+            {
+              "$ref": "#/$defs/NumericExpression"
+            },
+            {
+              "$ref": "#/$defs/RoundExpression"
+            },
+            {
+              "$ref": "#/$defs/ParseDateExpression"
+            },
+            {
+              "$ref": "#/$defs/FormatDateExpression"
+            }
+          ],
+          "title": "Value"
+        }
+      },
+      "required": [
+        "op",
+        "value",
+        "pattern"
+      ],
+      "title": "FormatDateExpression",
+      "type": "object"
+    },
+    "GetExpression": {
+      "additionalProperties": false,
+      "properties": {
+        "document": {
+          "default": "input",
+          "enum": [
+            "input",
+            "output",
+            "current"
+          ],
+          "title": "Document",
+          "type": "string"
+        },
+        "op": {
+          "const": "get",
+          "title": "Op",
+          "type": "string"
+        },
+        "path": {
+          "title": "Path",
+          "type": "string"
+        }
+      },
+      "required": [
+        "op",
+        "path"
+      ],
+      "title": "GetExpression",
+      "type": "object"
+    },
+    "IfExpression": {
+      "additionalProperties": false,
+      "properties": {
+        "condition": {
+          "discriminator": {
+            "mapping": {
+              "add": "#/$defs/NumericExpression",
+              "and": "#/$defs/BooleanExpression",
+              "array": "#/$defs/ArrayExpression",
+              "cast": "#/$defs/CastExpression",
+              "coalesce": "#/$defs/CoalesceExpression",
+              "concat": "#/$defs/ConcatExpression",
+              "divide": "#/$defs/NumericExpression",
+              "equals": "#/$defs/EqualsExpression",
+              "format_date": "#/$defs/FormatDateExpression",
+              "get": "#/$defs/GetExpression",
+              "if": "#/$defs/IfExpression",
+              "literal": "#/$defs/LiteralExpression",
+              "lookup": "#/$defs/LookupExpression",
+              "map": "#/$defs/MapExpression",
+              "multiply": "#/$defs/NumericExpression",
+              "not": "#/$defs/NotExpression",
+              "object": "#/$defs/ObjectExpression",
+              "or": "#/$defs/BooleanExpression",
+              "parse_date": "#/$defs/ParseDateExpression",
+              "round": "#/$defs/RoundExpression",
+              "subtract": "#/$defs/NumericExpression"
+            },
+            "propertyName": "op"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/GetExpression"
+            },
+            {
+              "$ref": "#/$defs/LiteralExpression"
+            },
+            {
+              "$ref": "#/$defs/ObjectExpression"
+            },
+            {
+              "$ref": "#/$defs/ArrayExpression"
+            },
+            {
+              "$ref": "#/$defs/MapExpression"
+            },
+            {
+              "$ref": "#/$defs/CoalesceExpression"
+            },
+            {
+              "$ref": "#/$defs/ConcatExpression"
+            },
+            {
+              "$ref": "#/$defs/CastExpression"
+            },
+            {
+              "$ref": "#/$defs/IfExpression"
+            },
+            {
+              "$ref": "#/$defs/EqualsExpression"
+            },
+            {
+              "$ref": "#/$defs/NotExpression"
+            },
+            {
+              "$ref": "#/$defs/BooleanExpression"
+            },
+            {
+              "$ref": "#/$defs/LookupExpression"
+            },
+            {
+              "$ref": "#/$defs/NumericExpression"
+            },
+            {
+              "$ref": "#/$defs/RoundExpression"
+            },
+            {
+              "$ref": "#/$defs/ParseDateExpression"
+            },
+            {
+              "$ref": "#/$defs/FormatDateExpression"
+            }
+          ],
+          "title": "Condition"
+        },
+        "op": {
+          "const": "if",
+          "title": "Op",
+          "type": "string"
+        },
+        "otherwise": {
+          "discriminator": {
+            "mapping": {
+              "add": "#/$defs/NumericExpression",
+              "and": "#/$defs/BooleanExpression",
+              "array": "#/$defs/ArrayExpression",
+              "cast": "#/$defs/CastExpression",
+              "coalesce": "#/$defs/CoalesceExpression",
+              "concat": "#/$defs/ConcatExpression",
+              "divide": "#/$defs/NumericExpression",
+              "equals": "#/$defs/EqualsExpression",
+              "format_date": "#/$defs/FormatDateExpression",
+              "get": "#/$defs/GetExpression",
+              "if": "#/$defs/IfExpression",
+              "literal": "#/$defs/LiteralExpression",
+              "lookup": "#/$defs/LookupExpression",
+              "map": "#/$defs/MapExpression",
+              "multiply": "#/$defs/NumericExpression",
+              "not": "#/$defs/NotExpression",
+              "object": "#/$defs/ObjectExpression",
+              "or": "#/$defs/BooleanExpression",
+              "parse_date": "#/$defs/ParseDateExpression",
+              "round": "#/$defs/RoundExpression",
+              "subtract": "#/$defs/NumericExpression"
+            },
+            "propertyName": "op"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/GetExpression"
+            },
+            {
+              "$ref": "#/$defs/LiteralExpression"
+            },
+            {
+              "$ref": "#/$defs/ObjectExpression"
+            },
+            {
+              "$ref": "#/$defs/ArrayExpression"
+            },
+            {
+              "$ref": "#/$defs/MapExpression"
+            },
+            {
+              "$ref": "#/$defs/CoalesceExpression"
+            },
+            {
+              "$ref": "#/$defs/ConcatExpression"
+            },
+            {
+              "$ref": "#/$defs/CastExpression"
+            },
+            {
+              "$ref": "#/$defs/IfExpression"
+            },
+            {
+              "$ref": "#/$defs/EqualsExpression"
+            },
+            {
+              "$ref": "#/$defs/NotExpression"
+            },
+            {
+              "$ref": "#/$defs/BooleanExpression"
+            },
+            {
+              "$ref": "#/$defs/LookupExpression"
+            },
+            {
+              "$ref": "#/$defs/NumericExpression"
+            },
+            {
+              "$ref": "#/$defs/RoundExpression"
+            },
+            {
+              "$ref": "#/$defs/ParseDateExpression"
+            },
+            {
+              "$ref": "#/$defs/FormatDateExpression"
+            }
+          ],
+          "title": "Otherwise"
+        },
+        "then": {
+          "discriminator": {
+            "mapping": {
+              "add": "#/$defs/NumericExpression",
+              "and": "#/$defs/BooleanExpression",
+              "array": "#/$defs/ArrayExpression",
+              "cast": "#/$defs/CastExpression",
+              "coalesce": "#/$defs/CoalesceExpression",
+              "concat": "#/$defs/ConcatExpression",
+              "divide": "#/$defs/NumericExpression",
+              "equals": "#/$defs/EqualsExpression",
+              "format_date": "#/$defs/FormatDateExpression",
+              "get": "#/$defs/GetExpression",
+              "if": "#/$defs/IfExpression",
+              "literal": "#/$defs/LiteralExpression",
+              "lookup": "#/$defs/LookupExpression",
+              "map": "#/$defs/MapExpression",
+              "multiply": "#/$defs/NumericExpression",
+              "not": "#/$defs/NotExpression",
+              "object": "#/$defs/ObjectExpression",
+              "or": "#/$defs/BooleanExpression",
+              "parse_date": "#/$defs/ParseDateExpression",
+              "round": "#/$defs/RoundExpression",
+              "subtract": "#/$defs/NumericExpression"
+            },
+            "propertyName": "op"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/GetExpression"
+            },
+            {
+              "$ref": "#/$defs/LiteralExpression"
+            },
+            {
+              "$ref": "#/$defs/ObjectExpression"
+            },
+            {
+              "$ref": "#/$defs/ArrayExpression"
+            },
+            {
+              "$ref": "#/$defs/MapExpression"
+            },
+            {
+              "$ref": "#/$defs/CoalesceExpression"
+            },
+            {
+              "$ref": "#/$defs/ConcatExpression"
+            },
+            {
+              "$ref": "#/$defs/CastExpression"
+            },
+            {
+              "$ref": "#/$defs/IfExpression"
+            },
+            {
+              "$ref": "#/$defs/EqualsExpression"
+            },
+            {
+              "$ref": "#/$defs/NotExpression"
+            },
+            {
+              "$ref": "#/$defs/BooleanExpression"
+            },
+            {
+              "$ref": "#/$defs/LookupExpression"
+            },
+            {
+              "$ref": "#/$defs/NumericExpression"
+            },
+            {
+              "$ref": "#/$defs/RoundExpression"
+            },
+            {
+              "$ref": "#/$defs/ParseDateExpression"
+            },
+            {
+              "$ref": "#/$defs/FormatDateExpression"
+            }
+          ],
+          "title": "Then"
+        }
+      },
+      "required": [
+        "op",
+        "condition",
+        "then",
+        "otherwise"
+      ],
+      "title": "IfExpression",
+      "type": "object"
+    },
+    "InAssertion": {
+      "additionalProperties": false,
+      "properties": {
+        "allowed": {
+          "items": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "integer"
+              },
+              {
+                "type": "number"
+              },
+              {
+                "type": "boolean"
+              },
+              {
+                "items": {},
+                "type": "array"
+              },
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "title": "Allowed",
+          "type": "array"
+        },
+        "op": {
+          "const": "in",
+          "title": "Op",
+          "type": "string"
+        },
+        "value": {
+          "discriminator": {
+            "mapping": {
+              "add": "#/$defs/NumericExpression",
+              "and": "#/$defs/BooleanExpression",
+              "array": "#/$defs/ArrayExpression",
+              "cast": "#/$defs/CastExpression",
+              "coalesce": "#/$defs/CoalesceExpression",
+              "concat": "#/$defs/ConcatExpression",
+              "divide": "#/$defs/NumericExpression",
+              "equals": "#/$defs/EqualsExpression",
+              "format_date": "#/$defs/FormatDateExpression",
+              "get": "#/$defs/GetExpression",
+              "if": "#/$defs/IfExpression",
+              "literal": "#/$defs/LiteralExpression",
+              "lookup": "#/$defs/LookupExpression",
+              "map": "#/$defs/MapExpression",
+              "multiply": "#/$defs/NumericExpression",
+              "not": "#/$defs/NotExpression",
+              "object": "#/$defs/ObjectExpression",
+              "or": "#/$defs/BooleanExpression",
+              "parse_date": "#/$defs/ParseDateExpression",
+              "round": "#/$defs/RoundExpression",
+              "subtract": "#/$defs/NumericExpression"
+            },
+            "propertyName": "op"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/GetExpression"
+            },
+            {
+              "$ref": "#/$defs/LiteralExpression"
+            },
+            {
+              "$ref": "#/$defs/ObjectExpression"
+            },
+            {
+              "$ref": "#/$defs/ArrayExpression"
+            },
+            {
+              "$ref": "#/$defs/MapExpression"
+            },
+            {
+              "$ref": "#/$defs/CoalesceExpression"
+            },
+            {
+              "$ref": "#/$defs/ConcatExpression"
+            },
+            {
+              "$ref": "#/$defs/CastExpression"
+            },
+            {
+              "$ref": "#/$defs/IfExpression"
+            },
+            {
+              "$ref": "#/$defs/EqualsExpression"
+            },
+            {
+              "$ref": "#/$defs/NotExpression"
+            },
+            {
+              "$ref": "#/$defs/BooleanExpression"
+            },
+            {
+              "$ref": "#/$defs/LookupExpression"
+            },
+            {
+              "$ref": "#/$defs/NumericExpression"
+            },
+            {
+              "$ref": "#/$defs/RoundExpression"
+            },
+            {
+              "$ref": "#/$defs/ParseDateExpression"
+            },
+            {
+              "$ref": "#/$defs/FormatDateExpression"
+            }
+          ],
+          "title": "Value"
+        }
+      },
+      "required": [
+        "op",
+        "value",
+        "allowed"
+      ],
+      "title": "InAssertion",
+      "type": "object"
+    },
+    "Invariant": {
+      "additionalProperties": false,
+      "properties": {
+        "assertion": {
+          "discriminator": {
+            "mapping": {
+              "equals": "#/$defs/EqualsAssertion",
+              "greater_than": "#/$defs/NumericAssertion",
+              "greater_than_or_equal": "#/$defs/NumericAssertion",
+              "in": "#/$defs/InAssertion",
+              "length_equals": "#/$defs/LengthEqualsAssertion",
+              "less_than": "#/$defs/NumericAssertion",
+              "less_than_or_equal": "#/$defs/NumericAssertion",
+              "matches": "#/$defs/MatchesAssertion",
+              "not_null": "#/$defs/NotNullAssertion",
+              "unique": "#/$defs/UniqueAssertion"
+            },
+            "propertyName": "op"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/EqualsAssertion"
+            },
+            {
+              "$ref": "#/$defs/NotNullAssertion"
+            },
+            {
+              "$ref": "#/$defs/InAssertion"
+            },
+            {
+              "$ref": "#/$defs/MatchesAssertion"
+            },
+            {
+              "$ref": "#/$defs/NumericAssertion"
+            },
+            {
+              "$ref": "#/$defs/UniqueAssertion"
+            },
+            {
+              "$ref": "#/$defs/LengthEqualsAssertion"
+            }
+          ],
+          "title": "Assertion"
+        },
+        "id": {
+          "minLength": 1,
+          "title": "Id",
+          "type": "string"
+        },
+        "when": {
+          "anyOf": [
+            {
+              "discriminator": {
+                "mapping": {
+                  "add": "#/$defs/NumericExpression",
+                  "and": "#/$defs/BooleanExpression",
+                  "array": "#/$defs/ArrayExpression",
+                  "cast": "#/$defs/CastExpression",
+                  "coalesce": "#/$defs/CoalesceExpression",
+                  "concat": "#/$defs/ConcatExpression",
+                  "divide": "#/$defs/NumericExpression",
+                  "equals": "#/$defs/EqualsExpression",
+                  "format_date": "#/$defs/FormatDateExpression",
+                  "get": "#/$defs/GetExpression",
+                  "if": "#/$defs/IfExpression",
+                  "literal": "#/$defs/LiteralExpression",
+                  "lookup": "#/$defs/LookupExpression",
+                  "map": "#/$defs/MapExpression",
+                  "multiply": "#/$defs/NumericExpression",
+                  "not": "#/$defs/NotExpression",
+                  "object": "#/$defs/ObjectExpression",
+                  "or": "#/$defs/BooleanExpression",
+                  "parse_date": "#/$defs/ParseDateExpression",
+                  "round": "#/$defs/RoundExpression",
+                  "subtract": "#/$defs/NumericExpression"
+                },
+                "propertyName": "op"
+              },
+              "oneOf": [
+                {
+                  "$ref": "#/$defs/GetExpression"
+                },
+                {
+                  "$ref": "#/$defs/LiteralExpression"
+                },
+                {
+                  "$ref": "#/$defs/ObjectExpression"
+                },
+                {
+                  "$ref": "#/$defs/ArrayExpression"
+                },
+                {
+                  "$ref": "#/$defs/MapExpression"
+                },
+                {
+                  "$ref": "#/$defs/CoalesceExpression"
+                },
+                {
+                  "$ref": "#/$defs/ConcatExpression"
+                },
+                {
+                  "$ref": "#/$defs/CastExpression"
+                },
+                {
+                  "$ref": "#/$defs/IfExpression"
+                },
+                {
+                  "$ref": "#/$defs/EqualsExpression"
+                },
+                {
+                  "$ref": "#/$defs/NotExpression"
+                },
+                {
+                  "$ref": "#/$defs/BooleanExpression"
+                },
+                {
+                  "$ref": "#/$defs/LookupExpression"
+                },
+                {
+                  "$ref": "#/$defs/NumericExpression"
+                },
+                {
+                  "$ref": "#/$defs/RoundExpression"
+                },
+                {
+                  "$ref": "#/$defs/ParseDateExpression"
+                },
+                {
+                  "$ref": "#/$defs/FormatDateExpression"
+                }
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "When"
+        }
+      },
+      "required": [
+        "id",
+        "assertion"
+      ],
+      "title": "Invariant",
+      "type": "object"
+    },
+    "LengthEqualsAssertion": {
+      "additionalProperties": false,
+      "properties": {
+        "expected": {
+          "minimum": 0,
+          "title": "Expected",
+          "type": "integer"
+        },
+        "op": {
+          "const": "length_equals",
+          "title": "Op",
+          "type": "string"
+        },
+        "value": {
+          "discriminator": {
+            "mapping": {
+              "add": "#/$defs/NumericExpression",
+              "and": "#/$defs/BooleanExpression",
+              "array": "#/$defs/ArrayExpression",
+              "cast": "#/$defs/CastExpression",
+              "coalesce": "#/$defs/CoalesceExpression",
+              "concat": "#/$defs/ConcatExpression",
+              "divide": "#/$defs/NumericExpression",
+              "equals": "#/$defs/EqualsExpression",
+              "format_date": "#/$defs/FormatDateExpression",
+              "get": "#/$defs/GetExpression",
+              "if": "#/$defs/IfExpression",
+              "literal": "#/$defs/LiteralExpression",
+              "lookup": "#/$defs/LookupExpression",
+              "map": "#/$defs/MapExpression",
+              "multiply": "#/$defs/NumericExpression",
+              "not": "#/$defs/NotExpression",
+              "object": "#/$defs/ObjectExpression",
+              "or": "#/$defs/BooleanExpression",
+              "parse_date": "#/$defs/ParseDateExpression",
+              "round": "#/$defs/RoundExpression",
+              "subtract": "#/$defs/NumericExpression"
+            },
+            "propertyName": "op"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/GetExpression"
+            },
+            {
+              "$ref": "#/$defs/LiteralExpression"
+            },
+            {
+              "$ref": "#/$defs/ObjectExpression"
+            },
+            {
+              "$ref": "#/$defs/ArrayExpression"
+            },
+            {
+              "$ref": "#/$defs/MapExpression"
+            },
+            {
+              "$ref": "#/$defs/CoalesceExpression"
+            },
+            {
+              "$ref": "#/$defs/ConcatExpression"
+            },
+            {
+              "$ref": "#/$defs/CastExpression"
+            },
+            {
+              "$ref": "#/$defs/IfExpression"
+            },
+            {
+              "$ref": "#/$defs/EqualsExpression"
+            },
+            {
+              "$ref": "#/$defs/NotExpression"
+            },
+            {
+              "$ref": "#/$defs/BooleanExpression"
+            },
+            {
+              "$ref": "#/$defs/LookupExpression"
+            },
+            {
+              "$ref": "#/$defs/NumericExpression"
+            },
+            {
+              "$ref": "#/$defs/RoundExpression"
+            },
+            {
+              "$ref": "#/$defs/ParseDateExpression"
+            },
+            {
+              "$ref": "#/$defs/FormatDateExpression"
+            }
+          ],
+          "title": "Value"
+        }
+      },
+      "required": [
+        "op",
+        "value",
+        "expected"
+      ],
+      "title": "LengthEqualsAssertion",
+      "type": "object"
+    },
+    "LiteralExpression": {
+      "additionalProperties": false,
+      "properties": {
+        "op": {
+          "const": "literal",
+          "title": "Op",
+          "type": "string"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "integer"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "boolean"
+            },
+            {
+              "items": {},
+              "type": "array"
+            },
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Value"
+        }
+      },
+      "required": [
+        "op",
+        "value"
+      ],
+      "title": "LiteralExpression",
+      "type": "object"
+    },
+    "LookupExpression": {
+      "additionalProperties": false,
+      "properties": {
+        "default": {
+          "anyOf": [
+            {
+              "discriminator": {
+                "mapping": {
+                  "add": "#/$defs/NumericExpression",
+                  "and": "#/$defs/BooleanExpression",
+                  "array": "#/$defs/ArrayExpression",
+                  "cast": "#/$defs/CastExpression",
+                  "coalesce": "#/$defs/CoalesceExpression",
+                  "concat": "#/$defs/ConcatExpression",
+                  "divide": "#/$defs/NumericExpression",
+                  "equals": "#/$defs/EqualsExpression",
+                  "format_date": "#/$defs/FormatDateExpression",
+                  "get": "#/$defs/GetExpression",
+                  "if": "#/$defs/IfExpression",
+                  "literal": "#/$defs/LiteralExpression",
+                  "lookup": "#/$defs/LookupExpression",
+                  "map": "#/$defs/MapExpression",
+                  "multiply": "#/$defs/NumericExpression",
+                  "not": "#/$defs/NotExpression",
+                  "object": "#/$defs/ObjectExpression",
+                  "or": "#/$defs/BooleanExpression",
+                  "parse_date": "#/$defs/ParseDateExpression",
+                  "round": "#/$defs/RoundExpression",
+                  "subtract": "#/$defs/NumericExpression"
+                },
+                "propertyName": "op"
+              },
+              "oneOf": [
+                {
+                  "$ref": "#/$defs/GetExpression"
+                },
+                {
+                  "$ref": "#/$defs/LiteralExpression"
+                },
+                {
+                  "$ref": "#/$defs/ObjectExpression"
+                },
+                {
+                  "$ref": "#/$defs/ArrayExpression"
+                },
+                {
+                  "$ref": "#/$defs/MapExpression"
+                },
+                {
+                  "$ref": "#/$defs/CoalesceExpression"
+                },
+                {
+                  "$ref": "#/$defs/ConcatExpression"
+                },
+                {
+                  "$ref": "#/$defs/CastExpression"
+                },
+                {
+                  "$ref": "#/$defs/IfExpression"
+                },
+                {
+                  "$ref": "#/$defs/EqualsExpression"
+                },
+                {
+                  "$ref": "#/$defs/NotExpression"
+                },
+                {
+                  "$ref": "#/$defs/BooleanExpression"
+                },
+                {
+                  "$ref": "#/$defs/LookupExpression"
+                },
+                {
+                  "$ref": "#/$defs/NumericExpression"
+                },
+                {
+                  "$ref": "#/$defs/RoundExpression"
+                },
+                {
+                  "$ref": "#/$defs/ParseDateExpression"
+                },
+                {
+                  "$ref": "#/$defs/FormatDateExpression"
+                }
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Default"
+        },
+        "key": {
+          "discriminator": {
+            "mapping": {
+              "add": "#/$defs/NumericExpression",
+              "and": "#/$defs/BooleanExpression",
+              "array": "#/$defs/ArrayExpression",
+              "cast": "#/$defs/CastExpression",
+              "coalesce": "#/$defs/CoalesceExpression",
+              "concat": "#/$defs/ConcatExpression",
+              "divide": "#/$defs/NumericExpression",
+              "equals": "#/$defs/EqualsExpression",
+              "format_date": "#/$defs/FormatDateExpression",
+              "get": "#/$defs/GetExpression",
+              "if": "#/$defs/IfExpression",
+              "literal": "#/$defs/LiteralExpression",
+              "lookup": "#/$defs/LookupExpression",
+              "map": "#/$defs/MapExpression",
+              "multiply": "#/$defs/NumericExpression",
+              "not": "#/$defs/NotExpression",
+              "object": "#/$defs/ObjectExpression",
+              "or": "#/$defs/BooleanExpression",
+              "parse_date": "#/$defs/ParseDateExpression",
+              "round": "#/$defs/RoundExpression",
+              "subtract": "#/$defs/NumericExpression"
+            },
+            "propertyName": "op"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/GetExpression"
+            },
+            {
+              "$ref": "#/$defs/LiteralExpression"
+            },
+            {
+              "$ref": "#/$defs/ObjectExpression"
+            },
+            {
+              "$ref": "#/$defs/ArrayExpression"
+            },
+            {
+              "$ref": "#/$defs/MapExpression"
+            },
+            {
+              "$ref": "#/$defs/CoalesceExpression"
+            },
+            {
+              "$ref": "#/$defs/ConcatExpression"
+            },
+            {
+              "$ref": "#/$defs/CastExpression"
+            },
+            {
+              "$ref": "#/$defs/IfExpression"
+            },
+            {
+              "$ref": "#/$defs/EqualsExpression"
+            },
+            {
+              "$ref": "#/$defs/NotExpression"
+            },
+            {
+              "$ref": "#/$defs/BooleanExpression"
+            },
+            {
+              "$ref": "#/$defs/LookupExpression"
+            },
+            {
+              "$ref": "#/$defs/NumericExpression"
+            },
+            {
+              "$ref": "#/$defs/RoundExpression"
+            },
+            {
+              "$ref": "#/$defs/ParseDateExpression"
+            },
+            {
+              "$ref": "#/$defs/FormatDateExpression"
+            }
+          ],
+          "title": "Key"
+        },
+        "op": {
+          "const": "lookup",
+          "title": "Op",
+          "type": "string"
+        },
+        "values": {
+          "additionalProperties": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "integer"
+              },
+              {
+                "type": "number"
+              },
+              {
+                "type": "boolean"
+              },
+              {
+                "items": {},
+                "type": "array"
+              },
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "title": "Values",
+          "type": "object"
+        }
+      },
+      "required": [
+        "op",
+        "key",
+        "values"
+      ],
+      "title": "LookupExpression",
+      "type": "object"
+    },
+    "MapExpression": {
+      "additionalProperties": false,
+      "properties": {
+        "collection": {
+          "discriminator": {
+            "mapping": {
+              "add": "#/$defs/NumericExpression",
+              "and": "#/$defs/BooleanExpression",
+              "array": "#/$defs/ArrayExpression",
+              "cast": "#/$defs/CastExpression",
+              "coalesce": "#/$defs/CoalesceExpression",
+              "concat": "#/$defs/ConcatExpression",
+              "divide": "#/$defs/NumericExpression",
+              "equals": "#/$defs/EqualsExpression",
+              "format_date": "#/$defs/FormatDateExpression",
+              "get": "#/$defs/GetExpression",
+              "if": "#/$defs/IfExpression",
+              "literal": "#/$defs/LiteralExpression",
+              "lookup": "#/$defs/LookupExpression",
+              "map": "#/$defs/MapExpression",
+              "multiply": "#/$defs/NumericExpression",
+              "not": "#/$defs/NotExpression",
+              "object": "#/$defs/ObjectExpression",
+              "or": "#/$defs/BooleanExpression",
+              "parse_date": "#/$defs/ParseDateExpression",
+              "round": "#/$defs/RoundExpression",
+              "subtract": "#/$defs/NumericExpression"
+            },
+            "propertyName": "op"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/GetExpression"
+            },
+            {
+              "$ref": "#/$defs/LiteralExpression"
+            },
+            {
+              "$ref": "#/$defs/ObjectExpression"
+            },
+            {
+              "$ref": "#/$defs/ArrayExpression"
+            },
+            {
+              "$ref": "#/$defs/MapExpression"
+            },
+            {
+              "$ref": "#/$defs/CoalesceExpression"
+            },
+            {
+              "$ref": "#/$defs/ConcatExpression"
+            },
+            {
+              "$ref": "#/$defs/CastExpression"
+            },
+            {
+              "$ref": "#/$defs/IfExpression"
+            },
+            {
+              "$ref": "#/$defs/EqualsExpression"
+            },
+            {
+              "$ref": "#/$defs/NotExpression"
+            },
+            {
+              "$ref": "#/$defs/BooleanExpression"
+            },
+            {
+              "$ref": "#/$defs/LookupExpression"
+            },
+            {
+              "$ref": "#/$defs/NumericExpression"
+            },
+            {
+              "$ref": "#/$defs/RoundExpression"
+            },
+            {
+              "$ref": "#/$defs/ParseDateExpression"
+            },
+            {
+              "$ref": "#/$defs/FormatDateExpression"
+            }
+          ],
+          "title": "Collection"
+        },
+        "expression": {
+          "discriminator": {
+            "mapping": {
+              "add": "#/$defs/NumericExpression",
+              "and": "#/$defs/BooleanExpression",
+              "array": "#/$defs/ArrayExpression",
+              "cast": "#/$defs/CastExpression",
+              "coalesce": "#/$defs/CoalesceExpression",
+              "concat": "#/$defs/ConcatExpression",
+              "divide": "#/$defs/NumericExpression",
+              "equals": "#/$defs/EqualsExpression",
+              "format_date": "#/$defs/FormatDateExpression",
+              "get": "#/$defs/GetExpression",
+              "if": "#/$defs/IfExpression",
+              "literal": "#/$defs/LiteralExpression",
+              "lookup": "#/$defs/LookupExpression",
+              "map": "#/$defs/MapExpression",
+              "multiply": "#/$defs/NumericExpression",
+              "not": "#/$defs/NotExpression",
+              "object": "#/$defs/ObjectExpression",
+              "or": "#/$defs/BooleanExpression",
+              "parse_date": "#/$defs/ParseDateExpression",
+              "round": "#/$defs/RoundExpression",
+              "subtract": "#/$defs/NumericExpression"
+            },
+            "propertyName": "op"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/GetExpression"
+            },
+            {
+              "$ref": "#/$defs/LiteralExpression"
+            },
+            {
+              "$ref": "#/$defs/ObjectExpression"
+            },
+            {
+              "$ref": "#/$defs/ArrayExpression"
+            },
+            {
+              "$ref": "#/$defs/MapExpression"
+            },
+            {
+              "$ref": "#/$defs/CoalesceExpression"
+            },
+            {
+              "$ref": "#/$defs/ConcatExpression"
+            },
+            {
+              "$ref": "#/$defs/CastExpression"
+            },
+            {
+              "$ref": "#/$defs/IfExpression"
+            },
+            {
+              "$ref": "#/$defs/EqualsExpression"
+            },
+            {
+              "$ref": "#/$defs/NotExpression"
+            },
+            {
+              "$ref": "#/$defs/BooleanExpression"
+            },
+            {
+              "$ref": "#/$defs/LookupExpression"
+            },
+            {
+              "$ref": "#/$defs/NumericExpression"
+            },
+            {
+              "$ref": "#/$defs/RoundExpression"
+            },
+            {
+              "$ref": "#/$defs/ParseDateExpression"
+            },
+            {
+              "$ref": "#/$defs/FormatDateExpression"
+            }
+          ],
+          "title": "Expression"
+        },
+        "op": {
+          "const": "map",
+          "title": "Op",
+          "type": "string"
+        }
+      },
+      "required": [
+        "op",
+        "collection",
+        "expression"
+      ],
+      "title": "MapExpression",
+      "type": "object"
+    },
+    "MappingRule": {
+      "additionalProperties": false,
+      "properties": {
+        "confidence": {
+          "default": 0.0,
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Confidence",
+          "type": "number"
+        },
+        "confidence_method": {
+          "default": "unknown",
+          "title": "Confidence Method",
+          "type": "string"
+        },
+        "evidence": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/Evidence"
+          },
+          "title": "Evidence",
+          "type": "array"
+        },
+        "expression": {
+          "discriminator": {
+            "mapping": {
+              "add": "#/$defs/NumericExpression",
+              "and": "#/$defs/BooleanExpression",
+              "array": "#/$defs/ArrayExpression",
+              "cast": "#/$defs/CastExpression",
+              "coalesce": "#/$defs/CoalesceExpression",
+              "concat": "#/$defs/ConcatExpression",
+              "divide": "#/$defs/NumericExpression",
+              "equals": "#/$defs/EqualsExpression",
+              "format_date": "#/$defs/FormatDateExpression",
+              "get": "#/$defs/GetExpression",
+              "if": "#/$defs/IfExpression",
+              "literal": "#/$defs/LiteralExpression",
+              "lookup": "#/$defs/LookupExpression",
+              "map": "#/$defs/MapExpression",
+              "multiply": "#/$defs/NumericExpression",
+              "not": "#/$defs/NotExpression",
+              "object": "#/$defs/ObjectExpression",
+              "or": "#/$defs/BooleanExpression",
+              "parse_date": "#/$defs/ParseDateExpression",
+              "round": "#/$defs/RoundExpression",
+              "subtract": "#/$defs/NumericExpression"
+            },
+            "propertyName": "op"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/GetExpression"
+            },
+            {
+              "$ref": "#/$defs/LiteralExpression"
+            },
+            {
+              "$ref": "#/$defs/ObjectExpression"
+            },
+            {
+              "$ref": "#/$defs/ArrayExpression"
+            },
+            {
+              "$ref": "#/$defs/MapExpression"
+            },
+            {
+              "$ref": "#/$defs/CoalesceExpression"
+            },
+            {
+              "$ref": "#/$defs/ConcatExpression"
+            },
+            {
+              "$ref": "#/$defs/CastExpression"
+            },
+            {
+              "$ref": "#/$defs/IfExpression"
+            },
+            {
+              "$ref": "#/$defs/EqualsExpression"
+            },
+            {
+              "$ref": "#/$defs/NotExpression"
+            },
+            {
+              "$ref": "#/$defs/BooleanExpression"
+            },
+            {
+              "$ref": "#/$defs/LookupExpression"
+            },
+            {
+              "$ref": "#/$defs/NumericExpression"
+            },
+            {
+              "$ref": "#/$defs/RoundExpression"
+            },
+            {
+              "$ref": "#/$defs/ParseDateExpression"
+            },
+            {
+              "$ref": "#/$defs/FormatDateExpression"
+            }
+          ],
+          "title": "Expression"
+        },
+        "target": {
+          "title": "Target",
+          "type": "string"
+        }
+      },
+      "required": [
+        "target",
+        "expression"
+      ],
+      "title": "MappingRule",
+      "type": "object"
+    },
+    "MatchesAssertion": {
+      "additionalProperties": false,
+      "properties": {
+        "op": {
+          "const": "matches",
+          "title": "Op",
+          "type": "string"
+        },
+        "pattern": {
+          "title": "Pattern",
+          "type": "string"
+        },
+        "value": {
+          "discriminator": {
+            "mapping": {
+              "add": "#/$defs/NumericExpression",
+              "and": "#/$defs/BooleanExpression",
+              "array": "#/$defs/ArrayExpression",
+              "cast": "#/$defs/CastExpression",
+              "coalesce": "#/$defs/CoalesceExpression",
+              "concat": "#/$defs/ConcatExpression",
+              "divide": "#/$defs/NumericExpression",
+              "equals": "#/$defs/EqualsExpression",
+              "format_date": "#/$defs/FormatDateExpression",
+              "get": "#/$defs/GetExpression",
+              "if": "#/$defs/IfExpression",
+              "literal": "#/$defs/LiteralExpression",
+              "lookup": "#/$defs/LookupExpression",
+              "map": "#/$defs/MapExpression",
+              "multiply": "#/$defs/NumericExpression",
+              "not": "#/$defs/NotExpression",
+              "object": "#/$defs/ObjectExpression",
+              "or": "#/$defs/BooleanExpression",
+              "parse_date": "#/$defs/ParseDateExpression",
+              "round": "#/$defs/RoundExpression",
+              "subtract": "#/$defs/NumericExpression"
+            },
+            "propertyName": "op"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/GetExpression"
+            },
+            {
+              "$ref": "#/$defs/LiteralExpression"
+            },
+            {
+              "$ref": "#/$defs/ObjectExpression"
+            },
+            {
+              "$ref": "#/$defs/ArrayExpression"
+            },
+            {
+              "$ref": "#/$defs/MapExpression"
+            },
+            {
+              "$ref": "#/$defs/CoalesceExpression"
+            },
+            {
+              "$ref": "#/$defs/ConcatExpression"
+            },
+            {
+              "$ref": "#/$defs/CastExpression"
+            },
+            {
+              "$ref": "#/$defs/IfExpression"
+            },
+            {
+              "$ref": "#/$defs/EqualsExpression"
+            },
+            {
+              "$ref": "#/$defs/NotExpression"
+            },
+            {
+              "$ref": "#/$defs/BooleanExpression"
+            },
+            {
+              "$ref": "#/$defs/LookupExpression"
+            },
+            {
+              "$ref": "#/$defs/NumericExpression"
+            },
+            {
+              "$ref": "#/$defs/RoundExpression"
+            },
+            {
+              "$ref": "#/$defs/ParseDateExpression"
+            },
+            {
+              "$ref": "#/$defs/FormatDateExpression"
+            }
+          ],
+          "title": "Value"
+        }
+      },
+      "required": [
+        "op",
+        "value",
+        "pattern"
+      ],
+      "title": "MatchesAssertion",
+      "type": "object"
+    },
+    "NotExpression": {
+      "additionalProperties": false,
+      "properties": {
+        "op": {
+          "const": "not",
+          "title": "Op",
+          "type": "string"
+        },
+        "value": {
+          "discriminator": {
+            "mapping": {
+              "add": "#/$defs/NumericExpression",
+              "and": "#/$defs/BooleanExpression",
+              "array": "#/$defs/ArrayExpression",
+              "cast": "#/$defs/CastExpression",
+              "coalesce": "#/$defs/CoalesceExpression",
+              "concat": "#/$defs/ConcatExpression",
+              "divide": "#/$defs/NumericExpression",
+              "equals": "#/$defs/EqualsExpression",
+              "format_date": "#/$defs/FormatDateExpression",
+              "get": "#/$defs/GetExpression",
+              "if": "#/$defs/IfExpression",
+              "literal": "#/$defs/LiteralExpression",
+              "lookup": "#/$defs/LookupExpression",
+              "map": "#/$defs/MapExpression",
+              "multiply": "#/$defs/NumericExpression",
+              "not": "#/$defs/NotExpression",
+              "object": "#/$defs/ObjectExpression",
+              "or": "#/$defs/BooleanExpression",
+              "parse_date": "#/$defs/ParseDateExpression",
+              "round": "#/$defs/RoundExpression",
+              "subtract": "#/$defs/NumericExpression"
+            },
+            "propertyName": "op"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/GetExpression"
+            },
+            {
+              "$ref": "#/$defs/LiteralExpression"
+            },
+            {
+              "$ref": "#/$defs/ObjectExpression"
+            },
+            {
+              "$ref": "#/$defs/ArrayExpression"
+            },
+            {
+              "$ref": "#/$defs/MapExpression"
+            },
+            {
+              "$ref": "#/$defs/CoalesceExpression"
+            },
+            {
+              "$ref": "#/$defs/ConcatExpression"
+            },
+            {
+              "$ref": "#/$defs/CastExpression"
+            },
+            {
+              "$ref": "#/$defs/IfExpression"
+            },
+            {
+              "$ref": "#/$defs/EqualsExpression"
+            },
+            {
+              "$ref": "#/$defs/NotExpression"
+            },
+            {
+              "$ref": "#/$defs/BooleanExpression"
+            },
+            {
+              "$ref": "#/$defs/LookupExpression"
+            },
+            {
+              "$ref": "#/$defs/NumericExpression"
+            },
+            {
+              "$ref": "#/$defs/RoundExpression"
+            },
+            {
+              "$ref": "#/$defs/ParseDateExpression"
+            },
+            {
+              "$ref": "#/$defs/FormatDateExpression"
+            }
+          ],
+          "title": "Value"
+        }
+      },
+      "required": [
+        "op",
+        "value"
+      ],
+      "title": "NotExpression",
+      "type": "object"
+    },
+    "NotNullAssertion": {
+      "additionalProperties": false,
+      "properties": {
+        "op": {
+          "const": "not_null",
+          "title": "Op",
+          "type": "string"
+        },
+        "value": {
+          "discriminator": {
+            "mapping": {
+              "add": "#/$defs/NumericExpression",
+              "and": "#/$defs/BooleanExpression",
+              "array": "#/$defs/ArrayExpression",
+              "cast": "#/$defs/CastExpression",
+              "coalesce": "#/$defs/CoalesceExpression",
+              "concat": "#/$defs/ConcatExpression",
+              "divide": "#/$defs/NumericExpression",
+              "equals": "#/$defs/EqualsExpression",
+              "format_date": "#/$defs/FormatDateExpression",
+              "get": "#/$defs/GetExpression",
+              "if": "#/$defs/IfExpression",
+              "literal": "#/$defs/LiteralExpression",
+              "lookup": "#/$defs/LookupExpression",
+              "map": "#/$defs/MapExpression",
+              "multiply": "#/$defs/NumericExpression",
+              "not": "#/$defs/NotExpression",
+              "object": "#/$defs/ObjectExpression",
+              "or": "#/$defs/BooleanExpression",
+              "parse_date": "#/$defs/ParseDateExpression",
+              "round": "#/$defs/RoundExpression",
+              "subtract": "#/$defs/NumericExpression"
+            },
+            "propertyName": "op"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/GetExpression"
+            },
+            {
+              "$ref": "#/$defs/LiteralExpression"
+            },
+            {
+              "$ref": "#/$defs/ObjectExpression"
+            },
+            {
+              "$ref": "#/$defs/ArrayExpression"
+            },
+            {
+              "$ref": "#/$defs/MapExpression"
+            },
+            {
+              "$ref": "#/$defs/CoalesceExpression"
+            },
+            {
+              "$ref": "#/$defs/ConcatExpression"
+            },
+            {
+              "$ref": "#/$defs/CastExpression"
+            },
+            {
+              "$ref": "#/$defs/IfExpression"
+            },
+            {
+              "$ref": "#/$defs/EqualsExpression"
+            },
+            {
+              "$ref": "#/$defs/NotExpression"
+            },
+            {
+              "$ref": "#/$defs/BooleanExpression"
+            },
+            {
+              "$ref": "#/$defs/LookupExpression"
+            },
+            {
+              "$ref": "#/$defs/NumericExpression"
+            },
+            {
+              "$ref": "#/$defs/RoundExpression"
+            },
+            {
+              "$ref": "#/$defs/ParseDateExpression"
+            },
+            {
+              "$ref": "#/$defs/FormatDateExpression"
+            }
+          ],
+          "title": "Value"
+        }
+      },
+      "required": [
+        "op",
+        "value"
+      ],
+      "title": "NotNullAssertion",
+      "type": "object"
+    },
+    "NumericAssertion": {
+      "additionalProperties": false,
+      "properties": {
+        "left": {
+          "discriminator": {
+            "mapping": {
+              "add": "#/$defs/NumericExpression",
+              "and": "#/$defs/BooleanExpression",
+              "array": "#/$defs/ArrayExpression",
+              "cast": "#/$defs/CastExpression",
+              "coalesce": "#/$defs/CoalesceExpression",
+              "concat": "#/$defs/ConcatExpression",
+              "divide": "#/$defs/NumericExpression",
+              "equals": "#/$defs/EqualsExpression",
+              "format_date": "#/$defs/FormatDateExpression",
+              "get": "#/$defs/GetExpression",
+              "if": "#/$defs/IfExpression",
+              "literal": "#/$defs/LiteralExpression",
+              "lookup": "#/$defs/LookupExpression",
+              "map": "#/$defs/MapExpression",
+              "multiply": "#/$defs/NumericExpression",
+              "not": "#/$defs/NotExpression",
+              "object": "#/$defs/ObjectExpression",
+              "or": "#/$defs/BooleanExpression",
+              "parse_date": "#/$defs/ParseDateExpression",
+              "round": "#/$defs/RoundExpression",
+              "subtract": "#/$defs/NumericExpression"
+            },
+            "propertyName": "op"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/GetExpression"
+            },
+            {
+              "$ref": "#/$defs/LiteralExpression"
+            },
+            {
+              "$ref": "#/$defs/ObjectExpression"
+            },
+            {
+              "$ref": "#/$defs/ArrayExpression"
+            },
+            {
+              "$ref": "#/$defs/MapExpression"
+            },
+            {
+              "$ref": "#/$defs/CoalesceExpression"
+            },
+            {
+              "$ref": "#/$defs/ConcatExpression"
+            },
+            {
+              "$ref": "#/$defs/CastExpression"
+            },
+            {
+              "$ref": "#/$defs/IfExpression"
+            },
+            {
+              "$ref": "#/$defs/EqualsExpression"
+            },
+            {
+              "$ref": "#/$defs/NotExpression"
+            },
+            {
+              "$ref": "#/$defs/BooleanExpression"
+            },
+            {
+              "$ref": "#/$defs/LookupExpression"
+            },
+            {
+              "$ref": "#/$defs/NumericExpression"
+            },
+            {
+              "$ref": "#/$defs/RoundExpression"
+            },
+            {
+              "$ref": "#/$defs/ParseDateExpression"
+            },
+            {
+              "$ref": "#/$defs/FormatDateExpression"
+            }
+          ],
+          "title": "Left"
+        },
+        "op": {
+          "enum": [
+            "greater_than",
+            "greater_than_or_equal",
+            "less_than",
+            "less_than_or_equal"
+          ],
+          "title": "Op",
+          "type": "string"
+        },
+        "right": {
+          "discriminator": {
+            "mapping": {
+              "add": "#/$defs/NumericExpression",
+              "and": "#/$defs/BooleanExpression",
+              "array": "#/$defs/ArrayExpression",
+              "cast": "#/$defs/CastExpression",
+              "coalesce": "#/$defs/CoalesceExpression",
+              "concat": "#/$defs/ConcatExpression",
+              "divide": "#/$defs/NumericExpression",
+              "equals": "#/$defs/EqualsExpression",
+              "format_date": "#/$defs/FormatDateExpression",
+              "get": "#/$defs/GetExpression",
+              "if": "#/$defs/IfExpression",
+              "literal": "#/$defs/LiteralExpression",
+              "lookup": "#/$defs/LookupExpression",
+              "map": "#/$defs/MapExpression",
+              "multiply": "#/$defs/NumericExpression",
+              "not": "#/$defs/NotExpression",
+              "object": "#/$defs/ObjectExpression",
+              "or": "#/$defs/BooleanExpression",
+              "parse_date": "#/$defs/ParseDateExpression",
+              "round": "#/$defs/RoundExpression",
+              "subtract": "#/$defs/NumericExpression"
+            },
+            "propertyName": "op"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/GetExpression"
+            },
+            {
+              "$ref": "#/$defs/LiteralExpression"
+            },
+            {
+              "$ref": "#/$defs/ObjectExpression"
+            },
+            {
+              "$ref": "#/$defs/ArrayExpression"
+            },
+            {
+              "$ref": "#/$defs/MapExpression"
+            },
+            {
+              "$ref": "#/$defs/CoalesceExpression"
+            },
+            {
+              "$ref": "#/$defs/ConcatExpression"
+            },
+            {
+              "$ref": "#/$defs/CastExpression"
+            },
+            {
+              "$ref": "#/$defs/IfExpression"
+            },
+            {
+              "$ref": "#/$defs/EqualsExpression"
+            },
+            {
+              "$ref": "#/$defs/NotExpression"
+            },
+            {
+              "$ref": "#/$defs/BooleanExpression"
+            },
+            {
+              "$ref": "#/$defs/LookupExpression"
+            },
+            {
+              "$ref": "#/$defs/NumericExpression"
+            },
+            {
+              "$ref": "#/$defs/RoundExpression"
+            },
+            {
+              "$ref": "#/$defs/ParseDateExpression"
+            },
+            {
+              "$ref": "#/$defs/FormatDateExpression"
+            }
+          ],
+          "title": "Right"
+        }
+      },
+      "required": [
+        "op",
+        "left",
+        "right"
+      ],
+      "title": "NumericAssertion",
+      "type": "object"
+    },
+    "NumericExpression": {
+      "additionalProperties": false,
+      "properties": {
+        "left": {
+          "discriminator": {
+            "mapping": {
+              "add": "#/$defs/NumericExpression",
+              "and": "#/$defs/BooleanExpression",
+              "array": "#/$defs/ArrayExpression",
+              "cast": "#/$defs/CastExpression",
+              "coalesce": "#/$defs/CoalesceExpression",
+              "concat": "#/$defs/ConcatExpression",
+              "divide": "#/$defs/NumericExpression",
+              "equals": "#/$defs/EqualsExpression",
+              "format_date": "#/$defs/FormatDateExpression",
+              "get": "#/$defs/GetExpression",
+              "if": "#/$defs/IfExpression",
+              "literal": "#/$defs/LiteralExpression",
+              "lookup": "#/$defs/LookupExpression",
+              "map": "#/$defs/MapExpression",
+              "multiply": "#/$defs/NumericExpression",
+              "not": "#/$defs/NotExpression",
+              "object": "#/$defs/ObjectExpression",
+              "or": "#/$defs/BooleanExpression",
+              "parse_date": "#/$defs/ParseDateExpression",
+              "round": "#/$defs/RoundExpression",
+              "subtract": "#/$defs/NumericExpression"
+            },
+            "propertyName": "op"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/GetExpression"
+            },
+            {
+              "$ref": "#/$defs/LiteralExpression"
+            },
+            {
+              "$ref": "#/$defs/ObjectExpression"
+            },
+            {
+              "$ref": "#/$defs/ArrayExpression"
+            },
+            {
+              "$ref": "#/$defs/MapExpression"
+            },
+            {
+              "$ref": "#/$defs/CoalesceExpression"
+            },
+            {
+              "$ref": "#/$defs/ConcatExpression"
+            },
+            {
+              "$ref": "#/$defs/CastExpression"
+            },
+            {
+              "$ref": "#/$defs/IfExpression"
+            },
+            {
+              "$ref": "#/$defs/EqualsExpression"
+            },
+            {
+              "$ref": "#/$defs/NotExpression"
+            },
+            {
+              "$ref": "#/$defs/BooleanExpression"
+            },
+            {
+              "$ref": "#/$defs/LookupExpression"
+            },
+            {
+              "$ref": "#/$defs/NumericExpression"
+            },
+            {
+              "$ref": "#/$defs/RoundExpression"
+            },
+            {
+              "$ref": "#/$defs/ParseDateExpression"
+            },
+            {
+              "$ref": "#/$defs/FormatDateExpression"
+            }
+          ],
+          "title": "Left"
+        },
+        "op": {
+          "enum": [
+            "add",
+            "subtract",
+            "multiply",
+            "divide"
+          ],
+          "title": "Op",
+          "type": "string"
+        },
+        "right": {
+          "discriminator": {
+            "mapping": {
+              "add": "#/$defs/NumericExpression",
+              "and": "#/$defs/BooleanExpression",
+              "array": "#/$defs/ArrayExpression",
+              "cast": "#/$defs/CastExpression",
+              "coalesce": "#/$defs/CoalesceExpression",
+              "concat": "#/$defs/ConcatExpression",
+              "divide": "#/$defs/NumericExpression",
+              "equals": "#/$defs/EqualsExpression",
+              "format_date": "#/$defs/FormatDateExpression",
+              "get": "#/$defs/GetExpression",
+              "if": "#/$defs/IfExpression",
+              "literal": "#/$defs/LiteralExpression",
+              "lookup": "#/$defs/LookupExpression",
+              "map": "#/$defs/MapExpression",
+              "multiply": "#/$defs/NumericExpression",
+              "not": "#/$defs/NotExpression",
+              "object": "#/$defs/ObjectExpression",
+              "or": "#/$defs/BooleanExpression",
+              "parse_date": "#/$defs/ParseDateExpression",
+              "round": "#/$defs/RoundExpression",
+              "subtract": "#/$defs/NumericExpression"
+            },
+            "propertyName": "op"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/GetExpression"
+            },
+            {
+              "$ref": "#/$defs/LiteralExpression"
+            },
+            {
+              "$ref": "#/$defs/ObjectExpression"
+            },
+            {
+              "$ref": "#/$defs/ArrayExpression"
+            },
+            {
+              "$ref": "#/$defs/MapExpression"
+            },
+            {
+              "$ref": "#/$defs/CoalesceExpression"
+            },
+            {
+              "$ref": "#/$defs/ConcatExpression"
+            },
+            {
+              "$ref": "#/$defs/CastExpression"
+            },
+            {
+              "$ref": "#/$defs/IfExpression"
+            },
+            {
+              "$ref": "#/$defs/EqualsExpression"
+            },
+            {
+              "$ref": "#/$defs/NotExpression"
+            },
+            {
+              "$ref": "#/$defs/BooleanExpression"
+            },
+            {
+              "$ref": "#/$defs/LookupExpression"
+            },
+            {
+              "$ref": "#/$defs/NumericExpression"
+            },
+            {
+              "$ref": "#/$defs/RoundExpression"
+            },
+            {
+              "$ref": "#/$defs/ParseDateExpression"
+            },
+            {
+              "$ref": "#/$defs/FormatDateExpression"
+            }
+          ],
+          "title": "Right"
+        }
+      },
+      "required": [
+        "op",
+        "left",
+        "right"
+      ],
+      "title": "NumericExpression",
+      "type": "object"
+    },
+    "ObjectExpression": {
+      "additionalProperties": false,
+      "properties": {
+        "fields": {
+          "additionalProperties": {
+            "discriminator": {
+              "mapping": {
+                "add": "#/$defs/NumericExpression",
+                "and": "#/$defs/BooleanExpression",
+                "array": "#/$defs/ArrayExpression",
+                "cast": "#/$defs/CastExpression",
+                "coalesce": "#/$defs/CoalesceExpression",
+                "concat": "#/$defs/ConcatExpression",
+                "divide": "#/$defs/NumericExpression",
+                "equals": "#/$defs/EqualsExpression",
+                "format_date": "#/$defs/FormatDateExpression",
+                "get": "#/$defs/GetExpression",
+                "if": "#/$defs/IfExpression",
+                "literal": "#/$defs/LiteralExpression",
+                "lookup": "#/$defs/LookupExpression",
+                "map": "#/$defs/MapExpression",
+                "multiply": "#/$defs/NumericExpression",
+                "not": "#/$defs/NotExpression",
+                "object": "#/$defs/ObjectExpression",
+                "or": "#/$defs/BooleanExpression",
+                "parse_date": "#/$defs/ParseDateExpression",
+                "round": "#/$defs/RoundExpression",
+                "subtract": "#/$defs/NumericExpression"
+              },
+              "propertyName": "op"
+            },
+            "oneOf": [
+              {
+                "$ref": "#/$defs/GetExpression"
+              },
+              {
+                "$ref": "#/$defs/LiteralExpression"
+              },
+              {
+                "$ref": "#/$defs/ObjectExpression"
+              },
+              {
+                "$ref": "#/$defs/ArrayExpression"
+              },
+              {
+                "$ref": "#/$defs/MapExpression"
+              },
+              {
+                "$ref": "#/$defs/CoalesceExpression"
+              },
+              {
+                "$ref": "#/$defs/ConcatExpression"
+              },
+              {
+                "$ref": "#/$defs/CastExpression"
+              },
+              {
+                "$ref": "#/$defs/IfExpression"
+              },
+              {
+                "$ref": "#/$defs/EqualsExpression"
+              },
+              {
+                "$ref": "#/$defs/NotExpression"
+              },
+              {
+                "$ref": "#/$defs/BooleanExpression"
+              },
+              {
+                "$ref": "#/$defs/LookupExpression"
+              },
+              {
+                "$ref": "#/$defs/NumericExpression"
+              },
+              {
+                "$ref": "#/$defs/RoundExpression"
+              },
+              {
+                "$ref": "#/$defs/ParseDateExpression"
+              },
+              {
+                "$ref": "#/$defs/FormatDateExpression"
+              }
+            ]
+          },
+          "title": "Fields",
+          "type": "object"
+        },
+        "op": {
+          "const": "object",
+          "title": "Op",
+          "type": "string"
+        }
+      },
+      "required": [
+        "op",
+        "fields"
+      ],
+      "title": "ObjectExpression",
+      "type": "object"
+    },
+    "ParseDateExpression": {
+      "additionalProperties": false,
+      "properties": {
+        "op": {
+          "const": "parse_date",
+          "title": "Op",
+          "type": "string"
+        },
+        "value": {
+          "discriminator": {
+            "mapping": {
+              "add": "#/$defs/NumericExpression",
+              "and": "#/$defs/BooleanExpression",
+              "array": "#/$defs/ArrayExpression",
+              "cast": "#/$defs/CastExpression",
+              "coalesce": "#/$defs/CoalesceExpression",
+              "concat": "#/$defs/ConcatExpression",
+              "divide": "#/$defs/NumericExpression",
+              "equals": "#/$defs/EqualsExpression",
+              "format_date": "#/$defs/FormatDateExpression",
+              "get": "#/$defs/GetExpression",
+              "if": "#/$defs/IfExpression",
+              "literal": "#/$defs/LiteralExpression",
+              "lookup": "#/$defs/LookupExpression",
+              "map": "#/$defs/MapExpression",
+              "multiply": "#/$defs/NumericExpression",
+              "not": "#/$defs/NotExpression",
+              "object": "#/$defs/ObjectExpression",
+              "or": "#/$defs/BooleanExpression",
+              "parse_date": "#/$defs/ParseDateExpression",
+              "round": "#/$defs/RoundExpression",
+              "subtract": "#/$defs/NumericExpression"
+            },
+            "propertyName": "op"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/GetExpression"
+            },
+            {
+              "$ref": "#/$defs/LiteralExpression"
+            },
+            {
+              "$ref": "#/$defs/ObjectExpression"
+            },
+            {
+              "$ref": "#/$defs/ArrayExpression"
+            },
+            {
+              "$ref": "#/$defs/MapExpression"
+            },
+            {
+              "$ref": "#/$defs/CoalesceExpression"
+            },
+            {
+              "$ref": "#/$defs/ConcatExpression"
+            },
+            {
+              "$ref": "#/$defs/CastExpression"
+            },
+            {
+              "$ref": "#/$defs/IfExpression"
+            },
+            {
+              "$ref": "#/$defs/EqualsExpression"
+            },
+            {
+              "$ref": "#/$defs/NotExpression"
+            },
+            {
+              "$ref": "#/$defs/BooleanExpression"
+            },
+            {
+              "$ref": "#/$defs/LookupExpression"
+            },
+            {
+              "$ref": "#/$defs/NumericExpression"
+            },
+            {
+              "$ref": "#/$defs/RoundExpression"
+            },
+            {
+              "$ref": "#/$defs/ParseDateExpression"
+            },
+            {
+              "$ref": "#/$defs/FormatDateExpression"
+            }
+          ],
+          "title": "Value"
+        }
+      },
+      "required": [
+        "op",
+        "value"
+      ],
+      "title": "ParseDateExpression",
+      "type": "object"
+    },
+    "RoundExpression": {
+      "additionalProperties": false,
+      "properties": {
+        "digits": {
+          "default": 0,
+          "maximum": 12,
+          "minimum": 0,
+          "title": "Digits",
+          "type": "integer"
+        },
+        "op": {
+          "const": "round",
+          "title": "Op",
+          "type": "string"
+        },
+        "value": {
+          "discriminator": {
+            "mapping": {
+              "add": "#/$defs/NumericExpression",
+              "and": "#/$defs/BooleanExpression",
+              "array": "#/$defs/ArrayExpression",
+              "cast": "#/$defs/CastExpression",
+              "coalesce": "#/$defs/CoalesceExpression",
+              "concat": "#/$defs/ConcatExpression",
+              "divide": "#/$defs/NumericExpression",
+              "equals": "#/$defs/EqualsExpression",
+              "format_date": "#/$defs/FormatDateExpression",
+              "get": "#/$defs/GetExpression",
+              "if": "#/$defs/IfExpression",
+              "literal": "#/$defs/LiteralExpression",
+              "lookup": "#/$defs/LookupExpression",
+              "map": "#/$defs/MapExpression",
+              "multiply": "#/$defs/NumericExpression",
+              "not": "#/$defs/NotExpression",
+              "object": "#/$defs/ObjectExpression",
+              "or": "#/$defs/BooleanExpression",
+              "parse_date": "#/$defs/ParseDateExpression",
+              "round": "#/$defs/RoundExpression",
+              "subtract": "#/$defs/NumericExpression"
+            },
+            "propertyName": "op"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/GetExpression"
+            },
+            {
+              "$ref": "#/$defs/LiteralExpression"
+            },
+            {
+              "$ref": "#/$defs/ObjectExpression"
+            },
+            {
+              "$ref": "#/$defs/ArrayExpression"
+            },
+            {
+              "$ref": "#/$defs/MapExpression"
+            },
+            {
+              "$ref": "#/$defs/CoalesceExpression"
+            },
+            {
+              "$ref": "#/$defs/ConcatExpression"
+            },
+            {
+              "$ref": "#/$defs/CastExpression"
+            },
+            {
+              "$ref": "#/$defs/IfExpression"
+            },
+            {
+              "$ref": "#/$defs/EqualsExpression"
+            },
+            {
+              "$ref": "#/$defs/NotExpression"
+            },
+            {
+              "$ref": "#/$defs/BooleanExpression"
+            },
+            {
+              "$ref": "#/$defs/LookupExpression"
+            },
+            {
+              "$ref": "#/$defs/NumericExpression"
+            },
+            {
+              "$ref": "#/$defs/RoundExpression"
+            },
+            {
+              "$ref": "#/$defs/ParseDateExpression"
+            },
+            {
+              "$ref": "#/$defs/FormatDateExpression"
+            }
+          ],
+          "title": "Value"
+        }
+      },
+      "required": [
+        "op",
+        "value"
+      ],
+      "title": "RoundExpression",
+      "type": "object"
+    },
+    "UniqueAssertion": {
+      "additionalProperties": false,
+      "properties": {
+        "op": {
+          "const": "unique",
+          "title": "Op",
+          "type": "string"
+        },
+        "value": {
+          "discriminator": {
+            "mapping": {
+              "add": "#/$defs/NumericExpression",
+              "and": "#/$defs/BooleanExpression",
+              "array": "#/$defs/ArrayExpression",
+              "cast": "#/$defs/CastExpression",
+              "coalesce": "#/$defs/CoalesceExpression",
+              "concat": "#/$defs/ConcatExpression",
+              "divide": "#/$defs/NumericExpression",
+              "equals": "#/$defs/EqualsExpression",
+              "format_date": "#/$defs/FormatDateExpression",
+              "get": "#/$defs/GetExpression",
+              "if": "#/$defs/IfExpression",
+              "literal": "#/$defs/LiteralExpression",
+              "lookup": "#/$defs/LookupExpression",
+              "map": "#/$defs/MapExpression",
+              "multiply": "#/$defs/NumericExpression",
+              "not": "#/$defs/NotExpression",
+              "object": "#/$defs/ObjectExpression",
+              "or": "#/$defs/BooleanExpression",
+              "parse_date": "#/$defs/ParseDateExpression",
+              "round": "#/$defs/RoundExpression",
+              "subtract": "#/$defs/NumericExpression"
+            },
+            "propertyName": "op"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/GetExpression"
+            },
+            {
+              "$ref": "#/$defs/LiteralExpression"
+            },
+            {
+              "$ref": "#/$defs/ObjectExpression"
+            },
+            {
+              "$ref": "#/$defs/ArrayExpression"
+            },
+            {
+              "$ref": "#/$defs/MapExpression"
+            },
+            {
+              "$ref": "#/$defs/CoalesceExpression"
+            },
+            {
+              "$ref": "#/$defs/ConcatExpression"
+            },
+            {
+              "$ref": "#/$defs/CastExpression"
+            },
+            {
+              "$ref": "#/$defs/IfExpression"
+            },
+            {
+              "$ref": "#/$defs/EqualsExpression"
+            },
+            {
+              "$ref": "#/$defs/NotExpression"
+            },
+            {
+              "$ref": "#/$defs/BooleanExpression"
+            },
+            {
+              "$ref": "#/$defs/LookupExpression"
+            },
+            {
+              "$ref": "#/$defs/NumericExpression"
+            },
+            {
+              "$ref": "#/$defs/RoundExpression"
+            },
+            {
+              "$ref": "#/$defs/ParseDateExpression"
+            },
+            {
+              "$ref": "#/$defs/FormatDateExpression"
+            }
+          ],
+          "title": "Value"
+        }
+      },
+      "required": [
+        "op",
+        "value"
+      ],
+      "title": "UniqueAssertion",
+      "type": "object"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "title": "Id",
+      "type": "string"
+    },
+    "invariants": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/Invariant"
+      },
+      "title": "Invariants",
+      "type": "array"
+    },
+    "mapping_version": {
+      "const": "0.1",
+      "title": "Mapping Version",
+      "type": "string"
+    },
+    "rules": {
+      "items": {
+        "$ref": "#/$defs/MappingRule"
+      },
+      "title": "Rules",
+      "type": "array"
+    },
+    "source_schema": {
+      "title": "Source Schema",
+      "type": "string"
+    },
+    "source_schema_version": {
+      "title": "Source Schema Version",
+      "type": "string"
+    },
+    "target_schema": {
+      "title": "Target Schema",
+      "type": "string"
+    },
+    "target_schema_version": {
+      "title": "Target Schema Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "mapping_version",
+    "id",
+    "source_schema",
+    "source_schema_version",
+    "target_schema",
+    "target_schema_version",
+    "rules"
+  ],
+  "title": "MappingDocument",
+  "type": "object"
+}

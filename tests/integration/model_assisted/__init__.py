@@ -1,0 +1,1 @@
+"""Model-assisted integration tests."""

@@ -1,0 +1,69 @@
+{
+  "$id": "mes-job",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "jobNumber",
+    "partNumber",
+    "facility",
+    "line",
+    "quantity",
+    "status",
+    "scheduledStartUtc"
+  ],
+  "properties": {
+    "jobNumber": {
+      "type": "string",
+      "title": "Manufacturing Order",
+      "description": "Unique manufacturing order identifier."
+    },
+    "partNumber": {
+      "type": "string",
+      "title": "Material",
+      "description": "Material identifier used by production planning."
+    },
+    "facility": {
+      "type": "string",
+      "title": "Plant",
+      "description": "Plant code where work is scheduled."
+    },
+    "line": {
+      "type": "string",
+      "title": "Execution Resource",
+      "description": "Resource that executes the operation."
+    },
+    "quantity": {
+      "type": "integer",
+      "title": "Quantity",
+      "description": "Quantity in individual units."
+    },
+    "lotNumber": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "title": "Lot Batch",
+      "description": "Batch identifier used for traceability."
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Released",
+        "Pending",
+        "Unknown"
+      ],
+      "title": "System Status"
+    },
+    "scheduledStartUtc": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Scheduled Start",
+      "description": "Scheduled start time for the order."
+    },
+    "legacyCode": {
+      "type": "string",
+      "title": "Legacy Code",
+      "description": "Legacy system code with no ERP equivalent."
+    }
+  }
+}

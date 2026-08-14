@@ -1,0 +1,19 @@
+review_version: "0.1"
+suggestion_report_sha256: "6450d5c4e2c804e6b4bc41cb37d0623847ef232da8c04044a124d61e786b82f3"
+mapping_id: erp-production-order-to-mes-job
+decisions:
+  - target_path: /facility
+    action: accept_selected
+    reason: Accept the high-confidence plant to facility mapping.
+  - target_path: /jobNumber
+    action: accept_selected
+    reason: Accept the high-confidence manufacturing order mapping.
+  - target_path: /partNumber
+    action: accept_selected
+    reason: Accept the high-confidence material mapping.
+  - target_path: /lotNumber
+    action: accept_selected
+    reason: Accept the low-confidence batch to lot number mapping after business review.
+  - target_path: /legacyCode
+    action: defer
+    reason: No source concept exists.

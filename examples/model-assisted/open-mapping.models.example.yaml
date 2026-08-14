@@ -1,0 +1,35 @@
+# Copy this file to open-mapping.models.yaml before replacing placeholders.
+# Store credentials in the named environment variable, never in this file.
+config_version: "0.1"
+
+providers:
+  local-compatible:
+    kind: openai-compatible
+    base_url: http://127.0.0.1:8080/v1
+    timeout_seconds: 30
+    max_retries: 0
+  native-provider:
+    kind: openai
+    api_key_env: OPEN_MAPPING_NATIVE_PROVIDER_TOKEN
+    timeout_seconds: 120
+    max_retries: 1
+
+models:
+  local-draft:
+    provider: local-compatible
+    model_id: "<local-model-id>"
+    structured_output: json
+    context_mode: targeted
+    input_token_budget: 16000
+    max_output_tokens: 4000
+    target_batch_size: 20
+    candidate_limit_per_target: 10
+  native-draft:
+    provider: native-provider
+    model_id: "<provider-model-id>"
+    structured_output: auto
+    context_mode: auto
+    input_token_budget: 64000
+    max_output_tokens: 12000
+    target_batch_size: 25
+    candidate_limit_per_target: 20

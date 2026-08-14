@@ -1,0 +1,183 @@
+id: erp-production-order-to-mes-job
+invariants: []
+mapping_version: '0.1'
+rules:
+- confidence: 0.95
+  confidence_method: heuristic-v0.1
+  evidence:
+  - detail: Normalized names match.
+    kind: exact_name
+    score: 1.0
+  - detail: Field name tokens are similar.
+    kind: name_similarity
+    score: 1.0
+  - detail: Descriptions are similar.
+    kind: description_similarity
+    score: 1.0
+  - detail: Types are compatible.
+    kind: type_compatibility
+    score: 1.0
+  - detail: Parent context is similar.
+    kind: structural_context
+    score: 1.0
+  - detail: Static verification passed.
+    kind: verifier_result
+    score: null
+  expression:
+    document: input
+    op: get
+    path: /plant
+  target: /facility
+- confidence: 0.95
+  confidence_method: heuristic-v0.1
+  evidence:
+  - detail: Normalized names match.
+    kind: exact_name
+    score: 1.0
+  - detail: Field name tokens are similar.
+    kind: name_similarity
+    score: 1.0
+  - detail: Descriptions are similar.
+    kind: description_similarity
+    score: 1.0
+  - detail: Types are compatible.
+    kind: type_compatibility
+    score: 1.0
+  - detail: Parent context is similar.
+    kind: structural_context
+    score: 1.0
+  - detail: Static verification passed.
+    kind: verifier_result
+    score: null
+  expression:
+    document: input
+    op: get
+    path: /manufacturingOrder
+  target: /jobNumber
+- confidence: 0.0
+  confidence_method: business-instruction-v0.1
+  evidence:
+  - detail: MES line means the ERP production line, not the work center.
+    kind: business_instruction
+    score: null
+  expression:
+    document: input
+    op: get
+    path: /productionLine
+  target: /line
+- confidence: 0.492857142857
+  confidence_method: heuristic-v0.1
+  evidence:
+  - detail: Field name tokens are similar.
+    kind: name_similarity
+    score: 0.7142857142857143
+  - detail: Descriptions are similar.
+    kind: description_similarity
+    score: 1.0
+  - detail: Types are compatible.
+    kind: type_compatibility
+    score: 1.0
+  - detail: Parent context is similar.
+    kind: structural_context
+    score: 1.0
+  - detail: Static verification passed.
+    kind: verifier_result
+    score: null
+  expression:
+    op: coalesce
+    operands:
+    - document: input
+      op: get
+      path: /batch
+  target: /lotNumber
+- confidence: 0.95
+  confidence_method: heuristic-v0.1
+  evidence:
+  - detail: Normalized names match.
+    kind: exact_name
+    score: 1.0
+  - detail: Field name tokens are similar.
+    kind: name_similarity
+    score: 1.0
+  - detail: Descriptions are similar.
+    kind: description_similarity
+    score: 1.0
+  - detail: Types are compatible.
+    kind: type_compatibility
+    score: 1.0
+  - detail: Parent context is similar.
+    kind: structural_context
+    score: 1.0
+  - detail: Static verification passed.
+    kind: verifier_result
+    score: null
+  expression:
+    document: input
+    op: get
+    path: /material
+  target: /partNumber
+- confidence: 0.0
+  confidence_method: business-instruction-v0.1
+  evidence:
+  - detail: MES stores quantity in individual units.
+    kind: business_instruction
+    score: null
+  expression:
+    op: cast
+    target_type: integer
+    value:
+      left:
+        document: input
+        op: get
+        path: /plannedQuantity/value
+      op: multiply
+      right:
+        default: null
+        key:
+          document: input
+          op: get
+          path: /plannedQuantity/unit
+        op: lookup
+        values:
+          DZ: 12
+          EA: 1
+  target: /quantity
+- confidence: 0.0
+  confidence_method: business-instruction-v0.1
+  evidence:
+  - detail: MES requires canonical UTC.
+    kind: business_instruction
+    score: null
+  expression:
+    op: format_date
+    pattern: YYYY-MM-DDThh:mm:ss.SSSZ
+    value:
+      op: parse_date
+      value:
+        document: input
+        op: get
+        path: /scheduledStart
+  target: /scheduledStartUtc
+- confidence: 0.0
+  confidence_method: business-instruction-v0.1
+  evidence:
+  - detail: Approved status translation.
+    kind: business_instruction
+    score: null
+  expression:
+    default:
+      op: literal
+      value: Unknown
+    key:
+      document: input
+      op: get
+      path: /systemStatus
+    op: lookup
+    values:
+      CRTD: Pending
+      REL: Released
+  target: /status
+source_schema: erp-production-order
+source_schema_version: unversioned
+target_schema: mes-job
+target_schema_version: unversioned

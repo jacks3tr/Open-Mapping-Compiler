@@ -1,0 +1,43 @@
+hints_version: "0.1"
+id: material-part-hints
+direct:
+  - target: /partNumber
+    source: /materialNumber
+    reason: Material number maps to MES part number.
+  - target: /description
+    source: /materialDescription
+    reason: Material description maps directly.
+lookups:
+  - target: /inventoryUnit
+    source: /baseUnit
+    values: { KG: Kilogram, LB: Pound }
+    reason: Base unit translation.
+unit_conversions: []
+dates: []
+constants: []
+expressions:
+  - target: /weightLb
+    reason: Convert supported KG and LB weights to pounds without a default for unsupported units.
+    expression:
+      op: round
+      digits: 6
+      value:
+        op: multiply
+        left: { op: get, path: /grossWeight/value, document: input }
+        right:
+          op: lookup
+          key: { op: get, path: /grossWeight/unit, document: input }
+          values: { KG: 2.2046226218, LB: 1 }
+  - target: /facilities
+    reason: Each plant record becomes a facility with an approved status translation.
+    expression:
+      op: map
+      collection: { op: get, path: /plantData, document: input }
+      expression:
+        op: object
+        fields:
+          plant: { op: get, path: /plant, document: current }
+          status:
+            op: lookup
+            key: { op: get, path: /status, document: current }
+            values: { ACT: Active, INA: Inactive }

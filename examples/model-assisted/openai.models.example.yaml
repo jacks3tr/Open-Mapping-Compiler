@@ -1,0 +1,22 @@
+# Copy this file to open-mapping.models.yaml.
+# Set OPENAI_API_KEY in your shell. Never put the key in this file.
+config_version: "0.1"
+
+providers:
+  openai:
+    kind: openai
+    api_key_env: OPENAI_API_KEY
+    timeout_seconds: 120
+    max_retries: 1
+
+models:
+  openai:
+    provider: openai
+    model_id: gpt-5
+    structured_output: auto
+    context_mode: auto
+  openai-mini:
+    provider: openai
+    model_id: gpt-5-mini
+    structured_output: auto
+    context_mode: auto

@@ -1,0 +1,30 @@
+benchmark_version: "0.1"
+id: account-segments
+description: Ten-segment to three-segment account
+source_schema: source.schema.json
+target_schema: target.schema.json
+samples: samples.jsonl
+expected_mapping: expected.mapping.yaml
+hints: hints.yaml
+review: review.yaml
+expected_ambiguous_targets: []
+expected_no_match_targets: []
+release_gates:
+  target_outcome_coverage:
+    minimum: 1.00
+  high_confidence_false_positive_rate:
+    maximum: 0.02
+  high_confidence_precision:
+    minimum: 0.90
+  expected_ambiguity_detection:
+    minimum: 1.00
+  expected_no_match_detection:
+    minimum: 1.00
+  review_application_correctness:
+    minimum: 1.00
+  invalid_source_path_rejection:
+    minimum: 1.00
+  duplicate_target_rejection:
+    minimum: 1.00
+  cross_runtime_equivalence:
+    minimum: 1.00
