@@ -4,11 +4,11 @@
 
 | Metric | Value | Numerator | Denominator |
 | --- | ---: | ---: | ---: |
-| ambiguity_precision | 1 | 0 | 0 |
+| ambiguity_precision | 0 | 0 | 1 |
 | compile_success_rate | 1 | 2 | 2 |
 | cross_runtime_equivalence | 1 | 72 | 72 |
-| direct_match_precision | 1 | 1 | 1 |
-| direct_match_recall | 0.333333333333 | 1 | 3 |
+| direct_match_precision | 1 | 2 | 2 |
+| direct_match_recall | 0.666666666667 | 2 | 3 |
 | duplicate_target_rejection | 1 | 1 | 1 |
 | expected_ambiguity_detection | 1 | 0 | 0 |
 | expected_no_match_detection | 1 | 0 | 0 |
@@ -16,9 +16,9 @@
 | high_confidence_precision | 1 | 1 | 1 |
 | invalid_source_path_rejection | 1 | 1 | 1 |
 | invariant_pass_rate | 1 | 71 | 71 |
-| low_confidence_precision | 0 | 0 | 0 |
+| low_confidence_precision | 1 | 1 | 1 |
 | medium_confidence_precision | 0 | 0 | 0 |
-| no_match_precision | 0 | 0 | 3 |
+| no_match_precision | 0 | 0 | 1 |
 | no_match_recall | 1 | 0 | 0 |
 | required_target_coverage | 1 | 4 | 4 |
 | review_application_correctness | 1 | 0 | 0 |
@@ -42,8 +42,8 @@
 
 ## Outcome counts
 
-- Baseline confidence: `{"high": 1, "low": 0, "medium": 0, "none": 3}`
-- Baseline disposition: `{"ambiguous": 0, "manual": 0, "no_match": 3, "review_required": 0, "suggested": 1}`
+- Baseline confidence: `{"high": 1, "low": 2, "medium": 0, "none": 1}`
+- Baseline disposition: `{"ambiguous": 1, "manual": 0, "no_match": 1, "review_required": 1, "suggested": 1}`
 - Assisted confidence: `{"high": 0, "low": 0, "medium": 0, "none": 4}`
 - Assisted disposition: `{"ambiguous": 0, "manual": 4, "no_match": 0, "review_required": 0, "suggested": 0}`
 
@@ -55,5 +55,4 @@
 - order-fulfillment-duplicate-line / interpreter: INVARIANT_FAILED: invariant 'unique-line-numbers' failed
 - order-fulfillment-duplicate-line / python: INVARIANT_FAILED: INVARIANT_FAILED
 - order-fulfillment-duplicate-line / typescript: INVARIANT_FAILED: INVARIANT_FAILED
-- warning: INVALID_INPUT: metric 'low_confidence_precision' has no observed cases
 - warning: INVALID_INPUT: metric 'medium_confidence_precision' has no observed cases

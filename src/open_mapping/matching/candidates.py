@@ -10,6 +10,12 @@ from rapidfuzz import fuzz
 from open_mapping.matching.compatibility import type_compatibility
 from open_mapping.matching.names import canonical_name, normalized_name_text
 from open_mapping.matching.profiles import FieldProfile
+from open_mapping.matching.semantics import (
+    field_semantics,
+    profile_support_for_target,
+    semantic_field_similarity,
+    semantic_fields_conflict,
+)
 from open_mapping.model.issues import Issue, IssueCode, Severity, sort_issues
 from open_mapping.model.json_types import OpenMappingModel
 from open_mapping.model.mappings import Evidence, EvidenceKind
@@ -24,13 +30,13 @@ from open_mapping.pointers import split_pointer
 
 
 class CandidateWeights(OpenMappingModel):
-    exact_name: float = 0.40
+    exact_name: float = 0.35
     name_similarity: float = 0.20
     description_similarity: float = 0.15
     type_compatibility: float = 0.15
     enum_overlap: float = 0.05
     structural_context: float = 0.05
-    sample_profile: float = 0.00
+    sample_profile: float = 0.05
 
     @model_validator(mode="after")
     def _validate_sum(self) -> CandidateWeights:
@@ -139,7 +145,11 @@ def _role_similarity(source: SchemaField, target: SchemaField) -> float | None:
     source_roles = _role_tokens(source)
     target_roles = _role_tokens(target)
     if "identifier" in target_roles and "identifier" not in source_roles:
-        return 0.0
+        source_concepts = field_semantics(source).concepts
+        if not source_concepts.intersection(
+            {"code", "identifier", "material_identifier", "site_identifier"}
+        ):
+            return 0.0
     if "payer" in target_roles:
         return 1.0 if "payer" in source_roles else 0.0
     if "bill" in target_roles:
@@ -187,12 +197,21 @@ def _signal(
             else 0.0,
         )
     )
+    semantic_similarity = semantic_field_similarity(source, target)
+    if not name_match:
+        name_sim = max(name_sim, semantic_similarity)
     source_desc = source.description or ""
     target_desc = target.description or ""
     desc_sim = fuzz.ratio(source_desc, target_desc) / 100.0 if source_desc and target_desc else 0.0
     role_similarity = _role_similarity(source, target)
     if role_similarity is not None:
         desc_sim = role_similarity
+    elif not name_match:
+        desc_sim = max(desc_sim, semantic_similarity)
+    semantic_conflict = semantic_fields_conflict(source, target)
+    if semantic_conflict:
+        name_sim = min(name_sim, 0.20)
+        desc_sim = min(desc_sim, 0.20)
     type_score = type_compatibility(source, target) or 0.0
     source_enums = set(source.enum_values)
     target_enums = set(target.enum_values)
@@ -212,11 +231,15 @@ def _signal(
         structural = 1.0 if not source_parents and not target_parents else 0.0
     if role_similarity is not None:
         structural = role_similarity
-    sample_score = 0.0
+    sample_score = profile_support_for_target(source_profile, target)
     if source_profile is not None and target_profile is not None:
         overlap = set(source_profile.pattern_classes).intersection(target_profile.pattern_classes)
-        sample_score = len(overlap) / max(
-            len(set(source_profile.pattern_classes).union(target_profile.pattern_classes)), 1
+        sample_score = max(
+            sample_score,
+            len(overlap)
+            / max(
+                len(set(source_profile.pattern_classes).union(target_profile.pattern_classes)), 1
+            ),
         )
     signals = CandidateSignals(
         exact_name=exact,
@@ -244,7 +267,7 @@ def _signal(
         evidence.append(
             Evidence(
                 kind=EvidenceKind.DESCRIPTION_SIMILARITY,
-                detail="Descriptions are similar.",
+                detail="Descriptions or semantic field roles are similar.",
                 score=desc_sim,
             )
         )

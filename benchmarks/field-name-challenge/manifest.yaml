@@ -1,0 +1,39 @@
+benchmark_version: "0.1"
+id: field-name-challenge
+description: Twenty source fields versus thirty target fields with semantic renames and same-type distractors
+source_schema: source.schema.json
+target_schema: target.schema.json
+samples: samples.jsonl
+expected_mapping: expected.mapping.yaml
+review: review.yaml
+expected_ambiguous_targets: []
+expected_no_match_targets:
+  - /barcodeEan
+  - /distributionChannel
+  - /hazardousMaterial
+  - /materialType
+  - /minimumOrderQuantity
+  - /procurementGroup
+  - /qualityInspectionRequired
+  - /reorderPoint
+  - /salesOrganization
+  - /shelfLifeDays
+  - /storageCondition
+  - /taxClassification
+release_gates:
+  target_outcome_coverage:
+    minimum: 1.00
+  review_application_correctness:
+    minimum: 1.00
+  required_target_coverage:
+    minimum: 1.00
+  compile_success_rate:
+    minimum: 1.00
+  target_schema_pass_rate:
+    minimum: 1.00
+  cross_runtime_equivalence:
+    minimum: 1.00
+  invalid_source_path_rejection:
+    minimum: 1.00
+  duplicate_target_rejection:
+    minimum: 1.00

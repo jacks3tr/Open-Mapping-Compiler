@@ -4,11 +4,11 @@
 
 | Metric | Value | Numerator | Denominator |
 | --- | ---: | ---: | ---: |
-| ambiguity_precision | 0.714285714286 | 5 | 7 |
+| ambiguity_precision | 1 | 5 | 5 |
 | compile_success_rate | 1 | 2 | 2 |
 | cross_runtime_equivalence | 1 | 50 | 50 |
-| direct_match_precision | 1 | 7 | 7 |
-| direct_match_recall | 0.777777777778 | 7 | 9 |
+| direct_match_precision | 1 | 9 | 9 |
+| direct_match_recall | 1 | 9 | 9 |
 | duplicate_target_rejection | 1 | 1 | 1 |
 | expected_ambiguity_detection | 1 | 5 | 5 |
 | expected_no_match_detection | 1 | 0 | 0 |
@@ -16,7 +16,7 @@
 | high_confidence_precision | 1 | 5 | 5 |
 | invalid_source_path_rejection | 1 | 1 | 1 |
 | invariant_pass_rate | 1 | 200 | 200 |
-| low_confidence_precision | 1 | 2 | 2 |
+| low_confidence_precision | 1 | 4 | 4 |
 | medium_confidence_precision | 0 | 0 | 0 |
 | no_match_precision | 1 | 0 | 0 |
 | no_match_recall | 1 | 0 | 0 |
@@ -43,7 +43,7 @@
 ## Outcome counts
 
 - Baseline confidence: `{"high": 10, "low": 4, "medium": 0, "none": 0}`
-- Baseline disposition: `{"ambiguous": 7, "manual": 0, "no_match": 0, "review_required": 2, "suggested": 5}`
+- Baseline disposition: `{"ambiguous": 5, "manual": 0, "no_match": 0, "review_required": 4, "suggested": 5}`
 - Assisted confidence: `{"high": 0, "low": 0, "medium": 0, "none": 14}`
 - Assisted disposition: `{"ambiguous": 0, "manual": 14, "no_match": 0, "review_required": 0, "suggested": 0}`
 

@@ -19,6 +19,8 @@ def _suggestions(tmp_path: Path) -> tuple[Path, Path]:
         str(pack / "target.schema.json"),
         "--hints",
         str(pack / "hints.yaml"),
+        "--samples",
+        str(pack / "samples.jsonl"),
         "--suggestions-out",
         str(suggestions),
         "--report-format",

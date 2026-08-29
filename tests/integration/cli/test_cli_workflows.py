@@ -39,6 +39,8 @@ def test_review_verify_run_compile(tmp_path: Path) -> None:
         str(root / "target.schema.json"),
         "--hints",
         str(root / "hints.yaml"),
+        "--samples",
+        str(root / "samples.jsonl"),
         "--suggestions-out",
         str(suggestions),
         "--report-format",

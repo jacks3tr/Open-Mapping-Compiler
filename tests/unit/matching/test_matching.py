@@ -53,6 +53,7 @@ def _schemas() -> tuple[SchemaDocument, SchemaDocument]:
 
 def test_names_and_confidence() -> None:
     assert name_tokens("orderId") == ("order", "identifier")
+    assert name_tokens("std_cost_cd") == ("standard", "cost", "code")
     assert (
         classify_confidence(0.95, thresholds=DEFAULT_CONFIDENCE_THRESHOLDS) == ConfidenceBand.HIGH
     )

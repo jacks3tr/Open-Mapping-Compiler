@@ -1,0 +1,112 @@
+review_version: "0.1"
+suggestion_report_sha256: "72093c401a535c26db5e18f824f82e3e7b00f08d7fecb301848e420d46063765"
+mapping_id: field-name-challenge-mapping
+decisions:
+  - target_path: /barcodeEan
+    action: reject
+    reason: The source has no retail barcode.
+  - target_path: /batchManaged
+    action: select_candidate
+    source_path: /lot_ctrl_flag
+    reason: Production-lot control is the batch-management flag.
+  - target_path: /distributionChannel
+    action: reject
+    reason: The source has no commercial distribution channel.
+  - target_path: /engineeringRevision
+    action: select_candidate
+    source_path: /rev_lvl
+    reason: The released revision level is the engineering revision.
+  - target_path: /hazardousMaterial
+    action: reject
+    reason: The source has no hazardous-goods classification.
+  - target_path: /inventoryMeasure
+    action: select_candidate
+    source_path: /base_uom
+    reason: The base unit is the inventory measure.
+  - target_path: /materialMaster
+    action: select_candidate
+    source_path: /part_no
+    reason: The current part number is the canonical material key.
+  - target_path: /materialText
+    action: select_candidate
+    source_path: /part_desc
+    reason: The part description is the readable material text.
+  - target_path: /materialType
+    action: reject
+    reason: The source has no raw, semi-finished, or finished classification.
+  - target_path: /merchandiseGroup
+    action: select_candidate
+    source_path: /product_family_cd
+    reason: The product family is the reporting merchandise group.
+  - target_path: /minimumBuffer
+    action: select_candidate
+    source_path: /safety_stock_qty
+    reason: Safety stock is the protected minimum buffer.
+  - target_path: /minimumOrderQuantity
+    action: reject
+    reason: Safety stock and item weight are not order minimums.
+  - target_path: /plannedDeliveryDays
+    action: select_candidate
+    source_path: /lead_time_days
+    reason: Replenishment lead time supplies planned delivery days.
+  - target_path: /planningController
+    action: select_candidate
+    source_path: /planner_id
+    reason: The planner code identifies the planning controller.
+  - target_path: /procurementGroup
+    action: reject
+    reason: Procurement mode does not identify a purchasing team.
+  - target_path: /qualityInspectionRequired
+    action: reject
+    reason: Lot and serial control do not imply receipt inspection.
+  - target_path: /reorderPoint
+    action: reject
+    reason: Safety stock is not a reorder trigger level.
+  - target_path: /salesOrganization
+    action: reject
+    reason: The source has no selling organization.
+  - target_path: /serializedItem
+    action: select_candidate
+    source_path: /serial_ctrl_flag
+    reason: Serial control identifies individually serialized items.
+  - target_path: /shelfLifeDays
+    action: reject
+    reason: Replenishment lead time is not product shelf life.
+  - target_path: /siteCode
+    action: select_candidate
+    source_path: /plant_cd
+    reason: The plant code is the owning site identifier.
+  - target_path: /sourcingMode
+    action: select_candidate
+    source_path: /procure_type
+    reason: Procurement type records whether supply is make, buy, or mixed.
+  - target_path: /standardPrice
+    action: select_candidate
+    source_path: /std_cost
+    reason: Standard cost is the standard valuation price.
+  - target_path: /storageCondition
+    action: reject
+    reason: The source has no environmental storage requirement.
+  - target_path: /taxClassification
+    action: reject
+    reason: The source has no tax category.
+  - target_path: /technicalDrawing
+    action: select_candidate
+    source_path: /drawing_ref
+    reason: The drawing reference identifies the controlled technical drawing.
+  - target_path: /valuationCurrency
+    action: select_candidate
+    source_path: /currency_cd
+    reason: The currency code applies to valuation amounts.
+  - target_path: /weightGross
+    action: select_candidate
+    source_path: /gross_wt
+    reason: Gross weight includes packaging in both contracts.
+  - target_path: /weightNet
+    action: select_candidate
+    source_path: /net_wt
+    reason: Net weight excludes packaging in both contracts.
+  - target_path: /weightUnit
+    action: select_candidate
+    source_path: /wt_uom
+    reason: The weight unit applies to both mass values.

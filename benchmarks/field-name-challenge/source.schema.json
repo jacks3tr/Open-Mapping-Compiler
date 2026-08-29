@@ -1,0 +1,110 @@
+{
+  "$id": "field-name-challenge-source",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "part_no",
+    "part_desc",
+    "base_uom",
+    "plant_cd",
+    "rev_lvl",
+    "drawing_ref",
+    "lot_ctrl_flag",
+    "serial_ctrl_flag",
+    "net_wt",
+    "gross_wt",
+    "wt_uom",
+    "std_cost",
+    "currency_cd",
+    "procure_type",
+    "lead_time_days",
+    "safety_stock_qty",
+    "product_family_cd",
+    "planner_id",
+    "legacy_part_no",
+    "vendor_material_ref"
+  ],
+  "properties": {
+    "part_no": {
+      "type": "string",
+      "description": "Current internal identifier assigned to the manufactured or sellable item."
+    },
+    "part_desc": {
+      "type": "string",
+      "description": "User-facing text that describes the item."
+    },
+    "base_uom": {
+      "type": "string",
+      "description": "Unit code used to stock and count the item."
+    },
+    "plant_cd": {
+      "type": "string",
+      "description": "Plant or site code that owns this item record."
+    },
+    "rev_lvl": {
+      "type": "string",
+      "description": "Released engineering change level for the item design."
+    },
+    "drawing_ref": {
+      "type": "string",
+      "description": "Document identifier for the item's controlled drawing."
+    },
+    "lot_ctrl_flag": {
+      "type": "boolean",
+      "description": "True when inventory must be traced by production lot."
+    },
+    "serial_ctrl_flag": {
+      "type": "boolean",
+      "description": "True when every physical unit requires a unique serial identifier."
+    },
+    "net_wt": {
+      "type": "number",
+      "description": "Mass of the item excluding packaging."
+    },
+    "gross_wt": {
+      "type": "number",
+      "description": "Mass of the item including packaging."
+    },
+    "wt_uom": {
+      "type": "string",
+      "description": "Unit code used by both recorded mass values."
+    },
+    "std_cost": {
+      "type": "number",
+      "description": "Planned valuation price per stocked unit."
+    },
+    "currency_cd": {
+      "type": "string",
+      "description": "Currency code for the planned valuation price."
+    },
+    "procure_type": {
+      "type": "string",
+      "description": "Code indicating whether replenishment is made internally, purchased, or both."
+    },
+    "lead_time_days": {
+      "type": "integer",
+      "description": "Calendar days expected between replenishment request and availability."
+    },
+    "safety_stock_qty": {
+      "type": "number",
+      "description": "Protected inventory quantity held to absorb demand variation."
+    },
+    "product_family_cd": {
+      "type": "string",
+      "description": "Assortment and reporting group assigned to the item."
+    },
+    "planner_id": {
+      "type": "string",
+      "description": "Person or team code that controls material planning."
+    },
+    "legacy_part_no": {
+      "type": "string",
+      "description": "Superseded item identifier retained only for historical lookup."
+    },
+    "vendor_material_ref": {
+      "type": "string",
+      "description": "Supplier catalog identifier for the item, not the internal item key."
+    }
+  },
+  "additionalProperties": false
+}

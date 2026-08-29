@@ -1,0 +1,62 @@
+mapping_version: "0.1"
+id: field-name-challenge-mapping
+source_schema: field-name-challenge-source
+source_schema_version: "unversioned"
+target_schema: field-name-challenge-target
+target_schema_version: "unversioned"
+rules:
+  - target: /materialMaster
+    expression: { op: get, path: /part_no, document: input }
+    confidence: 1.0
+  - target: /materialText
+    expression: { op: get, path: /part_desc, document: input }
+    confidence: 1.0
+  - target: /inventoryMeasure
+    expression: { op: get, path: /base_uom, document: input }
+    confidence: 1.0
+  - target: /siteCode
+    expression: { op: get, path: /plant_cd, document: input }
+    confidence: 1.0
+  - target: /engineeringRevision
+    expression: { op: get, path: /rev_lvl, document: input }
+    confidence: 1.0
+  - target: /technicalDrawing
+    expression: { op: get, path: /drawing_ref, document: input }
+    confidence: 1.0
+  - target: /batchManaged
+    expression: { op: get, path: /lot_ctrl_flag, document: input }
+    confidence: 1.0
+  - target: /serializedItem
+    expression: { op: get, path: /serial_ctrl_flag, document: input }
+    confidence: 1.0
+  - target: /weightNet
+    expression: { op: get, path: /net_wt, document: input }
+    confidence: 1.0
+  - target: /weightGross
+    expression: { op: get, path: /gross_wt, document: input }
+    confidence: 1.0
+  - target: /weightUnit
+    expression: { op: get, path: /wt_uom, document: input }
+    confidence: 1.0
+  - target: /standardPrice
+    expression: { op: get, path: /std_cost, document: input }
+    confidence: 1.0
+  - target: /valuationCurrency
+    expression: { op: get, path: /currency_cd, document: input }
+    confidence: 1.0
+  - target: /sourcingMode
+    expression: { op: get, path: /procure_type, document: input }
+    confidence: 1.0
+  - target: /plannedDeliveryDays
+    expression: { op: get, path: /lead_time_days, document: input }
+    confidence: 1.0
+  - target: /minimumBuffer
+    expression: { op: get, path: /safety_stock_qty, document: input }
+    confidence: 1.0
+  - target: /merchandiseGroup
+    expression: { op: get, path: /product_family_cd, document: input }
+    confidence: 1.0
+  - target: /planningController
+    expression: { op: get, path: /planner_id, document: input }
+    confidence: 1.0
+invariants: []

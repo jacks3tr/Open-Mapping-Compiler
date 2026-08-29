@@ -1,0 +1,148 @@
+{
+  "$id": "field-name-challenge-target",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "materialMaster",
+    "materialText",
+    "inventoryMeasure",
+    "siteCode",
+    "engineeringRevision",
+    "technicalDrawing",
+    "batchManaged",
+    "serializedItem",
+    "weightNet",
+    "weightGross",
+    "weightUnit",
+    "standardPrice",
+    "valuationCurrency",
+    "sourcingMode",
+    "plannedDeliveryDays",
+    "minimumBuffer",
+    "merchandiseGroup",
+    "planningController"
+  ],
+  "properties": {
+    "materialMaster": {
+      "type": "string",
+      "description": "Primary identifier used as the canonical material record key."
+    },
+    "materialText": {
+      "type": "string",
+      "description": "Readable material description shown to users."
+    },
+    "inventoryMeasure": {
+      "type": "string",
+      "description": "Unit used for inventory balances and item counts."
+    },
+    "siteCode": {
+      "type": "string",
+      "description": "Owning facility identifier for the material record."
+    },
+    "engineeringRevision": {
+      "type": "string",
+      "description": "Approved design revision currently released for production."
+    },
+    "technicalDrawing": {
+      "type": "string",
+      "description": "Reference to the controlled design drawing."
+    },
+    "batchManaged": {
+      "type": "boolean",
+      "description": "Whether stock movements require lot or batch traceability."
+    },
+    "serializedItem": {
+      "type": "boolean",
+      "description": "Whether individual units are tracked with unique serial identifiers."
+    },
+    "weightNet": {
+      "type": "number",
+      "description": "Material weight without packaging."
+    },
+    "weightGross": {
+      "type": "number",
+      "description": "Material weight with packaging included."
+    },
+    "weightUnit": {
+      "type": "string",
+      "description": "Unit applied to net and gross material weight."
+    },
+    "standardPrice": {
+      "type": "number",
+      "description": "Standard valuation amount for one inventory unit."
+    },
+    "valuationCurrency": {
+      "type": "string",
+      "description": "Currency used by the standard valuation amount."
+    },
+    "sourcingMode": {
+      "type": "string",
+      "description": "How the material is supplied: make, buy, or mixed."
+    },
+    "plannedDeliveryDays": {
+      "type": "integer",
+      "description": "Expected replenishment duration measured in calendar days."
+    },
+    "minimumBuffer": {
+      "type": "number",
+      "description": "Inventory reserve protected from normal consumption planning."
+    },
+    "merchandiseGroup": {
+      "type": "string",
+      "description": "Commercial family used to group related materials for reporting."
+    },
+    "planningController": {
+      "type": "string",
+      "description": "Responsible material planning person or team."
+    },
+    "materialType": {
+      "type": "string",
+      "description": "Classification such as raw, semi-finished, or finished material."
+    },
+    "procurementGroup": {
+      "type": "string",
+      "description": "Purchasing team responsible for supplier negotiations."
+    },
+    "shelfLifeDays": {
+      "type": "integer",
+      "description": "Maximum usable life before expiration, in days."
+    },
+    "storageCondition": {
+      "type": "string",
+      "description": "Environmental storage requirement such as ambient or refrigerated."
+    },
+    "hazardousMaterial": {
+      "type": "boolean",
+      "description": "Whether regulated hazardous-goods handling applies."
+    },
+    "qualityInspectionRequired": {
+      "type": "boolean",
+      "description": "Whether receipt requires a quality inspection lot."
+    },
+    "taxClassification": {
+      "type": "string",
+      "description": "Tax category assigned for commercial transactions."
+    },
+    "barcodeEan": {
+      "type": "string",
+      "description": "Global retail barcode value."
+    },
+    "salesOrganization": {
+      "type": "string",
+      "description": "Selling organization authorized to offer the material."
+    },
+    "distributionChannel": {
+      "type": "string",
+      "description": "Commercial route such as wholesale, retail, or direct."
+    },
+    "minimumOrderQuantity": {
+      "type": "number",
+      "description": "Smallest quantity accepted on a purchase order."
+    },
+    "reorderPoint": {
+      "type": "number",
+      "description": "Inventory level that triggers a new replenishment order."
+    }
+  },
+  "additionalProperties": false
+}

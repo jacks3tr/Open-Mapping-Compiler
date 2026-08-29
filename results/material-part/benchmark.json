@@ -14,22 +14,22 @@
   },
   "baseline_confidence_counts": {
     "high": 1,
-    "low": 1,
+    "low": 2,
     "medium": 1,
-    "none": 2
+    "none": 1
   },
   "baseline_disposition_counts": {
     "ambiguous": 0,
     "manual": 0,
-    "no_match": 2,
-    "review_required": 2,
+    "no_match": 1,
+    "review_required": 3,
     "suggested": 1
   },
   "denominators": {
     "ambiguity_precision": 0,
     "compile_success_rate": 2,
     "cross_runtime_equivalence": 61,
-    "direct_match_precision": 3,
+    "direct_match_precision": 4,
     "direct_match_recall": 2,
     "duplicate_target_rejection": 1,
     "expected_ambiguity_detection": 0,
@@ -38,9 +38,9 @@
     "high_confidence_precision": 1,
     "invalid_source_path_rejection": 1,
     "invariant_pass_rate": 0,
-    "low_confidence_precision": 1,
+    "low_confidence_precision": 2,
     "medium_confidence_precision": 1,
-    "no_match_precision": 2,
+    "no_match_precision": 1,
     "no_match_recall": 0,
     "required_target_coverage": 5,
     "review_application_correctness": 0,
@@ -157,7 +157,7 @@
     "ambiguity_precision": 1.0,
     "compile_success_rate": 1.0,
     "cross_runtime_equivalence": 1.0,
-    "direct_match_precision": 0.6666666666666666,
+    "direct_match_precision": 0.5,
     "direct_match_recall": 1.0,
     "duplicate_target_rejection": 1.0,
     "expected_ambiguity_detection": 1.0,

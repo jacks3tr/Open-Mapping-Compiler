@@ -1,5 +1,5 @@
 review_version: "0.1"
-suggestion_report_sha256: "6450d5c4e2c804e6b4bc41cb37d0623847ef232da8c04044a124d61e786b82f3"
+suggestion_report_sha256: "98b9754e553850960cd05581a67424f497d57413ff49d4c404bf3014ef603789"
 mapping_id: erp-production-order-to-mes-job
 decisions:
   - target_path: /facility
