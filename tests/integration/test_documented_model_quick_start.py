@@ -250,7 +250,10 @@ def test_documented_model_quick_start_runs_with_a_local_compatible_provider(
         cast(str, item["target_path"]): item
         for item in cast(list[dict[str, object]], suggestions["suggestions"])
     }
-    assert suggestions_by_target["/account_number"]["origin"] == "model"
+    account_number = suggestions_by_target["/account_number"]
+    account_evidence = cast(list[dict[str, object]], account_number["evidence"])
+    assert any(item["kind"] == "model_rerank" for item in account_evidence)
+    assert suggestions["model_run_disclosure"] is not None
     assert suggestions_by_target["/state"]["disposition"] == "manual"
     assert suggestions_by_target["/source_system"]["disposition"] == "manual"
     context = cast(

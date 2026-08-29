@@ -1,0 +1,101 @@
+{
+  "id": "blind-geospatial-feature-mapping-v1",
+  "invariants": [],
+  "mapping_version": "0.1",
+  "rules": [
+    {
+      "confidence": 1.0,
+      "expression": {
+        "document": "input",
+        "op": "get",
+        "path": "/fid"
+      },
+      "target": "/featureIdentifier"
+    },
+    {
+      "confidence": 1.0,
+      "expression": {
+        "document": "input",
+        "op": "get",
+        "path": "/feat_cls"
+      },
+      "target": "/featureCategory"
+    },
+    {
+      "confidence": 1.0,
+      "expression": {
+        "document": "input",
+        "op": "get",
+        "path": "/lon_dd"
+      },
+      "target": "/longitude"
+    },
+    {
+      "confidence": 1.0,
+      "expression": {
+        "document": "input",
+        "op": "get",
+        "path": "/lat_dd"
+      },
+      "target": "/latitude"
+    },
+    {
+      "confidence": 1.0,
+      "expression": {
+        "document": "input",
+        "op": "get",
+        "path": "/elev_m"
+      },
+      "target": "/elevationMeters"
+    },
+    {
+      "confidence": 1.0,
+      "expression": {
+        "document": "input",
+        "op": "get",
+        "path": "/crs_uri"
+      },
+      "target": "/coordinateReferenceSystem"
+    },
+    {
+      "confidence": 1.0,
+      "expression": {
+        "document": "input",
+        "op": "get",
+        "path": "/ext_ref"
+      },
+      "target": "/externalIdentifier"
+    },
+    {
+      "confidence": 1.0,
+      "expression": {
+        "document": "input",
+        "op": "get",
+        "path": "/collection_ref"
+      },
+      "target": "/collectionIdentifier"
+    },
+    {
+      "confidence": 1.0,
+      "expression": {
+        "document": "input",
+        "op": "get",
+        "path": "/valid_from"
+      },
+      "target": "/validFrom"
+    },
+    {
+      "confidence": 1.0,
+      "expression": {
+        "document": "input",
+        "op": "get",
+        "path": "/valid_from"
+      },
+      "target": "/observationTime"
+    }
+  ],
+  "source_schema": "blind-geospatial-feature-source-v1",
+  "source_schema_version": "unversioned",
+  "target_schema": "blind-geospatial-feature-target-v1",
+  "target_schema_version": "unversioned"
+}

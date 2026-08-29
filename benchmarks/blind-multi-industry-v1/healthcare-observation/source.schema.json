@@ -1,0 +1,64 @@
+{
+  "$comment": "Constructed from HL7 FHIR R5 Observation concepts; see ../provenance.json.",
+  "$id": "blind-healthcare-observation-source-v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "clin_eff_ts": {
+      "description": "Physiologically relevant date and time when the observed value was true.",
+      "format": "date-time",
+      "type": "string"
+    },
+    "enc_ref": {
+      "description": "Reference to the healthcare encounter associated with the observation.",
+      "type": "string"
+    },
+    "final_ind": {
+      "description": "True when the observation result has reached final status.",
+      "type": "boolean"
+    },
+    "issued_ts": {
+      "description": "Date and time this version of the result was made available to providers.",
+      "format": "date-time",
+      "type": "string"
+    },
+    "loinc_cd": {
+      "description": "Coded measurement or assertion represented by this observation.",
+      "pattern": "^[0-9]{1,5}-[0-9]$",
+      "type": "string"
+    },
+    "obs_uid": {
+      "description": "Business identifier assigned to the clinical observation.",
+      "type": "string"
+    },
+    "performer_ref": {
+      "description": "Reference to the person or organization responsible for asserting the result.",
+      "type": "string"
+    },
+    "pt_ref": {
+      "description": "Reference to the patient or other subject whose measurement this is.",
+      "type": "string"
+    },
+    "result_num": {
+      "description": "Numeric quantity asserted by the observation.",
+      "type": "number"
+    },
+    "ucum_cd": {
+      "description": "Unit code accompanying the measured quantity.",
+      "type": "string"
+    }
+  },
+  "required": [
+    "obs_uid",
+    "pt_ref",
+    "loinc_cd",
+    "result_num",
+    "ucum_cd",
+    "final_ind",
+    "enc_ref",
+    "performer_ref",
+    "clin_eff_ts",
+    "issued_ts"
+  ],
+  "type": "object"
+}

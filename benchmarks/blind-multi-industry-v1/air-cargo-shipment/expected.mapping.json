@@ -1,0 +1,101 @@
+{
+  "id": "blind-air-cargo-shipment-mapping-v1",
+  "invariants": [],
+  "mapping_version": "0.1",
+  "rules": [
+    {
+      "confidence": 1.0,
+      "expression": {
+        "document": "input",
+        "op": "get",
+        "path": "/awb_no"
+      },
+      "target": "/masterWaybillNumber"
+    },
+    {
+      "confidence": 1.0,
+      "expression": {
+        "document": "input",
+        "op": "get",
+        "path": "/hwb_no"
+      },
+      "target": "/houseWaybillNumber"
+    },
+    {
+      "confidence": 1.0,
+      "expression": {
+        "document": "input",
+        "op": "get",
+        "path": "/shipper_nm"
+      },
+      "target": "/consignorName"
+    },
+    {
+      "confidence": 1.0,
+      "expression": {
+        "document": "input",
+        "op": "get",
+        "path": "/consignee_nm"
+      },
+      "target": "/consigneeName"
+    },
+    {
+      "confidence": 1.0,
+      "expression": {
+        "document": "input",
+        "op": "get",
+        "path": "/piece_cnt"
+      },
+      "target": "/pieceQuantity"
+    },
+    {
+      "confidence": 1.0,
+      "expression": {
+        "document": "input",
+        "op": "get",
+        "path": "/gross_kg"
+      },
+      "target": "/grossWeightKilograms"
+    },
+    {
+      "confidence": 1.0,
+      "expression": {
+        "document": "input",
+        "op": "get",
+        "path": "/orig_iata"
+      },
+      "target": "/originAirport"
+    },
+    {
+      "confidence": 1.0,
+      "expression": {
+        "document": "input",
+        "op": "get",
+        "path": "/dest_iata"
+      },
+      "target": "/destinationAirport"
+    },
+    {
+      "confidence": 1.0,
+      "expression": {
+        "document": "input",
+        "op": "get",
+        "path": "/planned_dep"
+      },
+      "target": "/scheduledDepartureTime"
+    },
+    {
+      "confidence": 1.0,
+      "expression": {
+        "document": "input",
+        "op": "get",
+        "path": "/load_iata"
+      },
+      "target": "/departureLocation"
+    }
+  ],
+  "source_schema": "blind-air-cargo-shipment-source-v1",
+  "source_schema_version": "unversioned",
+  "target_schema": "blind-air-cargo-shipment-target-v1",
+  "target_schema_version": "unversioned"
+}

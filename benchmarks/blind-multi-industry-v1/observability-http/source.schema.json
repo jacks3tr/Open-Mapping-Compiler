@@ -1,0 +1,71 @@
+{
+  "$comment": "Constructed from OpenTelemetry Semantic Conventions 1.44 concepts; see ../provenance.json.",
+  "$id": "blind-observability-http-source-v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "dur_ms": {
+      "description": "Elapsed operation duration measured in milliseconds.",
+      "minimum": 0,
+      "type": "number"
+    },
+    "err_type": {
+      "description": "Class of error that ended the operation, or an HTTP status code string.",
+      "type": "string"
+    },
+    "http_mthd": {
+      "description": "HTTP method used for the request.",
+      "enum": [
+        "GET",
+        "POST",
+        "PUT",
+        "PATCH",
+        "DELETE"
+      ],
+      "type": "string"
+    },
+    "peer_addr": {
+      "description": "Network address of the directly connected peer.",
+      "type": "string"
+    },
+    "resp_code": {
+      "description": "HTTP response status code returned by the server.",
+      "minimum": 100,
+      "type": "integer"
+    },
+    "server_addr": {
+      "description": "Logical server host name or address for the request.",
+      "type": "string"
+    },
+    "span_uid": {
+      "description": "Identifier of this individual operation span.",
+      "type": "string"
+    },
+    "svc_nm": {
+      "description": "Logical name of the service producing the telemetry.",
+      "type": "string"
+    },
+    "trace_uid": {
+      "description": "Identifier shared by all spans in the distributed trace.",
+      "type": "string"
+    },
+    "url_full": {
+      "description": "Absolute URL requested by the client.",
+      "format": "uri",
+      "type": "string"
+    }
+  },
+  "required": [
+    "trace_uid",
+    "span_uid",
+    "svc_nm",
+    "http_mthd",
+    "url_full",
+    "resp_code",
+    "dur_ms",
+    "err_type",
+    "server_addr",
+    "peer_addr"
+  ],
+  "type": "object"
+}

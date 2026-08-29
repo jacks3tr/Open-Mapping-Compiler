@@ -1,0 +1,83 @@
+{
+  "$comment": "Neutral receiving contract derived independently from GS1 EPCIS 2.0 concepts.",
+  "$id": "blind-supply-chain-event-target-v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "businessStep": {
+      "description": "Business-process step represented by the event.",
+      "type": "string"
+    },
+    "eventIdentifier": {
+      "description": "Unique traceability-event key.",
+      "type": "string"
+    },
+    "eventLocation": {
+      "description": "Location associated with the event; read point and business location have distinct valid meanings.",
+      "type": "string"
+    },
+    "eventTimestamp": {
+      "description": "Time when the traceability event happened.",
+      "format": "date-time",
+      "type": "string"
+    },
+    "localTimeOffset": {
+      "description": "UTC offset applicable at the event location.",
+      "type": "string"
+    },
+    "lotNumber": {
+      "description": "Production lot or batch identifier.",
+      "type": "string"
+    },
+    "observedQuantity": {
+      "description": "Quantity participating in the event.",
+      "minimum": 0,
+      "type": "number"
+    },
+    "postEventDisposition": {
+      "description": "Business state expected to hold after the event.",
+      "type": "string"
+    },
+    "purchaseOrder": {
+      "description": "Purchase-order transaction reference.",
+      "type": "string"
+    },
+    "quantityUnit": {
+      "description": "Measurement unit for the observed quantity.",
+      "type": "string"
+    },
+    "readPointIdentifier": {
+      "description": "Exact capture point for the scan or observation.",
+      "type": "string"
+    },
+    "sensorTemperature": {
+      "description": "Temperature reported by a sensor attached to the event.",
+      "type": "number"
+    },
+    "sourceEventType": {
+      "description": "Specific EPCIS event class.",
+      "type": "string"
+    },
+    "tradeItemInstance": {
+      "description": "Serialized trade-item identity observed by the event.",
+      "type": "string"
+    },
+    "transformationIdentifier": {
+      "description": "Identifier linking inputs and outputs of a transformation event.",
+      "type": "string"
+    }
+  },
+  "required": [
+    "eventIdentifier",
+    "eventTimestamp",
+    "localTimeOffset",
+    "tradeItemInstance",
+    "businessStep",
+    "postEventDisposition",
+    "readPointIdentifier",
+    "observedQuantity",
+    "quantityUnit",
+    "eventLocation"
+  ],
+  "type": "object"
+}

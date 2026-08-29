@@ -1,0 +1,101 @@
+{
+  "id": "blind-payments-credit-transfer-mapping-v1",
+  "invariants": [],
+  "mapping_version": "0.1",
+  "rules": [
+    {
+      "confidence": 1.0,
+      "expression": {
+        "document": "input",
+        "op": "get",
+        "path": "/msg_ref"
+      },
+      "target": "/messageIdentifier"
+    },
+    {
+      "confidence": 1.0,
+      "expression": {
+        "document": "input",
+        "op": "get",
+        "path": "/e2e_ref"
+      },
+      "target": "/paymentReference"
+    },
+    {
+      "confidence": 1.0,
+      "expression": {
+        "document": "input",
+        "op": "get",
+        "path": "/dbtr_nm"
+      },
+      "target": "/payerName"
+    },
+    {
+      "confidence": 1.0,
+      "expression": {
+        "document": "input",
+        "op": "get",
+        "path": "/dbtr_iban"
+      },
+      "target": "/payerAccountIban"
+    },
+    {
+      "confidence": 1.0,
+      "expression": {
+        "document": "input",
+        "op": "get",
+        "path": "/cdtr_nm"
+      },
+      "target": "/beneficiaryName"
+    },
+    {
+      "confidence": 1.0,
+      "expression": {
+        "document": "input",
+        "op": "get",
+        "path": "/cdtr_iban"
+      },
+      "target": "/beneficiaryAccountIban"
+    },
+    {
+      "confidence": 1.0,
+      "expression": {
+        "document": "input",
+        "op": "get",
+        "path": "/instd_amt"
+      },
+      "target": "/instructedAmount"
+    },
+    {
+      "confidence": 1.0,
+      "expression": {
+        "document": "input",
+        "op": "get",
+        "path": "/instd_ccy"
+      },
+      "target": "/instructedCurrency"
+    },
+    {
+      "confidence": 1.0,
+      "expression": {
+        "document": "input",
+        "op": "get",
+        "path": "/sttlm_dt"
+      },
+      "target": "/settlementDate"
+    },
+    {
+      "confidence": 1.0,
+      "expression": {
+        "document": "input",
+        "op": "get",
+        "path": "/sttlm_dt"
+      },
+      "target": "/processingDate"
+    }
+  ],
+  "source_schema": "blind-payments-credit-transfer-source-v1",
+  "source_schema_version": "unversioned",
+  "target_schema": "blind-payments-credit-transfer-target-v1",
+  "target_schema_version": "unversioned"
+}

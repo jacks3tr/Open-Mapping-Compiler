@@ -1,0 +1,67 @@
+{
+  "$comment": "Constructed from ISO 20022 pacs.008 concepts; see ../provenance.json.",
+  "$id": "blind-payments-credit-transfer-source-v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "accept_dt": {
+      "description": "Calendar date on which the payment instruction was accepted.",
+      "format": "date",
+      "type": "string"
+    },
+    "cdtr_iban": {
+      "description": "International account number of the party receiving the funds.",
+      "pattern": "^[A-Z]{2}[0-9A-Z]{13,32}$",
+      "type": "string"
+    },
+    "cdtr_nm": {
+      "description": "Name of the party to which the funds are due.",
+      "type": "string"
+    },
+    "dbtr_iban": {
+      "description": "International account number of the party that owes the funds.",
+      "pattern": "^[A-Z]{2}[0-9A-Z]{13,32}$",
+      "type": "string"
+    },
+    "dbtr_nm": {
+      "description": "Name of the party that owes the transferred funds.",
+      "type": "string"
+    },
+    "e2e_ref": {
+      "description": "Reference assigned by the initiating party to follow the payment end to end.",
+      "type": "string"
+    },
+    "instd_amt": {
+      "description": "Amount ordered by the initiating party before deduction of charges.",
+      "minimum": 0,
+      "type": "number"
+    },
+    "instd_ccy": {
+      "description": "ISO currency code for the amount ordered by the initiating party.",
+      "pattern": "^[A-Z]{3}$",
+      "type": "string"
+    },
+    "msg_ref": {
+      "description": "Point-to-point reference assigned to identify the payment message.",
+      "type": "string"
+    },
+    "sttlm_dt": {
+      "description": "Calendar date on which interbank settlement makes funds available.",
+      "format": "date",
+      "type": "string"
+    }
+  },
+  "required": [
+    "msg_ref",
+    "e2e_ref",
+    "dbtr_nm",
+    "dbtr_iban",
+    "cdtr_nm",
+    "cdtr_iban",
+    "instd_amt",
+    "instd_ccy",
+    "accept_dt",
+    "sttlm_dt"
+  ],
+  "type": "object"
+}

@@ -51,6 +51,14 @@ class ModelFormatRepairPayload(OpenMappingModel):
     response_schema: JsonValue
 
 
+def _model_response_schema(package: MappingContextPackage) -> JsonValue:
+    schema = TypeAdapter(ModelMappingResponse).json_schema()
+    properties = cast(dict[str, object], schema["properties"])
+    context_sha256 = cast(dict[str, object], properties["context_sha256"])
+    context_sha256["const"] = mapping_context_sha256(package)
+    return cast(JsonValue, schema)
+
+
 def build_model_prompt(package: MappingContextPackage) -> ModelPrompt:
     """Build the versioned model prompt from one sanitized context package."""
 
@@ -58,7 +66,7 @@ def build_model_prompt(package: MappingContextPackage) -> ModelPrompt:
         prompt_version=package.prompt_version,
         system_instruction=_MAPPING_AGENT_V1_INSTRUCTION,
         user_payload_json=canonical_json(cast(JsonValue, package.model_dump(mode="json"))),
-        response_schema=cast(JsonValue, TypeAdapter(ModelMappingResponse).json_schema()),
+        response_schema=_model_response_schema(package),
     )
 
 
@@ -72,7 +80,7 @@ def build_model_repair_prompt(
 
     if len(canonical_json_bytes(invalid_response)) > _MAX_REPAIR_RESPONSE_BYTES:
         raise ValueError("model response is too large for bounded format repair")
-    response_schema = cast(JsonValue, TypeAdapter(ModelMappingResponse).json_schema())
+    response_schema = _model_response_schema(package)
     repair_payload = ModelFormatRepairPayload(
         task="repair-model-mapping-response",
         protocol_version=package.protocol_version,

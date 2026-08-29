@@ -1,0 +1,63 @@
+{
+  "$comment": "Constructed from OGC API Features 1.0.1 concepts; see ../provenance.json.",
+  "$id": "blind-geospatial-feature-source-v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "collection_ref": {
+      "description": "Identifier of the feature collection containing this object.",
+      "type": "string"
+    },
+    "crs_uri": {
+      "description": "URI naming the coordinate reference system.",
+      "type": "string"
+    },
+    "elev_m": {
+      "description": "Height coordinate measured in metres.",
+      "type": "number"
+    },
+    "ext_ref": {
+      "description": "Identifier used for the same feature by an external registry.",
+      "type": "string"
+    },
+    "feat_cls": {
+      "description": "Application category assigned to the feature.",
+      "type": "string"
+    },
+    "fid": {
+      "description": "Identifier of the real-world feature.",
+      "type": "string"
+    },
+    "lat_dd": {
+      "description": "Latitude coordinate in decimal degrees using WGS 84.",
+      "type": "number"
+    },
+    "lon_dd": {
+      "description": "Longitude coordinate in decimal degrees using WGS 84.",
+      "type": "number"
+    },
+    "valid_from": {
+      "description": "Beginning of the period in which the feature state is valid.",
+      "format": "date-time",
+      "type": "string"
+    },
+    "valid_until": {
+      "description": "End of the period in which the feature state is valid.",
+      "format": "date-time",
+      "type": "string"
+    }
+  },
+  "required": [
+    "fid",
+    "feat_cls",
+    "lon_dd",
+    "lat_dd",
+    "elev_m",
+    "crs_uri",
+    "ext_ref",
+    "collection_ref",
+    "valid_from",
+    "valid_until"
+  ],
+  "type": "object"
+}

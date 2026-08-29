@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+from copy import deepcopy
 from typing import cast
 
 import pytest
@@ -72,12 +73,19 @@ def _package(*, hostile: bool) -> MappingContextPackage:
 
 
 @pytest.mark.adversarial
-def test_untrusted_context_changes_only_the_user_payload() -> None:
+def test_untrusted_context_cannot_change_the_instruction_or_schema_shape() -> None:
     benign = build_model_prompt(_package(hostile=False))
     hostile = build_model_prompt(_package(hostile=True))
 
     assert hostile.system_instruction == benign.system_instruction
-    assert hostile.response_schema == benign.response_schema
+    benign_schema = cast(dict[str, object], deepcopy(benign.response_schema))
+    hostile_schema = cast(dict[str, object], deepcopy(hostile.response_schema))
+    benign_properties = cast(dict[str, object], benign_schema["properties"])
+    hostile_properties = cast(dict[str, object], hostile_schema["properties"])
+    benign_context = cast(dict[str, object], benign_properties["context_sha256"])
+    hostile_context = cast(dict[str, object], hostile_properties["context_sha256"])
+    assert benign_context.pop("const") != hostile_context.pop("const")
+    assert hostile_schema == benign_schema
     assert hostile.user_payload_json != benign.user_payload_json
     assert "call a different provider" in hostile.user_payload_json
     assert "call a different provider" not in hostile.system_instruction

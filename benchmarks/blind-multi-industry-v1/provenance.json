@@ -1,0 +1,130 @@
+{
+  "accessed": "2026-08-29",
+  "corpus_version": "1.0.0",
+  "method": "Constructed synthetic contracts and records grounded in authoritative public standards; no production, patient, payment, customer, or telemetry data is included.",
+  "sources": [
+    {
+      "case_id": "healthcare-observation",
+      "concepts": [
+        "identifier",
+        "subject",
+        "code",
+        "value",
+        "unit",
+        "effective",
+        "issued",
+        "encounter",
+        "performer",
+        "status"
+      ],
+      "industry": "healthcare",
+      "standard": "HL7 FHIR R5 Observation",
+      "url": "https://hl7.org/fhir/R5/observation-definitions.html"
+    },
+    {
+      "case_id": "payments-credit-transfer",
+      "concepts": [
+        "message identification",
+        "end-to-end identification",
+        "debtor",
+        "creditor",
+        "IBAN",
+        "instructed amount",
+        "currency",
+        "acceptance date",
+        "settlement date"
+      ],
+      "industry": "financial-services",
+      "standard": "ISO 20022 pacs.008",
+      "url": "https://www.iso20022.org/iso-20022-message-definitions?search=Pacs.008"
+    },
+    {
+      "case_id": "supply-chain-event",
+      "concepts": [
+        "event ID",
+        "event time",
+        "time-zone offset",
+        "EPC",
+        "business step",
+        "disposition",
+        "read point",
+        "business location",
+        "quantity",
+        "unit"
+      ],
+      "industry": "retail-supply-chain",
+      "standard": "GS1 EPCIS 2.0",
+      "url": "https://ref.gs1.org/standards/epcis/2.0.0/"
+    },
+    {
+      "case_id": "observability-http",
+      "concepts": [
+        "trace ID",
+        "span ID",
+        "service name",
+        "HTTP request method",
+        "URL",
+        "response status",
+        "duration",
+        "error type",
+        "server address",
+        "peer address"
+      ],
+      "industry": "software-observability",
+      "standard": "OpenTelemetry Semantic Conventions 1.44",
+      "url": "https://opentelemetry.io/docs/specs/semconv/http/http-spans/"
+    },
+    {
+      "case_id": "geospatial-feature",
+      "concepts": [
+        "feature ID",
+        "feature class",
+        "longitude",
+        "latitude",
+        "elevation",
+        "valid time",
+        "coordinate reference system",
+        "external reference",
+        "collection"
+      ],
+      "industry": "geospatial",
+      "standard": "OGC API Features 1.0.1",
+      "url": "https://docs.ogc.org/is/17-069r4/17-069r4.html"
+    },
+    {
+      "case_id": "energy-interval",
+      "concepts": [
+        "usage point",
+        "meter reading",
+        "service category",
+        "interval start",
+        "interval duration",
+        "reading value",
+        "unit",
+        "quality",
+        "published time"
+      ],
+      "industry": "energy-utilities",
+      "standard": "Green Button ESPI",
+      "url": "https://www.energy.gov/data/green-button"
+    },
+    {
+      "case_id": "air-cargo-shipment",
+      "concepts": [
+        "master waybill",
+        "house waybill",
+        "shipper",
+        "consignee",
+        "pieces",
+        "gross weight",
+        "origin",
+        "destination",
+        "loading location",
+        "planned departure"
+      ],
+      "industry": "air-cargo",
+      "standard": "IATA ONE Record cargo ontology 3.3",
+      "url": "https://onerecord.iata.org/ns/cargo/index-en.html"
+    }
+  ]
+}

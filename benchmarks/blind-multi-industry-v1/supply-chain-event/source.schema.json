@@ -1,0 +1,64 @@
+{
+  "$comment": "Constructed from GS1 EPCIS 2.0 concepts; see ../provenance.json.",
+  "$id": "blind-supply-chain-event-source-v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "biz_step_uri": {
+      "description": "Controlled vocabulary URI naming the business process step.",
+      "type": "string"
+    },
+    "bizloc_gln": {
+      "description": "Identifier of the broader business location where objects may be found.",
+      "type": "string"
+    },
+    "disp_uri": {
+      "description": "Controlled vocabulary URI describing the business condition after the event.",
+      "type": "string"
+    },
+    "epc_uri": {
+      "description": "Electronic Product Code URI identifying the observed trade-item instance.",
+      "type": "string"
+    },
+    "evt_id": {
+      "description": "Globally unique identifier assigned to the traceability event.",
+      "type": "string"
+    },
+    "evt_ts": {
+      "description": "Date and time at which the business event occurred.",
+      "format": "date-time",
+      "type": "string"
+    },
+    "qty_uom": {
+      "description": "Unit of measure used for the event quantity.",
+      "type": "string"
+    },
+    "qty_val": {
+      "description": "Quantity of the product class participating in the event.",
+      "minimum": 0,
+      "type": "number"
+    },
+    "rp_gln": {
+      "description": "Identifier of the precise read point at which capture occurred.",
+      "type": "string"
+    },
+    "tz_delta": {
+      "description": "Offset from UTC in force at the event location.",
+      "pattern": "^[+-][0-9]{2}:[0-9]{2}$",
+      "type": "string"
+    }
+  },
+  "required": [
+    "evt_id",
+    "evt_ts",
+    "tz_delta",
+    "epc_uri",
+    "biz_step_uri",
+    "disp_uri",
+    "rp_gln",
+    "bizloc_gln",
+    "qty_val",
+    "qty_uom"
+  ],
+  "type": "object"
+}

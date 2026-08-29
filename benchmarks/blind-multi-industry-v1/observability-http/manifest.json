@@ -1,0 +1,46 @@
+{
+  "benchmark_version": "0.1",
+  "description": "Blind standards-grounded software-observability schema-correspondence case",
+  "expected_ambiguous_targets": [
+    "/remoteEndpoint"
+  ],
+  "expected_mapping": "expected.mapping.json",
+  "expected_no_match_targets": [
+    "/deploymentEnvironment",
+    "/userAgent",
+    "/requestBodyBytes",
+    "/responseBodyBytes",
+    "/retryCount"
+  ],
+  "id": "blind-observability-http-v1",
+  "release_gates": {
+    "compile_success_rate": {
+      "minimum": 1.0
+    },
+    "cross_runtime_equivalence": {
+      "minimum": 1.0
+    },
+    "duplicate_target_rejection": {
+      "minimum": 1.0
+    },
+    "invalid_source_path_rejection": {
+      "minimum": 1.0
+    },
+    "required_target_coverage": {
+      "minimum": 1.0
+    },
+    "review_application_correctness": {
+      "minimum": 1.0
+    },
+    "target_outcome_coverage": {
+      "minimum": 1.0
+    },
+    "target_schema_pass_rate": {
+      "minimum": 1.0
+    }
+  },
+  "review": "review.json",
+  "samples": "samples.jsonl",
+  "source_schema": "source.schema.json",
+  "target_schema": "target.schema.json"
+}

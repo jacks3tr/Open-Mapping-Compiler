@@ -1,0 +1,392 @@
+{
+  "assisted_confidence_counts": {
+    "high": 0,
+    "low": 9,
+    "medium": 0,
+    "none": 6
+  },
+  "assisted_disposition_counts": {
+    "ambiguous": 6,
+    "manual": 0,
+    "no_match": 6,
+    "review_required": 3,
+    "suggested": 0
+  },
+  "baseline_confidence_counts": {
+    "high": 0,
+    "low": 9,
+    "medium": 0,
+    "none": 6
+  },
+  "baseline_disposition_counts": {
+    "ambiguous": 6,
+    "manual": 0,
+    "no_match": 6,
+    "review_required": 3,
+    "suggested": 0
+  },
+  "denominators": {
+    "ambiguity_precision": 6,
+    "compile_success_rate": 2,
+    "cross_runtime_equivalence": 3,
+    "direct_match_precision": 3,
+    "direct_match_recall": 9,
+    "duplicate_target_rejection": 1,
+    "expected_ambiguity_detection": 1,
+    "expected_no_match_detection": 5,
+    "high_confidence_false_positive_rate": 0,
+    "high_confidence_precision": 0,
+    "invalid_source_path_rejection": 1,
+    "invariant_pass_rate": 0,
+    "low_confidence_precision": 3,
+    "medium_confidence_precision": 0,
+    "no_match_precision": 6,
+    "no_match_recall": 5,
+    "required_target_coverage": 10,
+    "review_application_correctness": 15,
+    "target_outcome_coverage": 15,
+    "target_schema_pass_rate": 9,
+    "transformation_exact_match_rate": 0
+  },
+  "gate_results": [
+    {
+      "maximum": null,
+      "metric": "compile_success_rate",
+      "minimum": 1.0,
+      "passed": true,
+      "value": 1.0
+    },
+    {
+      "maximum": null,
+      "metric": "cross_runtime_equivalence",
+      "minimum": 1.0,
+      "passed": true,
+      "value": 1.0
+    },
+    {
+      "maximum": null,
+      "metric": "duplicate_target_rejection",
+      "minimum": 1.0,
+      "passed": true,
+      "value": 1.0
+    },
+    {
+      "maximum": null,
+      "metric": "invalid_source_path_rejection",
+      "minimum": 1.0,
+      "passed": true,
+      "value": 1.0
+    },
+    {
+      "maximum": null,
+      "metric": "required_target_coverage",
+      "minimum": 1.0,
+      "passed": true,
+      "value": 1.0
+    },
+    {
+      "maximum": null,
+      "metric": "review_application_correctness",
+      "minimum": 1.0,
+      "passed": true,
+      "value": 1.0
+    },
+    {
+      "maximum": null,
+      "metric": "target_outcome_coverage",
+      "minimum": 1.0,
+      "passed": true,
+      "value": 1.0
+    },
+    {
+      "maximum": null,
+      "metric": "target_schema_pass_rate",
+      "minimum": 1.0,
+      "passed": true,
+      "value": 1.0
+    }
+  ],
+  "gate_thresholds": {
+    "compile_success_rate": {
+      "maximum": null,
+      "minimum": 1.0
+    },
+    "cross_runtime_equivalence": {
+      "maximum": null,
+      "minimum": 1.0
+    },
+    "duplicate_target_rejection": {
+      "maximum": null,
+      "minimum": 1.0
+    },
+    "invalid_source_path_rejection": {
+      "maximum": null,
+      "minimum": 1.0
+    },
+    "required_target_coverage": {
+      "maximum": null,
+      "minimum": 1.0
+    },
+    "review_application_correctness": {
+      "maximum": null,
+      "minimum": 1.0
+    },
+    "target_outcome_coverage": {
+      "maximum": null,
+      "minimum": 1.0
+    },
+    "target_schema_pass_rate": {
+      "maximum": null,
+      "minimum": 1.0
+    }
+  },
+  "id": "blind-payments-credit-transfer-v1",
+  "issues": [
+    {
+      "code": "INVALID_INPUT",
+      "component": "benchmark.metrics",
+      "correction": "Declare an explicit zero expectation or add benchmark cases.",
+      "mapping_id": null,
+      "message": "metric 'high_confidence_precision' has no observed cases",
+      "rule_index": null,
+      "sample_id": null,
+      "schema_id": null,
+      "severity": "warning",
+      "source_path": null,
+      "target_path": null
+    },
+    {
+      "code": "INVALID_INPUT",
+      "component": "benchmark.metrics",
+      "correction": "Declare an explicit zero expectation or add benchmark cases.",
+      "mapping_id": null,
+      "message": "metric 'medium_confidence_precision' has no observed cases",
+      "rule_index": null,
+      "sample_id": null,
+      "schema_id": null,
+      "severity": "warning",
+      "source_path": null,
+      "target_path": null
+    }
+  ],
+  "metrics": {
+    "ambiguity_precision": 0.16666666666666666,
+    "compile_success_rate": 1.0,
+    "cross_runtime_equivalence": 1.0,
+    "direct_match_precision": 0.6666666666666666,
+    "direct_match_recall": 0.2222222222222222,
+    "duplicate_target_rejection": 1.0,
+    "expected_ambiguity_detection": 1.0,
+    "expected_no_match_detection": 0.6,
+    "high_confidence_false_positive_rate": 0.0,
+    "high_confidence_precision": 0.0,
+    "invalid_source_path_rejection": 1.0,
+    "invariant_pass_rate": 1.0,
+    "low_confidence_precision": 0.6666666666666666,
+    "medium_confidence_precision": 0.0,
+    "no_match_precision": 0.5,
+    "no_match_recall": 0.6,
+    "required_target_coverage": 1.0,
+    "review_application_correctness": 1.0,
+    "target_outcome_coverage": 1.0,
+    "target_schema_pass_rate": 1.0,
+    "transformation_exact_match_rate": 1.0
+  },
+  "numerators": {
+    "ambiguity_precision": 1,
+    "compile_success_rate": 2,
+    "cross_runtime_equivalence": 3,
+    "direct_match_precision": 2,
+    "direct_match_recall": 2,
+    "duplicate_target_rejection": 1,
+    "expected_ambiguity_detection": 1,
+    "expected_no_match_detection": 3,
+    "high_confidence_false_positive_rate": 0,
+    "high_confidence_precision": 0,
+    "invalid_source_path_rejection": 1,
+    "invariant_pass_rate": 0,
+    "low_confidence_precision": 2,
+    "medium_confidence_precision": 0,
+    "no_match_precision": 3,
+    "no_match_recall": 3,
+    "required_target_coverage": 10,
+    "review_application_correctness": 15,
+    "target_outcome_coverage": 15,
+    "target_schema_pass_rate": 9,
+    "transformation_exact_match_rate": 0
+  },
+  "report_version": "0.1",
+  "runtime_observations": [
+    {
+      "error_code": null,
+      "output": {
+        "beneficiaryAccountIban": "SE4550000000058398257466",
+        "beneficiaryName": "Nordic Tools AB",
+        "instructedAmount": 12850.75,
+        "instructedCurrency": "EUR",
+        "messageIdentifier": "MSG-20260621-001",
+        "payerAccountIban": "GB29NWBK60161331926819",
+        "payerName": "Acme Components LLC",
+        "paymentReference": "E2E-ACME-8841",
+        "processingDate": "2026-06-22",
+        "settlementDate": "2026-06-22"
+      },
+      "runtime": "interpreter",
+      "sample_id": "payments-credit-transfer-001",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "beneficiaryAccountIban": "SE4550000000058398257466",
+        "beneficiaryName": "Nordic Tools AB",
+        "instructedAmount": 12850.75,
+        "instructedCurrency": "EUR",
+        "messageIdentifier": "MSG-20260621-001",
+        "payerAccountIban": "GB29NWBK60161331926819",
+        "payerName": "Acme Components LLC",
+        "paymentReference": "E2E-ACME-8841",
+        "processingDate": "2026-06-22",
+        "settlementDate": "2026-06-22"
+      },
+      "runtime": "python",
+      "sample_id": "payments-credit-transfer-001",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "beneficiaryAccountIban": "SE4550000000058398257466",
+        "beneficiaryName": "Nordic Tools AB",
+        "instructedAmount": 12850.75,
+        "instructedCurrency": "EUR",
+        "messageIdentifier": "MSG-20260621-001",
+        "payerAccountIban": "GB29NWBK60161331926819",
+        "payerName": "Acme Components LLC",
+        "paymentReference": "E2E-ACME-8841",
+        "processingDate": "2026-06-22",
+        "settlementDate": "2026-06-22"
+      },
+      "runtime": "typescript",
+      "sample_id": "payments-credit-transfer-001",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "beneficiaryAccountIban": "AT611904300234573201",
+        "beneficiaryName": "Alpine Foods GmbH",
+        "instructedAmount": 910.0,
+        "instructedCurrency": "EUR",
+        "messageIdentifier": "MSG-20260622-014",
+        "payerAccountIban": "DE89370400440532013000",
+        "payerName": "River Market Inc",
+        "paymentReference": "E2E-RIVER-1022",
+        "processingDate": "2026-06-23",
+        "settlementDate": "2026-06-23"
+      },
+      "runtime": "interpreter",
+      "sample_id": "payments-credit-transfer-002",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "beneficiaryAccountIban": "AT611904300234573201",
+        "beneficiaryName": "Alpine Foods GmbH",
+        "instructedAmount": 910.0,
+        "instructedCurrency": "EUR",
+        "messageIdentifier": "MSG-20260622-014",
+        "payerAccountIban": "DE89370400440532013000",
+        "payerName": "River Market Inc",
+        "paymentReference": "E2E-RIVER-1022",
+        "processingDate": "2026-06-23",
+        "settlementDate": "2026-06-23"
+      },
+      "runtime": "python",
+      "sample_id": "payments-credit-transfer-002",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "beneficiaryAccountIban": "AT611904300234573201",
+        "beneficiaryName": "Alpine Foods GmbH",
+        "instructedAmount": 910,
+        "instructedCurrency": "EUR",
+        "messageIdentifier": "MSG-20260622-014",
+        "payerAccountIban": "DE89370400440532013000",
+        "payerName": "River Market Inc",
+        "paymentReference": "E2E-RIVER-1022",
+        "processingDate": "2026-06-23",
+        "settlementDate": "2026-06-23"
+      },
+      "runtime": "typescript",
+      "sample_id": "payments-credit-transfer-002",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "beneficiaryAccountIban": "FR7630006000011234567890189",
+        "beneficiaryName": "Med Supply SAS",
+        "instructedAmount": 44000.0,
+        "instructedCurrency": "USD",
+        "messageIdentifier": "MSG-20260623-031",
+        "payerAccountIban": "FR1420041010050500013M02606",
+        "payerName": "Nova Labs Ltd",
+        "paymentReference": "E2E-NOVA-7730",
+        "processingDate": "2026-06-24",
+        "settlementDate": "2026-06-24"
+      },
+      "runtime": "interpreter",
+      "sample_id": "payments-credit-transfer-003",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "beneficiaryAccountIban": "FR7630006000011234567890189",
+        "beneficiaryName": "Med Supply SAS",
+        "instructedAmount": 44000.0,
+        "instructedCurrency": "USD",
+        "messageIdentifier": "MSG-20260623-031",
+        "payerAccountIban": "FR1420041010050500013M02606",
+        "payerName": "Nova Labs Ltd",
+        "paymentReference": "E2E-NOVA-7730",
+        "processingDate": "2026-06-24",
+        "settlementDate": "2026-06-24"
+      },
+      "runtime": "python",
+      "sample_id": "payments-credit-transfer-003",
+      "stderr_summary": null,
+      "success": true
+    },
+    {
+      "error_code": null,
+      "output": {
+        "beneficiaryAccountIban": "FR7630006000011234567890189",
+        "beneficiaryName": "Med Supply SAS",
+        "instructedAmount": 44000,
+        "instructedCurrency": "USD",
+        "messageIdentifier": "MSG-20260623-031",
+        "payerAccountIban": "FR1420041010050500013M02606",
+        "payerName": "Nova Labs Ltd",
+        "paymentReference": "E2E-NOVA-7730",
+        "processingDate": "2026-06-24",
+        "settlementDate": "2026-06-24"
+      },
+      "runtime": "typescript",
+      "sample_id": "payments-credit-transfer-003",
+      "stderr_summary": null,
+      "success": true
+    }
+  ]
+}

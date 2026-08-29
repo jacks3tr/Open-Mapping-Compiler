@@ -1,0 +1,84 @@
+{
+  "$comment": "Neutral receiving contract derived independently from Green Button ESPI concepts.",
+  "$id": "blind-energy-interval-target-v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "billingAmount": {
+      "description": "Monetary charge attributable to the interval.",
+      "type": "number"
+    },
+    "carbonIntensity": {
+      "description": "Emissions intensity of supplied energy.",
+      "type": "number"
+    },
+    "consumptionValue": {
+      "description": "Consumption measured during the interval.",
+      "type": "number"
+    },
+    "demandMaximum": {
+      "description": "Maximum demand reached during the interval.",
+      "type": "number"
+    },
+    "intervalDurationSeconds": {
+      "description": "Length of the measurement interval in seconds.",
+      "type": "integer"
+    },
+    "intervalStart": {
+      "description": "Timestamp at which the reading interval begins.",
+      "format": "date-time",
+      "type": "string"
+    },
+    "measurementUnit": {
+      "description": "Unit applied to the consumption value.",
+      "type": "string"
+    },
+    "meterIdentifier": {
+      "description": "Identifier of the meter or reading source.",
+      "type": "string"
+    },
+    "outageFlag": {
+      "description": "Whether the service point was in an outage.",
+      "type": "boolean"
+    },
+    "publicationTimestamp": {
+      "description": "Time the interval reading was published.",
+      "format": "date-time",
+      "type": "string"
+    },
+    "qualityFlag": {
+      "description": "Quality classification of the meter reading.",
+      "type": "string"
+    },
+    "readingTimestamp": {
+      "description": "Timestamp associated with the reading; interval start and end are both common conventions.",
+      "format": "date-time",
+      "type": "string"
+    },
+    "resourceKind": {
+      "description": "Commodity measured at the service point.",
+      "type": "string"
+    },
+    "servicePointIdentifier": {
+      "description": "Identifier of the point where the resource is measured.",
+      "type": "string"
+    },
+    "tariffCode": {
+      "description": "Rate plan used to price the consumption.",
+      "type": "string"
+    }
+  },
+  "required": [
+    "servicePointIdentifier",
+    "meterIdentifier",
+    "resourceKind",
+    "intervalDurationSeconds",
+    "consumptionValue",
+    "measurementUnit",
+    "qualityFlag",
+    "publicationTimestamp",
+    "intervalStart",
+    "readingTimestamp"
+  ],
+  "type": "object"
+}

@@ -214,9 +214,12 @@ def build_model_benchmark_result(
         and _expression_json(proposal.expression)
         == _expression_json(truth[proposal.target_path].expression)
     }
-    complete = set(truth).issubset(exact_valid_targets) and set(
-        pack.manifest.expected_no_match_targets
-    ).issubset(abstained)
+    expected_ambiguity = set(pack.manifest.expected_ambiguous_targets)
+    complete = (
+        set(truth).difference(expected_ambiguity).issubset(exact_valid_targets)
+        and expected_ambiguity.issubset(abstained)
+        and set(pack.manifest.expected_no_match_targets).issubset(abstained)
+    )
     input_usage = tuple(run.usage.input_tokens for run in disclosure.batch_runs)
     output_usage = tuple(run.usage.output_tokens for run in disclosure.batch_runs)
     counts = ModelMetricCounts(

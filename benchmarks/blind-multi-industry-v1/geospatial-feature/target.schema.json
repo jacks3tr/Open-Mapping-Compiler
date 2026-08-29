@@ -1,0 +1,83 @@
+{
+  "$comment": "Neutral receiving contract derived independently from OGC API Features 1.0.1 concepts.",
+  "$id": "blind-geospatial-feature-target-v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "accuracyMeters": {
+      "description": "Estimated horizontal positional accuracy in metres.",
+      "type": "number"
+    },
+    "administrativeRegion": {
+      "description": "Administrative area containing the feature.",
+      "type": "string"
+    },
+    "altitudeDatum": {
+      "description": "Vertical reference datum used for elevation.",
+      "type": "string"
+    },
+    "collectionIdentifier": {
+      "description": "Collection to which the feature belongs.",
+      "type": "string"
+    },
+    "coordinateReferenceSystem": {
+      "description": "Reference identifying the coordinate system.",
+      "type": "string"
+    },
+    "elevationMeters": {
+      "description": "Feature elevation measured in metres.",
+      "type": "number"
+    },
+    "externalIdentifier": {
+      "description": "Identifier assigned by an external data authority.",
+      "type": "string"
+    },
+    "featureCategory": {
+      "description": "Classification of the represented real-world object.",
+      "type": "string"
+    },
+    "featureIdentifier": {
+      "description": "Stable identifier for the spatial feature.",
+      "type": "string"
+    },
+    "geometryType": {
+      "description": "Geometry kind such as Point, LineString, or Polygon.",
+      "type": "string"
+    },
+    "latitude": {
+      "description": "WGS 84 latitude in decimal degrees.",
+      "type": "number"
+    },
+    "longitude": {
+      "description": "WGS 84 longitude in decimal degrees.",
+      "type": "number"
+    },
+    "observationTime": {
+      "description": "Feature time whose start-versus-end interpretation depends on the consuming workflow.",
+      "format": "date-time",
+      "type": "string"
+    },
+    "ownerOrganization": {
+      "description": "Organization responsible for the feature.",
+      "type": "string"
+    },
+    "validFrom": {
+      "description": "Start time for the validity of this feature state.",
+      "format": "date-time",
+      "type": "string"
+    }
+  },
+  "required": [
+    "featureIdentifier",
+    "featureCategory",
+    "longitude",
+    "latitude",
+    "elevationMeters",
+    "coordinateReferenceSystem",
+    "externalIdentifier",
+    "collectionIdentifier",
+    "validFrom",
+    "observationTime"
+  ],
+  "type": "object"
+}

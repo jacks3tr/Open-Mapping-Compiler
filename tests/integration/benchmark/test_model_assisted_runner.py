@@ -27,23 +27,35 @@ from open_mapping.serialization.canonical_json import canonical_json_bytes
 class _ShapeFakeTransport:
     """Normalize three provider envelopes without network or credentials."""
 
-    def __init__(self, shape: str, truth: dict[str, JsonValue]) -> None:
+    def __init__(
+        self,
+        shape: str,
+        truth: dict[str, JsonValue],
+        *,
+        abstain_targets: frozenset[str] = frozenset(),
+    ) -> None:
         self.shape = shape
         self.truth = truth
+        self.abstain_targets = abstain_targets
 
     def invoke(self, request: ModelTransportRequest) -> ModelTransportResult:
         package = MappingContextPackage.model_validate_json(request.prompt.user_payload_json)
-        proposals = [
-            {
-                "target_path": item.target.pointer,
-                "action": "propose",
-                "selected_source_paths": _input_paths(self.truth[item.target.pointer]),
-                "expression": self.truth[item.target.pointer],
-                "reason": "Deterministic benchmark fake.",
-                "evidence": ["fixture truth"],
-            }
-            for item in package.target_requests
-        ]
+        proposals = []
+        for item in package.target_requests:
+            target_path = item.target.pointer
+            abstain = target_path in self.abstain_targets
+            proposals.append(
+                {
+                    "target_path": target_path,
+                    "action": "abstain" if abstain else "propose",
+                    "selected_source_paths": (
+                        [] if abstain else _input_paths(self.truth[target_path])
+                    ),
+                    "expression": None if abstain else self.truth[target_path],
+                    "reason": "Deterministic benchmark fake.",
+                    "evidence": ["fixture truth"],
+                }
+            )
         payload: JsonValue = {
             "protocol_version": "0.1",
             "prompt_version": package.prompt_version,
@@ -221,3 +233,37 @@ def test_model_options_do_not_change_baseline_gates(tmp_path: Path) -> None:
     assert modeled.gate_issues == baseline.gate_issues
     assert modeled.numerators == baseline.numerators
     assert modeled.denominators == baseline.denominators
+
+
+def test_full_mapping_completion_accepts_expected_ambiguity_abstentions(
+    tmp_path: Path,
+) -> None:
+    pack_path = Path("benchmarks/crm-erp")
+    pack = load_benchmark_pack(pack_path)
+    truth = {
+        rule.target: cast(JsonValue, rule.expression.model_dump(mode="json"))
+        for rule in pack.expected_mapping.rules
+    }
+    expected_ambiguity = frozenset(pack.manifest.expected_ambiguous_targets)
+    selection = _selection(ProviderKind.OPENAI)
+
+    def factory(_resolved: object) -> ModelTransport:
+        return _ShapeFakeTransport(
+            "openai",
+            truth,
+            abstain_targets=expected_ambiguity,
+        )
+
+    run = run_benchmark_pack(
+        pack_path,
+        enforce_gates=True,
+        result_dir=tmp_path / "expected-abstentions",
+        model_selection=selection,
+        model_registry={ProviderKind.OPENAI: factory},
+    )
+
+    result = next(iter(run.model_results.values()))
+    assert result.metrics.model_expected_ambiguity_abstention == 1.0
+    assert result.metrics.model_direct_match_precision == 1.0
+    assert result.metrics.model_direct_match_recall == 1.0
+    assert result.metrics.model_full_mapping_completion_rate == 1.0

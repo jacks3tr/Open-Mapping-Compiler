@@ -1,0 +1,101 @@
+{
+  "id": "blind-observability-http-mapping-v1",
+  "invariants": [],
+  "mapping_version": "0.1",
+  "rules": [
+    {
+      "confidence": 1.0,
+      "expression": {
+        "document": "input",
+        "op": "get",
+        "path": "/trace_uid"
+      },
+      "target": "/traceIdentifier"
+    },
+    {
+      "confidence": 1.0,
+      "expression": {
+        "document": "input",
+        "op": "get",
+        "path": "/span_uid"
+      },
+      "target": "/spanIdentifier"
+    },
+    {
+      "confidence": 1.0,
+      "expression": {
+        "document": "input",
+        "op": "get",
+        "path": "/svc_nm"
+      },
+      "target": "/applicationService"
+    },
+    {
+      "confidence": 1.0,
+      "expression": {
+        "document": "input",
+        "op": "get",
+        "path": "/http_mthd"
+      },
+      "target": "/requestMethod"
+    },
+    {
+      "confidence": 1.0,
+      "expression": {
+        "document": "input",
+        "op": "get",
+        "path": "/url_full"
+      },
+      "target": "/requestUrl"
+    },
+    {
+      "confidence": 1.0,
+      "expression": {
+        "document": "input",
+        "op": "get",
+        "path": "/resp_code"
+      },
+      "target": "/responseStatus"
+    },
+    {
+      "confidence": 1.0,
+      "expression": {
+        "document": "input",
+        "op": "get",
+        "path": "/dur_ms"
+      },
+      "target": "/latencyMilliseconds"
+    },
+    {
+      "confidence": 1.0,
+      "expression": {
+        "document": "input",
+        "op": "get",
+        "path": "/err_type"
+      },
+      "target": "/failureType"
+    },
+    {
+      "confidence": 1.0,
+      "expression": {
+        "document": "input",
+        "op": "get",
+        "path": "/server_addr"
+      },
+      "target": "/serverHost"
+    },
+    {
+      "confidence": 1.0,
+      "expression": {
+        "document": "input",
+        "op": "get",
+        "path": "/server_addr"
+      },
+      "target": "/remoteEndpoint"
+    }
+  ],
+  "source_schema": "blind-observability-http-source-v1",
+  "source_schema_version": "unversioned",
+  "target_schema": "blind-observability-http-target-v1",
+  "target_schema_version": "unversioned"
+}

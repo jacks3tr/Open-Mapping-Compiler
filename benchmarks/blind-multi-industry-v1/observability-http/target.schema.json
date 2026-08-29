@@ -1,0 +1,82 @@
+{
+  "$comment": "Neutral receiving contract derived independently from OpenTelemetry Semantic Conventions 1.44 concepts.",
+  "$id": "blind-observability-http-target-v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "applicationService": {
+      "description": "Logical application or service name.",
+      "type": "string"
+    },
+    "deploymentEnvironment": {
+      "description": "Environment such as production, staging, or development.",
+      "type": "string"
+    },
+    "failureType": {
+      "description": "Error classification associated with a failed request.",
+      "type": "string"
+    },
+    "latencyMilliseconds": {
+      "description": "Request duration expressed in milliseconds.",
+      "type": "number"
+    },
+    "remoteEndpoint": {
+      "description": "Remote endpoint; logical server and directly connected peer can differ through proxies.",
+      "type": "string"
+    },
+    "requestBodyBytes": {
+      "description": "Size of the request body in bytes.",
+      "type": "integer"
+    },
+    "requestMethod": {
+      "description": "HTTP request method.",
+      "type": "string"
+    },
+    "requestUrl": {
+      "description": "Complete requested URL.",
+      "format": "uri",
+      "type": "string"
+    },
+    "responseBodyBytes": {
+      "description": "Size of the response body in bytes.",
+      "type": "integer"
+    },
+    "responseStatus": {
+      "description": "HTTP status code in the response.",
+      "type": "integer"
+    },
+    "retryCount": {
+      "description": "Ordinal number of a resent request.",
+      "type": "integer"
+    },
+    "serverHost": {
+      "description": "Host name or address of the HTTP server.",
+      "type": "string"
+    },
+    "spanIdentifier": {
+      "description": "Identifier of the recorded operation.",
+      "type": "string"
+    },
+    "traceIdentifier": {
+      "description": "Distributed-trace correlation identifier.",
+      "type": "string"
+    },
+    "userAgent": {
+      "description": "User-agent string sent with the request.",
+      "type": "string"
+    }
+  },
+  "required": [
+    "traceIdentifier",
+    "spanIdentifier",
+    "applicationService",
+    "requestMethod",
+    "requestUrl",
+    "responseStatus",
+    "latencyMilliseconds",
+    "failureType",
+    "serverHost",
+    "remoteEndpoint"
+  ],
+  "type": "object"
+}

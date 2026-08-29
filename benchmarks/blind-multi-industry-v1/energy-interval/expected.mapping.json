@@ -1,0 +1,101 @@
+{
+  "id": "blind-energy-interval-mapping-v1",
+  "invariants": [],
+  "mapping_version": "0.1",
+  "rules": [
+    {
+      "confidence": 1.0,
+      "expression": {
+        "document": "input",
+        "op": "get",
+        "path": "/usage_pt"
+      },
+      "target": "/servicePointIdentifier"
+    },
+    {
+      "confidence": 1.0,
+      "expression": {
+        "document": "input",
+        "op": "get",
+        "path": "/meter_ref"
+      },
+      "target": "/meterIdentifier"
+    },
+    {
+      "confidence": 1.0,
+      "expression": {
+        "document": "input",
+        "op": "get",
+        "path": "/commodity_cd"
+      },
+      "target": "/resourceKind"
+    },
+    {
+      "confidence": 1.0,
+      "expression": {
+        "document": "input",
+        "op": "get",
+        "path": "/interval_secs"
+      },
+      "target": "/intervalDurationSeconds"
+    },
+    {
+      "confidence": 1.0,
+      "expression": {
+        "document": "input",
+        "op": "get",
+        "path": "/reading_val"
+      },
+      "target": "/consumptionValue"
+    },
+    {
+      "confidence": 1.0,
+      "expression": {
+        "document": "input",
+        "op": "get",
+        "path": "/uom_cd"
+      },
+      "target": "/measurementUnit"
+    },
+    {
+      "confidence": 1.0,
+      "expression": {
+        "document": "input",
+        "op": "get",
+        "path": "/quality_cd"
+      },
+      "target": "/qualityFlag"
+    },
+    {
+      "confidence": 1.0,
+      "expression": {
+        "document": "input",
+        "op": "get",
+        "path": "/published_ts"
+      },
+      "target": "/publicationTimestamp"
+    },
+    {
+      "confidence": 1.0,
+      "expression": {
+        "document": "input",
+        "op": "get",
+        "path": "/period_start"
+      },
+      "target": "/intervalStart"
+    },
+    {
+      "confidence": 1.0,
+      "expression": {
+        "document": "input",
+        "op": "get",
+        "path": "/period_start"
+      },
+      "target": "/readingTimestamp"
+    }
+  ],
+  "source_schema": "blind-energy-interval-source-v1",
+  "source_schema_version": "unversioned",
+  "target_schema": "blind-energy-interval-target-v1",
+  "target_schema_version": "unversioned"
+}

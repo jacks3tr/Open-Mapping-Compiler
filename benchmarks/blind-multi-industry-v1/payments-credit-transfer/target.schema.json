@@ -1,0 +1,85 @@
+{
+  "$comment": "Neutral receiving contract derived independently from ISO 20022 pacs.008 concepts.",
+  "$id": "blind-payments-credit-transfer-target-v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "beneficiaryAccountIban": {
+      "description": "IBAN of the receiving account.",
+      "type": "string"
+    },
+    "beneficiaryName": {
+      "description": "Name of the party receiving funds.",
+      "type": "string"
+    },
+    "chargeBearer": {
+      "description": "Party responsible for transaction charges.",
+      "type": "string"
+    },
+    "chargesAmount": {
+      "description": "Total payment charges.",
+      "type": "number"
+    },
+    "exchangeRate": {
+      "description": "Rate used to exchange one currency for another.",
+      "type": "number"
+    },
+    "instructedAmount": {
+      "description": "Monetary amount requested by the originator.",
+      "minimum": 0,
+      "type": "number"
+    },
+    "instructedCurrency": {
+      "description": "Currency of the requested amount.",
+      "pattern": "^[A-Z]{3}$",
+      "type": "string"
+    },
+    "intermediaryBic": {
+      "description": "BIC of an intermediary financial institution.",
+      "type": "string"
+    },
+    "messageIdentifier": {
+      "description": "Unique identifier of the payment message.",
+      "type": "string"
+    },
+    "payerAccountIban": {
+      "description": "IBAN of the paying account.",
+      "type": "string"
+    },
+    "payerName": {
+      "description": "Name of the paying party.",
+      "type": "string"
+    },
+    "paymentReference": {
+      "description": "Reference used to trace the transfer from originator to beneficiary.",
+      "type": "string"
+    },
+    "processingDate": {
+      "description": "Payment processing date; acceptance and settlement are both plausible without workflow context.",
+      "format": "date",
+      "type": "string"
+    },
+    "remittanceText": {
+      "description": "Unstructured information supplied for reconciliation.",
+      "type": "string"
+    },
+    "settlementDate": {
+      "description": "Date on which funds settle between financial institutions.",
+      "format": "date",
+      "type": "string"
+    }
+  },
+  "required": [
+    "messageIdentifier",
+    "paymentReference",
+    "payerName",
+    "payerAccountIban",
+    "beneficiaryName",
+    "beneficiaryAccountIban",
+    "instructedAmount",
+    "instructedCurrency",
+    "settlementDate",
+    "processingDate"
+  ],
+  "type": "object"
+}

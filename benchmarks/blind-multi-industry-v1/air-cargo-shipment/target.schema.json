@@ -1,0 +1,85 @@
+{
+  "$comment": "Neutral receiving contract derived independently from IATA ONE Record cargo ontology 3.3 concepts.",
+  "$id": "blind-air-cargo-shipment-target-v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "chargeableWeight": {
+      "description": "Weight used to calculate freight charges.",
+      "type": "number"
+    },
+    "commodityCode": {
+      "description": "Code classifying the shipped goods.",
+      "type": "string"
+    },
+    "consigneeName": {
+      "description": "Name of the cargo-receiving party.",
+      "type": "string"
+    },
+    "consignorName": {
+      "description": "Name of the cargo-sending party.",
+      "type": "string"
+    },
+    "customsStatus": {
+      "description": "Customs clearance state of the consignment.",
+      "type": "string"
+    },
+    "departureLocation": {
+      "description": "Departure location whose shipment-origin versus movement-loading meaning requires context.",
+      "pattern": "^[A-Z]{3}$",
+      "type": "string"
+    },
+    "destinationAirport": {
+      "description": "Airport code at the destination of the shipment route.",
+      "pattern": "^[A-Z]{3}$",
+      "type": "string"
+    },
+    "flightNumber": {
+      "description": "Marketing or operating flight identifier.",
+      "type": "string"
+    },
+    "grossWeightKilograms": {
+      "description": "Total gross cargo weight in kilograms.",
+      "type": "number"
+    },
+    "houseWaybillNumber": {
+      "description": "House-level waybill identifier.",
+      "type": "string"
+    },
+    "masterWaybillNumber": {
+      "description": "Master air waybill identifier.",
+      "type": "string"
+    },
+    "originAirport": {
+      "description": "Airport code at the origin of the shipment route.",
+      "pattern": "^[A-Z]{3}$",
+      "type": "string"
+    },
+    "pieceQuantity": {
+      "description": "Count of physical shipment pieces.",
+      "type": "integer"
+    },
+    "scheduledDepartureTime": {
+      "description": "Planned movement departure timestamp.",
+      "format": "date-time",
+      "type": "string"
+    },
+    "specialHandlingCode": {
+      "description": "Code identifying special cargo handling requirements.",
+      "type": "string"
+    }
+  },
+  "required": [
+    "masterWaybillNumber",
+    "houseWaybillNumber",
+    "consignorName",
+    "consigneeName",
+    "pieceQuantity",
+    "grossWeightKilograms",
+    "originAirport",
+    "destinationAirport",
+    "scheduledDepartureTime",
+    "departureLocation"
+  ],
+  "type": "object"
+}

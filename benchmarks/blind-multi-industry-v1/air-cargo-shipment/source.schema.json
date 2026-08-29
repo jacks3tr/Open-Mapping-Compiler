@@ -1,0 +1,67 @@
+{
+  "$comment": "Constructed from IATA ONE Record cargo ontology 3.3 concepts; see ../provenance.json.",
+  "$id": "blind-air-cargo-shipment-source-v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "awb_no": {
+      "description": "Master air waybill number identifying the consolidated shipment.",
+      "type": "string"
+    },
+    "consignee_nm": {
+      "description": "Name of the organization designated to receive the cargo.",
+      "type": "string"
+    },
+    "dest_iata": {
+      "description": "IATA airport code where the shipment routing terminates.",
+      "pattern": "^[A-Z]{3}$",
+      "type": "string"
+    },
+    "gross_kg": {
+      "description": "Total gross shipment weight measured in kilograms.",
+      "minimum": 0,
+      "type": "number"
+    },
+    "hwb_no": {
+      "description": "House waybill number identifying the shipper-level consignment.",
+      "type": "string"
+    },
+    "load_iata": {
+      "description": "IATA station at which cargo is loaded for the current movement.",
+      "pattern": "^[A-Z]{3}$",
+      "type": "string"
+    },
+    "orig_iata": {
+      "description": "IATA airport code where the shipment routing originates.",
+      "pattern": "^[A-Z]{3}$",
+      "type": "string"
+    },
+    "piece_cnt": {
+      "description": "Number of physical pieces in the shipment.",
+      "minimum": 1,
+      "type": "integer"
+    },
+    "planned_dep": {
+      "description": "Scheduled departure date and time for the movement.",
+      "format": "date-time",
+      "type": "string"
+    },
+    "shipper_nm": {
+      "description": "Name of the organization tendering the cargo.",
+      "type": "string"
+    }
+  },
+  "required": [
+    "awb_no",
+    "hwb_no",
+    "shipper_nm",
+    "consignee_nm",
+    "piece_cnt",
+    "gross_kg",
+    "orig_iata",
+    "dest_iata",
+    "planned_dep",
+    "load_iata"
+  ],
+  "type": "object"
+}

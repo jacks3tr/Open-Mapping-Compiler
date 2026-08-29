@@ -1,0 +1,101 @@
+{
+  "id": "blind-healthcare-observation-mapping-v1",
+  "invariants": [],
+  "mapping_version": "0.1",
+  "rules": [
+    {
+      "confidence": 1.0,
+      "expression": {
+        "document": "input",
+        "op": "get",
+        "path": "/obs_uid"
+      },
+      "target": "/observationIdentifier"
+    },
+    {
+      "confidence": 1.0,
+      "expression": {
+        "document": "input",
+        "op": "get",
+        "path": "/pt_ref"
+      },
+      "target": "/subjectReference"
+    },
+    {
+      "confidence": 1.0,
+      "expression": {
+        "document": "input",
+        "op": "get",
+        "path": "/loinc_cd"
+      },
+      "target": "/measurementCode"
+    },
+    {
+      "confidence": 1.0,
+      "expression": {
+        "document": "input",
+        "op": "get",
+        "path": "/result_num"
+      },
+      "target": "/numericResult"
+    },
+    {
+      "confidence": 1.0,
+      "expression": {
+        "document": "input",
+        "op": "get",
+        "path": "/ucum_cd"
+      },
+      "target": "/measurementUnit"
+    },
+    {
+      "confidence": 1.0,
+      "expression": {
+        "document": "input",
+        "op": "get",
+        "path": "/final_ind"
+      },
+      "target": "/isFinal"
+    },
+    {
+      "confidence": 1.0,
+      "expression": {
+        "document": "input",
+        "op": "get",
+        "path": "/enc_ref"
+      },
+      "target": "/encounterReference"
+    },
+    {
+      "confidence": 1.0,
+      "expression": {
+        "document": "input",
+        "op": "get",
+        "path": "/performer_ref"
+      },
+      "target": "/responsibleParty"
+    },
+    {
+      "confidence": 1.0,
+      "expression": {
+        "document": "input",
+        "op": "get",
+        "path": "/clin_eff_ts"
+      },
+      "target": "/clinicallyEffectiveAt"
+    },
+    {
+      "confidence": 1.0,
+      "expression": {
+        "document": "input",
+        "op": "get",
+        "path": "/clin_eff_ts"
+      },
+      "target": "/recordedAt"
+    }
+  ],
+  "source_schema": "blind-healthcare-observation-source-v1",
+  "source_schema_version": "unversioned",
+  "target_schema": "blind-healthcare-observation-target-v1",
+  "target_schema_version": "unversioned"
+}

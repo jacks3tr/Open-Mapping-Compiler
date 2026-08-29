@@ -1,0 +1,76 @@
+{
+  "$comment": "Constructed from Green Button ESPI concepts; see ../provenance.json.",
+  "$id": "blind-energy-interval-source-v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "commodity_cd": {
+      "description": "Kind of measured service such as electricity, gas, or water.",
+      "enum": [
+        "ELECTRICITY",
+        "GAS",
+        "WATER"
+      ],
+      "type": "string"
+    },
+    "interval_secs": {
+      "description": "Duration of each reading interval in seconds.",
+      "minimum": 1,
+      "type": "integer"
+    },
+    "meter_ref": {
+      "description": "Identifier of the meter-reading source at the usage point.",
+      "type": "string"
+    },
+    "period_end": {
+      "description": "End of the interval represented by the reading.",
+      "format": "date-time",
+      "type": "string"
+    },
+    "period_start": {
+      "description": "Beginning of the interval represented by the reading.",
+      "format": "date-time",
+      "type": "string"
+    },
+    "published_ts": {
+      "description": "Date and time at which the usage record was published.",
+      "format": "date-time",
+      "type": "string"
+    },
+    "quality_cd": {
+      "description": "Code indicating actual, estimated, or corrected reading quality.",
+      "enum": [
+        "ACTUAL",
+        "ESTIMATED",
+        "CORRECTED"
+      ],
+      "type": "string"
+    },
+    "reading_val": {
+      "description": "Measured resource consumption during the interval.",
+      "minimum": 0,
+      "type": "number"
+    },
+    "uom_cd": {
+      "description": "Unit code applied to the measured consumption.",
+      "type": "string"
+    },
+    "usage_pt": {
+      "description": "Identifier of the location where energy or another resource is measured.",
+      "type": "string"
+    }
+  },
+  "required": [
+    "usage_pt",
+    "meter_ref",
+    "commodity_cd",
+    "interval_secs",
+    "reading_val",
+    "uom_cd",
+    "quality_cd",
+    "published_ts",
+    "period_start",
+    "period_end"
+  ],
+  "type": "object"
+}

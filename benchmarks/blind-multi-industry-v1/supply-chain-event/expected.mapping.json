@@ -1,0 +1,101 @@
+{
+  "id": "blind-supply-chain-event-mapping-v1",
+  "invariants": [],
+  "mapping_version": "0.1",
+  "rules": [
+    {
+      "confidence": 1.0,
+      "expression": {
+        "document": "input",
+        "op": "get",
+        "path": "/evt_id"
+      },
+      "target": "/eventIdentifier"
+    },
+    {
+      "confidence": 1.0,
+      "expression": {
+        "document": "input",
+        "op": "get",
+        "path": "/evt_ts"
+      },
+      "target": "/eventTimestamp"
+    },
+    {
+      "confidence": 1.0,
+      "expression": {
+        "document": "input",
+        "op": "get",
+        "path": "/tz_delta"
+      },
+      "target": "/localTimeOffset"
+    },
+    {
+      "confidence": 1.0,
+      "expression": {
+        "document": "input",
+        "op": "get",
+        "path": "/epc_uri"
+      },
+      "target": "/tradeItemInstance"
+    },
+    {
+      "confidence": 1.0,
+      "expression": {
+        "document": "input",
+        "op": "get",
+        "path": "/biz_step_uri"
+      },
+      "target": "/businessStep"
+    },
+    {
+      "confidence": 1.0,
+      "expression": {
+        "document": "input",
+        "op": "get",
+        "path": "/disp_uri"
+      },
+      "target": "/postEventDisposition"
+    },
+    {
+      "confidence": 1.0,
+      "expression": {
+        "document": "input",
+        "op": "get",
+        "path": "/rp_gln"
+      },
+      "target": "/readPointIdentifier"
+    },
+    {
+      "confidence": 1.0,
+      "expression": {
+        "document": "input",
+        "op": "get",
+        "path": "/qty_val"
+      },
+      "target": "/observedQuantity"
+    },
+    {
+      "confidence": 1.0,
+      "expression": {
+        "document": "input",
+        "op": "get",
+        "path": "/qty_uom"
+      },
+      "target": "/quantityUnit"
+    },
+    {
+      "confidence": 1.0,
+      "expression": {
+        "document": "input",
+        "op": "get",
+        "path": "/bizloc_gln"
+      },
+      "target": "/eventLocation"
+    }
+  ],
+  "source_schema": "blind-supply-chain-event-source-v1",
+  "source_schema_version": "unversioned",
+  "target_schema": "blind-supply-chain-event-target-v1",
+  "target_schema_version": "unversioned"
+}

@@ -1,0 +1,62 @@
+{
+  "ambiguous_targets": 7,
+  "assets": {
+    "air-cargo-shipment": {
+      "expected.mapping.json": "b36e08e30b465ac04a35c67ebdf1a22b4708ea188c18a5f391b5e47638128f4d",
+      "manifest.json": "e40b13ba549f76fb01b6f5d767ca54946f94b4dd99f70aecb384decf94058b35",
+      "samples.jsonl": "5dbb6a6816ac8c3a025a985c364159ad79a9fd362eeaa25bf7ac1d44ebdc1761",
+      "source.schema.json": "ca882227211e06dc9d75785c4cb23e43bd2965d085bdff132940e62d57e4ae18",
+      "target.schema.json": "0711fb86781cad00b10c562eb549fd90504e39d367d089a67d1e25e1b589843c"
+    },
+    "energy-interval": {
+      "expected.mapping.json": "39a08b6a2dbdfaaf7ef19e4936e6a0769847f1d4d32abdb9c894bc455043a972",
+      "manifest.json": "7357652e08e8225c69f36b32cb0485c1c14b424914acc5132f569e614ea20da8",
+      "samples.jsonl": "a493cb52b59ae1d0787bb2c9b04e6a8b6094d63b2fd5ae29aa2ad14288944854",
+      "source.schema.json": "ec80fb319b7dce1c43c152610fc635ea8a6a67095093fbfa50c582ea373fca97",
+      "target.schema.json": "d04356c5dc64cc1d5805aef747c03ccecac8cc6c57fea5bae54622daa0f474cf"
+    },
+    "geospatial-feature": {
+      "expected.mapping.json": "32582dcd903a9939820f24d0b518a2bb2bcdee6126405ee9c397a28f27f1e4df",
+      "manifest.json": "8b35521594438b9b357fa5d8fce2e2efb6f6b2cd4b3e8f1cfe4be12fa9e83783",
+      "samples.jsonl": "02b6605a80b58a4864906db067d45e0d39563693406cf36a079bb3bab88e34b2",
+      "source.schema.json": "1d7eb8e601abf2c9cfbb59cca1e9b496b95c3769acc5e236e9721f26e1f3383f",
+      "target.schema.json": "4d98234c3020157ca5b2a9c6f053806331feb00b1655673493ecaa0295da19dc"
+    },
+    "healthcare-observation": {
+      "expected.mapping.json": "2b4d1453f2192ece2ea0a725e49349d2176be921a6348d509eb2288b8263b31c",
+      "manifest.json": "fec9b05aced7bd42831b7b751a4248950bb7632f95967ffd67fd4809bb2d73b3",
+      "samples.jsonl": "658420bb40937e731b9727cdd15d760559e136c645170c7e43fc799215c5b141",
+      "source.schema.json": "c687e7688e2c059fa53d514977b5ecf292e9ffb75687130a58c0a1e4dfd9c2f7",
+      "target.schema.json": "57761335b8c4772abdc90bce04c860b56c0d023d47d9887f4515a6e8c7000bd4"
+    },
+    "observability-http": {
+      "expected.mapping.json": "2403679b3f7d61c5650f1bbaef534f15ee413a110a38e9dec9fcef32c60e0598",
+      "manifest.json": "a226a5271f0a676bf2f2590c2fafcc2d48550f4f94f9880c613bcb3097344642",
+      "samples.jsonl": "a829688c1ff492f2ea135312980e2ca5f0c40420b0da0c88375b23a35b0ee92e",
+      "source.schema.json": "a32b592f4e5add13bb86cad0b99b4df55e55167af334b69d4dda02d73f1efc97",
+      "target.schema.json": "d4244e42ef792d23ff7e1baa07c431ffee5c1019b953ff6ec7842a22295976fc"
+    },
+    "payments-credit-transfer": {
+      "expected.mapping.json": "e87def60ad9a7015ec8dcb2290c08a5e82fd3ce673eba33636a331a7596787f1",
+      "manifest.json": "398cd804d8f0f6b7169f77488db2ce776c5ca8ee8c66e30cff090222a21a25d5",
+      "samples.jsonl": "b998098d72af0f677b2d05280a678820046fa1c1cb6f3bfc2c507390f2ed667c",
+      "source.schema.json": "27fe60f4feeed59faf8383c9d0be79dc92e04078cf49c9c1a81d76d8137acaf9",
+      "target.schema.json": "36634363aeae607f095b8b9a67ed782fbaabb6a1ce007612b33f9a7b13cc187a"
+    },
+    "supply-chain-event": {
+      "expected.mapping.json": "3b3d29dafe2ecaacc0f2b149001ea9fde2365629590237fb7b21be382936b603",
+      "manifest.json": "bd5f4de386fd6f3f3f29027c7dc816bce57d6854f418d0c9d3c7b15fdc572838",
+      "samples.jsonl": "6787526b76af64ac9119e199ab5da7a7816229c80e6dfa6087631b554f3bb365",
+      "source.schema.json": "f2f8b418b0acfd0cc3b740ddb4a81a303cbe19664304c530755b9ed1af65d795",
+      "target.schema.json": "f9e2fef5404646daef0c3f1bb99fded09726d670256508340ef4ebca9e9b45c6"
+    }
+  },
+  "case_count": 7,
+  "corpus_version": "1.0.0",
+  "direct_mappings": 63,
+  "frozen_on": "2026-08-29",
+  "method": "gold-before-baseline",
+  "no_match_targets": 35,
+  "provenance_sha256": "5a206fbd54a3b6669d9216cf87923802f4d06a720cc1b92b9b962655eb0e75a3",
+  "target_outcomes": 105
+}

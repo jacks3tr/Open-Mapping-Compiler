@@ -1,0 +1,83 @@
+{
+  "$comment": "Neutral receiving contract derived independently from HL7 FHIR R5 Observation concepts.",
+  "$id": "blind-healthcare-observation-target-v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "bodySiteCode": {
+      "description": "Coded anatomical site of the observation.",
+      "type": "string"
+    },
+    "clinicallyEffectiveAt": {
+      "description": "Time when the measured fact was clinically true.",
+      "format": "date-time",
+      "type": "string"
+    },
+    "deviceIdentifier": {
+      "description": "Identifier of the measuring device.",
+      "type": "string"
+    },
+    "encounterReference": {
+      "description": "Healthcare encounter connected to the result.",
+      "type": "string"
+    },
+    "interpretationCode": {
+      "description": "Coded interpretation such as high, low, or normal.",
+      "type": "string"
+    },
+    "isFinal": {
+      "description": "Whether the result is final rather than preliminary.",
+      "type": "boolean"
+    },
+    "measurementCode": {
+      "description": "Clinical code identifying what was measured.",
+      "type": "string"
+    },
+    "measurementUnit": {
+      "description": "Unit carried with the numeric result.",
+      "type": "string"
+    },
+    "numericResult": {
+      "description": "Measured numeric result.",
+      "type": "number"
+    },
+    "observationIdentifier": {
+      "description": "Stable business key for the clinical observation.",
+      "type": "string"
+    },
+    "recordedAt": {
+      "description": "Relevant observation timestamp; the receiving workflow must choose clinical-effective or publication semantics.",
+      "format": "date-time",
+      "type": "string"
+    },
+    "referenceRangeHigh": {
+      "description": "Upper bound of the applicable reference range.",
+      "type": "number"
+    },
+    "responsibleParty": {
+      "description": "Party responsible for the asserted observation.",
+      "type": "string"
+    },
+    "specimenIdentifier": {
+      "description": "Identifier of the specimen used for the observation.",
+      "type": "string"
+    },
+    "subjectReference": {
+      "description": "Patient or subject reference for the measurement.",
+      "type": "string"
+    }
+  },
+  "required": [
+    "observationIdentifier",
+    "subjectReference",
+    "measurementCode",
+    "numericResult",
+    "measurementUnit",
+    "isFinal",
+    "encounterReference",
+    "responsibleParty",
+    "clinicallyEffectiveAt",
+    "recordedAt"
+  ],
+  "type": "object"
+}
