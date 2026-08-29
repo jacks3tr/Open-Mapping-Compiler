@@ -40,7 +40,7 @@ class ModelBatchRun(OpenMappingModel):
 
 
 class ModelRunDisclosure(OpenMappingModel):
-    """Provider-neutral provenance for one ordered model-assisted run."""
+    """Provider-neutral provenance for one ordered AI model run."""
 
     model_alias: str
     provider_name: str

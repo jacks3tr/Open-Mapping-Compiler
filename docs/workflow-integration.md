@@ -1,6 +1,6 @@
 # Workflow integration
 
-Build bundles in a reviewed build step and deploy the `.omc` file with your application. Load it once when the process starts.
+Use AI to generate the first-pass mapping during a reviewed build step, then deploy the verified `.omc` file with your application. Load the bundle once when the process starts. The runtime path is deterministic and does not call the model.
 
 Python applications can keep one `Mapper` instance and call `transform` for each record. Other runtimes can invoke `open-mapping apply` with one JSON document or a JSONL stream. The command writes data to stdout and diagnostics to stderr.
 

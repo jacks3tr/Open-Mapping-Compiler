@@ -5,7 +5,7 @@ build-backend = "hatchling.build"
 [project]
 name = "open-mapping"
 version = "0.2.0"
-description = "Map two API schemas and return structured, reviewable JSON."
+description = "Use AI to map data contracts into structured, reviewable transformations."
 authors = [{ name = "Jacks3tr", email = "Jacks3tr@gmail.com" }]
 readme = "README.md"
 requires-python = ">=3.11"

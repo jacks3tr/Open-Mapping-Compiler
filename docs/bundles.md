@@ -1,5 +1,7 @@
 # Mapping bundles
 
+AI proposes mappings during compilation and review. The resulting `.omc` bundle applies approved mappings deterministically without calling a model at runtime.
+
 Version `0.1` of the `.omc` format is one canonical JSON document. It contains:
 
 - the portable mapping IR;

@@ -1,12 +1,12 @@
-# Model-assisted mapping
+# AI mapping
 
-Add a model to the normal two-schema command explicitly:
+AI is the recommended path for producing a high-quality first pass across systems that use different names and business language. Select a model explicitly:
 
 ```text
 open-mapping map source.schema.json target.schema.json --model openai:gpt-5-mini --out mapping.json
 ```
 
-Local deterministic mapping is the default. Select a model explicitly with `--model provider:model-id` or `OPEN_MAPPING_MODEL`; then set the matching provider credential.
+You can also set `OPEN_MAPPING_MODEL=provider:model-id` so the same `map` command and `map_schemas` function use that model without a per-call flag. Set the matching provider credential in the environment.
 
 Native model names use these environment variables:
 
@@ -25,6 +25,10 @@ The system prompt requires one structured proposal for each target field. It res
 The JSON result records each target field, proposed source paths, transformation expressions, supporting evidence, alternatives, ambiguous or unmapped fields, and sanitized provider metadata. It does not contain credentials or raw provider responses.
 
 Model proposals are not treated as approved business rules. The result is meant for human review or for a tool that applies its own approval policy.
+
+## Deterministic offline fallback
+
+Omit `--model` when a provider is unavailable or the mapping must stay fully offline. The fallback uses the same inputs and returns the same typed result without an API key or mapping pack. It is intentionally conservative and leaves uncertain decisions for review.
 
 ## Advanced provider configuration
 

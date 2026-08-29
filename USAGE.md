@@ -1,6 +1,6 @@
 # Advanced usage
 
-Start with the `map` command in [README.md](README.md). This guide covers the lower-level workflow for teams that need direct control over local suggestions, review documents, raw mappings, and generated code.
+Start with the AI workflow in [README.md](README.md). This guide covers the lower-level compiler stages for teams that need direct control over suggestion reports, review documents, raw mappings, and generated code.
 
 ## Inspect a schema
 

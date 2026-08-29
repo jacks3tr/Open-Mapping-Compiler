@@ -2,7 +2,7 @@
 
 ## 0.2.0
 
-- Added `open-mapping map SOURCE TARGET` as the primary model-assisted workflow.
+- Added `open-mapping map SOURCE TARGET` as the primary AI mapping workflow.
 - Added the public `map_schemas` API for applications that need the structured result.
 - Included model-provider transport support in the normal package installation.
 - Expanded the mapping prompt to compare schema meaning, structure, constraints, and loss risk.

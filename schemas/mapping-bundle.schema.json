@@ -2831,7 +2831,7 @@
     },
     "ModelRunDisclosure": {
       "additionalProperties": false,
-      "description": "Provider-neutral provenance for one ordered model-assisted run.",
+      "description": "Provider-neutral provenance for one ordered AI model run.",
       "properties": {
         "batch_runs": {
           "items": {

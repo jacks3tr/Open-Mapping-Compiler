@@ -1,5 +1,7 @@
 # HTTP sidecar
 
+Create and review a mapping with AI, build the verified `.omc` bundle, then use the sidecar to apply it deterministically. The running sidecar does not call a model or either business system.
+
 Install the optional server dependencies:
 
 ```text
