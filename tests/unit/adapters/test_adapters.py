@@ -89,3 +89,33 @@ paths:
         schema_id=None,
     )
     assert doc.schema_id == "order"
+
+
+def test_openapi_32_loads_selected_schema(tmp_path: Path) -> None:
+    path = tmp_path / "api.yaml"
+    path.write_text(
+        """openapi: 3.2.0
+info: {title: x, version: "1"}
+components:
+  schemas:
+    Reading:
+      $id: reading
+      type: object
+      required: [value]
+      properties:
+        value: {type: number}
+""",
+        encoding="utf-8",
+    )
+
+    doc = load_openapi_schema(
+        path,
+        selector=OpenApiSelector(
+            kind=OpenApiSelectorKind.COMPONENT,
+            component_name="Reading",
+        ),
+        schema_id=None,
+    )
+
+    assert doc.schema_id == "reading"
+    assert doc.field("/value") is not None

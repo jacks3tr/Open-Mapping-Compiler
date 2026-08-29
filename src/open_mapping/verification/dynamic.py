@@ -78,6 +78,23 @@ def _source_issues(
 ) -> tuple[Issue, ...]:
     raw = json.loads(schema.canonical_source_json)
     validator = Draft202012Validator(raw)
+    return _source_issues_with_validator(
+        validator,
+        schema_id=schema.schema_id,
+        document=document,
+        sample_id=sample_id,
+        diagnostic_values=diagnostic_values,
+    )
+
+
+def _source_issues_with_validator(
+    validator: Draft202012Validator,
+    *,
+    schema_id: str,
+    document: JsonValue,
+    sample_id: str,
+    diagnostic_values: bool = False,
+) -> tuple[Issue, ...]:
     result: list[Issue] = []
     for error in sorted(validator.iter_errors(document), key=validation_error_sort_key):
         result.append(
@@ -89,7 +106,7 @@ def _source_issues(
                     "source sample", error, diagnostic_values=diagnostic_values
                 ),
                 correction="Provide source samples that match the source schema.",
-                schema_id=schema.schema_id,
+                schema_id=schema_id,
                 sample_id=sample_id,
             )
         )

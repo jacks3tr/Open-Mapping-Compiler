@@ -23,7 +23,8 @@ def _run(*args: str) -> subprocess.CompletedProcess[str]:
 def test_help() -> None:
     result = _run("--help")
     assert result.returncode == 0
-    assert "suggest" in result.stdout
+    assert "map" in result.stdout
+    assert "suggest" not in result.stdout
 
 
 def test_inspect_erp_source() -> None:

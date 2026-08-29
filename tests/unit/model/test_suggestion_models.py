@@ -9,6 +9,7 @@ from open_mapping.model.suggestions import (
     ConfidenceBand,
     MappingSuggestion,
     SuggestionDisposition,
+    SuggestionOrigin,
     SuggestionReport,
     SuggestionSummary,
 )
@@ -74,3 +75,27 @@ def test_suggestion_report_rejects_noncanonical_target_order() -> None:
 def test_suggestion_report_accepts_exact_reconciled_summary() -> None:
     result = report((suggested("/a"), suggested("/b")))
     assert result.summary == SuggestionSummary(total_targets=2, high=2, suggested=2)
+
+
+def test_effective_source_paths_unifies_legacy_and_multi_source_state() -> None:
+    legacy = suggested("/legacy")
+    multi_source = MappingSuggestion(
+        target_path="/combined",
+        confidence_band=ConfidenceBand.LOW,
+        disposition=SuggestionDisposition.REVIEW_REQUIRED,
+        confidence_score=0.6,
+        confidence_method="model-v0.1",
+        origin=SuggestionOrigin.MODEL,
+        selected_source_paths=("/first", "/last"),
+        expression={
+            "op": "concat",
+            "operands": [
+                {"op": "get", "path": "/first", "document": "input"},
+                {"op": "get", "path": "/last", "document": "input"},
+            ],
+            "separator": " ",
+        },
+    )
+
+    assert legacy.effective_source_paths == ("/legacy",)
+    assert multi_source.effective_source_paths == ("/first", "/last")

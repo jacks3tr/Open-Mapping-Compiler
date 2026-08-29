@@ -11,7 +11,7 @@ import yaml
 from open_mapping.model.json_types import JsonValue
 from open_mapping.model.mappings import MappingDocument
 from open_mapping.serialization.canonical_json import canonical_json, canonical_json_bytes
-from open_mapping.serialization.yaml_loader import load_safe_yaml
+from open_mapping.serialization.formats import format_for_path, loads_document
 
 
 def _to_json_value(mapping: MappingDocument) -> JsonValue:
@@ -37,23 +37,18 @@ def dumps_mapping(mapping: MappingDocument, *, format_name: Literal["json", "yam
 
 
 def dump_mapping(mapping: MappingDocument, path: Path) -> None:
-    fmt: Literal["json", "yaml"] = "yaml" if path.suffix.lower() == ".yaml" else "json"
+    fmt: Literal["json", "yaml"] = "yaml" if format_for_path(path) == "yaml" else "json"
     path.write_text(dumps_mapping(mapping, format_name=fmt), encoding="utf-8")
 
 
 def loads_mapping(content: str, *, format_name: Literal["json", "yaml"]) -> MappingDocument:
-    import json
-
     from open_mapping.model.mappings import MappingDocument as Doc
 
-    if format_name == "json":
-        raw: JsonValue = json.loads(content)
-    else:
-        raw = load_safe_yaml(content)
+    raw = loads_document(content, format_name=format_name)
     return Doc.model_validate(raw)
 
 
 def load_mapping(path: Path) -> MappingDocument:
     content = path.read_text(encoding="utf-8")
-    fmt: Literal["json", "yaml"] = "yaml" if path.suffix.lower() in {".yaml", ".yml"} else "json"
+    fmt: Literal["json", "yaml"] = "yaml" if format_for_path(path) == "yaml" else "json"
     return loads_mapping(content, format_name=fmt)

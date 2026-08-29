@@ -7,7 +7,7 @@ from typing import Literal
 
 from pydantic import Field, model_validator
 
-from open_mapping.model.expressions import Expression
+from open_mapping.model.expressions import Expression, analyze_expression
 from open_mapping.model.issues import Issue
 from open_mapping.model.json_types import OpenMappingModel
 from open_mapping.model.mappings import Evidence
@@ -59,27 +59,6 @@ class SuggestionOrigin(StrEnum):
     MANUAL = "manual"
 
 
-def _expression_input_paths(expression: object) -> set[str]:
-    paths: set[str] = set()
-    payload = (
-        expression.model_dump(mode="json")
-        if isinstance(expression, OpenMappingModel)
-        else expression
-    )
-    stack: list[object] = [payload]
-    while stack:
-        node = stack.pop()
-        if isinstance(node, dict):
-            if node.get("op") == "get" and node.get("document", "input") == "input":
-                path = node.get("path")
-                if isinstance(path, str):
-                    paths.add(path)
-            stack.extend(node.values())
-        elif isinstance(node, list):
-            stack.extend(node)
-    return paths
-
-
 class MappingSuggestion(OpenMappingModel):
     target_path: str
     confidence_band: ConfidenceBand
@@ -100,6 +79,15 @@ class MappingSuggestion(OpenMappingModel):
     evidence: tuple[Evidence, ...] = ()
     issues: tuple[Issue, ...] = ()
     reason: str = ""
+
+    @property
+    def effective_source_paths(self) -> tuple[str, ...]:
+        """Return the canonical read view across v0.1 singular and plural fields."""
+        if self.selected_source_paths:
+            return self.selected_source_paths
+        if self.selected_source_path is not None:
+            return (self.selected_source_path,)
+        return ()
 
     @model_validator(mode="before")
     @classmethod
@@ -150,7 +138,7 @@ class MappingSuggestion(OpenMappingModel):
                     f"{self.disposition.value} requires a selected source and expression"
                 )
         if self.origin is SuggestionOrigin.MODEL and self.expression is not None:
-            input_dependencies = _expression_input_paths(self.expression)
+            input_dependencies = set(analyze_expression(self.expression).input_paths)
             selected_paths = self.selected_source_paths
             if (
                 len(selected_paths) != len(set(selected_paths))

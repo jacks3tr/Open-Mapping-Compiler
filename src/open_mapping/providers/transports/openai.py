@@ -38,8 +38,10 @@ class OpenAITransport:
         self._resolved_model = resolved_model
 
     def invoke(self, request: ModelTransportRequest) -> ModelTransportResult:
-        require_matching_request(request, self._resolved_model, component=_COMPONENT)
-        model = request.resolved_model.model
+        resolved_model = require_matching_request(
+            request, self._resolved_model, component=_COMPONENT
+        )
+        model = resolved_model.model
         if model.structured_output not in {
             StructuredOutputMode.AUTO,
             StructuredOutputMode.JSON_SCHEMA,
@@ -53,7 +55,7 @@ class OpenAITransport:
             raise _unsupported_parameter("seed")
         if model.parameters.reasoning_effort is not None:
             raise _unsupported_parameter("reasoning_effort")
-        credentials = resolve_transport_credentials(request.resolved_model)
+        credentials = resolve_transport_credentials(resolved_model)
         headers = dict(credentials.headers)
         if credentials.api_key is not None:
             headers["Authorization"] = f"Bearer {credentials.api_key}"
@@ -79,12 +81,12 @@ class OpenAITransport:
         try:
             response = post_json(
                 url=provider_endpoint(
-                    request.resolved_model.provider.base_url or _DEFAULT_BASE_URL,
+                    resolved_model.provider.base_url or _DEFAULT_BASE_URL,
                     "responses",
                 ),
                 payload=body,
                 headers=headers,
-                resolved_model=request.resolved_model,
+                resolved_model=resolved_model,
             )
         except HttpStatusFailure as exc:
             raise stable_transport_failure(exc) from exc

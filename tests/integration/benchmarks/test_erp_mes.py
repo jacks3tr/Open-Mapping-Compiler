@@ -92,6 +92,33 @@ def test_erp_example_is_complete_and_hash_bound() -> None:
     assert len((example / "expected/outputs.jsonl").read_text(encoding="utf-8").splitlines()) >= 10
 
 
+def test_erp_example_shared_assets_match_the_benchmark_pack() -> None:
+    benchmark = Path("benchmarks/erp-mes")
+    example = Path("examples/erp-mes")
+    for relative in (
+        "hints.yaml",
+        "review.yaml",
+        "source.schema.json",
+        "suggestions.json",
+        "target.schema.json",
+    ):
+        assert (example / relative).read_bytes() == (benchmark / relative).read_bytes()
+
+    example_samples = (example / "samples.jsonl").read_text(encoding="utf-8").splitlines()
+    benchmark_samples = (benchmark / "samples.jsonl").read_text(encoding="utf-8").splitlines()
+    assert example_samples == benchmark_samples[: len(example_samples)]
+
+    example_outputs = (example / "expected/outputs.jsonl").read_text(encoding="utf-8").splitlines()
+    benchmark_outputs = (
+        (benchmark / "expected/outputs.jsonl").read_text(encoding="utf-8").splitlines()
+    )
+    assert example_outputs == benchmark_outputs[: len(example_outputs)]
+    assert (
+        json.loads((example / "input.json").read_text(encoding="utf-8"))
+        == json.loads(example_samples[0])["input"]
+    )
+
+
 def test_erp_all_samples_all_runtimes_and_gates_pass(tmp_path: Path) -> None:
     run = run_benchmark_pack(
         Path("benchmarks/erp-mes"), enforce_gates=True, result_dir=tmp_path / "erp-mes"

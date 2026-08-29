@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import json
 from pathlib import Path
 
 from open_mapping.model.hints import MappingHints
@@ -14,6 +13,7 @@ from open_mapping.model.suggestions import (
     SuggestionReport,
     SuggestionSummary,
 )
+from open_mapping.schema_targets import SCHEMA_TARGETS, render_schema
 from open_mapping.serialization.hints import dumps_mapping_hints, load_mapping_hints
 from open_mapping.serialization.reviews import dumps_suggestion_review, load_suggestion_review
 from open_mapping.serialization.suggestions import (
@@ -72,14 +72,10 @@ def test_review_round_trip(tmp_path: Path) -> None:
     assert load_suggestion_review(path) == review
 
 
-def test_committed_schemas_exist() -> None:
-    for name in (
-        "mapping-document.schema.json",
-        "mapping-hints.schema.json",
-        "suggestion-report.schema.json",
-        "suggestion-review.schema.json",
-        "benchmark-manifest.schema.json",
-    ):
-        path = Path("schemas") / name
-        assert path.exists()
-        json.loads(path.read_text(encoding="utf-8"))
+def test_committed_schemas_exactly_match_all_generated_targets() -> None:
+    target_names = {target.filename for target in SCHEMA_TARGETS}
+    committed_names = {path.name for path in Path("schemas").glob("*.schema.json")}
+    assert committed_names == target_names
+    for target in SCHEMA_TARGETS:
+        path = Path("schemas") / target.filename
+        assert path.read_text(encoding="utf-8") == render_schema(target.model)

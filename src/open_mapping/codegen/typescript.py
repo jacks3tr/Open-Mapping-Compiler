@@ -5,6 +5,7 @@ from __future__ import annotations
 import json
 
 from open_mapping.codegen.common import GeneratedArtifact
+from open_mapping.evaluation.mappings import ordered_rules
 from open_mapping.model.mappings import MappingDocument
 from open_mapping.model.schema import SchemaDocument
 from open_mapping.serialization.mappings import mapping_sha256
@@ -19,23 +20,10 @@ const MAX_EXPRESSION_DEPTH = 64;
 const MAX_ARRAY_ITEMS = 10000;
 const MAX_OUTPUT_NODES = 100000;
 const MAX_STRING_LENGTH = 1000000;
-const RULES: Record<string, Record<string, unknown>> = __RULES__;
+const RULES: [string, Record<string, unknown>][] = __RULES__;
 const DECIMAL = /^[+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?$/;
 const INTEGER = /^[+-]?\d+$/;
 const DATE_TOKENS = ["YYYY", "SSS", "MM", "DD", "hh", "mm", "ss", "Z"] as const;
-
-const TARGETS = Object.keys(RULES).sort((a, b) => {
-  const at = a.replace(/^\//, "").split("/");
-  const bt = b.replace(/^\//, "").split("/");
-  const n = Math.max(at.length, bt.length);
-  for (let i = 0; i < n; i += 1) {
-    const x = at[i] ?? "";
-    const y = bt[i] ?? "";
-    if (x < y) return -1;
-    if (x > y) return 1;
-  }
-  return 0;
-});
 
 function getPath(document: unknown, pointer: string): unknown {
   if (pointer === "") return document;
@@ -357,8 +345,8 @@ export function transform(source: unknown): unknown {
   }
   const input = source as Record<string, unknown>;
   let output: Record<string, unknown> = {};
-  for (const target of TARGETS) {
-    const value = evaluate(RULES[target], input, output, [], 0);
+  for (const [target, rule] of RULES) {
+    const value = evaluate(rule, input, output, [], 0);
     checkLimits(value);
     output = assign(output, target, value);
   }
@@ -374,7 +362,9 @@ def generate_typescript(
     target_schema: SchemaDocument,
 ) -> GeneratedArtifact:
     require_static_valid(mapping, source_schema=source_schema, target_schema=target_schema)
-    rules = {rule.target: rule.expression.model_dump(mode="json") for rule in mapping.rules}
+    rules = [
+        (rule.target, rule.expression.model_dump(mode="json")) for rule in ordered_rules(mapping)
+    ]
     source = (
         _RUNTIME.replace("__MAPPING_ID__", json.dumps(mapping.id))
         .replace("__MAPPING_SHA__", json.dumps(mapping_sha256(mapping)))

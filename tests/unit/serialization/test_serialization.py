@@ -45,6 +45,16 @@ def test_mapping_round_trip(tmp_path: Path) -> None:
     assert mapping_sha256(loaded) == mapping_sha256(mapping)
 
 
+def test_mapping_yml_suffix_writes_yaml(tmp_path: Path) -> None:
+    mapping = _mapping()
+    path = tmp_path / "mapping.yml"
+
+    dump_mapping(mapping, path)
+
+    assert not path.read_text(encoding="utf-8").lstrip().startswith("{")
+    assert load_mapping(path) == mapping
+
+
 def test_mapping_json_round_trip(tmp_path: Path) -> None:
     mapping = _mapping()
     path = tmp_path / "mapping.json"

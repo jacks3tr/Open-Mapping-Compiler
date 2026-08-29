@@ -9,6 +9,7 @@ from open_mapping.errors import OpenMappingError
 from open_mapping.evaluation.expressions import EvaluationContext, evaluate_expression
 from open_mapping.evaluation.invariants import evaluate_invariant
 from open_mapping.evaluation.limits import EvaluationLimits
+from open_mapping.evaluation.mappings import ordered_rules
 from open_mapping.model.expressions import (
     Expression,
     GetExpression,
@@ -16,6 +17,7 @@ from open_mapping.model.expressions import (
     ObjectExpression,
 )
 from open_mapping.model.invariants import Invariant
+from open_mapping.model.mappings import MappingDocument
 from open_mapping.pointers import (
     assign_pointer,
     escape_pointer_token,
@@ -54,6 +56,23 @@ def test_minimal_evaluator() -> None:
     )
     result = evaluate_expression(expr, EvaluationContext(input_document={"name": "x"}))
     assert result == {"name": "x", "fixed": 1}
+
+
+def test_ordered_rules_use_decoded_json_pointer_tokens() -> None:
+    mapping = MappingDocument(
+        mapping_version="0.1",
+        id="order",
+        source_schema="source",
+        source_schema_version="1",
+        target_schema="target",
+        target_schema_version="1",
+        rules=(
+            {"target": "/a/a", "expression": {"op": "literal", "value": 2}},
+            {"target": "/a//b", "expression": {"op": "literal", "value": 1}},
+        ),
+    )
+
+    assert tuple(rule.target for rule in ordered_rules(mapping)) == ("/a//b", "/a/a")
 
 
 def test_invariant_equals() -> None:

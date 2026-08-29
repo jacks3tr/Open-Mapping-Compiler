@@ -8,42 +8,203 @@ from typing import Annotated
 
 import typer
 
+from open_mapping.cli.apply import apply_command
 from open_mapping.cli.benchmark import benchmark_command
+from open_mapping.cli.build import build_command
 from open_mapping.cli.common import (
     ReportFormat,
     SchemaFormat,
+    SourceFormat,
     SuggestAssemblyPolicy,
     TargetLanguage,
     run_public_command,
 )
 from open_mapping.cli.compile import compile_command
 from open_mapping.cli.inspect import inspect_command
+from open_mapping.cli.map import map_command
 from open_mapping.cli.model_context import model_context_command
 from open_mapping.cli.models import models_app
 from open_mapping.cli.review import review_command
 from open_mapping.cli.run import run_command
+from open_mapping.cli.serve import serve_command
 from open_mapping.cli.suggest import suggest_command
 from open_mapping.cli.verify import verify_command
 
-_ROOT_HELP = """Open Mapping Compiler provides deterministic schema mapping and verification.
+_ROOT_HELP = """Map source data or a schema locally and return structured JSON.
 
-Privacy: raw samples are excluded from providers by default.
-Cost: only an explicit --model selection can initiate a billable model call.
-Semantics: confidence and disposition are separate concepts.
-Review: model proposals are drafts; noninteractive review records automation-safe decisions.
-Providers: a required provider failure is fatal; baseline use is offline.
-Exit codes: 0 success; 2 input; 3 static; 4 dynamic; 5 provider; 6 codegen; 7 benchmark; 8 review.
+Run: open-mapping map SOURCE TARGET
+Add --model PROVIDER:MODEL only when model assistance is wanted.
 """
 
 app = typer.Typer(name="open-mapping", help=_ROOT_HELP, add_completion=False)
-app.add_typer(models_app, name="models")
+app.add_typer(models_app, name="models", hidden=True)
+
+
+@app.command("map", help="Map source data or a schema with optional model assistance.")
+def map_two_schemas(
+    source: Annotated[Path, typer.Argument(help="Source data or schema.", metavar="SOURCE")],
+    target: Annotated[Path, typer.Argument(help="Target schema.", metavar="TARGET")],
+    source_format: Annotated[
+        SourceFormat, typer.Option("--source-format")
+    ] = SourceFormat.JSON_SCHEMA,
+    source_selector: Annotated[str | None, typer.Option("--source-selector")] = None,
+    target_format: Annotated[
+        SchemaFormat, typer.Option("--target-format")
+    ] = SchemaFormat.JSON_SCHEMA,
+    target_selector: Annotated[str | None, typer.Option("--target-selector")] = None,
+    samples: Annotated[Path | None, typer.Option("--samples")] = None,
+    hints: Annotated[Path | None, typer.Option("--hints")] = None,
+    instruction: Annotated[
+        str | None, typer.Option("--instruction", help="Optional mapping context for a model.")
+    ] = None,
+    out: Annotated[
+        Path | None,
+        typer.Option("--out", help="Write the structured JSON result to this file."),
+    ] = None,
+    model: Annotated[
+        str | None,
+        typer.Option(
+            "--model",
+            help="Optional provider:model selection; omitted means local mapping.",
+        ),
+    ] = None,
+    models_config: Annotated[
+        Path | None,
+        typer.Option("--models-config", help="Optional advanced provider configuration."),
+    ] = None,
+    allow_raw_samples: Annotated[
+        bool,
+        typer.Option("--allow-raw-samples", help="Allow a selected model to receive raw samples."),
+    ] = False,
+    require_model: Annotated[
+        bool,
+        typer.Option("--require-model", help="Fail instead of falling back when model use fails."),
+    ] = False,
+    force: Annotated[bool, typer.Option("--force")] = False,
+) -> None:
+    _exit(
+        lambda: map_command(
+            source,
+            target,
+            source_format=source_format.value,
+            source_selector=source_selector,
+            target_format=target_format.value,
+            target_selector=target_selector,
+            samples=samples,
+            hints=hints,
+            instruction=instruction,
+            out=out,
+            model=model,
+            models_config=models_config,
+            allow_raw_samples=allow_raw_samples,
+            require_model=require_model,
+            force=force,
+        )
+    )
+
+
+@app.command()
+def build(
+    source: Annotated[Path, typer.Argument(help="Source data or schema.", metavar="SOURCE")],
+    target: Annotated[Path, typer.Argument(help="Target schema.", metavar="TARGET")],
+    source_format: Annotated[
+        SourceFormat, typer.Option("--source-format")
+    ] = SourceFormat.JSON_SCHEMA,
+    source_selector: Annotated[str | None, typer.Option("--source-selector")] = None,
+    target_format: Annotated[
+        SchemaFormat, typer.Option("--target-format")
+    ] = SchemaFormat.JSON_SCHEMA,
+    target_selector: Annotated[str | None, typer.Option("--target-selector")] = None,
+    samples: Annotated[Path | None, typer.Option("--samples")] = None,
+    hints: Annotated[Path | None, typer.Option("--hints")] = None,
+    review: Annotated[Path | None, typer.Option("--review")] = None,
+    mapping_id: Annotated[str | None, typer.Option("--mapping-id")] = None,
+    model: Annotated[str | None, typer.Option("--model")] = None,
+    models_config: Annotated[Path | None, typer.Option("--models-config")] = None,
+    instruction: Annotated[str | None, typer.Option("--instruction")] = None,
+    allow_raw_samples: Annotated[bool, typer.Option("--allow-raw-samples")] = False,
+    require_model: Annotated[bool, typer.Option("--require-model")] = False,
+    work_dir: Annotated[Path | None, typer.Option("--work-dir")] = None,
+    out: Annotated[Path | None, typer.Option("--out")] = None,
+    require_samples: Annotated[bool, typer.Option("--require-samples")] = False,
+    require_complete_review: Annotated[bool, typer.Option("--require-complete-review")] = False,
+    force: Annotated[bool, typer.Option("--force")] = False,
+    report_format: Annotated[ReportFormat, typer.Option("--report-format")] = ReportFormat.TEXT,
+) -> None:
+    _exit(
+        lambda: build_command(
+            source,
+            target,
+            source_format=source_format.value,
+            source_selector=source_selector,
+            target_format=target_format.value,
+            target_selector=target_selector,
+            samples=samples,
+            hints=hints,
+            review=review,
+            mapping_id=mapping_id,
+            model=model,
+            models_config=models_config,
+            instruction=instruction,
+            allow_raw_samples=allow_raw_samples,
+            require_model=require_model,
+            work_dir=work_dir,
+            out=out,
+            require_samples=require_samples,
+            require_complete_review=require_complete_review,
+            force=force,
+            report_format=report_format,
+        )
+    )
+
+
+@app.command()
+def apply(
+    bundle: Annotated[Path, typer.Argument(help="Verified .omc mapping bundle.", metavar="BUNDLE")],
+    input_file: Annotated[Path | None, typer.Option("--input")] = None,
+    out: Annotated[Path | None, typer.Option("--out")] = None,
+    jsonl: Annotated[bool, typer.Option("--jsonl")] = False,
+    pretty: Annotated[bool, typer.Option("--pretty")] = False,
+    force: Annotated[bool, typer.Option("--force")] = False,
+    diagnostic_values: Annotated[bool, typer.Option("--diagnostic-values")] = False,
+) -> None:
+    _exit(
+        lambda: apply_command(
+            bundle,
+            input_file=input_file,
+            out=out,
+            jsonl=jsonl,
+            pretty=pretty,
+            force=force,
+            diagnostic_values=diagnostic_values,
+        )
+    )
+
+
+@app.command(hidden=True)
+def serve(
+    bundle: Annotated[Path, typer.Argument(help="Verified .omc mapping bundle.", metavar="BUNDLE")],
+    host: Annotated[str, typer.Option("--host")] = "127.0.0.1",
+    port: Annotated[int, typer.Option("--port", min=1, max=65535)] = 8080,
+    allow_remote: Annotated[bool, typer.Option("--allow-remote")] = False,
+    api_key_env: Annotated[str | None, typer.Option("--api-key-env")] = None,
+) -> None:
+    _exit(
+        lambda: serve_command(
+            bundle,
+            host=host,
+            port=port,
+            allow_remote=allow_remote,
+            api_key_env=api_key_env,
+        )
+    )
 
 
 def _exit(operation: Callable[[], int]) -> None:
     raise typer.Exit(run_public_command(operation))
 
 
-@app.command()
+@app.command(hidden=True)
 def inspect(
     schema: Annotated[Path, typer.Argument(help="JSON Schema or OpenAPI file.", metavar="SCHEMA")],
     schema_format: Annotated[
@@ -61,6 +222,7 @@ def inspect(
 
 @app.command(
     "model-context",
+    hidden=True,
     help=(
         "Preview the exact sanitized model package without a provider call. "
         "Raw samples require opt-in; proposals still require review."
@@ -106,10 +268,11 @@ def model_context(
 
 
 @app.command(
+    hidden=True,
     help=(
         "Only --model initiates a model call and possible cost. Raw samples require explicit "
         "opt-in, and model proposals remain subject to review."
-    )
+    ),
 )
 def suggest(
     source: Annotated[Path, typer.Argument(help="Source schema.", metavar="SOURCE")],
@@ -221,16 +384,16 @@ def suggest(
     )
 
 
-@app.command()
+@app.command(hidden=True)
 def review(
     suggestions: Annotated[Path, typer.Argument(help="Suggestion report.", metavar="SUGGESTIONS")],
-    decisions: Annotated[
-        Path,
-        typer.Option("--decisions", help="Required noninteractive review decision file."),
-    ],
     source: Annotated[Path, typer.Option("--source")],
     target: Annotated[Path, typer.Option("--target")],
     out: Annotated[Path, typer.Option("--out")],
+    decisions: Annotated[
+        Path,
+        typer.Option("--decisions", help="Review decision file or interactive output."),
+    ],
     source_format: Annotated[
         SchemaFormat, typer.Option("--source-format")
     ] = SchemaFormat.JSON_SCHEMA,
@@ -241,6 +404,7 @@ def review(
     target_selector: Annotated[str | None, typer.Option("--target-selector")] = None,
     review_report_out: Annotated[Path | None, typer.Option("--review-report-out")] = None,
     require_complete_review: Annotated[bool, typer.Option("--require-complete-review")] = False,
+    interactive: Annotated[bool, typer.Option("--interactive")] = False,
     force: Annotated[bool, typer.Option("--force")] = False,
 ) -> None:
     _exit(
@@ -257,11 +421,12 @@ def review(
             review_report_out,
             require_complete_review,
             force,
+            interactive,
         )
     )
 
 
-@app.command()
+@app.command(hidden=True)
 def verify(
     mapping: Annotated[Path, typer.Argument(help="Mapping document.", metavar="MAPPING")],
     source: Annotated[Path, typer.Option("--source")],
@@ -300,7 +465,7 @@ def verify(
     )
 
 
-@app.command()
+@app.command(hidden=True)
 def run(
     mapping: Annotated[Path, typer.Argument(help="Mapping document.", metavar="MAPPING")],
     source_schema: Annotated[Path, typer.Option("--source-schema")],
@@ -341,7 +506,7 @@ def run(
     )
 
 
-@app.command()
+@app.command(hidden=True)
 def compile(
     mapping: Annotated[Path, typer.Argument(help="Mapping document.", metavar="MAPPING")],
     source: Annotated[Path, typer.Option("--source")],
@@ -374,7 +539,7 @@ def compile(
     )
 
 
-@app.command()
+@app.command(hidden=True)
 def benchmark(
     paths: Annotated[
         list[Path], typer.Argument(help="Benchmark pack directories.", metavar="PATHS")

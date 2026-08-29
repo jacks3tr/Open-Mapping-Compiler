@@ -8,8 +8,9 @@ import subprocess
 import sys
 import tempfile
 from collections.abc import Mapping, Sequence
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from pathlib import Path
+from types import MappingProxyType
 from typing import TYPE_CHECKING, Literal, cast
 
 from open_mapping.benchmark.gates import check_gates
@@ -68,21 +69,64 @@ if TYPE_CHECKING:
 
 @dataclass
 class BenchmarkRun:
-    id: str
-    metrics: BenchmarkMetrics
-    gate_issues: tuple[Issue, ...] = field(default=())
-    issues: tuple[Issue, ...] = field(default=())
-    baseline_confidence_counts: dict[str, int] = field(default_factory=dict)
-    baseline_disposition_counts: dict[str, int] = field(default_factory=dict)
-    assisted_confidence_counts: dict[str, int] = field(default_factory=dict)
-    assisted_disposition_counts: dict[str, int] = field(default_factory=dict)
-    numerators: dict[str, int] = field(default_factory=dict)
-    denominators: dict[str, int] = field(default_factory=dict)
-    runtime_observations: tuple[RuntimeObservation, ...] = ()
+    report: BenchmarkReport
     assembled_mapping_sha256: str | None = None
     json_report_path: Path | None = None
     markdown_report_path: Path | None = None
-    model_results: dict[str, ModelBenchmarkResult] = field(default_factory=dict)
+
+    @property
+    def id(self) -> str:
+        return self.report.id
+
+    @property
+    def metrics(self) -> BenchmarkMetrics:
+        return self.report.metrics
+
+    @property
+    def issues(self) -> tuple[Issue, ...]:
+        return self.report.issues
+
+    @property
+    def gate_issues(self) -> tuple[Issue, ...]:
+        return tuple(
+            issue for issue in self.report.issues if issue.code is IssueCode.BENCHMARK_GATE_FAILED
+        )
+
+    @property
+    def baseline_confidence_counts(self) -> dict[str, int]:
+        return self.report.baseline_confidence_counts
+
+    @property
+    def baseline_disposition_counts(self) -> dict[str, int]:
+        return self.report.baseline_disposition_counts
+
+    @property
+    def assisted_confidence_counts(self) -> dict[str, int]:
+        return self.report.assisted_confidence_counts
+
+    @property
+    def assisted_disposition_counts(self) -> dict[str, int]:
+        return self.report.assisted_disposition_counts
+
+    @property
+    def numerators(self) -> dict[str, int]:
+        return self.report.numerators
+
+    @property
+    def denominators(self) -> dict[str, int]:
+        return self.report.denominators
+
+    @property
+    def runtime_observations(self) -> tuple[RuntimeObservation, ...]:
+        return self.report.runtime_observations
+
+    @property
+    def model_results(self) -> dict[str, ModelBenchmarkResult]:
+        return self.report.model_results
+
+    @model_results.setter
+    def model_results(self, value: dict[str, ModelBenchmarkResult]) -> None:
+        self.report = self.report.model_copy(update={"model_results": value})
 
     @property
     def confidence_counts(self) -> dict[str, int]:
@@ -98,6 +142,37 @@ class BenchmarkRun:
     def report_path(self) -> Path | None:
         """Compatibility alias for the Markdown report."""
         return self.markdown_report_path
+
+
+@dataclass(frozen=True, slots=True)
+class _RuntimeObservationIndex:
+    """Transient views over the report's canonical flat observation ledger."""
+
+    observations: tuple[RuntimeObservation, ...]
+    by_sample: Mapping[str, tuple[RuntimeObservation, ...]]
+
+    @classmethod
+    def build(cls, observations: tuple[RuntimeObservation, ...]) -> _RuntimeObservationIndex:
+        grouped: dict[str, list[RuntimeObservation]] = {}
+        seen: set[tuple[str, str]] = set()
+        for observation in observations:
+            key = (observation.sample_id, observation.runtime)
+            if key in seen:
+                raise ValueError(
+                    "duplicate runtime observation for "
+                    f"sample {observation.sample_id!r} and runtime {observation.runtime!r}"
+                )
+            seen.add(key)
+            grouped.setdefault(observation.sample_id, []).append(observation)
+        return cls(
+            observations=observations,
+            by_sample=MappingProxyType(
+                {sample_id: tuple(items) for sample_id, items in grouped.items()}
+            ),
+        )
+
+    def for_sample(self, sample_id: str) -> tuple[RuntimeObservation, ...]:
+        return self.by_sample.get(sample_id, ())
 
 
 def _issue(
@@ -140,7 +215,7 @@ def _outcome_correct(suggestion: MappingSuggestion, truth: MappingRule | None) -
         return False
     expected_path = _direct_path(truth.expression)
     if expected_path is not None:
-        return suggestion.selected_source_path == expected_path
+        return suggestion.effective_source_paths == (expected_path,)
     return _expression_json(suggestion.expression) == _expression_json(truth.expression)
 
 
@@ -327,7 +402,7 @@ def _expected_observation_success(sample: BenchmarkSample, observation: RuntimeO
     return observation.success and semantic_json_equal(observation.output, sample.expected)
 
 
-def _equivalent(observations: list[RuntimeObservation], sample: BenchmarkSample) -> bool:
+def _equivalent(observations: Sequence[RuntimeObservation], sample: BenchmarkSample) -> bool:
     if len(observations) != 3:
         return False
     if all(item.success for item in observations):
@@ -902,8 +977,9 @@ def run_benchmark_pack(
                         )
                     )
 
+    observation_index = _RuntimeObservationIndex.build(tuple(observations))
     samples_by_id = {sample.id: sample for sample in pack.samples}
-    for observation in observations:
+    for observation in observation_index.observations:
         sample = samples_by_id[observation.sample_id]
         if not _expected_observation_success(sample, observation):
             detail = (
@@ -919,19 +995,15 @@ def run_benchmark_pack(
                     sample_id=observation.sample_id,
                 )
             )
-    by_sample = {
-        sample.id: [item for item in observations if item.sample_id == sample.id]
-        for sample in pack.samples
-    }
     equivalent = sum(
-        _equivalent(items, samples_by_id[sample_id]) for sample_id, items in by_sample.items()
+        _equivalent(observation_index.for_sample(sample.id), sample) for sample in pack.samples
     )
     target_valid, target_total, target_issues = target_schema_observation_counts(
-        pack.target_schema, pack.samples, tuple(observations)
+        pack.target_schema, pack.samples, observation_index.observations
     )
     report_issues.extend(target_issues)
     invariant_passed, invariant_total, invariant_issues = _invariant_counts(
-        pack, tuple(observations)
+        pack, observation_index.observations
     )
     report_issues.extend(invariant_issues)
     invalid_probe = duplicate_probe = 0
@@ -1036,27 +1108,16 @@ def run_benchmark_pack(
         denominators={name: item.denominator for name, item in measurements.items()},
         gate_thresholds=pack.manifest.release_gates,
         gate_results=gate_results,
-        runtime_observations=tuple(observations),
+        runtime_observations=observation_index.observations,
         issues=all_issues,
         model_results=model_results,
     )
     json_path, markdown_path = _persist_report(report, result_dir)
     return BenchmarkRun(
-        id=pack.manifest.id,
-        metrics=metrics,
-        gate_issues=gate_issues,
-        issues=all_issues,
-        baseline_confidence_counts=baseline_confidence,
-        baseline_disposition_counts=baseline_disposition,
-        assisted_confidence_counts=assisted_confidence,
-        assisted_disposition_counts=assisted_disposition,
-        numerators=report.numerators,
-        denominators=report.denominators,
-        runtime_observations=tuple(observations),
+        report=report,
         assembled_mapping_sha256=mapping_sha256(mapping) if mapping is not None else None,
         json_report_path=json_path,
         markdown_report_path=markdown_path,
-        model_results=model_results,
     )
 
 

@@ -1,0 +1,6 @@
+hints_version: "0.1"
+id: quick-start
+direct:
+  - target: /accountName
+    source: /fullName
+    reason: The target account name uses the source full name.

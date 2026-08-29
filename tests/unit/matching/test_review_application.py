@@ -17,6 +17,7 @@ from open_mapping.model.suggestions import (
     ConfidenceBand,
     MappingSuggestion,
     SuggestionDisposition,
+    SuggestionOrigin,
     SuggestionReport,
     SuggestionSummary,
 )
@@ -173,3 +174,42 @@ def test_stale_hash_prevents_any_review_application() -> None:
     assert result.mapping is None
     assert result.applied_decisions == ()
     assert {issue.code for issue in result.issues} == {IssueCode.STALE_SUGGESTION_REPORT}
+
+
+def test_high_confidence_model_origin_is_never_auto_accepted() -> None:
+    source, target = schemas()
+    model_suggestion = suggested("/name").model_copy(
+        update={"origin": SuggestionOrigin.MODEL, "selected_source_paths": ("/name",)}
+    )
+    report_value = report((model_suggestion,))
+
+    result = assemble_mapping(
+        report_value,
+        mapping_id="phase3",
+        source_schema=source,
+        target_schema=target.model_copy(update={"fields": (target.field("/name"),)}),
+        policy=AssemblyPolicy.HIGH_AND_MANUAL,
+        review=None,
+        require_complete_review=False,
+    )
+
+    assert result.mapping is None
+    assert result.unresolved_targets == ("/name",)
+
+
+def test_undecided_review_action_remains_unresolved() -> None:
+    report_value = report((suggested("/code"), suggested("/name")))
+    review = review_for(
+        report_value,
+        (
+            SuggestionReviewDecision(
+                target_path="/name", action=ReviewAction.UNDECIDED, reason="Choose an action."
+            ),
+        ),
+    )
+
+    result = _assemble(report_value, review, complete=True)
+
+    assert result.mapping is None
+    assert "/name" in result.unresolved_targets
+    assert {issue.code for issue in result.issues} == {IssueCode.INVALID_REVIEW_DECISION}

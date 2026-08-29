@@ -61,9 +61,7 @@ def _issue(
 
 
 def _descendant_fields(schema: SchemaDocument, pointer: str) -> tuple[SchemaField, ...]:
-    return tuple(
-        field for field in schema.fields if field.pointer.startswith(pointer.rstrip("/") + "/")
-    )
+    return schema.topology.descendants(pointer)
 
 
 def _required_mapping_pointers(schema: SchemaDocument) -> set[str]:
@@ -71,7 +69,7 @@ def _required_mapping_pointers(schema: SchemaDocument) -> set[str]:
     for field in schema.fields:
         if field.pointer == "" or not field.required:
             continue
-        if "/items/" in field.pointer:
+        if schema.topology.is_within_array_items(field.pointer):
             continue
         if JsonType.ARRAY in field.types or not _descendant_fields(schema, field.pointer):
             result.add(field.pointer)
@@ -501,13 +499,7 @@ def _check_invariant_paths(
 
 
 def _direct_children(schema: SchemaDocument, pointer: str) -> tuple[SchemaField, ...]:
-    depth = len(split_pointer(pointer)) + 1
-    return tuple(
-        field
-        for field in schema.fields
-        if field.pointer.startswith(pointer.rstrip("/") + "/")
-        and len(split_pointer(field.pointer)) == depth
-    )
+    return schema.topology.children(pointer)
 
 
 def _types_assignable(source_types: frozenset[JsonType], target_types: frozenset[JsonType]) -> bool:

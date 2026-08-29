@@ -1,7 +1,18 @@
 {
   "$defs": {
+    "ConfidenceBand": {
+      "enum": [
+        "high",
+        "medium",
+        "low",
+        "none"
+      ],
+      "title": "ConfidenceBand",
+      "type": "string"
+    },
     "ReviewAction": {
       "enum": [
+        "undecided",
         "accept_selected",
         "select_candidate",
         "reject",
@@ -10,15 +21,80 @@
       "title": "ReviewAction",
       "type": "string"
     },
+    "SuggestionDisposition": {
+      "enum": [
+        "suggested",
+        "review_required",
+        "ambiguous",
+        "no_match",
+        "manual"
+      ],
+      "title": "SuggestionDisposition",
+      "type": "string"
+    },
     "SuggestionReviewDecision": {
       "additionalProperties": false,
       "properties": {
         "action": {
           "$ref": "#/$defs/ReviewAction"
         },
+        "candidate_paths": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Candidate Paths",
+          "type": "array"
+        },
+        "confidence_band": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ConfidenceBand"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "context": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Context"
+        },
+        "disposition": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/SuggestionDisposition"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
         "reason": {
           "title": "Reason",
           "type": "string"
+        },
+        "selected_source_path": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Selected Source Path"
         },
         "source_path": {
           "anyOf": [

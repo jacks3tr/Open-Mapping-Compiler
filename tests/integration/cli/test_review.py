@@ -4,6 +4,9 @@ from __future__ import annotations
 
 from pathlib import Path
 
+from typer.testing import CliRunner
+
+from open_mapping.cli.app import app
 from tests.integration.cli.conftest import ROOT, run_cli
 
 
@@ -138,3 +141,26 @@ def test_review_help_shows_exact_automation_safe_syntax() -> None:
     assert "SUGGESTIONS" in result.stdout
     assert "--decisions" in result.stdout
     assert "DECISIONS" not in result.stdout.split("Options", 1)[0]
+
+
+def test_interactive_review_fails_immediately_without_a_tty(tmp_path: Path) -> None:
+    result = CliRunner().invoke(
+        app,
+        [
+            "review",
+            str(tmp_path / "missing-suggestions.json"),
+            "--interactive",
+            "--decisions",
+            str(tmp_path / "review.yaml"),
+            "--source",
+            str(tmp_path / "missing-source.json"),
+            "--target",
+            str(tmp_path / "missing-target.json"),
+            "--out",
+            str(tmp_path / "mapping.yaml"),
+        ],
+    )
+
+    assert result.exit_code == 2
+    assert "attached TTY" in result.stderr
+    assert "missing-source" not in result.stderr

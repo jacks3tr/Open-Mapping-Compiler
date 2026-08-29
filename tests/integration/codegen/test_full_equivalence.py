@@ -269,3 +269,19 @@ def test_conformance_corpus_covers_every_v01_operation_and_required_error_code()
         "DIVIDE_BY_ZERO",
         "INVALID_DATE",
     }
+
+
+def test_typescript_self_test_executes_the_generated_transform() -> None:
+    node = shutil.which("node")
+    assert node is not None
+
+    completed = subprocess.run(
+        [node, str(ROOT / "tools" / "run_generated_typescript.mjs"), "--self-test"],
+        text=True,
+        capture_output=True,
+        check=False,
+        timeout=30,
+    )
+
+    assert completed.returncode == 0, completed.stderr
+    assert json.loads(completed.stdout) == {"selfTest": True}

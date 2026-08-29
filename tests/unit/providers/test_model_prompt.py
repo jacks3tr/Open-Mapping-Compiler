@@ -92,6 +92,10 @@ def test_mapping_agent_v1_matches_the_golden_instruction_for_a_fixed_package() -
         "Do not guess missing business rules",
         "confidence scores, approval state, review decisions, or verification claims",
         "Briefly explain each proposal",
+        "Analyze field meaning before name similarity",
+        "requiredness, nullability, types, formats, enums, object structure, and array item structure",
+        "Preserve source values without loss when possible",
+        "Do not invent implicit casts, default values, enum translations, units, or date formats",
         "return no prose outside it",
     ):
         assert required_text in prompt.system_instruction

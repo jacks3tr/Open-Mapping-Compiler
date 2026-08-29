@@ -1,9 +1,13 @@
-# Model-assisted customer mapping
+# Model-assisted schema mapping
 
-This example maps a customer record into an account record. It includes two manual business rules for target state and source system. A model can draft the remaining account-number rule, but a review file must approve that draft before the mapping is assembled.
+This folder contains a source customer schema and a target account schema.
 
-For OpenAI, copy `openai.models.example.yaml` to `open-mapping.models.yaml` and set `OPENAI_API_KEY` in your shell. The file already defines `gpt-5` and `gpt-5-mini`. Follow the [OpenAI provider setup](../../docs/openai-provider.md) for the complete commands.
+Install `open-mapping`, set `OPENAI_API_KEY`, then run this command from the repository root:
 
-For a local service, copy `open-mapping.models.example.yaml` instead. `local-draft` is for an OpenAI-compatible endpoint on your machine. `native-draft` shows the general native-provider configuration shape.
+```text
+open-mapping map examples/model-assisted/source.schema.json examples/model-assisted/target.schema.json --model openai:gpt-5-mini --out mapping.json
+```
 
-Follow the [model-assisted mapping guide](../../docs/model-assisted-mapping.md) for the commands, context preview, review file, verification, and compilation steps. The [baseline guide](../../USAGE.md) describes the offline workflow.
+Open `mapping.json` to review the proposed field mappings and transformations. An application can read the same file as JSON.
+
+The native OpenAI shorthand needs no configuration file. `openai.models.example.yaml` is only needed when you want named aliases or custom model parameters.

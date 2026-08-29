@@ -4,7 +4,7 @@ Bug fixes, focused features, tests, documentation, and benchmark improvements ar
 
 ## Development setup
 
-Use Python 3.12 or later, uv, Node.js 24, and npm. Install only the locked project dependencies:
+Use Python 3.11 or later, uv, Node.js 24, and npm. Install only the locked project dependencies:
 
 ```text
 uv sync --frozen --all-extras
@@ -35,4 +35,4 @@ Do not commit virtual environments, caches, coverage files, build archives, loca
 
 ## Contact
 
-[Jacks3tr](https://github.com/jacks3tr)
+Jacks3tr Jacks3tr@gmail.com

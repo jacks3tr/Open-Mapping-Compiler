@@ -1,4 +1,4 @@
-"""OpenAPI 3.1 schema extraction."""
+"""OpenAPI 3.1 and 3.2 schema extraction."""
 
 from __future__ import annotations
 
@@ -6,6 +6,8 @@ import json
 from enum import StrEnum
 from pathlib import Path
 from typing import Literal, cast
+
+from pydantic import model_validator
 
 from open_mapping.adapters.json_schema import parse_json_schema
 from open_mapping.errors import OpenMappingError
@@ -27,6 +29,46 @@ class OpenApiSelector(OpenMappingModel):
     operation_id: str | None = None
     status_code: str | None = None
     media_type: str = "application/json"
+
+    @model_validator(mode="before")
+    @classmethod
+    def _default_response_status(cls, value: object) -> object:
+        if (
+            isinstance(value, dict)
+            and value.get("kind")
+            in {OpenApiSelectorKind.RESPONSE, OpenApiSelectorKind.RESPONSE.value}
+            and value.get("status_code") is None
+        ):
+            return {**value, "status_code": "200"}
+        return value
+
+    @model_validator(mode="after")
+    def _validate_shape(self) -> OpenApiSelector:
+        if not self.media_type:
+            raise ValueError("media_type must be non-empty")
+        if self.kind is OpenApiSelectorKind.COMPONENT:
+            if (
+                not self.component_name
+                or self.operation_id is not None
+                or self.status_code is not None
+            ):
+                raise ValueError(
+                    "component selector requires component_name and forbids operation_id/status_code"
+                )
+        elif self.kind is OpenApiSelectorKind.REQUEST:
+            if (
+                not self.operation_id
+                or self.component_name is not None
+                or self.status_code is not None
+            ):
+                raise ValueError(
+                    "request selector requires operation_id and forbids component_name/status_code"
+                )
+        elif not self.operation_id or self.component_name is not None or not self.status_code:
+            raise ValueError(
+                "response selector requires operation_id/status_code and forbids component_name"
+            )
+        return self
 
 
 def parse_openapi_selector(value: str) -> OpenApiSelector:
@@ -119,15 +161,15 @@ def _extract_schema(document: JsonValue, selector: OpenApiSelector, source_uri: 
             (_openapi_issue("OpenAPI root must be an object", "Use a valid OpenAPI document."),)
         )
     version = document.get("openapi")
-    if not isinstance(version, str) or not version.startswith("3.1"):
+    if not isinstance(version, str) or not version.startswith(("3.1", "3.2")):
         raise OpenMappingError(
             (
                 Issue(
                     code=IssueCode.UNSUPPORTED_SCHEMA_FEATURE,
                     severity=Severity.ERROR,
                     component="adapters.openapi",
-                    message="only OpenAPI 3.1 documents are supported",
-                    correction="Convert the document to OpenAPI 3.1.",
+                    message="only OpenAPI 3.1 and 3.2 documents are supported",
+                    correction="Convert the document to OpenAPI 3.1 or 3.2.",
                 ),
             )
         )

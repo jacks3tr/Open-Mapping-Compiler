@@ -6,11 +6,11 @@ import hashlib
 from collections.abc import Callable, Sequence
 from typing import Literal, Protocol, TypeAlias, runtime_checkable
 
-from pydantic import Field, model_validator
+from pydantic import Field, TypeAdapter, model_validator
 
 from open_mapping.errors import OpenMappingError
 from open_mapping.matching.profiles import FieldProfile
-from open_mapping.model.expressions import Expression
+from open_mapping.model.expressions import Expression, analyze_expression
 from open_mapping.model.issues import Issue, IssueCode, Severity
 from open_mapping.model.json_types import JsonValue, OpenMappingModel
 from open_mapping.model.mappings import Evidence
@@ -114,20 +114,8 @@ def _invalid_response(message: str) -> OpenMappingError:
 
 
 def provider_expression_input_paths(expression: object) -> set[str]:
-    paths: set[str] = set()
-    stack = [expression]
-    while stack:
-        node = stack.pop()
-        if not isinstance(node, dict):
-            continue
-        if node.get("op") == "get" and node.get("document", "input") == "input":
-            paths.add(str(node.get("path")))
-        for value in node.values():
-            if isinstance(value, dict):
-                stack.append(value)
-            elif isinstance(value, list):
-                stack.extend(item for item in value if isinstance(item, dict))
-    return paths
+    typed: Expression = TypeAdapter(Expression).validate_python(expression)
+    return set(analyze_expression(typed).input_paths)
 
 
 def validate_provider_response(response: ProviderResponse, request: ProviderRequest) -> None:
@@ -138,7 +126,7 @@ def validate_provider_response(response: ProviderResponse, request: ProviderRequ
         if not set(proposal.selected_source_paths).issubset(candidate_paths):
             raise _invalid_response("provider selected path is outside the candidate set")
         if proposal.expression is not None:
-            get_paths = provider_expression_input_paths(proposal.expression.model_dump(mode="json"))
+            get_paths = provider_expression_input_paths(proposal.expression)
             if not get_paths.issubset(candidate_paths):
                 raise _invalid_response(
                     "provider expression reads a path outside the candidate set"

@@ -1,124 +1,48 @@
 # Open Mapping Compiler
 
-Open Mapping Compiler turns source and target schemas, sample data, and business rules into portable mappings that can be reviewed, verified, run, and compiled. The default workflow is deterministic and offline.
+## What it is
 
-It supports JSON Schema Draft 2020-12 and OpenAPI 3.1, nested objects and arrays, enum translation, unit conversion, date normalization, bounded expressions, and Python or TypeScript output. Model assistance is optional.
+Open Mapping Compiler turns source JSON data or a source contract and a target contract into a reviewable mapping. Give it a JSON record, JSON Schemas, or selected schemas from OpenAPI documents. Optional samples, hints, and context improve the first pass without changing the output contract.
+
+## Add a model
+
+Set `OPEN_MAPPING_MODEL` to a provider-neutral selection such as `openai:<model-id>`, `anthropic:<model-id>`, or `google:<model-id>`, then set that provider's API key. The same `map_schemas` function and `open-mapping map` command return the same typed result. Model proposals are constrained, statically verified, and reviewable; raw samples stay local unless explicitly allowed.
+
+Custom or local endpoints can use an [advanced provider configuration](docs/model-assisted-mapping.md). A runnable provider example is in [`examples/model-assisted`](examples/model-assisted/README.md).
+
+## Local
+
+It returns deterministic suggestions locally and can build a verified `.omc` bundle that transforms JSON in Python, a shell pipeline, or a sidecar. It does not call source or target business APIs.
 
 ## Install
 
-You need Python 3.12 or later. Install the command and its model-provider support directly from GitHub:
+```text
+python -m pip install "open-mapping @ https://github.com/jacks3tr/Open-Mapping-Compiler/archive/refs/heads/main.zip"
+```
+
+## Map source data
 
 ```text
-python -m pip install "open-mapping[ai] @ git+https://github.com/jacks3tr/Open-Mapping-Compiler.git"
+open-mapping map input.json target.schema.json --source-format json-data --out mapping.json
 ```
 
-Check the installation:
+No API key, source schema, provider, or mapping pack is required. `mapping.json` contains one outcome for every target field, including proposed source paths, transformations, confidence, alternatives, and machine-readable inference diagnostics. Pass a single record object or a non-empty array of record objects. The records stay local unless model use and raw-sample disclosure are both explicitly enabled.
+
+Python applications use the same contract:
+
+```python
+from open_mapping import map_schemas
+
+result = map_schemas(source_record, target_schema, source_format="json-data", hints=hints)
+```
+
+## Build executable output
 
 ```text
-open-mapping --help
+open-mapping build input.json target.schema.json --source-format json-data --hints hints.yaml --out mapping.omc
+open-mapping apply mapping.omc --input input.json
 ```
 
-## Set up OpenAI
+The source records become verification samples automatically, and the inferred schema is embedded in the bundle for inspection. Unambiguous mappings build immediately. When judgment is required, `build` emits a hash-bound review file and exits with code 8; complete it and rerun the printed command. Schema-first use remains available by omitting `--source-format json-data`. See the [working quick start](docs/quick-start.md), [Python SDK](docs/sdk.md), and [workflow integration guide](docs/workflow-integration.md).
 
-Create `open-mapping.models.yaml` in the directory where you will run the compiler:
-
-```yaml
-config_version: "0.1"
-
-providers:
-  openai:
-    kind: openai
-    api_key_env: OPENAI_API_KEY
-
-models:
-  openai:
-    provider: openai
-    model_id: gpt-5
-  openai-mini:
-    provider: openai
-    model_id: gpt-5-mini
-```
-
-The same ready-to-copy configuration is stored at [`examples/model-assisted/openai.models.example.yaml`](examples/model-assisted/openai.models.example.yaml). The model IDs link to OpenAI's [GPT-5](https://developers.openai.com/api/docs/models/gpt-5) and [GPT-5 mini](https://developers.openai.com/api/docs/models/gpt-5-mini) documentation.
-
-Set your API key in the shell. Do not put the key in YAML.
-
-PowerShell:
-
-```powershell
-$env:OPENAI_API_KEY = "your-api-key"
-```
-
-macOS or Linux:
-
-```sh
-export OPENAI_API_KEY="your-api-key"
-```
-
-Check the configuration without making a provider call:
-
-```text
-open-mapping models validate --config open-mapping.models.yaml
-```
-
-See [Set up the OpenAI provider](docs/openai-provider.md) for a complete example using the files in this repository.
-
-## Get a structured mapping draft
-
-Run `suggest` with your source schema, target schema, and model alias:
-
-```text
-open-mapping suggest source.schema.json target.schema.json --model openai-mini --suggestions-out suggestions.json --model-run-report-out model-run.json --require-model
-```
-
-This makes one or more schema-constrained provider calls and writes the result to `suggestions.json`. Add `--samples samples.jsonl` or `--hints hints.yaml` when you have those files.
-
-The model returns a draft, not an approved mapping. Open `suggestions.json`, review each proposed target, and copy its `suggestion_report_sha256` into `review.yaml`:
-
-```yaml
-review_version: "0.1"
-suggestion_report_sha256: "copy this value from suggestions.json"
-mapping_id: my-mapping
-decisions:
-  - target_path: /targetField
-    action: accept_selected
-    reason: Reviewed and approved.
-```
-
-Create the mapping:
-
-```text
-open-mapping review suggestions.json --decisions review.yaml --source source.schema.json --target target.schema.json --out mapping.yaml --require-complete-review
-```
-
-`mapping.yaml` is the portable mapping file. Verify it before using it:
-
-```text
-open-mapping verify mapping.yaml --source source.schema.json --target target.schema.json
-```
-
-## Use it without a model
-
-Leave out `--model` and the compiler uses its local matcher. This needs no provider configuration, API key, or network connection:
-
-```text
-open-mapping suggest source.schema.json target.schema.json --suggestions-out suggestions.json
-```
-
-Review the suggestions and create `mapping.yaml` with the same `review` command shown above. You can also write a mapping directly and run `open-mapping verify` against it. See [USAGE.md](USAGE.md) for mapping expressions, hints, samples, running mappings, and code generation.
-
-## What gets sent to a model
-
-The provider receives bounded schema context, candidate paths, optional instructions, and sample profiles. Raw sample values stay local unless you pass `--allow-raw-samples`.
-
-Provider output is untrusted. A model cannot approve its own mapping, set confidence, override manual hints, or mark a mapping as verified. The review and verification steps stay local and deterministic.
-
-## More documentation
-
-- [OpenAI provider setup](docs/openai-provider.md)
-- [Model-assisted mapping](docs/model-assisted-mapping.md)
-- [Manual workflow](USAGE.md)
-- [Examples](examples)
-- [Contributing](CONTRIBUTING.md)
-- [Security policy](SECURITY.md)
-- [Apache License 2.0](LICENSE)
+The project is licensed under [Apache License 2.0](LICENSE).

@@ -10,7 +10,7 @@ from collections.abc import Callable, Iterable, Mapping
 from dataclasses import dataclass
 from time import monotonic, sleep
 from types import MappingProxyType
-from typing import NoReturn, cast
+from typing import NoReturn, TypeVar, cast
 
 from open_mapping.errors import OpenMappingError
 from open_mapping.model.issues import Issue, IssueCode, Severity
@@ -189,7 +189,10 @@ def read_bounded_response_body(chunks: Iterable[bytes]) -> bytes:
     return b"".join(body_parts)
 
 
-def call_with_transient_retries[Value](
+Value = TypeVar("Value")
+
+
+def call_with_transient_retries(
     operation: Callable[[], Value],
     *,
     max_retries: int,
@@ -254,8 +257,8 @@ def require_matching_request(
     resolved_model: ResolvedModel,
     *,
     component: str,
-) -> None:
-    """Reject attempts to invoke a transport with a different model resolution."""
+) -> ResolvedModel:
+    """Validate the compatibility field and return the transport-owned model."""
 
     if request.resolved_model != resolved_model:
         raise transport_error(
@@ -263,6 +266,7 @@ def require_matching_request(
             "Build the transport from the same resolved model passed to invoke.",
             component=component,
         )
+    return resolved_model
 
 
 def _retry_after_seconds(headers: Mapping[str, str]) -> float | None:

@@ -105,20 +105,15 @@ def test_keyboard_interrupt_exits_130_without_traceback(monkeypatch: pytest.Monk
     assert "Traceback" not in result.output
 
 
-def test_root_help_documents_semantics_privacy_review_and_exit_codes() -> None:
+def test_root_help_explains_the_primary_source_input_workflow() -> None:
     result = run_cli("--help")
 
     assert result.returncode == 0
     help_text = result.stdout.lower()
     for phrase in (
-        "privacy",
-        "raw samples",
-        "confidence",
-        "disposition",
-        "noninteractive review",
-        "exit codes",
-        "required provider",
+        "map source data or a schema locally and return structured json",
+        "open-mapping map source target",
+        "add --model provider:model only when model assistance is wanted",
+        "structured json",
     ):
         assert phrase in help_text
-    for code in ("0", "2", "3", "4", "5", "6", "7", "8"):
-        assert code in result.stdout

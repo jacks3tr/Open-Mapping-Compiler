@@ -5,6 +5,7 @@ from __future__ import annotations
 from pathlib import Path
 
 import pytest
+from pydantic import ValidationError
 
 from open_mapping.adapters.json_schema import load_json_schema
 from open_mapping.adapters.openapi import (
@@ -14,6 +15,22 @@ from open_mapping.adapters.openapi import (
     load_schema,
 )
 from open_mapping.errors import OpenMappingError
+
+
+def test_openapi_selector_rejects_impossible_direct_states_and_defaults_response_status() -> None:
+    with pytest.raises(ValidationError, match="component_name"):
+        OpenApiSelector(kind=OpenApiSelectorKind.COMPONENT)
+    with pytest.raises(ValidationError, match="operation_id"):
+        OpenApiSelector(kind=OpenApiSelectorKind.REQUEST, component_name="X")
+    with pytest.raises(ValidationError, match="status_code"):
+        OpenApiSelector(
+            kind=OpenApiSelectorKind.REQUEST,
+            operation_id="createX",
+            status_code="201",
+        )
+
+    response = OpenApiSelector(kind=OpenApiSelectorKind.RESPONSE, operation_id="getX")
+    assert response.status_code == "200"
 
 
 def test_json_schema_cycles_and_allof(tmp_path: Path) -> None:

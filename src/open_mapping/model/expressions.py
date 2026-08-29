@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from dataclasses import dataclass
 from typing import Annotated, Literal
 
 from pydantic import Field
@@ -127,6 +128,68 @@ Expression = Annotated[
     Field(discriminator="op"),
 ]
 
+
+@dataclass(frozen=True, slots=True)
+class ExpressionFacts:
+    input_paths: frozenset[str]
+    documents: frozenset[str]
+    operations: frozenset[str]
+
+    @property
+    def is_pure_constant(self) -> bool:
+        return not self.documents
+
+
+def _children(expression: Expression) -> tuple[Expression, ...]:
+    if isinstance(expression, (GetExpression, LiteralExpression)):
+        return ()
+    if isinstance(expression, ObjectExpression):
+        return tuple(expression.fields.values())
+    if isinstance(expression, ArrayExpression):
+        return expression.items
+    if isinstance(expression, MapExpression):
+        return (expression.collection, expression.expression)
+    if isinstance(expression, (CoalesceExpression, ConcatExpression, BooleanExpression)):
+        return expression.operands
+    if isinstance(
+        expression,
+        (CastExpression, NotExpression, RoundExpression, ParseDateExpression, FormatDateExpression),
+    ):
+        return (expression.value,)
+    if isinstance(expression, IfExpression):
+        return (expression.condition, expression.then, expression.otherwise)
+    if isinstance(expression, (EqualsExpression, NumericExpression)):
+        return (expression.left, expression.right)
+    if isinstance(expression, LookupExpression):
+        return (
+            (expression.key,)
+            if expression.default is None
+            else (expression.key, expression.default)
+        )
+    raise TypeError(f"unsupported typed expression {type(expression)!r}")
+
+
+def analyze_expression(expression: Expression) -> ExpressionFacts:
+    """Collect context-free dependencies and operations from a typed expression."""
+    input_paths: set[str] = set()
+    documents: set[str] = set()
+    operations: set[str] = set()
+    stack = [expression]
+    while stack:
+        node = stack.pop()
+        operations.add(node.op)
+        if isinstance(node, GetExpression):
+            documents.add(node.document)
+            if node.document == "input":
+                input_paths.add(node.path)
+        stack.extend(_children(node))
+    return ExpressionFacts(
+        input_paths=frozenset(input_paths),
+        documents=frozenset(documents),
+        operations=frozenset(operations),
+    )
+
+
 __all__ = [
     "ArrayExpression",
     "BooleanExpression",
@@ -135,6 +198,7 @@ __all__ = [
     "ConcatExpression",
     "EqualsExpression",
     "Expression",
+    "ExpressionFacts",
     "FormatDateExpression",
     "GetExpression",
     "IfExpression",
@@ -146,4 +210,5 @@ __all__ = [
     "ObjectExpression",
     "ParseDateExpression",
     "RoundExpression",
+    "analyze_expression",
 ]

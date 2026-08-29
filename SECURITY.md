@@ -2,7 +2,7 @@
 
 ## Supported versions
 
-The current `0.1.x` release line receives security fixes. Older snapshots are unsupported; reproduce reports against the newest available `0.1.x` release when possible.
+The current `0.2.x` release line receives security fixes. Older snapshots are unsupported. Reproduce reports against the newest available `0.2.x` release when possible.
 
 ## Private reporting
 
@@ -27,6 +27,8 @@ The main safeguards are:
 - suggestion reports and reviews are hash-bound, coverage-checked, and duplicate-checked;
 - generated source quotes mapping-controlled data and is verified before writing;
 - output replacement is opt-in and atomic, with rollback on replacement failure.
+- `.omc` loaders recompute embedded mapping and schema hashes before use;
+- the HTTP sidecar binds to loopback by default and requires explicit bearer authentication for remote binds.
 
 These controls reduce risk but do not make an optional remote provider trustworthy. Review the provider's data-handling terms, use a dedicated least-privilege token environment variable, prefer HTTPS, and do not send data the provider is not authorized to process. Loopback HTTP is allowed for local development only.
 

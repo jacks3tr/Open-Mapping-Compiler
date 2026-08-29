@@ -26,7 +26,20 @@ def resolve_models_config_path(
     if configured_path:
         return Path(configured_path)
     default_path = cwd / _DEFAULT_CONFIG_FILE
-    return default_path if default_path.is_file() else None
+    if default_path.is_file():
+        return default_path
+    appdata = environment.get("APPDATA")
+    user_path: Path | None
+    if appdata:
+        user_path = Path(appdata) / "open-mapping" / "models.yaml"
+    else:
+        config_home = environment.get("XDG_CONFIG_HOME")
+        if config_home:
+            user_path = Path(config_home) / "open-mapping" / "models.yaml"
+        else:
+            home = environment.get("HOME") or environment.get("USERPROFILE")
+            user_path = Path(home) / ".config" / "open-mapping" / "models.yaml" if home else None
+    return user_path if user_path is not None and user_path.is_file() else None
 
 
 def load_model_provider_config(path: Path) -> ModelProviderConfig:

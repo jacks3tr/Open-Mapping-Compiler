@@ -30,8 +30,10 @@ class GoogleTransport:
         self._resolved_model = resolved_model
 
     def invoke(self, request: ModelTransportRequest) -> ModelTransportResult:
-        require_matching_request(request, self._resolved_model, component=_COMPONENT)
-        model = request.resolved_model.model
+        resolved_model = require_matching_request(
+            request, self._resolved_model, component=_COMPONENT
+        )
+        model = resolved_model.model
         if model.structured_output not in {
             StructuredOutputMode.AUTO,
             StructuredOutputMode.JSON_SCHEMA,
@@ -47,7 +49,7 @@ class GoogleTransport:
                 "Remove parameters.reasoning_effort for this provider transport.",
                 component=_COMPONENT,
             )
-        credentials = resolve_transport_credentials(request.resolved_model)
+        credentials = resolve_transport_credentials(resolved_model)
         headers = {**dict(credentials.headers), "x-goog-api-key": credentials.api_key or ""}
         generation_config: dict[str, object] = {
             "responseMimeType": "application/json",
@@ -70,12 +72,12 @@ class GoogleTransport:
         try:
             response = post_json(
                 url=provider_endpoint(
-                    request.resolved_model.provider.base_url or _DEFAULT_BASE_URL,
+                    resolved_model.provider.base_url or _DEFAULT_BASE_URL,
                     route,
                 ),
                 payload=body,
                 headers=headers,
-                resolved_model=request.resolved_model,
+                resolved_model=resolved_model,
             )
         except HttpStatusFailure as exc:
             raise stable_transport_failure(exc) from exc

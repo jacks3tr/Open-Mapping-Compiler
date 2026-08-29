@@ -28,8 +28,10 @@ class OpenAICompatibleTransport:
         self._resolved_model = resolved_model
 
     def invoke(self, request: ModelTransportRequest) -> ModelTransportResult:
-        require_matching_request(request, self._resolved_model, component=_COMPONENT)
-        model = request.resolved_model.model
+        resolved_model = require_matching_request(
+            request, self._resolved_model, component=_COMPONENT
+        )
+        model = resolved_model.model
         mode = (
             StructuredOutputMode.JSON_SCHEMA
             if model.structured_output is StructuredOutputMode.AUTO
@@ -53,7 +55,7 @@ class OpenAICompatibleTransport:
                 "Remove parameters.reasoning_effort or use a provider-specific transport that supports it.",
                 component=_COMPONENT,
             )
-        credentials = resolve_transport_credentials(request.resolved_model)
+        credentials = resolve_transport_credentials(resolved_model)
         headers = dict(credentials.headers)
         if credentials.api_key is not None:
             headers["Authorization"] = f"Bearer {credentials.api_key}"
@@ -82,7 +84,7 @@ class OpenAICompatibleTransport:
             body["temperature"] = model.parameters.temperature
         if model.parameters.top_p is not None:
             body["top_p"] = model.parameters.top_p
-        base_url = request.resolved_model.provider.base_url
+        base_url = resolved_model.provider.base_url
         if base_url is None:
             raise transport_error(
                 "OpenAI-compatible transport has no base_url",
@@ -95,7 +97,7 @@ class OpenAICompatibleTransport:
                 url=provider_endpoint(base_url, "chat/completions"),
                 payload=body,
                 headers=headers,
-                resolved_model=request.resolved_model,
+                resolved_model=resolved_model,
             )
         except HttpStatusFailure as exc:
             if mode is StructuredOutputMode.JSON_SCHEMA and 400 <= exc.status_code < 500:

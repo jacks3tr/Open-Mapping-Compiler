@@ -25,6 +25,23 @@ def validate_target_document(
 ) -> tuple[Issue, ...]:
     raw = json.loads(schema.canonical_source_json)
     validator = Draft202012Validator(raw)
+    return _target_issues_with_validator(
+        validator,
+        schema_id=schema.schema_id,
+        document=document,
+        sample_id=sample_id,
+        diagnostic_values=diagnostic_values,
+    )
+
+
+def _target_issues_with_validator(
+    validator: Draft202012Validator,
+    *,
+    schema_id: str,
+    document: JsonValue,
+    sample_id: str | None = None,
+    diagnostic_values: bool = False,
+) -> tuple[Issue, ...]:
     errors: list[Issue] = []
     for error in sorted(validator.iter_errors(document), key=validation_error_sort_key):
         errors.append(
@@ -36,7 +53,7 @@ def validate_target_document(
                     "target document", error, diagnostic_values=diagnostic_values
                 ),
                 correction="Adjust the mapping so generated output matches the target schema.",
-                schema_id=schema.schema_id,
+                schema_id=schema_id,
                 sample_id=sample_id,
                 target_path=validation_error_pointer(error),
             )

@@ -132,13 +132,14 @@ class CustomHttpTransport:
                 "custom HTTP model transport request does not match the configured model",
                 "Build the transport from the same resolved model passed to invoke.",
             )
-        provider = request.resolved_model.provider
+        resolved_model = self._resolved_model
+        provider = resolved_model.provider
         if provider.base_url is None:
             raise _transport_error(
                 "custom HTTP model transport has no endpoint URL",
                 "Configure a base_url for the custom HTTP provider.",
             )
-        credentials = resolve_transport_credentials(request.resolved_model)
+        credentials = resolve_transport_credentials(resolved_model)
         package = _context_package(request)
         started = monotonic()
         proposals: list[ModelTargetProposal] = []
@@ -149,8 +150,8 @@ class CustomHttpTransport:
                 request=_legacy_request(request, package, target_index),
                 allow_raw_samples=package.raw_samples_included,
                 headers=credentials.headers,
-                timeout_seconds=provider_timeout_seconds(request.resolved_model),
-                max_retries=bounded_retry_count(request.resolved_model),
+                timeout_seconds=provider_timeout_seconds(resolved_model),
+                max_retries=bounded_retry_count(resolved_model),
             )
             if len(legacy_result.response.proposals) != 1:
                 raise _transport_error(

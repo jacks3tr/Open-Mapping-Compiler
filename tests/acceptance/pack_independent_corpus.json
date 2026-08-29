@@ -1,0 +1,285 @@
+{
+  "corpus_version": "0.1",
+  "domains": [
+    {
+      "name": "healthcare",
+      "cases": [
+        {
+          "id": "patient-priority",
+          "direct_field": "patientId",
+          "direct_value": "P-100",
+          "transformation": {
+            "kind": "lookup",
+            "source": "triageCode",
+            "target": "priority",
+            "values": {"STAT": "urgent", "ROUTINE": "routine"},
+            "source_value": "STAT",
+            "expected": "urgent"
+          }
+        },
+        {
+          "id": "encounter-origin",
+          "direct_field": "encounterId",
+          "direct_value": "E-200",
+          "transformation": {
+            "kind": "constant",
+            "target": "sourceSystem",
+            "value": "clinical"
+          }
+        },
+        {
+          "id": "clinician-name",
+          "direct_field": "clinicianId",
+          "direct_value": "C-300",
+          "transformation": {
+            "kind": "concat",
+            "sources": ["givenName", "familyName"],
+            "source_values": ["Ada", "Lovelace"],
+            "separator": " ",
+            "target": "displayName",
+            "expected": "Ada Lovelace"
+          }
+        },
+        {
+          "id": "dose-milligrams",
+          "direct_field": "medicationId",
+          "direct_value": "M-400",
+          "transformation": {
+            "kind": "unit",
+            "value_source": "dose",
+            "unit_source": "doseUnit",
+            "target": "doseMg",
+            "factors": {"mg": 1, "g": 1000},
+            "value": 2,
+            "unit": "g",
+            "expected": 2000
+          }
+        }
+      ]
+    },
+    {
+      "name": "commerce",
+      "cases": [
+        {
+          "id": "order-state",
+          "direct_field": "orderId",
+          "direct_value": "O-100",
+          "transformation": {
+            "kind": "lookup",
+            "source": "statusCode",
+            "target": "state",
+            "values": {"N": "new", "S": "shipped"},
+            "source_value": "S",
+            "expected": "shipped"
+          }
+        },
+        {
+          "id": "invoice-currency",
+          "direct_field": "invoiceId",
+          "direct_value": "I-200",
+          "transformation": {
+            "kind": "constant",
+            "target": "settlementCurrency",
+            "value": "USD"
+          }
+        },
+        {
+          "id": "customer-name",
+          "direct_field": "customerId",
+          "direct_value": "CU-300",
+          "transformation": {
+            "kind": "concat",
+            "sources": ["givenName", "familyName"],
+            "source_values": ["Grace", "Hopper"],
+            "separator": " ",
+            "target": "displayName",
+            "expected": "Grace Hopper"
+          }
+        },
+        {
+          "id": "case-quantity",
+          "direct_field": "productId",
+          "direct_value": "PR-400",
+          "transformation": {
+            "kind": "unit",
+            "value_source": "packCount",
+            "unit_source": "packUnit",
+            "target": "units",
+            "factors": {"each": 1, "dozen": 12},
+            "value": 2,
+            "unit": "dozen",
+            "expected": 24
+          }
+        }
+      ]
+    },
+    {
+      "name": "logistics",
+      "cases": [
+        {
+          "id": "shipment-service",
+          "direct_field": "shipmentId",
+          "direct_value": "S-100",
+          "transformation": {
+            "kind": "lookup",
+            "source": "serviceCode",
+            "target": "serviceLevel",
+            "values": {"EXP": "express", "STD": "standard"},
+            "source_value": "EXP",
+            "expected": "express"
+          }
+        },
+        {
+          "id": "warehouse-region",
+          "direct_field": "warehouseId",
+          "direct_value": "W-200",
+          "transformation": {
+            "kind": "constant",
+            "target": "reportingRegion",
+            "value": "north-america"
+          }
+        },
+        {
+          "id": "route-label",
+          "direct_field": "routeId",
+          "direct_value": "R-300",
+          "transformation": {
+            "kind": "concat",
+            "sources": ["origin", "destination"],
+            "source_values": ["BOS", "LAX"],
+            "separator": " -> ",
+            "target": "routeLabel",
+            "expected": "BOS -> LAX"
+          }
+        },
+        {
+          "id": "transit-minutes",
+          "direct_field": "packageId",
+          "direct_value": "PK-400",
+          "transformation": {
+            "kind": "unit",
+            "value_source": "duration",
+            "unit_source": "durationUnit",
+            "target": "transitMinutes",
+            "factors": {"minutes": 1, "hours": 60},
+            "value": 2,
+            "unit": "hours",
+            "expected": 120
+          }
+        }
+      ]
+    },
+    {
+      "name": "human-resources",
+      "cases": [
+        {
+          "id": "employee-classification",
+          "direct_field": "employeeId",
+          "direct_value": "E-100",
+          "transformation": {
+            "kind": "lookup",
+            "source": "typeCode",
+            "target": "employmentType",
+            "values": {"F": "full-time", "C": "contractor"},
+            "source_value": "C",
+            "expected": "contractor"
+          }
+        },
+        {
+          "id": "position-jurisdiction",
+          "direct_field": "positionId",
+          "direct_value": "P-200",
+          "transformation": {
+            "kind": "constant",
+            "target": "payrollJurisdiction",
+            "value": "US"
+          }
+        },
+        {
+          "id": "leave-request-label",
+          "direct_field": "requestId",
+          "direct_value": "L-300",
+          "transformation": {
+            "kind": "concat",
+            "sources": ["employeeName", "leaveType"],
+            "source_values": ["Katherine Johnson", "vacation"],
+            "separator": ": ",
+            "target": "requestLabel",
+            "expected": "Katherine Johnson: vacation"
+          }
+        },
+        {
+          "id": "tenure-months",
+          "direct_field": "workerId",
+          "direct_value": "W-400",
+          "transformation": {
+            "kind": "unit",
+            "value_source": "tenure",
+            "unit_source": "tenureUnit",
+            "target": "tenureMonths",
+            "factors": {"months": 1, "years": 12},
+            "value": 3,
+            "unit": "years",
+            "expected": 36
+          }
+        }
+      ]
+    },
+    {
+      "name": "telemetry",
+      "cases": [
+        {
+          "id": "device-health",
+          "direct_field": "deviceId",
+          "direct_value": "D-100",
+          "transformation": {
+            "kind": "lookup",
+            "source": "healthCode",
+            "target": "health",
+            "values": {"G": "good", "D": "degraded"},
+            "source_value": "D",
+            "expected": "degraded"
+          }
+        },
+        {
+          "id": "sensor-protocol",
+          "direct_field": "sensorId",
+          "direct_value": "SE-200",
+          "transformation": {
+            "kind": "constant",
+            "target": "protocol",
+            "value": "mqtt"
+          }
+        },
+        {
+          "id": "alert-label",
+          "direct_field": "alertId",
+          "direct_value": "A-300",
+          "transformation": {
+            "kind": "concat",
+            "sources": ["sensorName", "metric"],
+            "source_values": ["boiler-7", "pressure"],
+            "separator": ": ",
+            "target": "alertLabel",
+            "expected": "boiler-7: pressure"
+          }
+        },
+        {
+          "id": "power-watts",
+          "direct_field": "readingId",
+          "direct_value": "RD-400",
+          "transformation": {
+            "kind": "unit",
+            "value_source": "power",
+            "unit_source": "powerUnit",
+            "target": "powerWatts",
+            "factors": {"W": 1, "kW": 1000},
+            "value": 2,
+            "unit": "kW",
+            "expected": 2000
+          }
+        }
+      ]
+    }
+  ]
+}

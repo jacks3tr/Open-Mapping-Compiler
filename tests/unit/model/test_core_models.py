@@ -5,6 +5,7 @@ from __future__ import annotations
 import pytest
 from pydantic import ValidationError
 
+from open_mapping.model.benchmarks import BenchmarkMetrics, BenchmarkReport, RuntimeObservation
 from open_mapping.model.expressions import GetExpression, LiteralExpression
 from open_mapping.model.issues import Issue, IssueCode, Severity, has_errors, sort_issues
 from open_mapping.model.suggestions import (
@@ -71,3 +72,25 @@ def test_suggestion_invariants() -> None:
         }
     )
     assert valid.expression is None
+
+
+def test_benchmark_report_rejects_duplicate_runtime_observations() -> None:
+    observation = RuntimeObservation(
+        runtime="interpreter", sample_id="sample", success=True, output={}
+    )
+
+    with pytest.raises(ValidationError, match="duplicate runtime observation"):
+        BenchmarkReport(
+            id="benchmark",
+            baseline_confidence_counts={},
+            baseline_disposition_counts={},
+            assisted_confidence_counts={},
+            assisted_disposition_counts={},
+            metrics=BenchmarkMetrics(),
+            numerators={},
+            denominators={},
+            gate_thresholds={},
+            gate_results=(),
+            runtime_observations=(observation, observation),
+            issues=(),
+        )

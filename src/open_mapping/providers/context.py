@@ -11,6 +11,7 @@ from pydantic import Field
 from open_mapping.errors import OpenMappingError
 from open_mapping.matching.candidates import iter_target_mapping_units
 from open_mapping.matching.profiles import FieldProfile
+from open_mapping.model.expressions import analyze_expression
 from open_mapping.model.hints import MappingHints
 from open_mapping.model.issues import Issue, IssueCode, Severity
 from open_mapping.model.json_types import JsonValue, OpenMappingModel
@@ -179,24 +180,6 @@ def _candidate_sets_by_target(
     }
 
 
-def _expression_source_paths(value: JsonValue) -> set[str]:
-    result: set[str] = set()
-    stack: list[JsonValue] = [value]
-    while stack:
-        current = stack.pop()
-        if isinstance(current, dict):
-            if (
-                current.get("op") == "get"
-                and current.get("document", "input") == "input"
-                and isinstance(current.get("path"), str)
-            ):
-                result.add(normalize_pointer(cast(str, current["path"])))
-            stack.extend(cast(JsonValue, item) for item in current.values())
-        elif isinstance(current, list):
-            stack.extend(cast(JsonValue, item) for item in current)
-    return result
-
-
 def _hint_records(hints: MappingHints | None) -> tuple[tuple[str, tuple[str, ...]], ...]:
     if hints is None:
         return ()
@@ -270,7 +253,15 @@ def _hint_records(hints: MappingHints | None) -> tuple[tuple[str, tuple[str, ...
                 "expression",
                 expression_hint.target,
                 text,
-                tuple(sorted(_expression_source_paths(expression), key=_pointer_key)),
+                tuple(
+                    sorted(
+                        (
+                            normalize_pointer(path)
+                            for path in analyze_expression(expression_hint.expression).input_paths
+                        ),
+                        key=_pointer_key,
+                    )
+                ),
             )
         )
     records.sort(key=lambda item: (item[0], _pointer_key(item[1]), item[2], item[3]))
@@ -308,13 +299,9 @@ def _redacted_raw_samples(
     return tuple(included), redaction_count
 
 
-def _direct_siblings(pointer: str, fields: Sequence[SchemaField]) -> set[str]:
+def _direct_siblings(pointer: str, schema: SchemaDocument) -> set[str]:
     parent = normalize_pointer(pointer).rsplit("/", 1)[0]
-    return {
-        field.pointer
-        for field in fields
-        if normalize_pointer(field.pointer).rsplit("/", 1)[0] == parent
-    }
+    return {field.pointer for field in schema.topology.children(parent)}
 
 
 def _ancestors(pointer: str, existing: set[str]) -> set[str]:
@@ -329,10 +316,11 @@ def _ancestors(pointer: str, existing: set[str]) -> set[str]:
 
 def _targeted_source_paths(
     *,
-    fields: tuple[SchemaField, ...],
+    schema: SchemaDocument,
     requests: Sequence[ModelTargetRequest],
     hint_paths: Sequence[str],
 ) -> set[str]:
+    fields = schema.fields
     existing = {field.pointer for field in fields}
     candidate_paths = {
         candidate.source_path for request in requests for candidate in request.candidates
@@ -341,7 +329,7 @@ def _targeted_source_paths(
     selected.update(candidate_paths)
     for path in candidate_paths:
         selected.update(_ancestors(path, existing))
-        selected.update(_direct_siblings(path, fields))
+        selected.update(_direct_siblings(path, schema))
 
     array_paths = {
         field.pointer
@@ -349,12 +337,7 @@ def _targeted_source_paths(
         if JsonType.ARRAY in field.types and field.pointer in selected
     }
     for array_path in array_paths:
-        item_prefix = array_path.rstrip("/") + "/items"
-        selected.update(
-            field.pointer
-            for field in fields
-            if field.pointer == item_prefix or field.pointer.startswith(item_prefix + "/")
-        )
+        selected.update(field.pointer for field in schema.topology.descendants(array_path))
     return selected.intersection(existing)
 
 
@@ -431,7 +414,7 @@ def _build_package(
         included_source_fields = source_fields
     else:
         selected_paths = _targeted_source_paths(
-            fields=source_fields,
+            schema=source_schema,
             requests=target_requests,
             hint_paths=hint_paths,
         )

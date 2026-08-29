@@ -36,6 +36,7 @@ from open_mapping.providers.transports.base import (
     encode_bounded_json_body,
     provider_timeout_seconds,
     read_bounded_response_body,
+    require_matching_request,
     resolve_transport_credentials,
     sanitize_headers,
     stable_transport_failure,
@@ -212,6 +213,23 @@ def test_native_factory_defers_credential_resolution_until_invoke(
     with pytest.raises(OpenMappingError, match="OPEN_MAPPING_TEST_API_KEY.*is not set"):
         transport.invoke(request)
     assert isinstance(transport, OpenAITransport)
+
+
+def test_matching_request_resolves_to_the_transport_owned_model() -> None:
+    resolved = _resolved_model(ProviderKind.OPENAI)
+    request = ModelTransportRequest(
+        resolved_model=resolved,
+        prompt=ModelPrompt(
+            prompt_version="mapping-agent-v1",
+            system_instruction="fixed instruction",
+            user_payload_json="{}",
+            response_schema={},
+        ),
+    )
+
+    bound = require_matching_request(request, resolved, component="test")
+
+    assert bound is resolved
 
 
 def test_credential_headers_are_resolved_fresh_and_sanitized_at_the_transport_boundary() -> None:

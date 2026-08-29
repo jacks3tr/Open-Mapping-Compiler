@@ -16,7 +16,8 @@ ROOT = Path(__file__).resolve().parents[3]
 def test_help_inprocess() -> None:
     result = runner.invoke(app, ["--help"])
     assert result.exit_code == 0
-    assert "suggest" in result.stdout
+    assert "map" in result.stdout
+    assert "suggest" not in result.stdout
 
 
 def test_inspect_inprocess() -> None:

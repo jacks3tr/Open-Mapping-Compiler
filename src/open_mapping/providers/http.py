@@ -62,23 +62,6 @@ def _validate_response(response: ProviderResponse, request: ProviderRequest) -> 
     validate_provider_response(response, request)
 
 
-def _collect_get_paths(expression: object) -> set[str]:
-    result: set[str] = set()
-    stack = [expression]
-    while stack:
-        node = stack.pop()
-        if not isinstance(node, dict):
-            continue
-        if node.get("op") == "get" and node.get("document", "input") == "input":
-            result.add(str(node.get("path")))
-        for value in node.values():
-            if isinstance(value, dict):
-                stack.append(value)
-            elif isinstance(value, list):
-                stack.extend(item for item in value if isinstance(item, dict))
-    return result
-
-
 def call_http_provider(
     url: str,
     *,

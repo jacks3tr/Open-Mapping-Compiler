@@ -4,25 +4,43 @@ build-backend = "hatchling.build"
 
 [project]
 name = "open-mapping"
-version = "0.1.0"
-description = "Portable, explainable, and deterministically verified schema mappings."
-authors = [{ name = "Jacks3tr" }]
+version = "0.2.0"
+description = "Map two API schemas and return structured, reviewable JSON."
+authors = [{ name = "Jacks3tr", email = "Jacks3tr@gmail.com" }]
 readme = "README.md"
-requires-python = ">=3.12"
-license = { text = "Apache-2.0" }
+requires-python = ">=3.11"
+license = "Apache-2.0"
+keywords = ["json-schema", "mapping", "transformation", "openapi"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Typing :: Typed",
+]
 dependencies = [
     "pydantic>=2.7",
     "jsonschema>=4.22",
     "PyYAML>=6.0",
     "rapidfuzz>=3.9",
     "typer>=0.12",
+    "httpx>=0.27",
 ]
 
 [project.optional-dependencies]
-ai = ["httpx>=0.27"]
+ai = []
+server = ["fastapi>=0.115,<1", "uvicorn>=0.34,<1"]
 
 [project.scripts]
 open-mapping = "open_mapping.cli.app:main"
+
+[project.urls]
+Documentation = "https://github.com/jacks3tr/Open-Mapping-Compiler#readme"
+Issues = "https://github.com/jacks3tr/Open-Mapping-Compiler/issues"
+Repository = "https://github.com/jacks3tr/Open-Mapping-Compiler"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/open_mapping"]
@@ -32,7 +50,7 @@ packages = ["src/open_mapping"]
 "examples" = "open_mapping/examples"
 
 [tool.ruff]
-target-version = "py312"
+target-version = "py311"
 line-length = 100
 src = ["src", "tests", "tools"]
 exclude = ["*.md", ".venv", "node_modules", "dist", "build"]
@@ -54,7 +72,7 @@ known-first-party = ["open_mapping"]
 "src/open_mapping/verification/type_inference.py" = ["B009"]
 
 [tool.mypy]
-python_version = "3.12"
+python_version = "3.11"
 strict = true
 files = ["src", "tests"]
 warn_unused_configs = true

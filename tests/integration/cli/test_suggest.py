@@ -111,7 +111,7 @@ def test_model_without_resolved_configuration_fails_before_schema_loading(tmp_pa
     )
 
     assert result.returncode == 2
-    assert "--model requires --models-config" in result.stderr
+    assert "neither a configured alias nor native shorthand" in result.stderr
     assert "missing-source" not in result.stderr
     assert "Traceback" not in result.stderr
     assert result.stdout == ""

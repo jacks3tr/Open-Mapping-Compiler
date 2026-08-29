@@ -5,14 +5,13 @@ from __future__ import annotations
 from open_mapping.evaluation.expressions import EvaluationContext, evaluate_expression
 from open_mapping.evaluation.limits import DEFAULT_EVALUATION_LIMITS, EvaluationLimits
 from open_mapping.model.json_types import JsonValue
-from open_mapping.model.mappings import MappingDocument
+from open_mapping.model.mappings import MappingDocument, MappingRule
 from open_mapping.pointers import assign_pointer, split_pointer
 
 
-def _rule_order(mapping: MappingDocument) -> tuple[str, ...]:
-    return tuple(
-        sorted((rule.target for rule in mapping.rules), key=lambda path: split_pointer(path))
-    )
+def ordered_rules(mapping: MappingDocument) -> tuple[MappingRule, ...]:
+    """Return executable rules in the one canonical pointer order."""
+    return tuple(sorted(mapping.rules, key=lambda rule: split_pointer(rule.target)))
 
 
 def _evaluate_mapping_document(
@@ -21,12 +20,14 @@ def _evaluate_mapping_document(
     limits: EvaluationLimits = DEFAULT_EVALUATION_LIMITS,
 ) -> JsonValue:
     output: dict[str, object] = {}
-    for target in _rule_order(mapping):
-        rule = next(item for item in mapping.rules if item.target == target)
+    for rule in ordered_rules(mapping):
         value = evaluate_expression(
             rule.expression,
             EvaluationContext(input_document=source, output_document=output),
             limits,
         )
-        output = assign_pointer(output, target, value)
+        output = assign_pointer(output, rule.target, value)
     return output
+
+
+__all__ = ["ordered_rules"]

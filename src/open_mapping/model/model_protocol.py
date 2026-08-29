@@ -10,26 +10,7 @@ from pydantic import ConfigDict, Field, model_validator
 from pydantic import JsonValue as PydanticJsonValue
 
 from open_mapping.matching.profiles import FieldProfile
-from open_mapping.model.expressions import (
-    ArrayExpression,
-    BooleanExpression,
-    CastExpression,
-    CoalesceExpression,
-    ConcatExpression,
-    EqualsExpression,
-    Expression,
-    FormatDateExpression,
-    GetExpression,
-    IfExpression,
-    LiteralExpression,
-    LookupExpression,
-    MapExpression,
-    NotExpression,
-    NumericExpression,
-    ObjectExpression,
-    ParseDateExpression,
-    RoundExpression,
-)
+from open_mapping.model.expressions import Expression, analyze_expression
 from open_mapping.model.issues import Issue, IssueCode, Severity, sort_issues
 from open_mapping.model.json_types import JsonScalar, JsonValue, OpenMappingModel
 from open_mapping.model.model_config import ContextMode
@@ -360,58 +341,8 @@ def mapping_context_sha256(package: MappingContextPackage) -> str:
     return hashlib.sha256(canonical_json_bytes(_canonical_context_payload(package))).hexdigest()
 
 
-def _analyze_expression(expression: Expression) -> tuple[set[str], set[str], set[str]]:
-    """Return input paths, non-input documents, and operation names used by an expression."""
-    input_paths: set[str] = set()
-    non_input_documents: set[str] = set()
-    operation_names: set[str] = set()
-    stack: list[Expression] = [expression]
-    while stack:
-        node = stack.pop()
-        operation_names.add(node.op)
-        if isinstance(node, GetExpression):
-            if node.document == "input":
-                input_paths.add(node.path)
-            else:
-                non_input_documents.add(node.document)
-        elif isinstance(node, LiteralExpression):
-            continue
-        elif isinstance(node, ObjectExpression):
-            stack.extend(node.fields.values())
-        elif isinstance(node, ArrayExpression):
-            stack.extend(node.items)
-        elif isinstance(node, MapExpression):
-            stack.extend((node.collection, node.expression))
-        elif isinstance(node, (CoalesceExpression, ConcatExpression, BooleanExpression)):
-            stack.extend(node.operands)
-        elif isinstance(node, CastExpression):
-            stack.append(node.value)
-        elif isinstance(node, IfExpression):
-            stack.extend((node.condition, node.then, node.otherwise))
-        elif isinstance(node, EqualsExpression):
-            stack.extend((node.left, node.right))
-        elif isinstance(node, NotExpression):
-            stack.append(node.value)
-        elif isinstance(node, LookupExpression):
-            stack.append(node.key)
-            if node.default is not None:
-                stack.append(node.default)
-        elif isinstance(node, NumericExpression):
-            stack.extend((node.left, node.right))
-        elif isinstance(node, RoundExpression):
-            stack.append(node.value)
-        elif isinstance(node, ParseDateExpression):
-            stack.append(node.value)
-        elif isinstance(node, FormatDateExpression):
-            stack.append(node.value)
-        else:
-            raise TypeError(f"unsupported typed expression {type(node)!r}")
-    return input_paths, non_input_documents, operation_names
-
-
 def _is_pure_constant(expression: Expression) -> bool:
-    input_paths, non_input_documents, _operation_names = _analyze_expression(expression)
-    return not input_paths and not non_input_documents
+    return analyze_expression(expression).is_pure_constant
 
 
 def _invalid_response_issue(
@@ -491,7 +422,8 @@ def validate_model_mapping_response(
                 )
         if proposal.expression is None:
             continue
-        input_paths, non_input_documents, operation_names = _analyze_expression(proposal.expression)
+        facts = analyze_expression(proposal.expression)
+        non_input_documents = facts.documents.difference({"input"})
         for document in sorted(non_input_documents):
             issues.append(
                 _invalid_response_issue(
@@ -500,7 +432,7 @@ def validate_model_mapping_response(
                     target_path=proposal.target_path,
                 )
             )
-        for operation in sorted(operation_names.difference(package.expression_operations)):
+        for operation in sorted(facts.operations.difference(package.expression_operations)):
             issues.append(
                 _invalid_response_issue(
                     "expression operation is not allowed by the context",
@@ -508,7 +440,7 @@ def validate_model_mapping_response(
                     target_path=proposal.target_path,
                 )
             )
-        for source_path in sorted(input_paths):
+        for source_path in sorted(facts.input_paths):
             if source_path not in allowed_source_paths:
                 issues.append(
                     _invalid_response_issue(
@@ -518,7 +450,7 @@ def validate_model_mapping_response(
                     )
                 )
         selected_source_paths = set(proposal.selected_source_paths)
-        for source_path in sorted(selected_source_paths.difference(input_paths)):
+        for source_path in sorted(selected_source_paths.difference(facts.input_paths)):
             issues.append(
                 _invalid_response_issue(
                     "selected source path is not read by the expression",
@@ -526,7 +458,7 @@ def validate_model_mapping_response(
                     target_path=proposal.target_path,
                 )
             )
-        for source_path in sorted(input_paths.difference(selected_source_paths)):
+        for source_path in sorted(facts.input_paths.difference(selected_source_paths)):
             issues.append(
                 _invalid_response_issue(
                     "expression source path is not selected",

@@ -3,15 +3,12 @@
 from __future__ import annotations
 
 import hashlib
-import json
 from pathlib import Path
-
-import yaml
 
 from open_mapping.model.json_types import JsonValue
 from open_mapping.model.suggestions import SuggestionReport
 from open_mapping.serialization.canonical_json import canonical_json_bytes
-from open_mapping.serialization.yaml_loader import load_safe_yaml
+from open_mapping.serialization.formats import dumps_document, format_for_path, loads_document
 
 
 def suggestion_report_sha256(report: SuggestionReport) -> str:
@@ -19,24 +16,18 @@ def suggestion_report_sha256(report: SuggestionReport) -> str:
 
 
 def dumps_suggestion_report(report: SuggestionReport, *, format_name: str) -> str:
-    value = report.model_dump(mode="json")
-    if format_name == "json":
-        return json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(",", ":")) + "\n"
-    return yaml.safe_dump(value, sort_keys=True, default_flow_style=False, allow_unicode=True)
+    value: JsonValue = report.model_dump(mode="json")
+    return dumps_document(value, format_name=format_name, allow_unicode=True)
 
 
 def dump_suggestion_report(report: SuggestionReport, path: Path) -> None:
-    fmt = "yaml" if path.suffix.lower() in {".yaml", ".yml"} else "json"
+    fmt = format_for_path(path)
     path.write_text(dumps_suggestion_report(report, format_name=fmt), encoding="utf-8")
 
 
 def load_suggestion_report(path: Path) -> SuggestionReport:
     content = path.read_text(encoding="utf-8")
-    raw: JsonValue = (
-        json.loads(content)
-        if path.suffix.lower() not in {".yaml", ".yml"}
-        else load_safe_yaml(content)
-    )
+    raw = loads_document(content, format_name=format_for_path(path))
     if not isinstance(raw, dict):
         return SuggestionReport.model_validate(raw)
     value = dict(raw)

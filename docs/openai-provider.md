@@ -1,92 +1,21 @@
-# Set up the OpenAI provider
+# Use OpenAI to map schemas
 
-This example uses OpenAI's Responses API to draft a mapping for the customer schemas in `examples/model-assisted`. The compiler requests structured output, checks the returned expression, and writes a suggestion report for review.
-
-## Install the command
-
-Install Open Mapping Compiler with model-provider support:
+Install model support and set your key:
 
 ```text
-python -m pip install "open-mapping[ai] @ git+https://github.com/jacks3tr/Open-Mapping-Compiler.git"
+pip install open-mapping
 ```
 
-If you are working from a repository checkout, use `uv run open-mapping` in place of `open-mapping` in the commands below.
+Set `OPENAI_API_KEY` in the process environment. Do not put the key in YAML, command arguments, or Git.
 
-## Copy the OpenAI configuration
-
-The repository includes a configuration with `gpt-5` and `gpt-5-mini` already named. Copy it to the repository root.
-
-PowerShell:
-
-```powershell
-Copy-Item examples/model-assisted/openai.models.example.yaml open-mapping.models.yaml
-```
-
-macOS or Linux:
-
-```sh
-cp examples/model-assisted/openai.models.example.yaml open-mapping.models.yaml
-```
-
-Set your API key in the current shell.
-
-PowerShell:
-
-```powershell
-$env:OPENAI_API_KEY = "your-api-key"
-```
-
-macOS or Linux:
-
-```sh
-export OPENAI_API_KEY="your-api-key"
-```
-
-The YAML contains the environment variable name, not the key itself. Keep the real key out of files, command arguments, and Git.
-
-Validate the file without contacting OpenAI:
+Then map two schemas:
 
 ```text
-open-mapping models validate --config open-mapping.models.yaml
+open-mapping map source.schema.json target.schema.json --model openai:gpt-5-mini --out mapping.json
 ```
 
-## Request a structured draft
+Omit `--model` for local deterministic mapping. Set `OPEN_MAPPING_MODEL=openai:<model-id>` when an environment-level default is more convenient.
 
-Run the compiler from the repository root:
+The repository includes [`examples/model-assisted`](../examples/model-assisted/README.md) with two schemas you can map. The included `openai.models.example.yaml` file is for named aliases and custom model parameters; the normal `map` command does not require it.
 
-```text
-open-mapping suggest examples/model-assisted/source.schema.json examples/model-assisted/target.schema.json --model openai-mini --samples examples/model-assisted/samples.jsonl --hints examples/model-assisted/hints.yaml --suggestions-out suggestions.json --model-run-report-out model-run.json --require-model
-```
-
-The command writes:
-
-- `suggestions.json`, which contains the deterministic candidates and model draft;
-- `model-run.json`, which contains sanitized hashes, usage metadata when available, and provider issues.
-
-No mapping is approved yet. Open `suggestions.json` and find `suggestion_report_sha256`. Create `review.yaml` with that hash:
-
-```yaml
-review_version: "0.1"
-suggestion_report_sha256: "copy this value from suggestions.json"
-mapping_id: customer-to-account
-decisions:
-  - target_path: /account_number
-    action: accept_selected
-    reason: The proposed source field was reviewed and approved.
-```
-
-The example hints already define `/state` and `/source_system`, so the review only covers `/account_number`.
-
-Create the mapping:
-
-```text
-open-mapping review suggestions.json --decisions review.yaml --source examples/model-assisted/source.schema.json --target examples/model-assisted/target.schema.json --out mapping.yaml --require-complete-review
-```
-
-Verify it against the schemas and example samples:
-
-```text
-open-mapping verify mapping.yaml --source examples/model-assisted/source.schema.json --target examples/model-assisted/target.schema.json --samples examples/model-assisted/samples.jsonl
-```
-
-`mapping.yaml` is now ready to run or compile. The [model-assisted mapping guide](model-assisted-mapping.md) covers context previews, provider failure behavior, raw-sample controls, and compilation.
+See [model-assisted mapping](model-assisted-mapping.md) for the request contents, structured response, privacy behavior, and advanced endpoints.

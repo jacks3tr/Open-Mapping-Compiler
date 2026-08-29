@@ -1,0 +1,16 @@
+{
+  "$id": "quick-start-target",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["accountName", "customerId"],
+  "properties": {
+    "accountName": {
+      "type": "string",
+      "description": "Customer account name"
+    },
+    "customerId": {
+      "type": "string",
+      "description": "Stable customer identifier"
+    }
+  }
+}

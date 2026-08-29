@@ -16,13 +16,14 @@ from open_mapping.cli.common import (
     run_public_command,
     validate_input_files,
 )
+from open_mapping.errors import OpenMappingError
 from open_mapping.model.json_types import JsonValue
 from open_mapping.model.model_config import ModelProviderConfig, ResolvedModel
 from open_mapping.providers.config import (
     load_model_provider_config,
-    resolve_model,
     resolve_models_config_path,
 )
+from open_mapping.providers.shorthand import resolve_model_selection
 from open_mapping.serialization.canonical_json import canonical_json, canonical_json_bytes
 
 _MODELS_HELP = """Validate and inspect named model configurations without making a model call.
@@ -38,7 +39,7 @@ models_app = typer.Typer(help=_MODELS_HELP, add_completion=False)
 class CliModelSelection:
     """One validated CLI model selection and its non-secret configuration digest."""
 
-    config: ModelProviderConfig
+    config: ModelProviderConfig | None
     resolved_model: ResolvedModel
     config_sha256: str
 
@@ -64,28 +65,27 @@ def load_cli_model_selection(
 ) -> CliModelSelection:
     """Resolve and validate a selected alias before schemas or providers are touched."""
 
-    resolved_path = resolve_models_config_path(
-        explicit_config,
-        cwd=Path.cwd() if cwd is None else cwd,
-        environment=os.environ if environment is None else environment,
-    )
-    if resolved_path is None:
-        raise CliInputError(
-            "--model requires --models-config, OPEN_MAPPING_MODELS_CONFIG, "
-            "or ./open-mapping.models.yaml"
-        )
-    config = _load_config(resolved_path)
+    actual_cwd = Path.cwd() if cwd is None else cwd
+    actual_environment = os.environ if environment is None else environment
     try:
-        resolved_model = resolve_model(config, alias)
-    except KeyError as exc:
-        message = (
-            exc.args[0] if exc.args and isinstance(exc.args[0], str) else "unknown model alias"
+        resolved = resolve_model_selection(
+            alias,
+            explicit_config=explicit_config,
+            cwd=actual_cwd,
+            environment=actual_environment,
         )
-        raise CliInputError(message) from exc
+    except OpenMappingError as exc:
+        if any(issue.code.value == "PROVIDER_FAILURE" for issue in exc.issues):
+            raise
+        raise CliInputError("; ".join(issue.message for issue in exc.issues)) from exc
+    resolved_path = resolve_models_config_path(
+        explicit_config, cwd=actual_cwd, environment=actual_environment
+    )
+    config = _load_config(resolved_path) if resolved_path is not None else None
     return CliModelSelection(
         config=config,
-        resolved_model=resolved_model,
-        config_sha256=model_config_sha256(config),
+        resolved_model=resolved.resolved_model,
+        config_sha256=resolved.config_sha256,
     )
 
 

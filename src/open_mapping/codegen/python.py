@@ -5,6 +5,7 @@ from __future__ import annotations
 import json
 
 from open_mapping.codegen.common import GeneratedArtifact
+from open_mapping.evaluation.mappings import ordered_rules
 from open_mapping.model.mappings import MappingDocument
 from open_mapping.model.schema import SchemaDocument
 from open_mapping.serialization.mappings import mapping_sha256
@@ -30,7 +31,6 @@ MAX_STRING_LENGTH = __MAX_STRING_LENGTH__
 
 _MISSING = object()
 _RULES = json.loads(__RULES_JSON__)
-_TARGETS = tuple(sorted(_RULES, key=lambda path: tuple(token for token in path.strip("/").split("/") if token)))
 _DECIMAL = re.compile(r"^[+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?$")
 _INTEGER = re.compile(r"^[+-]?\d+$")
 _RFC3339 = re.compile(r"^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(?:\.(\d+))?(Z|[+-]\d{2}:\d{2})$")
@@ -392,8 +392,7 @@ def transform(source: dict[str, object]) -> dict[str, object]:
     if not isinstance(source, dict):
         raise RuntimeError("INVALID_INPUT: source must be an object")
     output: dict[str, object] = {}
-    for target in _TARGETS:
-        rule = _RULES[target]
+    for target, rule in _RULES:
         value = _evaluate(rule, source, output, [], 0)
         _check_limits(value)
         output = _assign(output, target, value)
@@ -408,7 +407,9 @@ def generate_python(
     target_schema: SchemaDocument,
 ) -> GeneratedArtifact:
     require_static_valid(mapping, source_schema=source_schema, target_schema=target_schema)
-    rules = {rule.target: rule.expression.model_dump(mode="json") for rule in mapping.rules}
+    rules = [
+        (rule.target, rule.expression.model_dump(mode="json")) for rule in ordered_rules(mapping)
+    ]
     source = (
         _RUNTIME.replace("__MAPPING_ID_REPR__", repr(mapping.id))
         .replace("__MAPPING_SHA_REPR__", repr(mapping_sha256(mapping)))

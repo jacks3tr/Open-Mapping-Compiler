@@ -1,0 +1,16 @@
+{
+  "$id": "quick-start-source",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["customerId", "fullName"],
+  "properties": {
+    "customerId": {
+      "type": "string",
+      "description": "Stable customer identifier"
+    },
+    "fullName": {
+      "type": "string",
+      "description": "Customer account name"
+    }
+  }
+}

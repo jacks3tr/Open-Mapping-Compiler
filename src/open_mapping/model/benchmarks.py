@@ -183,3 +183,16 @@ class BenchmarkReport(OpenMappingModel):
     model_results: dict[str, ModelBenchmarkResult] = Field(
         default_factory=dict, exclude_if=lambda value: not value
     )
+
+    @model_validator(mode="after")
+    def _validate_runtime_observation_keys(self) -> BenchmarkReport:
+        seen: set[tuple[str, str]] = set()
+        for observation in self.runtime_observations:
+            key = (observation.sample_id, observation.runtime)
+            if key in seen:
+                raise ValueError(
+                    "duplicate runtime observation for "
+                    f"sample {observation.sample_id!r} and runtime {observation.runtime!r}"
+                )
+            seen.add(key)
+        return self

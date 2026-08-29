@@ -30,8 +30,10 @@ class AnthropicTransport:
         self._resolved_model = resolved_model
 
     def invoke(self, request: ModelTransportRequest) -> ModelTransportResult:
-        require_matching_request(request, self._resolved_model, component=_COMPONENT)
-        model = request.resolved_model.model
+        resolved_model = require_matching_request(
+            request, self._resolved_model, component=_COMPONENT
+        )
+        model = resolved_model.model
         if model.structured_output not in {
             StructuredOutputMode.AUTO,
             StructuredOutputMode.TOOL,
@@ -53,7 +55,7 @@ class AnthropicTransport:
                 "Remove parameters.reasoning_effort when using forced structured output.",
                 component=_COMPONENT,
             )
-        credentials = resolve_transport_credentials(request.resolved_model)
+        credentials = resolve_transport_credentials(resolved_model)
         headers = {
             **dict(credentials.headers),
             "x-api-key": credentials.api_key or "",
@@ -81,12 +83,12 @@ class AnthropicTransport:
         try:
             response = post_json(
                 url=provider_endpoint(
-                    request.resolved_model.provider.base_url or _DEFAULT_BASE_URL,
+                    resolved_model.provider.base_url or _DEFAULT_BASE_URL,
                     "messages",
                 ),
                 payload=body,
                 headers=headers,
-                resolved_model=request.resolved_model,
+                resolved_model=resolved_model,
             )
         except HttpStatusFailure as exc:
             raise stable_transport_failure(exc) from exc

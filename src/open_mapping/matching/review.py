@@ -14,13 +14,61 @@ from open_mapping.model.reviews import (
     AssemblyPolicy,
     ReviewAction,
     ReviewResult,
+    SuggestionReviewDecision,
     SuggestionReviewDocument,
 )
 from open_mapping.model.schema import SchemaDocument
-from open_mapping.model.suggestions import ConfidenceBand, SuggestionDisposition, SuggestionReport
+from open_mapping.model.suggestions import (
+    ConfidenceBand,
+    SuggestionDisposition,
+    SuggestionOrigin,
+    SuggestionReport,
+)
 from open_mapping.pointers import split_pointer
 from open_mapping.serialization.suggestions import suggestion_report_sha256
 from open_mapping.verification.static import require_static_valid, verify_proposed_rule
+
+
+def create_review_template(
+    report: SuggestionReport,
+    *,
+    mapping_id: str,
+    include_optional: bool,
+) -> SuggestionReviewDocument:
+    """Create a deterministic review document without trusting copied metadata."""
+
+    del include_optional
+    decisions: list[SuggestionReviewDecision] = []
+    for suggestion in report.suggestions:
+        auto_accepted = (
+            suggestion.origin is SuggestionOrigin.DETERMINISTIC
+            and suggestion.disposition is SuggestionDisposition.SUGGESTED
+            and suggestion.confidence_band is ConfidenceBand.HIGH
+        )
+        if auto_accepted:
+            continue
+        context_parts = [suggestion.reason]
+        context_parts.extend(evidence.detail for evidence in suggestion.evidence[:4])
+        context = " ".join(part.strip() for part in context_parts if part.strip())[:1000]
+        decisions.append(
+            SuggestionReviewDecision(
+                target_path=suggestion.target_path,
+                action=ReviewAction.UNDECIDED,
+                source_path=None,
+                reason="Choose a review action.",
+                confidence_band=suggestion.confidence_band,
+                disposition=suggestion.disposition,
+                selected_source_path=suggestion.selected_source_path,
+                candidate_paths=tuple(candidate.source_path for candidate in suggestion.candidates),
+                context=context or None,
+            )
+        )
+    return SuggestionReviewDocument(
+        review_version="0.1",
+        suggestion_report_sha256=suggestion_report_sha256(report),
+        mapping_id=mapping_id,
+        decisions=tuple(decisions),
+    )
 
 
 def _issue(
@@ -158,7 +206,10 @@ def assemble_mapping(
                 suggestion.target_path
                 for suggestion in report.suggestions
                 if suggestion.disposition != SuggestionDisposition.MANUAL
-                and suggestion.target_path not in decisions_by_target
+                and (
+                    suggestion.target_path not in decisions_by_target
+                    or decisions_by_target[suggestion.target_path].action is ReviewAction.UNDECIDED
+                )
             ),
             key=split_pointer,
         )
@@ -207,6 +258,7 @@ def assemble_mapping(
         if decision is None:
             if (
                 policy == AssemblyPolicy.HIGH_AND_MANUAL
+                and suggestion.origin is SuggestionOrigin.DETERMINISTIC
                 and suggestion.disposition == SuggestionDisposition.SUGGESTED
                 and suggestion.confidence_band == ConfidenceBand.HIGH
                 and suggestion.expression is not None
@@ -214,7 +266,11 @@ def assemble_mapping(
                 included = True
         else:
             applied_action = decision.action
-            if decision.action in {ReviewAction.REJECT, ReviewAction.DEFER}:
+            if decision.action in {
+                ReviewAction.UNDECIDED,
+                ReviewAction.REJECT,
+                ReviewAction.DEFER,
+            }:
                 included = False
             elif decision.action == ReviewAction.ACCEPT_SELECTED:
                 if (

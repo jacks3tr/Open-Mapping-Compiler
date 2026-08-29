@@ -10,18 +10,25 @@ from os import close as _close
 from os import fsync as _fsync
 from os import replace as replace
 from pathlib import Path
+from typing import TypeVar
 
 import typer
 import yaml
 from pydantic import ValidationError
 
 from open_mapping.errors import OpenMappingError
-from open_mapping.model.issues import Issue
+from open_mapping.model.issues import Issue, IssueCode
 
 
 class SchemaFormat(StrEnum):
     JSON_SCHEMA = "json-schema"
     OPENAPI = "openapi"
+
+
+class SourceFormat(StrEnum):
+    JSON_SCHEMA = "json-schema"
+    OPENAPI = "openapi"
+    JSON_DATA = "json-data"
 
 
 class ReportFormat(StrEnum):
@@ -40,13 +47,14 @@ class TargetLanguage(StrEnum):
     TYPESCRIPT = "typescript"
 
 
+Choice = TypeVar("Choice", bound=StrEnum)
+
+
 class CliInputError(ValueError):
     """A safe, actionable command-line input failure."""
 
 
-def require_choice[Choice: StrEnum](
-    value: object, choice_type: type[Choice], option: str
-) -> Choice:
+def require_choice(value: object, choice_type: type[Choice], option: str) -> Choice:
     """Validate a handler choice even when a caller bypasses Typer."""
     if isinstance(value, choice_type):
         return value
@@ -96,6 +104,8 @@ def run_public_command(operation: Callable[[], int]) -> int:
         return 130
     except OpenMappingError as exc:
         echo_issues(exc.issues)
+        if any(issue.code == IssueCode.PROVIDER_FAILURE for issue in exc.issues):
+            return 5
         return 2
     except (
         OSError,

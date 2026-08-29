@@ -2,6 +2,9 @@
 
 from __future__ import annotations
 
+import pytest
+from pydantic import ValidationError
+
 from open_mapping.adapters.json_schema import parse_json_schema
 from open_mapping.matching.ambiguity import detect_ambiguity
 from open_mapping.matching.candidates import (
@@ -17,7 +20,7 @@ from open_mapping.matching.proposals import build_deterministic_suggestions
 from open_mapping.matching.review import assemble_mapping
 from open_mapping.model.hints import DirectHint
 from open_mapping.model.reviews import AssemblyPolicy, SuggestionReviewDocument
-from open_mapping.model.schema import SchemaDocument
+from open_mapping.model.schema import JsonType, SchemaDocument, SchemaField
 from open_mapping.model.suggestions import ConfidenceBand, TargetCandidateSet
 from open_mapping.serialization.suggestions import suggestion_report_sha256
 
@@ -70,6 +73,93 @@ def test_candidate_generation_and_suggestions() -> None:
     report = build_deterministic_suggestions(source, target, candidate_sets=sets, hints=None)
     assert not validate_suggestion_coverage(report, target)
     assert report.summary.total_targets == 2
+
+
+def test_mapping_units_distinguish_items_properties_from_array_items() -> None:
+    target = parse_json_schema(
+        {
+            "$id": "t",
+            "type": "object",
+            "properties": {
+                "items": {"type": "string"},
+                "container": {
+                    "type": "object",
+                    "properties": {"items": {"type": "integer"}},
+                },
+                "lines": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "sku": {"type": "string"},
+                            "items": {"type": "string"},
+                        },
+                    },
+                },
+            },
+        },
+        schema_id=None,
+        source_uri="t",
+    )
+
+    assert tuple(field.pointer for field in iter_target_mapping_units(target)) == (
+        "/container/items",
+        "/items",
+        "/lines",
+    )
+
+
+def test_schema_document_rejects_duplicate_field_pointers() -> None:
+    field = SchemaField(pointer="/value", types=frozenset({JsonType.STRING}), required=False)
+
+    with pytest.raises(ValidationError, match="field pointers must be unique"):
+        SchemaDocument(
+            schema_id="duplicate",
+            schema_version="1",
+            dialect="test",
+            root_types=frozenset({JsonType.OBJECT}),
+            fields=(field, field),
+            canonical_source_json="{}",
+        )
+
+
+def test_schema_topology_indexes_children_and_descendants_without_serializing() -> None:
+    schema = parse_json_schema(
+        {
+            "$id": "indexed",
+            "type": "object",
+            "properties": {
+                "parent": {
+                    "type": "object",
+                    "properties": {"child": {"type": "string"}},
+                }
+            },
+        },
+        schema_id=None,
+        source_uri="indexed",
+    )
+
+    assert tuple(field.pointer for field in schema.topology.children("")) == ("/parent",)
+    assert tuple(field.pointer for field in schema.topology.descendants("/parent")) == (
+        "/parent/child",
+    )
+    assert "topology" not in schema.model_dump()
+
+
+def test_schema_topology_does_not_treat_the_root_field_as_its_own_child() -> None:
+    root = SchemaField(pointer="", types=frozenset({JsonType.OBJECT}), required=True)
+    child = SchemaField(pointer="/child", types=frozenset({JsonType.STRING}), required=False)
+    schema = SchemaDocument(
+        schema_id="root-field",
+        schema_version="1",
+        dialect="test",
+        root_types=frozenset({JsonType.OBJECT}),
+        fields=(root, child),
+        canonical_source_json="{}",
+    )
+
+    assert schema.topology.children("") == (child,)
+    assert schema.topology.descendants("") == (child,)
 
 
 def test_ambiguity_detection() -> None:

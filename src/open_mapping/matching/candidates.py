@@ -61,13 +61,9 @@ def iter_target_mapping_units(schema: SchemaDocument) -> tuple[SchemaField, ...]
     for field in schema.fields:
         if field.pointer == "":
             continue
-        if "items" in split_pointer(field.pointer):
+        if schema.topology.is_within_array_items(field.pointer):
             continue
-        has_children = any(
-            other.pointer.startswith(field.pointer.rstrip("/") + "/")
-            for other in schema.fields
-            if other is not field
-        )
+        has_children = bool(schema.topology.children(field.pointer))
         if JsonType.OBJECT in field.types and has_children:
             continue
         result.append(field)
@@ -318,6 +314,12 @@ def generate_candidates(
                 + signals.structural_context * weights.structural_context
                 + signals.sample_profile * weights.sample_profile
             )
+            if (
+                source_schema.schema_version == "inferred-v0.1"
+                and source.pointer == target.pointer
+                and signals.type_compatibility == 1.0
+            ):
+                raw_score = max(raw_score, 0.95)
             candidates.append(
                 MatchCandidate(
                     source_path=source.pointer,

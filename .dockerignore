@@ -1,0 +1,16 @@
+.git
+.github
+.venv
+node_modules
+tests
+tools
+benchmarks
+results
+dist
+build
+.open-mapping
+.coverage*
+coverage.json
+htmlcov
+*.log
+*.tmp

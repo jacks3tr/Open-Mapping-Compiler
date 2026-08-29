@@ -77,6 +77,7 @@ def test_runner_records_baseline_assisted_review_and_runtime_evidence(tmp_path: 
     assert "—" not in run.markdown_report_path.read_text(encoding="utf-8")
 
     report = json.loads(run.json_report_path.read_text(encoding="utf-8"))
+    assert report == run.report.model_dump(mode="json")
     assert report["metrics"] == run.metrics.model_dump(mode="json")
     assert report["denominators"] == run.denominators
     assert report["gate_thresholds"]

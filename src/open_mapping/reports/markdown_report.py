@@ -78,10 +78,7 @@ def render_suggestions_markdown(report: SuggestionReport) -> str:
                 f"| `{_md(suggestion.target_path)}` | {suggestion.confidence_band.value} | {suggestion.disposition.value} | {score} | {selected} |"
             )
         else:
-            selected_paths = suggestion.selected_source_paths or (
-                (suggestion.selected_source_path,) if suggestion.selected_source_path else ()
-            )
-            selected = _md(", ".join(selected_paths))
+            selected = _md(", ".join(suggestion.effective_source_paths))
             static_issues = _md(
                 "; ".join(
                     f"{issue.severity.value}: {issue.code.value}: {issue.message}"

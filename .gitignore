@@ -25,6 +25,9 @@ junit*.xml
 test-results/
 benchmark-results/
 artifacts/
+.open-mapping/
+*.omc
+*.review.yaml
 
 # Generated suggestions are transient except the reviewed public fixtures.
 **/suggestions.json

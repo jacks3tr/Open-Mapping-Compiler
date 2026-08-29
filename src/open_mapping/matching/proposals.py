@@ -346,9 +346,9 @@ def apply_provider_assistance(
             continue
 
         expression = proposal.expression
-        if expression is not None and not provider_expression_input_paths(
-            expression.model_dump(mode="json")
-        ).issubset(candidate_by_path):
+        if expression is not None and not provider_expression_input_paths(expression).issubset(
+            candidate_by_path
+        ):
             issues.append(
                 _provider_warning(
                     suggestion.target_path,
@@ -659,12 +659,7 @@ def apply_model_mapping_responses(
 
         exact_agreement = (
             expression == suggestion.expression
-            and proposal.selected_source_paths
-            == (
-                (suggestion.selected_source_path,)
-                if suggestion.selected_source_path is not None
-                else suggestion.selected_source_paths
-            )
+            and proposal.selected_source_paths == suggestion.effective_source_paths
         )
         if exact_agreement:
             updated.append(

@@ -29,7 +29,7 @@ function typecheck(generatedPath) {
   }
 }
 
-async function runTs(source, serializedInput, selfTest) {
+async function runTs(source, serializedInput, { checkTypes = false } = {}) {
   const dir = await mkdtemp(join(tmpdir(), "open-mapping-ts-"));
   const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
   const callerCwd = process.cwd();
@@ -37,14 +37,13 @@ async function runTs(source, serializedInput, selfTest) {
     const generatedPath = join(dir, "generated.ts");
     const runnerPath = join(dir, "runner.mts");
     await writeFile(generatedPath, source, "utf8");
-    const body = selfTest
-      ? "console.log('ok');\n"
-      : `import { transform } from "./generated.ts";\nlet data = "";\nprocess.stdin.setEncoding("utf8");\nprocess.stdin.on("data", (chunk) => (data += chunk));\nprocess.stdin.on("end", () => { const output = transform(JSON.parse(data)); process.stdout.write(JSON.stringify(output)); });\n`;
+    if (checkTypes) typecheck(generatedPath);
+    const body = `import { transform } from "./generated.ts";\nlet data = "";\nprocess.stdin.setEncoding("utf8");\nprocess.stdin.on("data", (chunk) => (data += chunk));\nprocess.stdin.on("end", () => { const output = transform(JSON.parse(data)); process.stdout.write(JSON.stringify(output)); });\n`;
     await writeFile(runnerPath, body, "utf8");
     const loader = pathToFileURL(join(root, "node_modules", "tsx", "dist", "loader.mjs")).href;
     return execFileSync(process.execPath, ["--import", loader, runnerPath], {
       cwd: callerCwd,
-      input: selfTest ? undefined : serializedInput,
+      input: serializedInput,
       encoding: "utf8",
       stdio: ["pipe", "pipe", "pipe"],
     });
@@ -55,15 +54,10 @@ async function runTs(source, serializedInput, selfTest) {
 
 async function main() {
   if (process.argv.includes("--self-test")) {
-    const dir = await mkdtemp(join(tmpdir(), "open-mapping-ts-self-"));
-    try {
-      const path = join(dir, "generated.ts");
-      await writeFile(path, "export function transform(source: unknown): unknown { return source; }", "utf8");
-      typecheck(path);
-      process.stdout.write(await runTs(readFileSync(path, "utf8"), null, true));
-    } finally {
-      await rm(dir, { recursive: true, force: true });
-    }
+    const source = "export function transform(source: unknown): unknown { return source; }";
+    process.stdout.write(
+      await runTs(source, JSON.stringify({ selfTest: true }), { checkTypes: true }),
+    );
     return;
   }
   if (process.argv[2] === "--typecheck") {
@@ -101,7 +95,7 @@ async function main() {
     return;
   }
   try {
-    process.stdout.write(await runTs(source, serializedInput, false));
+    process.stdout.write(await runTs(source, serializedInput));
   } catch (error) {
     process.stderr.write(String(error) + "\n");
     process.exitCode = 1;

@@ -106,6 +106,38 @@ def test_closed_enum_accepts_source_domain_subset() -> None:
     assert result.valid
 
 
+def test_required_object_property_named_items_is_not_treated_as_array_structure() -> None:
+    source = _schema("source", {"unrelated": {"type": "string"}}, ["unrelated"])
+    target = _schema(
+        "target",
+        {
+            "items": {
+                "type": "object",
+                "required": ["code"],
+                "properties": {"code": {"type": "string"}},
+            },
+            "unrelated": {"type": "string"},
+        },
+        ["items"],
+    )
+
+    result = verify_static(
+        _mapping(
+            {
+                "target": "/unrelated",
+                "expression": {"op": "get", "path": "/unrelated", "document": "input"},
+            }
+        ),
+        source_schema=source,
+        target_schema=target,
+    )
+
+    assert any(
+        issue.code == IssueCode.REQUIRED_TARGET_UNMAPPED and issue.target_path == "/items/code"
+        for issue in result.issues
+    )
+
+
 def test_closed_enum_rejects_unbounded_string_output() -> None:
     source = _schema("source", {"status": {"type": "string"}}, ["status"])
     target = _schema(

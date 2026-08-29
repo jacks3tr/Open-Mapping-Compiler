@@ -10,9 +10,11 @@ from pydantic import model_validator
 from open_mapping.model.issues import Issue
 from open_mapping.model.json_types import OpenMappingModel
 from open_mapping.model.mappings import MappingDocument
+from open_mapping.model.suggestions import ConfidenceBand, SuggestionDisposition
 
 
 class ReviewAction(StrEnum):
+    UNDECIDED = "undecided"
     ACCEPT_SELECTED = "accept_selected"
     SELECT_CANDIDATE = "select_candidate"
     REJECT = "reject"
@@ -24,6 +26,11 @@ class SuggestionReviewDecision(OpenMappingModel):
     action: ReviewAction
     source_path: str | None = None
     reason: str
+    confidence_band: ConfidenceBand | None = None
+    disposition: SuggestionDisposition | None = None
+    selected_source_path: str | None = None
+    candidate_paths: tuple[str, ...] = ()
+    context: str | None = None
 
     @model_validator(mode="after")
     def _validate_action_fields(self) -> SuggestionReviewDecision:
@@ -32,6 +39,8 @@ class SuggestionReviewDecision(OpenMappingModel):
                 raise ValueError("select_candidate requires source_path")
         elif self.source_path is not None:
             raise ValueError(f"{self.action.value} must not include source_path")
+        if len(self.candidate_paths) != len(set(self.candidate_paths)):
+            raise ValueError("candidate_paths must not contain duplicates")
         return self
 
 

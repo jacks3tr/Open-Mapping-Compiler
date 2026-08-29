@@ -116,11 +116,13 @@ def test_models_invalid_config_is_a_traceback_free_input_failure(tmp_path: Path)
 def test_model_command_help_explains_cost_privacy_and_review() -> None:
     root_help = run_cli("--help")
     models_help = run_cli("models", "--help")
+    context_help = run_cli("model-context", "--help")
 
-    assert root_help.returncode == models_help.returncode == 0
+    assert root_help.returncode == models_help.returncode == context_help.returncode == 0
     combined = " ".join((root_help.stdout + models_help.stdout).lower().split())
     assert "cost" in combined
     assert "privacy" in combined
     assert "review" in combined
-    assert "model-context" in root_help.stdout
+    assert "model-context" not in root_help.stdout
+    assert "sanitized model package" in context_help.stdout
     assert str(ROOT) not in combined
