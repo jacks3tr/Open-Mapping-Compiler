@@ -34,28 +34,31 @@ def test_readme_presents_ai_mapping_as_the_primary_workflow() -> None:
     assert "Seven-command quick start" not in readme
     assert headings == [
         "## What it is",
-        "## Use it with AI",
-        "## Install",
+        "## Start with AI",
         "## Map source data",
+        "## Use it in your software",
         "## Deterministic offline fallback",
         "## Build executable output",
         "## Tested across seven industries",
     ]
-    assert len(readme.splitlines()) <= 85
-    assert readme.count("```") <= 8
-    assert (
-        'python -m pip install "open-mapping @ '
-        'https://github.com/jacks3tr/Open-Mapping-Compiler/archive/refs/heads/main.zip"' in readme
-    )
+    assert len(readme.splitlines()) <= 110
+    assert readme.count("```") <= 12
+    assert "python -m pip install open-mapping" in readme
     assert "open-mapping[ai]" not in readme
     assert "open-mapping map input.json target.schema.json --source-format json-data" in readme
-    assert "--model openai:<model-id>" in readme
+    assert "--require-model" in readme
     assert "--out mapping.json" in readme
-    assert readme.index("## Use it with AI") < readme.index("## Map source data")
+    assert readme.index("## Start with AI") < readme.index("## Map source data")
     assert readme.index("## Map source data") < readme.index("## Deterministic offline fallback")
     assert "Optional model help" not in readme
     assert "examples/model-assisted/README.md" in readme
     assert "OPEN_MAPPING_MODEL" in readme
+    assert "OPENAI_API_KEY" in readme
+    assert "ANTHROPIC_API_KEY" in readme
+    assert "GOOGLE_API_KEY" in readme
+    assert "calls the provider directly" in readme
+    assert "Mapper.load" in readme
+    assert "Compile once" in readme
     assert "deterministic offline fallback" in readme
     assert "63/63 (100%)" in readme
     assert "7/7 (100%)" in readme

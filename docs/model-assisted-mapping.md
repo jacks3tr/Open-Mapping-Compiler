@@ -6,7 +6,7 @@ AI is the recommended path for producing a high-quality first pass across system
 open-mapping map source.schema.json target.schema.json --model openai:gpt-5-mini --out mapping.json
 ```
 
-You can also set `OPEN_MAPPING_MODEL=provider:model-id` so the same `map` command and `map_schemas` function use that model without a per-call flag. Set the matching provider credential in the environment.
+You can also set `OPEN_MAPPING_MODEL=provider:model-id` so the same `map` command and `map_schemas` function use that model without a per-call flag. Set the matching provider credential in the environment. The installed package calls that provider directly from your process; Open Mapping Compiler does not operate a key-handling proxy.
 
 Native model names use these environment variables:
 
@@ -28,10 +28,10 @@ Model proposals are not treated as approved business rules. The result is meant 
 
 ## Deterministic offline fallback
 
-Omit `--model` when a provider is unavailable or the mapping must stay fully offline. The fallback uses the same inputs and returns the same typed result without an API key or mapping pack. It is intentionally conservative and leaves uncertain decisions for review.
+Omit `--model` and leave `OPEN_MAPPING_MODEL` unset when a provider is unavailable or the mapping must stay fully offline. The fallback uses the same inputs and returns the same typed result without an API key or mapping pack. It is intentionally conservative and leaves uncertain decisions for review.
 
 ## Advanced provider configuration
 
 Use `open-mapping.models.yaml` for OpenAI-compatible services, custom HTTP endpoints, named aliases, or custom model parameters. The files in [`examples/model-assisted`](../examples/model-assisted) show the configuration format.
 
-Provider billing, retention, availability, and model behavior are controlled by the selected provider.
+Credentials are read from environment variables, not model configuration, command arguments, or output artifacts. Provider billing, retention, availability, and model behavior are controlled by the selected provider.

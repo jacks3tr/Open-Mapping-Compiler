@@ -4,12 +4,18 @@
 
 ## Map with AI
 
-Pass `model="provider:model-id"` or set `OPEN_MAPPING_MODEL`, then set the matching provider's API key. The model sees sanitized schema context, allowed source paths, allowed operations, and a strict response contract. Raw samples stay local unless explicitly allowed.
+Pass `model="provider:model-id"` or set `OPEN_MAPPING_MODEL`, then set `OPENAI_API_KEY`, `ANTHROPIC_API_KEY`, or `GOOGLE_API_KEY` for the selected provider. The PyPI package calls the provider directly from your process. The model sees sanitized schema context, allowed source paths, allowed operations, and a strict response contract. Raw samples stay local unless explicitly allowed.
 
 ```python
 from open_mapping import map_schemas
 
-result = map_schemas(source_schema, target_schema, hints=hints, model="openai:<model-id>")
+result = map_schemas(
+    source_schema,
+    target_schema,
+    hints=hints,
+    model="openai:<model-id>",
+    require_model=True,
+)
 ```
 
 For the shortest path, pass a JSON record or a non-empty record array and select explicit inference:
@@ -24,6 +30,7 @@ result = map_schemas(
     source_format="json-data",
     hints=hints,
     model="openai:<model-id>",
+    require_model=True,
 )
 inferred = infer_source_schema(source)
 ```
@@ -34,11 +41,11 @@ The inferred schema is deterministic, remains open to extra object properties, a
 
 The returned `SuggestionReport` contains typed proposals, transformations, evidence, alternatives, unresolved fields, issues, and sanitized model-run metadata.
 
-Use `Compiler.build(...)` to produce a verified bundle and `Mapper.from_bundle(...)` to transform records. JSON-data source records become verification samples automatically, and the bundle embeds the inferred schema. Applying a bundle is deterministic and does not call the model.
+Use `Compiler(model="provider:model-id", require_model=True).build(...)` to produce a verified bundle and `Mapper.from_bundle(...)` to transform records. JSON-data source records become verification samples automatically, and the bundle embeds the inferred schema. Compile when a connector is configured or a schema changes; load the bundle once at application startup and reuse the `Mapper` for each record. Applying a bundle is deterministic and does not call the model.
 
 ## Deterministic offline fallback
 
-Omit `model` when a provider is unavailable or the mapping must stay fully offline:
+Omit `model` and leave `OPEN_MAPPING_MODEL` unset when a provider is unavailable or the mapping must stay fully offline:
 
 ```python
 from open_mapping import map_schemas

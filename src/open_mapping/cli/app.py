@@ -65,7 +65,10 @@ def map_two_schemas(
         str | None,
         typer.Option(
             "--model",
-            help="Optional provider:model selection; omitted means local mapping.",
+            help=(
+                "Optional provider:model selection; otherwise uses OPEN_MAPPING_MODEL "
+                "or the local fallback."
+            ),
         ),
     ] = None,
     models_config: Annotated[
