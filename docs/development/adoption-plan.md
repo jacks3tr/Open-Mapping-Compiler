@@ -51,13 +51,15 @@ The exact saved worktree and base were confirmed. Dependencies were synchronized
 
 Review found two corrections: failed output restoration must preserve the backup containing the original bytes, and the printed Windows continuation needs PowerShell's call operator. Both have focused regression coverage; the output, adoption CLI, and quoting checks passed together (14 tests). The uninterrupted full Python run passed all 976 tests collected before those three regressions were added, in 783.59 seconds, with one upstream Starlette deprecation warning. Remote CI must verify all 979 tests on the final commit.
 
-Docker Desktop could not start its engine: its Ingest server could not access the local `sailor-ingest.sock`. Container verification remains required in CI; this is not evidence of a container build failure. No new version or release is being created, and publisher configuration remains a prerequisite for the next release.
+Docker Desktop could not start its engine: its Ingest server could not access the local `sailor-ingest.sock`. The container build and offline demo subsequently passed in [PR CI run 34141797209](https://github.com/jacks3tr/Open-Mapping-Compiler/actions/runs/34141797209), alongside the wheel and TypeScript checks. No new version or release is being created, and publisher configuration remains a prerequisite for the next release.
+
+The first Linux full CI run found seven help-text assertion failures caused by Typer forcing ANSI terminal formatting under `GITHUB_ACTIONS`; 972 tests passed. CI disables forced terminal rendering for stable captured text. Assertions and test coverage remain intact. Final-head CI on [PR #1](https://github.com/jacks3tr/Open-Mapping-Compiler/pull/1) is authoritative for the complete suite and merge gate.
 
 ## Required completion gates
 
 - [ ] Run the entire Python suite and all CI jobs against the final commit; do not substitute partial/grouped runs for required checks.
 - [x] Run the required independent diff review. Luna reviewed correctness and Ponytail complexity across the adoption diff; the two confirmed findings above were fixed and no remaining blocker was reported.
-- [ ] Build and execute the Docker image with a running engine. The local engine was stopped, so container behavior was not verified here.
+- [x] Build and execute the Docker image with a running engine. The PR's package job built the image and ran its offline demo successfully on the Linux runner.
 - [ ] Commit and push the reviewed changes, open the PR, inspect its exact-head checks, and merge only after they pass. GitHub access is verified in the continuation session; the PR's final-head checks remain the authoritative merge gate.
 - [ ] Configure/verify the external PyPI trusted publisher and GHCR public visibility before publishing a new, unused version. The workflows and instructions are implemented; neither account configuration nor actual publication occurred.
 

@@ -8,6 +8,9 @@ on:
 permissions:
   contents: read
 
+env:
+  _TYPER_FORCE_DISABLE_TERMINAL: "1"
+
 jobs:
   test:
     strategy:
