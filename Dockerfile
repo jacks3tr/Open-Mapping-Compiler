@@ -1,17 +1,20 @@
 FROM python:3.11-slim AS builder
 
 WORKDIR /build
-COPY pyproject.toml README.md LICENSE ./
+RUN python -m pip install --no-cache-dir uv==0.12.1
+COPY pyproject.toml uv.lock README.md LICENSE ./
 COPY src ./src
 COPY schemas ./schemas
 COPY examples ./examples
-RUN python -m pip wheel --no-cache-dir --wheel-dir /wheels ".[server]"
+RUN uv export --frozen --no-dev --extra server --no-emit-project --output-file /requirements.txt \
+    && python -m pip wheel --no-cache-dir --require-hashes --wheel-dir /wheels -r /requirements.txt \
+    && python -m pip wheel --no-cache-dir --no-deps --wheel-dir /wheels .
 
 FROM python:3.11-slim
 
 RUN useradd --create-home --uid 10001 openmapping
 COPY --from=builder /wheels /wheels
-RUN python -m pip install --no-cache-dir /wheels/*.whl && rm -rf /wheels
+RUN python -m pip install --no-index --no-cache-dir /wheels/*.whl && rm -rf /wheels
 USER openmapping
 WORKDIR /data
 EXPOSE 8080

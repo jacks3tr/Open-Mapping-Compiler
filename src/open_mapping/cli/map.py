@@ -29,6 +29,8 @@ def map_command(
     allow_raw_samples: bool,
     require_model: bool,
     force: bool,
+    offline: bool = False,
+    model_concurrency: int = 1,
 ) -> int:
     """Map two schemas locally, with optional model assistance."""
 
@@ -48,6 +50,8 @@ def map_command(
         target_format=target_format,
         target_selector=target_selector,
         model=model,
+        offline=offline,
+        model_concurrency=model_concurrency,
         models_config=models_config,
         samples=samples,
         hints=hints,

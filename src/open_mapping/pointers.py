@@ -95,34 +95,35 @@ def resolve_pointer(document: JsonValue, pointer: str) -> JsonValue:
     return current
 
 
-def assign_pointer(document: dict[str, object], pointer: str, value: object) -> dict[str, object]:
-    tokens = split_pointer(pointer)
-    result = dict(document)
-    current: dict[str, object] = result
-    for index, token in enumerate(tokens):
-        if token.isdigit():
-            raise OpenMappingError(
-                (
-                    Issue(
-                        code=IssueCode.INVALID_INPUT,
-                        severity=Severity.ERROR,
-                        component="pointers",
-                        message="numeric array-index assignment is not supported in mapping rule targets",
-                        correction="Use an object field path for mapping targets.",
-                        target_path=pointer,
-                    ),
+class _OutputBuilder:
+    """Own output containers; copy borrowed source/literal objects only before mutation."""
+
+    def __init__(self, document: dict[str, object] | None = None) -> None:
+        self.document: dict[str, object] = {} if document is None else dict(document)
+        # Retain references so an overwritten container's id cannot be recycled.
+        self._owned: dict[int, dict[str, object]] = {id(self.document): self.document}
+
+    def assign(self, pointer: str, tokens: tuple[str, ...], value: object) -> None:
+        current = self.document
+        for index, token in enumerate(tokens):
+            if token.isdigit():
+                raise OpenMappingError(
+                    (
+                        Issue(
+                            code=IssueCode.INVALID_INPUT,
+                            severity=Severity.ERROR,
+                            component="pointers",
+                            message="numeric array-index assignment is not supported in mapping rule targets",
+                            correction="Use an object field path for mapping targets.",
+                            target_path=pointer,
+                        ),
+                    )
                 )
-            )
-        last = index == len(tokens) - 1
-        if last:
-            current[token] = value
-        else:
+            if index == len(tokens) - 1:
+                current[token] = value
+                continue
             existing = current.get(token)
-            if existing is None or isinstance(existing, dict):
-                child: dict[str, object] = {} if existing is None else dict(existing)
-                current[token] = child
-                current = child
-            else:
+            if existing is not None and not isinstance(existing, dict):
                 raise OpenMappingError(
                     (
                         Issue(
@@ -135,4 +136,20 @@ def assign_pointer(document: dict[str, object], pointer: str, value: object) -> 
                         ),
                     )
                 )
-    return result
+            if existing is None:
+                child: dict[str, object] = {}
+                self._owned[id(child)] = child
+            elif id(existing) in self._owned:
+                child = existing
+            else:
+                child = dict(existing)
+                self._owned[id(child)] = child
+            current[token] = child
+            current = child
+
+
+def assign_pointer(document: dict[str, object], pointer: str, value: object) -> dict[str, object]:
+    tokens = split_pointer(pointer)
+    builder = _OutputBuilder(document)
+    builder.assign(pointer, tokens, value)
+    return builder.document

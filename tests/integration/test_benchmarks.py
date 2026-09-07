@@ -22,7 +22,7 @@ def test_gates() -> None:
     assert check_gates(manifest, metrics)
 
 
-def test_benchmark_packs_run() -> None:
+def test_benchmark_packs_run(tmp_path: Path) -> None:
     expected_failed_gates: dict[str, set[str]] = {
         "erp-mes": set(),
         "material-part": set(),
@@ -31,7 +31,9 @@ def test_benchmark_packs_run() -> None:
         "order-fulfillment": set(),
     }
     for name, expected in expected_failed_gates.items():
-        result = run_benchmark_pack(Path("benchmarks") / name, enforce_gates=False)
+        result = run_benchmark_pack(
+            Path("benchmarks") / name, enforce_gates=False, result_dir=tmp_path / name
+        )
         assert result.metrics.target_outcome_coverage == 1.0
         assert {
             issue.message.split(" gate ", 1)[1].split(" failed", 1)[0].strip("'")

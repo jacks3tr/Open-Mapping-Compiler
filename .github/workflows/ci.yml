@@ -3,6 +3,7 @@ name: checks
 on:
   push:
   pull_request:
+  workflow_call:
 
 permissions:
   contents: read
@@ -15,7 +16,7 @@ jobs:
         os: [ubuntu-latest, windows-latest]
         python: ["3.11", "3.12", "3.13", "3.14"]
     runs-on: ${{ matrix.os }}
-    timeout-minutes: 15
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -27,29 +28,28 @@ jobs:
       - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         with:
           python-version: ${{ matrix.python }}
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: "24"
       - name: Install dependencies
         run: uv sync --frozen --all-extras
+      - run: npm ci
       - name: Check formatting
         run: uv run ruff format --check .
       - name: Lint
         run: uv run ruff check .
       - name: Type check
         run: uv run mypy src tests
-      - name: Test streamlined and server workflows
+      - name: Full test suite
+        if: matrix.python == '3.12'
+        run: uv run python -m pytest -q
+      - name: Cross-version core and adoption contracts
+        if: matrix.python != '3.12'
         run: >-
-          uv run pytest
-          tests/unit/model/test_bundles.py
-          tests/unit/serialization/test_bundles.py
-          tests/unit/test_compiler.py
-          tests/unit/test_mapper.py
-          tests/unit/providers/test_shorthand.py
-          tests/integration/cli/test_build.py
-          tests/integration/cli/test_apply.py
-          tests/integration/cli/test_review_template.py
-          tests/integration/server
-          tests/integration/test_public_sdk.py
-          tests/adversarial/test_bundle_tampering.py
-          tests/adversarial/test_apply_streaming.py
+          uv run python -m pytest
+          tests/unit tests/property tests/adversarial tests/golden tests/acceptance
+          tests/integration/cli/test_adoption_cli.py
+          tests/integration/server tests/integration/test_public_sdk.py
           -q
 
   package-and-typescript:
@@ -73,3 +73,10 @@ jobs:
       - run: npm ci
       - run: npm run typecheck
       - run: npm run test:generated
+      - run: npm run test:client
+      - name: Install the wheel outside the checkout
+        run: python tools/smoke_install.py dist/*.whl
+      - name: Build and smoke-test the container
+        run: |
+          docker build --tag open-mapping:test .
+          docker run --rm --network none --entrypoint open-mapping open-mapping:test demo

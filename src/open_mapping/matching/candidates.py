@@ -2,7 +2,10 @@
 
 from __future__ import annotations
 
-from collections.abc import Sequence
+from collections.abc import Iterator, Sequence
+from dataclasses import dataclass
+from heapq import nsmallest
+from typing import NamedTuple
 
 from pydantic import model_validator
 from rapidfuzz import fuzz
@@ -11,13 +14,14 @@ from open_mapping.matching.compatibility import type_compatibility
 from open_mapping.matching.names import canonical_name, normalized_name_text
 from open_mapping.matching.profiles import FieldProfile
 from open_mapping.matching.semantics import (
+    FieldSemantics,
     field_semantics,
     profile_support_for_target,
     semantic_field_similarity,
     semantic_fields_conflict,
 )
 from open_mapping.model.issues import Issue, IssueCode, Severity, sort_issues
-from open_mapping.model.json_types import OpenMappingModel
+from open_mapping.model.json_types import JsonScalar, OpenMappingModel
 from open_mapping.model.mappings import Evidence, EvidenceKind
 from open_mapping.model.schema import JsonType, SchemaDocument, SchemaField
 from open_mapping.model.suggestions import (
@@ -141,11 +145,58 @@ def _role_tokens(field: SchemaField) -> set[str]:
     return result
 
 
-def _role_similarity(source: SchemaField, target: SchemaField) -> float | None:
-    source_roles = _role_tokens(source)
-    target_roles = _role_tokens(target)
+@dataclass(frozen=True, slots=True)
+class _FieldFeatures:
+    field: SchemaField
+    name_tokens: tuple[str, ...]
+    title_tokens: tuple[str, ...]
+    name_text: str
+    title_text: str
+    parents: frozenset[str]
+    roles: frozenset[str]
+    enums: frozenset[JsonScalar]
+    semantics: FieldSemantics
+
+    @classmethod
+    def prepare(cls, field: SchemaField) -> _FieldFeatures:
+        name = field.pointer.rsplit("/", 1)[-1]
+        return cls(
+            field=field,
+            name_tokens=canonical_name(name),
+            title_tokens=canonical_name(field.title or ""),
+            name_text=normalized_name_text(name),
+            title_text=normalized_name_text(field.title or ""),
+            parents=frozenset(_parent_tokens(field.pointer)),
+            roles=frozenset(_role_tokens(field)),
+            enums=frozenset(field.enum_values),
+            semantics=field_semantics(field),
+        )
+
+
+class _SignalValues(NamedTuple):
+    exact_name: float
+    name_similarity: float
+    description_similarity: float
+    type_compatibility: float
+    enum_overlap: float
+    structural_context: float
+    sample_profile: float
+
+    def validated(self) -> CandidateSignals:
+        return CandidateSignals(**self._asdict())
+
+
+class _ScoredCandidate(NamedTuple):
+    raw_score: float
+    source_path: str
+    signals: _SignalValues
+
+
+def _role_similarity(source: _FieldFeatures, target: _FieldFeatures) -> float | None:
+    source_roles = source.roles
+    target_roles = target.roles
     if "identifier" in target_roles and "identifier" not in source_roles:
-        source_concepts = field_semantics(source).concepts
+        source_concepts = source.semantics.concepts
         if not source_concepts.intersection(
             {"code", "identifier", "material_identifier", "site_identifier"}
         ):
@@ -163,18 +214,17 @@ def _role_similarity(source: SchemaField, target: SchemaField) -> float | None:
     return None
 
 
-def _signal(
-    source: SchemaField,
-    target: SchemaField,
+def _signal_values(
+    source_features: _FieldFeatures,
+    target_features: _FieldFeatures,
     source_profile: FieldProfile | None,
     target_profile: FieldProfile | None,
-) -> tuple[CandidateSignals, list[Evidence]]:
-    source_name = source.pointer.rsplit("/", 1)[-1]
-    target_name = target.pointer.rsplit("/", 1)[-1]
-    source_tokens = canonical_name(source_name)
-    target_tokens = canonical_name(target_name)
-    source_title_tokens = canonical_name(source.title or "")
-    target_title_tokens = canonical_name(target.title or "")
+) -> _SignalValues:
+    source, target = source_features.field, target_features.field
+    source_tokens = source_features.name_tokens
+    target_tokens = target_features.name_tokens
+    source_title_tokens = source_features.title_tokens
+    target_title_tokens = target_features.title_tokens
     name_match = (
         (source_tokens and target_tokens and source_tokens == target_tokens)
         or (source_tokens and target_title_tokens and source_tokens == target_title_tokens)
@@ -185,44 +235,51 @@ def _signal(
         1.0
         if name_match
         else max(
-            fuzz.ratio(normalized_name_text(source_name), normalized_name_text(target_name))
-            / 100.0,
-            fuzz.ratio(normalized_name_text(source_name), normalized_name_text(target.title or ""))
-            / 100.0
+            fuzz.ratio(source_features.name_text, target_features.name_text) / 100.0,
+            fuzz.ratio(source_features.name_text, target_features.title_text) / 100.0
             if target.title
             else 0.0,
-            fuzz.ratio(normalized_name_text(source.title or ""), normalized_name_text(target_name))
-            / 100.0
+            fuzz.ratio(source_features.title_text, target_features.name_text) / 100.0
             if source.title
             else 0.0,
         )
     )
-    semantic_similarity = semantic_field_similarity(source, target)
+    semantic_similarity = semantic_field_similarity(
+        source,
+        target,
+        source_semantics=source_features.semantics,
+        target_semantics=target_features.semantics,
+    )
     if not name_match:
         name_sim = max(name_sim, semantic_similarity)
     source_desc = source.description or ""
     target_desc = target.description or ""
     desc_sim = fuzz.ratio(source_desc, target_desc) / 100.0 if source_desc and target_desc else 0.0
-    role_similarity = _role_similarity(source, target)
+    role_similarity = _role_similarity(source_features, target_features)
     if role_similarity is not None:
         desc_sim = role_similarity
     elif not name_match:
         desc_sim = max(desc_sim, semantic_similarity)
-    semantic_conflict = semantic_fields_conflict(source, target)
+    semantic_conflict = semantic_fields_conflict(
+        source,
+        target,
+        source_semantics=source_features.semantics,
+        target_semantics=target_features.semantics,
+    )
     if semantic_conflict:
         name_sim = min(name_sim, 0.20)
         desc_sim = min(desc_sim, 0.20)
     type_score = type_compatibility(source, target) or 0.0
-    source_enums = set(source.enum_values)
-    target_enums = set(target.enum_values)
+    source_enums = source_features.enums
+    target_enums = target_features.enums
     if source_enums and target_enums:
         enum_overlap = len(source_enums.intersection(target_enums)) / len(
             source_enums.union(target_enums)
         )
     else:
         enum_overlap = 0.0
-    source_parents = _parent_tokens(source.pointer)
-    target_parents = _parent_tokens(target.pointer)
+    source_parents = source_features.parents
+    target_parents = target_features.parents
     if source_parents and target_parents:
         structural = len(source_parents.intersection(target_parents)) / len(
             source_parents.union(target_parents)
@@ -231,7 +288,9 @@ def _signal(
         structural = 1.0 if not source_parents and not target_parents else 0.0
     if role_similarity is not None:
         structural = role_similarity
-    sample_score = profile_support_for_target(source_profile, target)
+    sample_score = profile_support_for_target(
+        source_profile, target, target_semantics=target_features.semantics
+    )
     if source_profile is not None and target_profile is not None:
         overlap = set(source_profile.pattern_classes).intersection(target_profile.pattern_classes)
         sample_score = max(
@@ -241,15 +300,19 @@ def _signal(
                 len(set(source_profile.pattern_classes).union(target_profile.pattern_classes)), 1
             ),
         )
-    signals = CandidateSignals(
-        exact_name=exact,
-        name_similarity=name_sim,
-        description_similarity=desc_sim,
-        type_compatibility=type_score,
-        enum_overlap=enum_overlap,
-        structural_context=structural,
-        sample_profile=sample_score,
+    return _SignalValues(
+        exact, name_sim, desc_sim, type_score, enum_overlap, structural, sample_score
     )
+
+
+def _evidence(signals: CandidateSignals) -> tuple[Evidence, ...]:
+    exact = signals.exact_name
+    name_sim = signals.name_similarity
+    desc_sim = signals.description_similarity
+    type_score = signals.type_compatibility
+    enum_overlap = signals.enum_overlap
+    structural = signals.structural_context
+    sample_score = signals.sample_profile
     evidence: list[Evidence] = []
     if exact:
         evidence.append(
@@ -301,7 +364,7 @@ def _signal(
                 score=sample_score,
             )
         )
-    return signals, evidence
+    return tuple(evidence)
 
 
 def generate_candidates(
@@ -313,20 +376,24 @@ def generate_candidates(
     weights: CandidateWeights = DEFAULT_CANDIDATE_WEIGHTS,
     top_k: int = 10,
 ) -> tuple[TargetCandidateSet, ...]:
-    profile_map = {profile.pointer: profile for profile in (*source_profiles, *target_profiles)}
+    source_profile_map = {profile.pointer: profile for profile in source_profiles}
+    target_profile_map = {profile.pointer: profile for profile in target_profiles}
+    sources = tuple(
+        _FieldFeatures.prepare(field) for field in source_schema.fields if field.pointer
+    )
     result: list[TargetCandidateSet] = []
-    for target in iter_target_mapping_units(target_schema):
-        candidates: list[MatchCandidate] = []
-        for source in source_schema.fields:
-            if source.pointer == "":
-                continue
+
+    def scores(target_features: _FieldFeatures) -> Iterator[_ScoredCandidate]:
+        target = target_features.field
+        for source_features in sources:
+            source = source_features.field
             if type_compatibility(source, target) is None:
                 continue
-            signals, evidence = _signal(
-                source,
-                target,
-                profile_map.get(source.pointer),
-                profile_map.get(target.pointer),
+            signals = _signal_values(
+                source_features,
+                target_features,
+                source_profile_map.get(source.pointer),
+                target_profile_map.get(target.pointer),
             )
             raw_score = (
                 signals.exact_name * weights.exact_name
@@ -343,19 +410,27 @@ def generate_candidates(
                 and signals.type_compatibility == 1.0
             ):
                 raw_score = max(raw_score, 0.95)
+            yield _ScoredCandidate(round(raw_score, 12), source.pointer, signals)
+
+    for target in iter_target_mapping_units(target_schema):
+        selected = nsmallest(
+            top_k,
+            scores(_FieldFeatures.prepare(target)),
+            key=lambda item: (-item.raw_score, item.source_path),
+        )
+        candidates: list[MatchCandidate] = []
+        for item in selected:
+            signals = item.signals.validated()
             candidates.append(
                 MatchCandidate(
-                    source_path=source.pointer,
+                    source_path=item.source_path,
                     target_path=target.pointer,
-                    raw_score=round(raw_score, 12),
+                    raw_score=item.raw_score,
                     signals=signals,
-                    evidence=tuple(evidence),
+                    evidence=_evidence(signals),
                 )
             )
-        candidates.sort(key=lambda item: (-item.raw_score, item.source_path))
-        result.append(
-            TargetCandidateSet(target_path=target.pointer, candidates=tuple(candidates[:top_k]))
-        )
+        result.append(TargetCandidateSet(target_path=target.pointer, candidates=tuple(candidates)))
     result.sort(key=lambda item: split_pointer(item.target_path))
     return tuple(result)
 

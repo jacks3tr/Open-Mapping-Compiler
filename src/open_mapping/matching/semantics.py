@@ -276,10 +276,16 @@ def _weight(concept: str) -> float:
     return _CONCEPT_WEIGHTS.get(concept, 1.0)
 
 
-def semantic_field_similarity(source: SchemaField, target: SchemaField) -> float:
-    """Compare typed business concepts without encoding field-pair mappings."""
-    source_concepts = field_semantics(source).concepts
-    target_concepts = field_semantics(target).concepts
+def semantic_field_similarity(
+    source: SchemaField,
+    target: SchemaField,
+    *,
+    source_semantics: FieldSemantics | None = None,
+    target_semantics: FieldSemantics | None = None,
+) -> float:
+    """Compare typed concepts; prepared signatures avoid repeated metadata parsing."""
+    source_concepts = (source_semantics or field_semantics(source)).concepts
+    target_concepts = (target_semantics or field_semantics(target)).concepts
     overlap = source_concepts.intersection(target_concepts)
     if not overlap:
         return 0.0
@@ -304,10 +310,16 @@ def semantic_field_similarity(source: SchemaField, target: SchemaField) -> float
     return min(max(score, 0.0), 1.0)
 
 
-def semantic_fields_conflict(source: SchemaField, target: SchemaField) -> bool:
+def semantic_fields_conflict(
+    source: SchemaField,
+    target: SchemaField,
+    *,
+    source_semantics: FieldSemantics | None = None,
+    target_semantics: FieldSemantics | None = None,
+) -> bool:
     """Return whether both fields declare mutually exclusive semantic roles."""
-    source_concepts = field_semantics(source).concepts
-    target_concepts = field_semantics(target).concepts
+    source_concepts = (source_semantics or field_semantics(source)).concepts
+    target_concepts = (target_semantics or field_semantics(target)).concepts
     source_roles = source_concepts.intersection(_ROLE_CONCEPTS)
     target_roles = target_concepts.intersection(_ROLE_CONCEPTS)
     if source_roles and target_roles and source_roles.isdisjoint(target_roles):
@@ -325,6 +337,8 @@ def semantic_fields_conflict(source: SchemaField, target: SchemaField) -> bool:
 def profile_support_for_target(
     source_profile: FieldProfile | None,
     target: SchemaField,
+    *,
+    target_semantics: FieldSemantics | None = None,
 ) -> float:
     """Score privacy-safe source observations against a target semantic type."""
     if source_profile is None or source_profile.sample_count == 0:
@@ -334,7 +348,7 @@ def profile_support_for_target(
     if not observed or not observed.intersection(target_types):
         return 0.0
 
-    concepts = field_semantics(target).concepts
+    concepts = (target_semantics or field_semantics(target)).concepts
     patterns = set(source_profile.pattern_classes)
     if "email" in concepts:
         return 1.0 if "email-like" in patterns else 0.0

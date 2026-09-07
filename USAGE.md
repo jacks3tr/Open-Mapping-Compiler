@@ -1,51 +1,32 @@
-# Advanced usage
+# Usage
 
-Start with the AI workflow in [README.md](README.md). This guide covers the lower-level compiler stages for teams that need direct control over suggestion reports, review documents, raw mappings, and generated code.
+Use AI or the deterministic matcher to generate a proposal, review uncertain decisions, and compile once. Runtime transformations do not call a model.
 
-## Inspect a schema
+## First run
 
-```text
-open-mapping inspect source.schema.json
-```
-
-OpenAPI 3.1 and 3.2 inputs need a selector such as `component:Customer`, `request:createCustomer`, or `response:getCustomer:200`.
-
-## Generate suggestions
+From a checkout:
 
 ```text
-open-mapping suggest source.schema.json target.schema.json --suggestions-out suggestions.json
+python -m pip install .
+open-mapping demo --out-dir example
+open-mapping apply example/mapping.omc --input example/input.json
 ```
 
-Add `--samples samples.jsonl` for sample profiles or `--hints hints.yaml` for business rules. The report assigns one disposition to each target field: `suggested`, `review_required`, `ambiguous`, `no_match`, or `manual`.
+The demo exports all inputs and expected outputs and requires no credentials. See [installation and release availability](docs/releasing.md) before depending on a registry package or image tag.
 
-## Review and create a raw mapping
+## Choose the interface
 
-```text
-open-mapping review suggestions.json --decisions review.yaml --source source.schema.json --target target.schema.json --out mapping.yaml --require-complete-review
-```
+| Task | Interface |
+| --- | --- |
+| Produce structured suggestions | `open-mapping map` or Python `map_schemas` |
+| Build an executable artifact | `open-mapping build` or Python `Compiler.build` |
+| Review the frozen proposal | `open-mapping review-draft --interactive` or your own review-document UI |
+| Continue an approved draft | `open-mapping resume` or Python `Compiler.resume` |
+| Apply records | `Mapper`, `open-mapping apply`, or the HTTP sidecar |
+| Inspect changed contracts | `open-mapping impact` or Python `Compiler.analyze_changes` |
 
-Use `--interactive` only in a terminal. Automation should edit the normal YAML review document and keep the hash binding intact.
+[Quick start](docs/quick-start.md) · [Python SDK](docs/sdk.md) · [HTTP sidecar](docs/server.md) · [JSONL and workflow contracts](docs/workflow-integration.md) · [Bundle guarantees](docs/bundles.md)
 
-## Verify, run, and compile
+Explicit model settings override `OPEN_MAPPING_MODEL`; `--offline` overrides both. `--require-model` fails rather than silently substituting a fallback. Use `--report-format json` on build/resume for one machine-readable result, and treat exit `8` as a review state. Resume the saved draft instead of regenerating suggestions.
 
-```text
-open-mapping verify mapping.yaml --source source.schema.json --target target.schema.json --samples samples.jsonl
-open-mapping run mapping.yaml --source-schema source.schema.json --target-schema target.schema.json --input input.json --out output.json
-open-mapping compile mapping.yaml --source source.schema.json --target target.schema.json --target-language python --out generated_mapping.py
-```
-
-TypeScript code generation uses `--target-language typescript`.
-
-## Hints
-
-Hints record business decisions that names and types cannot prove. Supported hint forms include direct field selection, constants, lookup tables, date formatting, unit conversion, and typed expressions. Keep reasons specific enough for another reviewer to understand why the rule exists.
-
-## Common errors
-
-- `SOURCE_SCHEMA_INFERRED`: inspect the inferred schema in the bundle or provide an explicit source schema when the observed records are not representative.
-- `REQUIRED_TARGET_UNMAPPED`: review the target or add a business hint.
-- `AMBIGUOUS_MAPPING`: select the intended candidate in the review document.
-- `SOURCE_SCHEMA_VALIDATION`: the sample or input does not match the source schema.
-- `TARGET_SCHEMA_VALIDATION`: the output does not match the target schema.
-- `BUNDLE_HASH_MISMATCH`: discard the bundle and rebuild it from trusted inputs.
-- `REVIEW_REQUIRED`: complete the generated review document before loading a deployable bundle.
+Keep provider credentials in environment variables or your application's injected transport. Drafts contain verification samples and require application access controls. Schema compatibility and passing examples do not substitute for business approval.

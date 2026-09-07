@@ -1,21 +1,105 @@
-"""One-command mapping build workflow."""
+"""Build and resume commands over the same saved compiler lifecycle."""
 
 from __future__ import annotations
 
+import os
+import shlex
 from pathlib import Path
 from typing import Literal
 
 import typer
 
-from open_mapping.cli.common import ReportFormat, preflight_outputs, render_issues, write_outputs
+from open_mapping.cli.common import (
+    CliInputError,
+    ReportFormat,
+    echo_build_json,
+    preflight_outputs,
+    render_issues,
+    write_outputs,
+)
 from open_mapping.compiler import Compiler
-from open_mapping.model.builds import BuildStatus
-from open_mapping.model.suggestions import ConfidenceBand, SuggestionDisposition, SuggestionOrigin
+from open_mapping.model.builds import BuildResult
+from open_mapping.model.drafts import BuildDraft
 from open_mapping.reports.json_report import render_suggestions_json, render_verification_json
 from open_mapping.reports.markdown_report import render_suggestions_markdown
-from open_mapping.reports.text_report import render_suggestions_text
 from open_mapping.serialization.bundles import dumps_bundle
 from open_mapping.serialization.reviews import dumps_suggestion_review
+
+
+def _resume_command(draft: Path, review: Path, out: Path) -> str:
+    arguments = ["open-mapping", "resume", str(draft), "--review", str(review), "--out", str(out)]
+    if os.name == "nt":
+        return "& " + " ".join("'" + argument.replace("'", "''") + "'" for argument in arguments)
+    return shlex.join(arguments)
+
+
+def _save_result(
+    result: BuildResult,
+    *,
+    work_dir: Path,
+    out: Path,
+    review: Path | None,
+    force: bool,
+    report_format: ReportFormat,
+    draft_path: Path | None = None,
+) -> int:
+    draft_path = draft_path or work_dir / "draft.json"
+    suggestions_path = work_dir / "suggestions.json"
+    verification_path = work_dir / "verification.json"
+    review_path = review or out.parent / f"{result.mapping_id}.review.yaml"
+    preflight_outputs(
+        (draft_path, suggestions_path, verification_path, review_path, out), force=True
+    )
+    outputs = {suggestions_path: render_suggestions_json(result.suggestion_report)}
+    artifacts = {"draft": str(draft_path), "suggestions": str(suggestions_path)}
+    if result.draft is not None and not draft_path.exists():
+        outputs[draft_path] = result.draft.model_dump_json(indent=2) + "\n"
+    elif result.draft is not None and review is None:
+        preflight_outputs((draft_path,), force=force)
+        outputs[draft_path] = result.draft.model_dump_json(indent=2) + "\n"
+    if result.needs_review:
+        assert result.review_document is not None
+        artifacts["review"] = str(review_path)
+        if review is None:
+            preflight_outputs((review_path,), force=force)
+            outputs[review_path] = dumps_suggestion_review(
+                result.review_document, format_name="yaml"
+            )
+    else:
+        preflight_outputs((out,), force=force)
+        outputs[out] = dumps_bundle(result.require_bundle())
+        artifacts["bundle"] = str(out)
+    if result.verification_report is not None:
+        outputs[verification_path] = render_verification_json(result.verification_report)
+        artifacts["verification"] = str(verification_path)
+    write_outputs(outputs, force=True)
+    bundle = result.bundle
+    if report_format is ReportFormat.JSON:
+        echo_build_json(
+            status=result.status.value,
+            mapping_id=result.mapping_id,
+            issues=result.issues,
+            artifact_paths=artifacts,
+            verification=bundle.verification if bundle is not None else None,
+        )
+    else:
+        if result.needs_review:
+            typer.echo("NEEDS_REVIEW")
+            typer.echo(f"Review: {review_path}\nDraft: {draft_path}")
+            typer.echo(f"Resume:\n  {_resume_command(draft_path, review_path, out)}")
+        else:
+            assert bundle is not None
+            count = bundle.verification.sample_count
+            typer.echo("READY" if count else "READY — static verification only")
+            typer.echo(f"{len(bundle.mapping.rules)} targets\n0 unresolved required targets")
+            if count:
+                typer.echo(f"{count} samples passed")
+            typer.echo(f"Created: {out}")
+        if result.issues:
+            typer.echo(render_issues(result.issues), err=True)
+        if report_format is ReportFormat.MARKDOWN:
+            typer.echo(render_suggestions_markdown(result.suggestion_report), nl=False)
+    return 8 if result.needs_review else 0
 
 
 def build_command(
@@ -41,32 +125,42 @@ def build_command(
     require_complete_review: bool,
     force: bool,
     report_format: ReportFormat,
+    offline: bool = False,
+    model_concurrency: int = 1,
 ) -> int:
     resolved_id = mapping_id or f"{source.stem}-to-{target.stem}"
     resolved_out = out or Path(f"{resolved_id}.omc")
-    resolved_work_dir = work_dir or Path(".open-mapping") / resolved_id
-    suggestions_path = resolved_work_dir / "suggestions.json"
-    verification_path = resolved_work_dir / "verification.json"
-    review_path = Path(f"{resolved_id}.review.yaml")
-    potential_outputs = [resolved_out]
+    resolved_work = work_dir or resolved_out.parent / ".open-mapping" / resolved_id
+    draft_path = resolved_work / "draft.json"
+    preflight_outputs((resolved_out,), force=force)
     if review is None:
-        potential_outputs.append(review_path)
-    preflight_outputs(tuple(potential_outputs), force=force)
-    source_format_arg = (
-        "" if source_format == "json-schema" else f" --source-format {source_format}"
+        preflight_outputs(
+            (draft_path, resolved_out.parent / f"{resolved_id}.review.yaml"), force=force
+        )
+    inputs = {
+        path.resolve()
+        for path in (source, target, samples, hints, review, models_config)
+        if path is not None
+    }
+    outputs = (
+        resolved_out,
+        draft_path,
+        resolved_work / "suggestions.json",
+        resolved_work / "verification.json",
+        *((resolved_out.parent / f"{resolved_id}.review.yaml",) if review is None else ()),
     )
-    source_selector_arg = "" if source_selector is None else f" --source-selector {source_selector}"
-    target_format_arg = (
-        "" if target_format == "json-schema" else f" --target-format {target_format}"
-    )
-    target_selector_arg = "" if target_selector is None else f" --target-selector {target_selector}"
-
-    result = Compiler(
+    preflight_outputs(outputs, force=True)
+    if any(path.resolve() in inputs for path in outputs):
+        raise CliInputError("output paths must not overwrite input documents")
+    compiler = Compiler(
         model=model,
         models_config=models_config,
         allow_raw_samples=allow_raw_samples,
         require_model=require_model,
-    ).build(
+        offline=offline,
+        model_concurrency=model_concurrency,
+    )
+    result = compiler.build(
         source=source,
         target=target,
         source_format=source_format,
@@ -76,94 +170,45 @@ def build_command(
         samples=samples,
         hints=hints,
         review=review,
+        draft=BuildDraft.load(draft_path) if review is not None else None,
         mapping_id=resolved_id,
         instruction=instruction,
         require_samples=require_samples,
         require_complete_review=require_complete_review,
     )
-    renderer = {
-        ReportFormat.TEXT: render_suggestions_text,
-        ReportFormat.JSON: render_suggestions_json,
-        ReportFormat.MARKDOWN: render_suggestions_markdown,
-    }[report_format]
-    if result.status is BuildStatus.NEEDS_REVIEW:
-        assert result.review_document is not None
-        write_outputs(
-            {suggestions_path: render_suggestions_json(result.suggestion_report)},
-            force=True,
-        )
-        write_outputs(
-            {review_path: dumps_suggestion_review(result.review_document, format_name="yaml")},
-            force=force,
-        )
-        summary = result.suggestion_report.summary
-        typer.echo(
-            "\n".join(
-                (
-                    "NEEDS_REVIEW",
-                    "",
-                    f"{summary.suggested + summary.manual} targets mapped",
-                    f"{summary.review_required} review required",
-                    f"{summary.ambiguous} ambiguous",
-                    f"{summary.no_match} no match",
-                    "",
-                    "Created:",
-                    f"  {suggestions_path}",
-                    f"  {review_path}",
-                    "",
-                    "Rerun:",
-                    (
-                        f"  open-mapping build {source} {target}{source_format_arg}"
-                        f"{source_selector_arg}{target_format_arg}{target_selector_arg}"
-                        f" --review {review_path} --out {resolved_out}"
-                    ),
-                )
-            )
-        )
-        return 8
-
-    bundle = result.require_bundle()
-    audit_outputs = {suggestions_path: render_suggestions_json(result.suggestion_report)}
-    if result.verification_report is not None:
-        audit_outputs[verification_path] = render_verification_json(result.verification_report)
-    write_outputs(audit_outputs, force=True)
-    write_outputs({resolved_out: dumps_bundle(bundle)}, force=force)
-    sample_count = bundle.verification.sample_count
-    mapped_targets = {rule.target for rule in bundle.mapping.rules}
-    deterministic_high = sum(
-        1
-        for suggestion in result.suggestion_report.suggestions
-        if suggestion.target_path in mapped_targets
-        and suggestion.origin is SuggestionOrigin.DETERMINISTIC
-        and suggestion.confidence_band is ConfidenceBand.HIGH
-        and suggestion.disposition is SuggestionDisposition.SUGGESTED
+    return _save_result(
+        result,
+        work_dir=resolved_work,
+        out=resolved_out,
+        review=review,
+        force=force,
+        report_format=report_format,
     )
-    manual = sum(
-        1
-        for suggestion in result.suggestion_report.suggestions
-        if suggestion.target_path in mapped_targets
-        and suggestion.disposition is SuggestionDisposition.MANUAL
-    )
-    typer.echo("READY" if sample_count else "READY — static verification only")
-    typer.echo(
-        "\n".join(
-            (
-                "",
-                f"{len(bundle.mapping.rules)} targets",
-                f"{deterministic_high} deterministic high-confidence",
-                f"{manual} manual business rules",
-                "0 unresolved required targets",
-                *((f"{sample_count} samples passed",) if sample_count else ()),
-                "",
-                f"Created: {resolved_out}",
-            )
-        )
-    )
-    if result.issues:
-        typer.echo(render_issues(result.issues), err=True)
-    if report_format is not ReportFormat.TEXT:
-        typer.echo(renderer(result.suggestion_report), nl=False)
-    return 0
 
 
-__all__ = ["build_command"]
+def resume_command(
+    draft: Path,
+    *,
+    review: Path,
+    out: Path | None,
+    force: bool,
+    report_format: ReportFormat,
+) -> int:
+    snapshot = BuildDraft.load(draft)
+    resolved_out = out or Path(f"{snapshot.content.mapping_id}.omc")
+    preflight_outputs((resolved_out,), force=force)
+    if resolved_out.resolve() in {draft.resolve(), review.resolve()}:
+        raise CliInputError("output paths must not overwrite the draft or review")
+    result = Compiler(offline=True).resume(snapshot, review=review)
+    return _save_result(
+        result,
+        work_dir=draft.parent,
+        out=resolved_out,
+        review=review,
+        force=force,
+        report_format=report_format,
+        draft_path=draft,
+    )
+
+
+__all__ = ["build_command", "resume_command"]

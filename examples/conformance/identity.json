@@ -1,0 +1,22 @@
+{
+  "fixture_version": "0.1",
+  "description": "Core SDK and sidecar source-validation contract, not generated TypeScript runtime parity.",
+  "schema": {
+    "$id": "urn:open-mapping:conformance:identity",
+    "type": "object",
+    "required": ["name"],
+    "additionalProperties": false,
+    "properties": {
+      "name": {"type": "string", "minLength": 1, "description": "Canonical display name"}
+    }
+  },
+  "cases": [
+    {"id": "valid", "input": {"name": "Ada"}, "output": {"name": "Ada"}},
+    {"id": "unicode", "input": {"name": "東京"}, "output": {"name": "東京"}},
+    {"id": "wrong-type", "input": {"name": 3}, "issue_code": "SOURCE_SCHEMA_VALIDATION"},
+    {"id": "missing", "input": {}, "issue_code": "SOURCE_SCHEMA_VALIDATION"},
+    {"id": "null", "input": {"name": null}, "issue_code": "SOURCE_SCHEMA_VALIDATION"},
+    {"id": "empty", "input": {"name": ""}, "issue_code": "SOURCE_SCHEMA_VALIDATION"},
+    {"id": "additional-property", "input": {"name": "Ada", "unexpected": true}, "issue_code": "SOURCE_SCHEMA_VALIDATION"}
+  ]
+}

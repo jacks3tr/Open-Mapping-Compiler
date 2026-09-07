@@ -34,18 +34,28 @@ def create_review_template(
     *,
     mapping_id: str,
     include_optional: bool,
+    include_auto_accepted: bool = False,
+    target_schema: SchemaDocument | None = None,
 ) -> SuggestionReviewDocument:
     """Create a deterministic review document without trusting copied metadata."""
 
-    del include_optional
     decisions: list[SuggestionReviewDecision] = []
     for suggestion in report.suggestions:
+        if suggestion.disposition is SuggestionDisposition.MANUAL:
+            continue
+        target = (
+            target_schema.topology.field(suggestion.target_path)
+            if target_schema is not None
+            else None
+        )
+        if not include_optional and target is not None and not target.required:
+            continue
         auto_accepted = (
             suggestion.origin is SuggestionOrigin.DETERMINISTIC
             and suggestion.disposition is SuggestionDisposition.SUGGESTED
             and suggestion.confidence_band is ConfidenceBand.HIGH
         )
-        if auto_accepted:
+        if auto_accepted and not include_auto_accepted:
             continue
         context_parts = [suggestion.reason]
         context_parts.extend(evidence.detail for evidence in suggestion.evidence[:4])

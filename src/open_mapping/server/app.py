@@ -3,7 +3,9 @@
 from __future__ import annotations
 
 import hmac
+from typing import Literal
 
+from anyio import CapacityLimiter, to_thread
 from fastapi import FastAPI, Header, Request
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
@@ -15,7 +17,6 @@ from open_mapping.errors import OpenMappingError
 from open_mapping.mapper import Mapper
 from open_mapping.model.issues import Issue, IssueCode, Severity
 from open_mapping.model.json_types import JsonValue
-from open_mapping.verification.dynamic import _source_issues
 
 _MAX_BODY_BYTES = 10 * 1024 * 1024
 _MAX_BATCH_SIZE = 1000
@@ -29,6 +30,7 @@ class _TransformRequest(BaseModel):
 class _BatchRequest(BaseModel):
     model_config = ConfigDict(extra="forbid")
     inputs: list[JsonValue]
+    on_error: Literal["raise", "collect"] = "raise"
 
 
 def _issue(code: IssueCode, message: str, correction: str) -> Issue:
@@ -116,6 +118,16 @@ class _BodyTooLarge(Exception):
 def create_app(mapper: Mapper, *, api_key: str | None = None) -> FastAPI:
     app = FastAPI(title="Open Mapping Compiler", version=__version__)
     app.add_middleware(_RequestSizeLimit)
+    execution_limit = CapacityLimiter(4)
+
+    def run_batch(payload: _BatchRequest) -> dict[str, object]:
+        if payload.on_error == "collect":
+            return {
+                "results": [
+                    result.model_dump(mode="json") for result in mapper.iter_results(payload.inputs)
+                ]
+            }
+        return {"outputs": mapper.transform_many(payload.inputs)}
 
     async def require_auth(authorization: str | None = Header(default=None)) -> None:
         if api_key is None:
@@ -192,7 +204,9 @@ def create_app(mapper: Mapper, *, api_key: str | None = None) -> FastAPI:
         authorization: str | None = Header(default=None),
     ) -> dict[str, object]:
         await require_auth(authorization)
-        issues = _source_issues(mapper.bundle.source_schema, payload.input, "request")
+        issues = await to_thread.run_sync(
+            mapper.validate_source, payload.input, limiter=execution_limit
+        )
         return {
             "valid": not issues,
             "issues": [issue.model_dump(mode="json") for issue in issues],
@@ -204,7 +218,8 @@ def create_app(mapper: Mapper, *, api_key: str | None = None) -> FastAPI:
         authorization: str | None = Header(default=None),
     ) -> dict[str, JsonValue]:
         await require_auth(authorization)
-        return {"output": mapper.transform(payload.input)}
+        output = await to_thread.run_sync(mapper.transform, payload.input, limiter=execution_limit)
+        return {"output": output}
 
     @app.post("/transform-batch")
     async def transform_batch(
@@ -222,7 +237,7 @@ def create_app(mapper: Mapper, *, api_key: str | None = None) -> FastAPI:
                     ),
                 )
             )
-        return {"outputs": mapper.transform_many(payload.inputs)}
+        return await to_thread.run_sync(run_batch, payload, limiter=execution_limit)
 
     return app
 

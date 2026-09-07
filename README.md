@@ -1,98 +1,99 @@
 # Open Mapping Compiler
 
-## What it is
+Generate reviewable mappings from JSON data, JSON Schema, or selected OpenAPI contracts. Use your model provider or the deterministic offline matcher, resolve uncertain decisions, and compile a verified `.omc` bundle. Load the bundle once and transform records without further model calls.
 
-Open Mapping Compiler uses AI (bring your own keys) to turn source JSON data or a source contract and a target contract into a reviewable, typed mapping. Give it a JSON record, JSON Schemas, or selected schemas from OpenAPI documents. It compares field names, descriptions, types, formats, constraints, examples, and optional context to produce a strong first pass even when two systems use different language.
+The library owns mapping, review, verification, and execution. Your product owns business-system connections, authentication, scheduling, retries, storage, and billing. No database, workflow service, model account, or frontend framework is required.
 
-## Start with AI
+## First success, without an API key
 
-Install the package from PyPI:
+From a checkout:
 
 ```text
-python -m pip install open-mapping
+git clone https://github.com/jacks3tr/Open-Mapping-Compiler.git
+cd Open-Mapping-Compiler
+python -m pip install .
+open-mapping demo --out-dir example
+open-mapping apply example/mapping.omc --input example/input.json
 ```
 
-Choose any supported provider and model. Your key stays in your process environment; Open Mapping Compiler calls the provider directly and does not require an Open Mapping account or proxy.
+The demo is included in the installed package, works outside the checkout, ignores model environment settings, and exports every input plus the expected output and verified bundle. It maps `customer_id` to `customerId` and `name` to `displayName`.
 
-| Model selection | API key environment variable |
+PyPI installation is `python -m pip install open-mapping` **after a successful registry release**. A GitHub tag or wheel build alone does not establish that the package was published. Until the trusted publisher is configured and the published-install check passes, use the checkout installation above. See [release setup](docs/releasing.md).
+
+## Choose your integration path
+
+| Goal | Start here |
+| --- | --- |
+| Generate and review a mapping | [Build, review, and resume](docs/quick-start.md) |
+| Embed transformations in a Python product | [Python SDK](docs/sdk.md) |
+| Transform from another language or a workflow tool | [HTTP sidecar](docs/server.md), [TypeScript client](examples/typescript/README.md), or [JSONL workflows](docs/workflow-integration.md) |
+
+## Add AI when evaluating mapping quality
+
+Configure a supported model and its key in your process environment. Keys are not embedded in bundles or drafts. The host application can instead inject its own inference transport.
+
+| Selection | Credential variable |
 | --- | --- |
 | `openai:<model-id>` | `OPENAI_API_KEY` |
 | `anthropic:<model-id>` | `ANTHROPIC_API_KEY` |
 | `google:<model-id>` | `GOOGLE_API_KEY` |
 
-For example, in PowerShell:
-
-```powershell
-$env:OPEN_MAPPING_MODEL = "openai:<model-id>"
-$env:OPENAI_API_KEY = "<your-api-key>"
-```
-
-On macOS or Linux, use `export OPEN_MAPPING_MODEL="openai:<model-id>"` and `export OPENAI_API_KEY="<your-api-key>"`. Custom or local endpoints can use an [advanced provider configuration](docs/model-assisted-mapping.md). A runnable provider example is in [`examples/model-assisted`](examples/model-assisted/README.md).
-
-## Map source data
+For example, after configuring `OPENAI_API_KEY`:
 
 ```text
-open-mapping map input.json target.schema.json --source-format json-data --require-model --out mapping.json
+open-mapping build example/source.json example/target.json --samples example/samples.jsonl --model openai:<model-id> --require-model --mapping-id customer --work-dir work/customer --out customer.omc --report-format json
 ```
 
-`mapping.json` contains one outcome for every target field, including proposed source paths, transformations, confidence, alternatives, and machine-readable inference diagnostics. Pass a single record object or a non-empty array of record objects. Add optional hints and context when the schemas alone do not capture the business meaning. Raw samples stay local unless you explicitly allow them.
+A ready result contains the bundle path. A review-required result exits with code `8` and identifies the saved draft and decision file. Review the **original** proposal rather than running inference again:
 
-Python applications use the same contract:
-
-```python
-from open_mapping import map_schemas
-
-result = map_schemas(
-    source_record,
-    target_schema,
-    source_format="json-data",
-    hints=hints,
-    require_model=True,
-)
+```text
+open-mapping review-draft work/customer/draft.json --interactive --out approved.review.yaml
+open-mapping resume work/customer/draft.json --review approved.review.yaml --out customer.omc --report-format json
 ```
 
-Pass `model="provider:model-id"` or `--model provider:model-id` to select a model per call instead of using `OPEN_MAPPING_MODEL`. The compiler gives the model sanitized schema context and a strict response contract, then constrains and statically verifies every proposal.
+Resumption preserves the original suggestions, contracts, samples, and verification limits and makes zero model calls. The original input files and provider credentials are not required. Changing a contract requires a new build and review.
 
-## Use it in your software
+`--offline` explicitly disables model calls, including `OPEN_MAPPING_MODEL`. Explicit model selection otherwise overrides the environment. `--require-model` fails when no model is selected or inference fails. `--model-concurrency` is opt-in, bounded from `1` to `8`, and defaults to sequential execution.
 
-Compile once when a connector is configured or either schema changes: source data or contract + target contract + optional context → AI proposal → review when needed → verified `.omc` bundle. At runtime, load that bundle once and transform as many records as needed without another model call:
+Raw samples are excluded from provider context unless explicitly allowed. **Saved drafts contain the samples used for verification**, so apply your application's normal access controls and retention policy to them. The offline example demonstrates installation and execution, not general AI mapping accuracy.
+
+## Embed the reusable runtime
+
+After running the demo:
 
 ```python
 from open_mapping import Mapper
 
-mapper = Mapper.load("mapping.omc")
-target_record = mapper.transform(source_record)
+mapper = Mapper.load("example/mapping.omc")
+print(mapper.transform({"customer_id": "C-200", "name": "Grace"}))
+
+for result in mapper.iter_results([
+    {"customer_id": "C-201", "name": "Ada"},
+    {"customer_id": 3, "name": "Invalid identifier"},
+]):
+    print(result.index, result.success, result.output, result.issues)
 ```
 
-Use `open-mapping apply` in a shell pipeline or install `open-mapping[server]` for an HTTP sidecar. Your integration remains responsible for reading and writing business APIs, credentials, retries, idempotency, and dead-letter handling.
+`iter_results` continues after per-record mapping errors. Existing `transform_many` and `iter_transform` retain fail-fast behavior. Source validation, target validation, invariants, and resource limits remain enabled.
 
-## Deterministic offline fallback
-
-The deterministic offline fallback is available when a provider is unavailable or data must stay fully offline. Omit `--model` or the SDK's `model` argument and leave `OPEN_MAPPING_MODEL` unset. It requires no API key or mapping pack and returns the same typed result. It combines types, constraints, common software abbreviations, typed business concepts, schema context, and privacy-safe value profiles, while leaving uncertain decisions for review.
-
-## Build executable output
+Inspect changes before replacing an approved integration:
 
 ```text
-open-mapping build input.json target.schema.json --source-format json-data --hints hints.yaml --model openai:<model-id> --require-model --out mapping.omc
-open-mapping apply mapping.omc --input input.json
+open-mapping impact example/mapping.omc example/source.json example/target.json
 ```
 
-The source records become verification samples automatically, and the inferred schema is embedded in the bundle for inspection. Unambiguous mappings build immediately. When judgment is required, `build` emits a hash-bound review file and exits with code 8; complete it and rerun the printed command. The resulting `.omc` bundle transforms JSON deterministically in Python, a shell pipeline, or a sidecar without calling a model at runtime. See the [working quick start](docs/quick-start.md), [Python SDK](docs/sdk.md), and [workflow integration guide](docs/workflow-integration.md).
+The report identifies removed source paths, new required targets, affected rules, and static failures. It does not rewrite a bundle, automatically migrate it, or carry approvals to changed contracts.
 
-## Tested across seven industries
+## Understand the guarantees
 
-In a blind Luna Max evaluation, the model used our structured schema context and strict response contract to score 100% accuracy across 7 mappings across different industries. It did not receive expected mappings, ambiguity or no-match labels, reviews, results, provenance, or raw samples. The offline deterministic fallback scored 45.7% across the same tests.
+**Structurally valid** means the mapping passed static checks. **Sample-verified** additionally means the supplied samples passed execution checks. Neither proves correct business meaning; billing and shipping fields can have identical types. A schema inferred from a few records is an observation, not an authoritative statement of future optionality.
 
-| Measure | Result |
-| --- | ---: |
-| Direct mapping precision | 63/63 (100%) |
-| Direct mapping recall | 63/63 (100%) |
-| Ambiguities left for review | 7/7 (100%) |
-| Missing source fields left unmapped | 35/35 (100%) |
-| Target decisions returned | 105/105 (100%) |
-| Static-valid direct proposals | 63/63 (100%) |
-| Complete industry cases | 7/7 (100%) |
+Python `Mapper`, the CLI, and the HTTP sidecar enforce runtime source/target schemas and invariants. Generated TypeScript currently provides the expression evaluator and resource limits, **not equivalent runtime schema and invariant validation**. Use the sidecar client when those guarantees are required. See [bundle compatibility and conformance](docs/bundles.md).
 
-The [blind multi-industry corpus](benchmarks/blind-multi-industry-v1/README.md) contains all 105 independently frozen target decisions across healthcare, payments, retail supply chain, observability, geospatial data, energy utilities, and air cargo.
+## Evaluation and performance
 
-The project is licensed under [Apache License 2.0](LICENSE).
+The published Luna Max run achieved **100% on synthetic benchmark v1**: 105 target outcomes across seven small industry-shaped cases, including 63 direct mappings, seven ambiguities, and 35 no-match targets. The deterministic baseline scored 45.7% on that same corpus. These results are not a production-accuracy estimate, and a corpus used during development is no longer an untouched holdout. See the [original corpus and methodology](benchmarks/blind-multi-industry-v1/README.md).
+
+Measure your own contracts with the benchmark tooling. `tools/benchmark_adoption.py` measures candidate generation and execution kernels separately, without provider calls or timing-based CI gates. Prepared rules, pointer tokens, private output construction, and cached field features remove repeated work without disabling validation.
+
+[Apache License 2.0](LICENSE).

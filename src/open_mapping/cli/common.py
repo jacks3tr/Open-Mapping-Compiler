@@ -17,7 +17,8 @@ import yaml
 from pydantic import ValidationError
 
 from open_mapping.errors import OpenMappingError
-from open_mapping.model.issues import Issue, IssueCode
+from open_mapping.model.bundles import BundleVerification
+from open_mapping.model.issues import Issue, IssueCode, Severity
 
 
 class SchemaFormat(StrEnum):
@@ -35,6 +36,11 @@ class ReportFormat(StrEnum):
     TEXT = "text"
     JSON = "json"
     MARKDOWN = "markdown"
+
+
+class ErrorMode(StrEnum):
+    RAISE = "raise"
+    COLLECT = "collect"
 
 
 class SuggestAssemblyPolicy(StrEnum):
@@ -95,15 +101,62 @@ def _safe_input_message(exc: BaseException) -> str:
     return str(exc) or "invalid command input"
 
 
-def run_public_command(operation: Callable[[], int]) -> int:
+def echo_build_json(
+    *,
+    status: str,
+    mapping_id: str | None,
+    issues: Sequence[Issue] = (),
+    artifact_paths: Mapping[str, str] | None = None,
+    verification: BundleVerification | None = None,
+) -> None:
+    typer.echo(
+        json.dumps(
+            {
+                "status": status,
+                "mapping_id": mapping_id,
+                "issues": [issue.model_dump(mode="json") for issue in issues],
+                "artifact_paths": dict(artifact_paths or {}),
+                "verification": verification.model_dump(mode="json")
+                if verification is not None
+                else None,
+            },
+            sort_keys=True,
+        )
+    )
+
+
+def run_public_command(
+    operation: Callable[[], int],
+    *,
+    json_errors: bool = False,
+    mapping_id: str | None = None,
+) -> int:
     """Run one command behind the stable, traceback-free public boundary."""
     try:
         return operation()
     except KeyboardInterrupt:
-        typer.echo("INTERRUPTED: operation cancelled", err=True)
+        if json_errors:
+            echo_build_json(
+                status="failed",
+                mapping_id=mapping_id,
+                issues=(
+                    Issue(
+                        code=IssueCode.INVALID_INPUT,
+                        severity=Severity.ERROR,
+                        component="cli",
+                        message="operation cancelled",
+                        correction="Resume the saved draft when ready.",
+                    ),
+                ),
+            )
+        else:
+            typer.echo("INTERRUPTED: operation cancelled", err=True)
         return 130
     except OpenMappingError as exc:
-        echo_issues(exc.issues)
+        if json_errors:
+            echo_build_json(status="failed", mapping_id=mapping_id, issues=exc.issues)
+        else:
+            echo_issues(exc.issues)
         if any(issue.code == IssueCode.PROVIDER_FAILURE for issue in exc.issues):
             return 5
         return 2
@@ -115,7 +168,22 @@ def run_public_command(operation: Callable[[], int]) -> int:
         ValidationError,
         CliInputError,
     ) as exc:
-        typer.echo(f"INVALID_INPUT: {_safe_input_message(exc)}", err=True)
+        if json_errors:
+            echo_build_json(
+                status="failed",
+                mapping_id=mapping_id,
+                issues=(
+                    Issue(
+                        code=IssueCode.INVALID_INPUT,
+                        severity=Severity.ERROR,
+                        component="cli",
+                        message=_safe_input_message(exc),
+                        correction="Check the input documents and output paths.",
+                    ),
+                ),
+            )
+        else:
+            typer.echo(f"INVALID_INPUT: {_safe_input_message(exc)}", err=True)
         return 2
 
 
@@ -153,6 +221,7 @@ def write_outputs(outputs: Mapping[Path, str], *, force: bool) -> None:
     temporary: dict[Path, Path] = {}
     backups: dict[Path, Path] = {}
     committed: list[Path] = []
+    unrecovered_backups: set[Path] = set()
     try:
         for path, content in outputs.items():
             path.parent.mkdir(parents=True, exist_ok=True)
@@ -170,18 +239,29 @@ def write_outputs(outputs: Mapping[Path, str], *, force: bool) -> None:
                 backups[path] = backup
             replace(temporary[path], path)
             committed.append(path)
-    except OSError:
+    except OSError as exc:
+        rollback_error: OSError | None = None
         for path in reversed(committed):
-            path.unlink(missing_ok=True)
+            try:
+                path.unlink(missing_ok=True)
+            except OSError as rollback_exc:
+                rollback_error = rollback_error or rollback_exc
         for path, backup in backups.items():
             if backup.exists():
-                replace(backup, path)
+                try:
+                    replace(backup, path)
+                except OSError as rollback_exc:
+                    unrecovered_backups.add(backup)
+                    rollback_error = rollback_error or rollback_exc
+        if rollback_error is not None:
+            raise rollback_error from exc
         raise
     finally:
         for path in temporary.values():
             path.unlink(missing_ok=True)
         for backup in backups.values():
-            backup.unlink(missing_ok=True)
+            if backup not in unrecovered_backups:
+                backup.unlink(missing_ok=True)
 
 
 def write_output(path: Path, content: str, *, force: bool) -> None:

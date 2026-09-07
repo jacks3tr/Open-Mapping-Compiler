@@ -5,6 +5,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
+import pytest
 from typer.testing import CliRunner
 
 from open_mapping.cli.app import app
@@ -147,8 +148,11 @@ def test_review_verify_run_compile_inprocess(tmp_path: Path) -> None:
         assert generated.exists()
 
 
-def test_benchmark_inprocess() -> None:
-    result = runner.invoke(app, ["benchmark", "benchmarks/account-segments", "--enforce-gates"])
+def test_benchmark_inprocess(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.chdir(tmp_path)
+    result = runner.invoke(
+        app, ["benchmark", str(ROOT / "benchmarks/account-segments"), "--enforce-gates"]
+    )
     assert result.exit_code == 0, result.output
     assert "account-segments" in result.output
     assert "GATE_FAILED" not in result.stderr

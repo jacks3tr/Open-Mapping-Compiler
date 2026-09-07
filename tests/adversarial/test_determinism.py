@@ -103,3 +103,31 @@ def test_interrupted_atomic_output_set_restores_originals(
     assert second.read_text(encoding="utf-8") == "old-second"
     assert not list(tmp_path.glob(".*.tmp"))
     assert not list(tmp_path.glob(".*.bak"))
+
+
+def test_failed_rollback_preserves_unrecovered_backup(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    output = tmp_path / "output.txt"
+    output.write_bytes(b"original")
+    real_replace = common.replace
+    replacements = 0
+
+    def fail_commit_and_restore(source: str | Path, destination: str | Path) -> None:
+        nonlocal replacements
+        replacements += 1
+        if replacements == 2:
+            raise OSError("synthetic replacement failure")
+        if replacements == 3:
+            raise OSError("synthetic restoration failure")
+        real_replace(source, destination)
+
+    monkeypatch.setattr(common, "replace", fail_commit_and_restore)
+    with pytest.raises(OSError, match="restoration failure"):
+        common.write_outputs({output: "replacement"}, force=True)
+
+    backups = tuple(tmp_path.glob(".*.bak"))
+    assert len(backups) == 1
+    assert backups[0].read_bytes() == b"original"
+    assert not output.exists()
+    assert not tuple(tmp_path.glob(".*.tmp"))

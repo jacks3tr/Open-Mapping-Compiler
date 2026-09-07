@@ -55,6 +55,7 @@
   "corpus_version": "1.0.0",
   "direct_mappings": 63,
   "frozen_on": "2026-08-29",
+  "hash_line_endings": "CRLF",
   "method": "gold-before-baseline",
   "no_match_targets": 35,
   "provenance_sha256": "5a206fbd54a3b6669d9216cf87923802f4d06a720cc1b92b9b962655eb0e75a3",
