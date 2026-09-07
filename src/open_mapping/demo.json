@@ -1,0 +1,24 @@
+{
+  "source_schema": {
+    "$id": "urn:open-mapping:demo:source",
+    "type": "object",
+    "required": ["customer_id", "name"],
+    "additionalProperties": false,
+    "properties": {
+      "customer_id": {"type": "string", "description": "Authoritative customer identifier"},
+      "name": {"type": "string", "description": "Canonical customer display name"}
+    }
+  },
+  "target_schema": {
+    "$id": "urn:open-mapping:demo:target",
+    "type": "object",
+    "required": ["customerId", "displayName"],
+    "additionalProperties": false,
+    "properties": {
+      "customerId": {"type": "string", "description": "Authoritative customer identifier"},
+      "displayName": {"type": "string", "title": "name", "description": "Canonical customer display name"}
+    }
+  },
+  "input": {"customer_id": "C-100", "name": "Ada"},
+  "expected": {"customerId": "C-100", "displayName": "Ada"}
+}

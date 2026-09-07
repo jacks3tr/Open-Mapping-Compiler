@@ -7,7 +7,7 @@ from jsonschema import Draft202012Validator
 from open_mapping.errors import OpenMappingError
 from open_mapping.evaluation.invariants import evaluate_invariant
 from open_mapping.evaluation.limits import DEFAULT_EVALUATION_LIMITS, EvaluationLimits
-from open_mapping.evaluation.mappings import _evaluate_mapping_document
+from open_mapping.evaluation.mappings import PreparedRules, _evaluate_mapping_document
 from open_mapping.model.issues import Issue
 from open_mapping.model.json_types import JsonValue
 from open_mapping.model.mappings import MappingDocument
@@ -50,6 +50,7 @@ def _transform_prepared(
     diagnostic_values: bool,
     source_validator: Draft202012Validator | None = None,
     target_validator: Draft202012Validator | None = None,
+    prepared_rules: PreparedRules | None = None,
 ) -> JsonValue:
     """Execute a mapping whose static contract was already verified."""
 
@@ -71,7 +72,7 @@ def _transform_prepared(
     )
     if source_issues:
         raise OpenMappingError(source_issues)
-    output = _evaluate_mapping_document(mapping, source, limits)
+    output = _evaluate_mapping_document(mapping, source, limits, prepared_rules=prepared_rules)
     target_issues = (
         validate_target_document(
             target_schema,

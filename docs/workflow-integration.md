@@ -1,28 +1,59 @@
 # Workflow integration
 
-Use AI to generate the first-pass mapping during a reviewed build step, then deploy the verified `.omc` file with your application. Load the bundle once when the process starts. The runtime path is deterministic and does not call the model.
+Run AI during mapping configuration, not once per business transaction. Persist an approved bundle, load it once per worker, and let the host workflow own retries, idempotency, delivery, quarantine, and storage.
 
-## Where compilation fits
+## Machine-readable build lifecycle
 
-Compile a mapping when a customer configures a connector, when either schema changes, or as a reviewed CI step. Supply source JSON data or a source contract, the target contract, and any optional hints or business context. The result either builds a verified bundle or returns a hash-bound review file for the decisions the inputs cannot prove.
+For validly parsed `build` and `resume` invocations, `--report-format json` writes exactly one JSON object to stdout:
 
-Do not call a model for every production record. Treat the `.omc` bundle as the versioned integration artifact and rebuild it when its source or target contract changes.
-
-## Runtime options
-
-Python applications can keep one `Mapper` instance and call `transform` for each record. Other runtimes can invoke `open-mapping apply` with one JSON document or a JSONL stream. The command writes data to stdout and diagnostics to stderr.
-
-```python
-from open_mapping import Mapper
-
-mapper = Mapper.load("mapping.omc")
-target_record = mapper.transform(source_record)
+```json
+{
+  "status": "needs_review",
+  "mapping_id": "customer",
+  "issues": [],
+  "artifact_paths": {"draft": "work/customer/draft.json", "review": "customer.review.yaml", "suggestions": "work/customer/suggestions.json"},
+  "verification": null
+}
 ```
 
-Products that do not embed Python can install `open-mapping[server]` and call the local HTTP sidecar. See the [sidecar guide](server.md) for its validation and transform endpoints.
+Statuses are `ready`, `needs_review`, and `failed`. `verification` contains bundle verification metadata when ready. On failure, issues explain the error and `artifact_paths` is empty. Human diagnostics do not contaminate JSON stdout. CLI argument/usage errors still use the command parser's standard stderr and exit `2`; do not attempt to parse stdout after an invalid invocation.
 
-## Review and delivery
+| Operation | Exit code |
+| --- | --- |
+| Build/resume ready | `0` |
+| Build/resume needs review | `8` |
+| Build/resume invalid input, artifact, or mapping | `2` |
+| Required provider invocation fails | `5` |
+| Interrupted build/resume | `130` |
+| Apply encounters invalid records | `4` |
+| Impact report: unchanged and statically valid | `0` |
+| Impact report: changed but statically valid | `8` |
+| Impact report: static failures | `3` |
 
-Treat exit code 8 from `build` as a review queue item. Store the generated suggestion report and review YAML together. After a reviewer chooses decisions, rerun `build` with `--review`. The hash binding prevents an old review from approving new suggestions.
+Persist the draft returned by a review-required build. After your approval interface writes a matching decision document, invoke `resume DRAFT --review REVIEW --out BUNDLE`. Do not reconstruct a build command or rerun the model to resume. Failed/incomplete review is not permission to weaken verification.
 
-The compiler does not deliver records to another system. Put network retries, idempotency, credentials, and dead-letter handling in the application that calls it.
+## Stream records
+
+After `open-mapping demo --out-dir example`, create a JSONL input file:
+
+```jsonl
+{"customer_id":"C-100","name":"Ada"}
+{"customer_id":3,"name":"Invalid"}
+{"customer_id":"C-101","name":"Grace"}
+```
+
+Apply it with complete per-record outcomes:
+
+```text
+open-mapping apply example/mapping.omc --input records.jsonl --jsonl --on-error collect --out results.jsonl
+```
+
+Results contain `index`, `success`, `output`, and `issues`. Indices count nonblank records from zero. Malformed JSON lines also produce failed results and do not discard later valid records. The command writes all collected outcomes and exits `4` when any record failed. Inspect the outcome, not whether output is null: a success flag distinguishes valid null data from failure.
+
+Default `--on-error raise` stops at the first failure. `--on-error collect` requires JSONL and is explicit opt-in. File output is buffered and atomically replaced only after a complete run; stdout stays line-flushed for pipelines. `--force` permits replacing an output, never a known input or bundle file. Route failed results to your existing quarantine or retry mechanism rather than introducing another queue inside this library.
+
+## Embedded and HTTP batches
+
+Python `Mapper.iter_results` yields lazily and preserves order. `transform_many` remains eager and fail-fast for compatibility. The HTTP `/transform-batch` endpoint supports `on_error: "collect"`; it limits requests to 1,000 records and 10 MiB. Split larger jobs upstream.
+
+A bundle is data, not an authenticated approval record. Use your existing storage ACLs and artifact promotion process. Drafts include sample data; runtime bundles do not automatically include those samples. See [bundle compatibility](bundles.md) and the [sidecar contract](server.md).

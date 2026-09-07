@@ -1,0 +1,66 @@
+{
+  "corpus_version": "0.1",
+  "status": "unscored",
+  "cases": [
+    {
+      "id": "nested-rename",
+      "source": {
+        "$id": "holdout:nested:source", "type": "object", "required": ["address"],
+        "properties": {"address": {"type": "object", "required": ["postal_code"], "properties": {
+          "postal_code": {"type": "string", "description": "Postal code of the delivery address"}
+        }}}
+      },
+      "target": {
+        "$id": "holdout:nested:target", "type": "object", "required": ["deliveryPostalCode"],
+        "properties": {"deliveryPostalCode": {"type": "string", "description": "Postal code of the delivery address"}}
+      },
+      "expected": {"/deliveryPostalCode": {"outcome": "mapping", "source_paths": ["/address/postal_code"]}},
+      "samples": [{"input": {"address": {"postal_code": "00421"}}, "expected": {"deliveryPostalCode": "00421"}}]
+    },
+    {
+      "id": "unresolved-recipient",
+      "source": {
+        "$id": "holdout:recipient:source", "type": "object", "required": ["billing_email", "shipping_email"],
+        "properties": {
+          "billing_email": {"type": "string", "description": "Billing contact email address"},
+          "shipping_email": {"type": "string", "description": "Shipping contact email address"}
+        }
+      },
+      "target": {
+        "$id": "holdout:recipient:target", "type": "object", "required": ["recipientEmail"],
+        "properties": {"recipientEmail": {"type": "string", "description": "Recipient email; business policy must choose the billing or shipping contact"}}
+      },
+      "expected": {"/recipientEmail": {"outcome": "abstain", "source_paths": []}},
+      "samples": [{"input": {"billing_email": "billing@example.invalid", "shipping_email": "shipping@example.invalid"}}]
+    },
+    {
+      "id": "missing-timestamp",
+      "source": {
+        "$id": "holdout:timestamp:source", "type": "object", "required": ["record_id"],
+        "properties": {"record_id": {"type": "string", "description": "Opaque record identifier; contains no time information"}}
+      },
+      "target": {
+        "$id": "holdout:timestamp:target", "type": "object", "required": ["createdAt"],
+        "properties": {"createdAt": {"type": "string", "format": "date-time", "description": "Original record creation timestamp; must not be fabricated"}}
+      },
+      "expected": {"/createdAt": {"outcome": "abstain", "source_paths": []}},
+      "samples": [{"input": {"record_id": "R-100"}}]
+    },
+    {
+      "id": "nullable-identifier",
+      "source": {
+        "$id": "holdout:nullable:source", "type": "object", "required": ["external_reference"],
+        "properties": {"external_reference": {"type": ["string", "null"], "description": "External reference identifier; null means no external reference"}}
+      },
+      "target": {
+        "$id": "holdout:nullable:target", "type": "object", "required": ["externalReferenceId"],
+        "properties": {"externalReferenceId": {"type": ["string", "null"], "description": "External reference identifier; null means no external reference"}}
+      },
+      "expected": {"/externalReferenceId": {"outcome": "mapping", "source_paths": ["/external_reference"]}},
+      "samples": [
+        {"input": {"external_reference": null}, "expected": {"externalReferenceId": null}},
+        {"input": {"external_reference": "X-5"}, "expected": {"externalReferenceId": "X-5"}}
+      ]
+    }
+  ]
+}

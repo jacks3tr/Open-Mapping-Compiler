@@ -1,0 +1,7 @@
+{
+  "corpus_version": "0.1",
+  "method": "gold-before-evaluation",
+  "hash_line_endings": "LF",
+  "case_count": 4,
+  "cases_sha256": "1bad09cf9629b3f5dc083decc642a1adf5135b50dd799ec94404a1e20e101e91"
+}

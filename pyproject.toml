@@ -32,7 +32,7 @@ dependencies = [
 
 [project.optional-dependencies]
 ai = []
-server = ["fastapi>=0.115,<1", "uvicorn>=0.34,<1"]
+server = ["fastapi>=0.115,<1", "uvicorn>=0.34,<1", "anyio>=4,<5"]
 
 [project.scripts]
 open-mapping = "open_mapping.cli.app:main"

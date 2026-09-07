@@ -26,13 +26,29 @@ CASE_IDS = (
 
 
 def _sha256(path: Path) -> str:
-    return hashlib.sha256(path.read_bytes()).hexdigest()
+    # The original Windows freeze used CRLF; Git checks these text assets out
+    # with platform-dependent newlines. Preserve the original hash contract.
+    content = path.read_bytes().replace(b"\r\n", b"\n").replace(b"\n", b"\r\n")
+    return hashlib.sha256(content).hexdigest()
+
+
+def test_frozen_hash_ignores_checkout_newlines_but_detects_content_changes(
+    tmp_path: Path,
+) -> None:
+    asset = tmp_path / "asset.json"
+    asset.write_bytes(b'{"value": 1}\r\n')
+    original = _sha256(asset)
+    asset.write_bytes(b'{"value": 1}\n')
+    assert _sha256(asset) == original
+    asset.write_bytes(b'{"value": 2}\n')
+    assert _sha256(asset) != original
 
 
 def test_blind_corpus_gold_assets_match_the_frozen_lock() -> None:
     lock = json.loads((CORPUS / "corpus.lock.json").read_text(encoding="utf-8"))
 
     assert lock["corpus_version"] == "1.0.0"
+    assert lock["hash_line_endings"] == "CRLF"
     assert lock["method"] == "gold-before-baseline"
     assert lock["case_count"] == 7
     assert lock["target_outcomes"] == 105

@@ -294,7 +294,7 @@ def test_suggest_help_documents_provider_privacy_behavior() -> None:
     result = run_cli("suggest", "--help")
 
     assert result.returncode == 0
-    normalized_help = " ".join(result.stdout.lower().replace("|", " ").split())
+    normalized_help = " ".join(result.stdout.lower().replace("|", " ").replace("│", " ").split())
     assert "raw samples" in normalized_help
     assert "selected provider or model" in normalized_help
     assert "--require-provider" in result.stdout

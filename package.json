@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "typecheck": "tsc --noEmit",
-    "test:generated": "node tools/run_generated_typescript.mjs --self-test"
+    "test:generated": "node tools/run_generated_typescript.mjs --self-test",
+    "test:client": "node --import tsx --test examples/typescript/open_mapping_client.test.ts"
   },
   "devDependencies": {
     "@types/node": "^26.2.0",

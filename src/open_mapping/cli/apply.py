@@ -6,13 +6,14 @@ import json
 import os
 import tempfile
 from pathlib import Path
-from typing import Any, NoReturn, TextIO, cast
+from typing import Any, Literal, NoReturn, TextIO, cast
 
 import typer
 
 from open_mapping.cli.common import CliInputError, preflight_outputs, render_issues
 from open_mapping.errors import OpenMappingError
-from open_mapping.mapper import Mapper
+from open_mapping.mapper import Mapper, TransformResult
+from open_mapping.model.issues import Issue, IssueCode, Severity
 from open_mapping.model.json_types import JsonValue
 from open_mapping.serialization.canonical_json import canonical_json
 
@@ -66,13 +67,21 @@ def apply_command(
     pretty: bool,
     force: bool,
     diagnostic_values: bool,
+    on_error: Literal["raise", "collect"] = "raise",
 ) -> int:
+    if on_error not in {"raise", "collect"}:
+        raise CliInputError("on_error must be raise or collect")
+    if on_error == "collect" and not jsonl:
+        raise CliInputError("--on-error collect requires --jsonl")
     if jsonl and pretty:
         raise CliInputError("--pretty cannot be used with --jsonl")
     if input_file is not None and not input_file.is_file():
         raise CliInputError(f"input file not found: {input_file.name}")
     if out is not None:
         preflight_outputs((out,), force=force)
+        inputs = {path.resolve() for path in (bundle, input_file) if path is not None}
+        if out.resolve() in inputs:
+            raise CliInputError("output must not overwrite the bundle or source input")
     mapper = Mapper.load(bundle)
     source_stream = (
         input_file.open("r", encoding="utf-8")
@@ -105,6 +114,7 @@ def apply_command(
             out=out,
             force=force,
             diagnostic_values=diagnostic_values,
+            on_error=on_error,
         )
     finally:
         if input_file is not None:
@@ -118,6 +128,7 @@ def _apply_jsonl(
     out: Path | None,
     force: bool,
     diagnostic_values: bool,
+    on_error: Literal["raise", "collect"] = "raise",
 ) -> int:
     output_stream: TextIO
     temporary_path: Path | None = None
@@ -129,6 +140,8 @@ def _apply_jsonl(
         os.close(descriptor)
         temporary_path = Path(name)
         output_stream = temporary_path.open("w", encoding="utf-8", newline="")
+    exit_code = 0
+    record_index = 0
     try:
         for line_number, line in enumerate(source_stream, start=1):
             if not line.strip():
@@ -136,22 +149,54 @@ def _apply_jsonl(
             try:
                 value = _load_json(line)
             except (json.JSONDecodeError, ValueError, UnicodeError):
-                typer.echo(f"INVALID_INPUT: invalid JSONL input at line {line_number}", err=True)
-                return 4
-            transformed, code = _transform_or_exit(
-                mapper, value, diagnostic_values=diagnostic_values
-            )
-            if code:
-                typer.echo(f"input line: {line_number}", err=True)
-                return code
-            assert transformed is not None
-            output_stream.write(canonical_json(transformed) + "\n")
-            output_stream.flush()
+                if on_error == "raise":
+                    typer.echo(
+                        f"INVALID_INPUT: invalid JSONL input at line {line_number}", err=True
+                    )
+                    return 4
+                outcome = TransformResult(
+                    index=record_index,
+                    success=False,
+                    issues=(
+                        Issue(
+                            code=IssueCode.INVALID_INPUT,
+                            severity=Severity.ERROR,
+                            component="cli.apply",
+                            message=f"invalid JSONL input at line {line_number}",
+                            correction="Provide one duplicate-free JSON value per nonblank line.",
+                            sample_id=f"line-{line_number}",
+                        ),
+                    ),
+                )
+            else:
+                if on_error == "raise":
+                    transformed, code = _transform_or_exit(
+                        mapper, value, diagnostic_values=diagnostic_values
+                    )
+                    if code:
+                        typer.echo(f"input line: {line_number}", err=True)
+                        return code
+                    output_stream.write(canonical_json(transformed) + "\n")
+                    if out is None:
+                        output_stream.flush()
+                    record_index += 1
+                    continue
+                outcome = next(
+                    mapper.iter_results((value,), diagnostic_values=diagnostic_values)
+                ).model_copy(update={"index": record_index})
+            if not outcome.success:
+                exit_code = 4
+            output_stream.write(outcome.model_dump_json() + "\n")
+            if out is None:
+                output_stream.flush()
+            record_index += 1
         if out is not None:
+            output_stream.flush()
+            os.fsync(output_stream.fileno())
             output_stream.close()
             assert temporary_path is not None
             os.replace(temporary_path, out)
-        return 0
+        return exit_code
     finally:
         if out is not None and not output_stream.closed:
             output_stream.close()

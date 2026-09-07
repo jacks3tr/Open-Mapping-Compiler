@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import hashlib
 from collections.abc import Mapping, Sequence
+from concurrent.futures import ThreadPoolExecutor
 
 from pydantic import ValidationError
 
@@ -338,9 +339,12 @@ def invoke_model_mapping(
     resolved_model: ResolvedModel,
     config_sha256: str,
     registry: Mapping[ProviderKind, TransportFactory],
+    max_concurrency: int = 1,
 ) -> tuple[tuple[ModelMappingResponse, ...], ModelRunDisclosure, tuple[Issue, ...]]:
     """Invoke deterministic model batches and return only validated responses."""
 
+    if not 1 <= max_concurrency <= 8:
+        raise ValueError("max_concurrency must be between 1 and 8")
     ordered_packages = tuple(
         sorted(
             packages,
@@ -349,14 +353,39 @@ def invoke_model_mapping(
     )
     batch_runs: tuple[ModelBatchRun, ...]
     responses: list[ModelMappingResponse] = []
-    if ordered_packages:
+    if ordered_packages and max_concurrency > 1:
+
+        def invoke_isolated(
+            package: MappingContextPackage,
+        ) -> tuple[ModelMappingResponse | None, ModelBatchRun]:
+            try:
+                transport = registry[resolved_model.provider.kind](resolved_model)
+            except Exception as error:
+                return None, _factory_failure_runs((package,), error=error)[0]
+            return _invoke_batch(
+                package=package, resolved_model=resolved_model, transport=transport
+            )
+
+        mutable_runs: list[ModelBatchRun] = []
+        with ThreadPoolExecutor(
+            max_workers=max_concurrency, thread_name_prefix="omc-model"
+        ) as executor:
+            # Bounded groups avoid eagerly enqueueing every batch on Python 3.11+.
+            for start in range(0, len(ordered_packages), max_concurrency):
+                group = ordered_packages[start : start + max_concurrency]
+                for response, run in executor.map(invoke_isolated, group):
+                    mutable_runs.append(run)
+                    if response is not None:
+                        responses.append(response)
+        batch_runs = tuple(mutable_runs)
+    elif ordered_packages:
         try:
             factory = registry[resolved_model.provider.kind]
             transport = factory(resolved_model)
         except Exception as error:
             batch_runs = _factory_failure_runs(ordered_packages, error=error)
         else:
-            mutable_runs: list[ModelBatchRun] = []
+            mutable_runs = []
             for package in ordered_packages:
                 response, run = _invoke_batch(
                     package=package,

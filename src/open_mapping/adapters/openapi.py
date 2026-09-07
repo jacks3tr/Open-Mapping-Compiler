@@ -325,8 +325,20 @@ def _resolve_schema(schema: JsonValue, document: JsonValue) -> JsonValue:
 def load_openapi_schema(
     path: Path, *, selector: OpenApiSelector, schema_id: str | None
 ) -> SchemaDocument:
-    document = _load_document(path)
-    schema = _resolve_schema(_extract_schema(document, selector, path.name), document)
+    return parse_openapi_schema(
+        _load_document(path), selector=selector, schema_id=schema_id, source_uri=path.name
+    )
+
+
+def parse_openapi_schema(
+    document: JsonValue,
+    *,
+    selector: OpenApiSelector,
+    schema_id: str | None = None,
+    source_uri: str = "memory",
+) -> SchemaDocument:
+    """Parse an application-owned OpenAPI document without temporary files."""
+    schema = _resolve_schema(_extract_schema(document, selector, source_uri), document)
     resolved_id = schema_id
     if resolved_id is None and isinstance(schema, dict):
         root_id = schema.get("$id")
@@ -337,7 +349,7 @@ def load_openapi_schema(
     return parse_json_schema(
         schema,
         schema_id=resolved_id,
-        source_uri=f"{path.name}:{selector.kind.value}:{selector.operation_id or selector.component_name or ''}:{selector.status_code or ''}",
+        source_uri=f"{source_uri}:{selector.kind.value}:{selector.operation_id or selector.component_name or ''}:{selector.status_code or ''}",
     )
 
 

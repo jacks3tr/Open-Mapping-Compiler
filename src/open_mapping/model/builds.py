@@ -6,6 +6,7 @@ from enum import StrEnum
 
 from open_mapping.errors import OpenMappingError
 from open_mapping.model.bundles import MappingBundle
+from open_mapping.model.drafts import BuildDraft
 from open_mapping.model.issues import Issue, IssueCode, Severity
 from open_mapping.model.json_types import OpenMappingModel
 from open_mapping.model.reviews import SuggestionReviewDocument
@@ -26,6 +27,7 @@ class BuildResult(OpenMappingModel):
     review_document: SuggestionReviewDocument | None
     verification_report: VerificationReport | None
     issues: tuple[Issue, ...]
+    draft: BuildDraft | None = None
 
     @property
     def ready(self) -> bool:
@@ -45,7 +47,7 @@ class BuildResult(OpenMappingModel):
                     severity=Severity.ERROR,
                     component="compiler",
                     message=f"mapping {self.mapping_id!r} requires review before it can be bundled",
-                    correction="Complete the generated review document and rebuild with --review.",
+                    correction="Complete the generated review document and resume the saved draft.",
                     mapping_id=self.mapping_id,
                 ),
             )

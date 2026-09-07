@@ -2,8 +2,7 @@
 
 from __future__ import annotations
 
-import os
-from collections.abc import Sequence
+from collections.abc import Mapping, Sequence
 from pathlib import Path
 from typing import Literal
 
@@ -11,8 +10,10 @@ from open_mapping.adapters.openapi import OpenApiSelector
 from open_mapping.compiler import Compiler
 from open_mapping.model.hints import MappingHints
 from open_mapping.model.json_types import JsonValue
+from open_mapping.model.model_config import ProviderKind, ResolvedModel
 from open_mapping.model.schema import SchemaDocument
 from open_mapping.model.suggestions import SuggestionReport
+from open_mapping.providers.transports.base import TransportFactory
 from open_mapping.verification.dynamic import VerificationSample
 
 
@@ -24,19 +25,24 @@ def map_schemas(
     source_selector: str | OpenApiSelector | None = None,
     target_format: Literal["json-schema", "openapi"] = "json-schema",
     target_selector: str | OpenApiSelector | None = None,
-    model: str | None = None,
+    model: str | ResolvedModel | None = None,
     models_config: Path | None = None,
     samples: Path | Sequence[VerificationSample] | None = None,
     hints: Path | MappingHints | None = None,
     instruction: str | None = None,
     allow_raw_samples: bool = False,
     require_model: bool = False,
+    offline: bool = False,
+    model_concurrency: int = 1,
+    transport_registry: Mapping[ProviderKind, TransportFactory] | None = None,
 ) -> SuggestionReport:
     """Return one structured mapping result, using a model only when requested."""
 
-    selected_model = model if model is not None else os.environ.get("OPEN_MAPPING_MODEL")
     return Compiler(
-        model=selected_model,
+        model=model,
+        offline=offline,
+        model_concurrency=model_concurrency,
+        transport_registry=transport_registry,
         models_config=models_config,
         allow_raw_samples=allow_raw_samples,
         require_model=require_model,

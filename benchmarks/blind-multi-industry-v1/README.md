@@ -64,4 +64,8 @@ The cases intentionally cover abbreviations, different naming styles, semantic n
 
 ## Blindness and provenance
 
-`corpus.lock.json` signs the manifests, source schemas, target schemas, samples, and expected mappings. `provenance.json` records the authoritative standard and concepts used for each case. All records and contracts are synthetic adaptations; they are not copied standard schemas or real operational data.
+`corpus.lock.json` records hashes of the manifests, source schemas, target schemas, samples, and expected mappings. These hashes detect changes; they are not cryptographic signatures. `provenance.json` records the authoritative standard and concepts used for each case. All records and contracts are synthetic adaptations; they are not copied standard schemas or real operational data.
+
+The original freeze hashed Windows CRLF text. Integrity tests normalize checkout newlines to CRLF before checking those original hashes, as declared by `hash_line_endings` in the lock. No gold records or expected mappings were changed to fix cross-platform verification. The test also verifies that content changes still fail integrity checking.
+
+The historical results above apply only to this synthetic corpus. A separate [unscored holdout](../holdout-v1/README.md) is available for later evaluation; once results influence implementation, that corpus must also become a regression set rather than remain labeled blind.

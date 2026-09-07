@@ -10,8 +10,9 @@ import typer
 
 from open_mapping.cli.apply import apply_command
 from open_mapping.cli.benchmark import benchmark_command
-from open_mapping.cli.build import build_command
+from open_mapping.cli.build import build_command, resume_command
 from open_mapping.cli.common import (
+    ErrorMode,
     ReportFormat,
     SchemaFormat,
     SourceFormat,
@@ -20,11 +21,13 @@ from open_mapping.cli.common import (
     run_public_command,
 )
 from open_mapping.cli.compile import compile_command
+from open_mapping.cli.demo import demo_command
+from open_mapping.cli.impact import impact_command
 from open_mapping.cli.inspect import inspect_command
 from open_mapping.cli.map import map_command
 from open_mapping.cli.model_context import model_context_command
 from open_mapping.cli.models import models_app
-from open_mapping.cli.review import review_command
+from open_mapping.cli.review import review_command, review_draft_command
 from open_mapping.cli.run import run_command
 from open_mapping.cli.serve import serve_command
 from open_mapping.cli.suggest import suggest_command
@@ -84,6 +87,10 @@ def map_two_schemas(
         typer.Option("--require-model", help="Fail instead of falling back when model use fails."),
     ] = False,
     force: Annotated[bool, typer.Option("--force")] = False,
+    offline: Annotated[
+        bool, typer.Option("--offline", help="Disable model calls, including environment defaults.")
+    ] = False,
+    model_concurrency: Annotated[int, typer.Option("--model-concurrency", min=1, max=8)] = 1,
 ) -> None:
     _exit(
         lambda: map_command(
@@ -97,6 +104,8 @@ def map_two_schemas(
             hints=hints,
             instruction=instruction,
             out=out,
+            offline=offline,
+            model_concurrency=model_concurrency,
             model=model,
             models_config=models_config,
             allow_raw_samples=allow_raw_samples,
@@ -127,6 +136,11 @@ def build(
     instruction: Annotated[str | None, typer.Option("--instruction")] = None,
     allow_raw_samples: Annotated[bool, typer.Option("--allow-raw-samples")] = False,
     require_model: Annotated[bool, typer.Option("--require-model")] = False,
+    offline: Annotated[
+        bool,
+        typer.Option("--offline", help="Disable all model calls, including environment defaults."),
+    ] = False,
+    model_concurrency: Annotated[int, typer.Option("--model-concurrency", min=1, max=8)] = 1,
     work_dir: Annotated[Path | None, typer.Option("--work-dir")] = None,
     out: Annotated[Path | None, typer.Option("--out")] = None,
     require_samples: Annotated[bool, typer.Option("--require-samples")] = False,
@@ -151,14 +165,94 @@ def build(
             instruction=instruction,
             allow_raw_samples=allow_raw_samples,
             require_model=require_model,
+            offline=offline,
+            model_concurrency=model_concurrency,
             work_dir=work_dir,
             out=out,
             require_samples=require_samples,
             require_complete_review=require_complete_review,
             force=force,
             report_format=report_format,
+        ),
+        json_errors=report_format is ReportFormat.JSON,
+        mapping_id=mapping_id or f"{source.stem}-to-{target.stem}",
+    )
+
+
+@app.command(help="Resume the exact saved draft without model calls.")
+def resume(
+    draft: Annotated[Path, typer.Argument(help="Saved draft.json.")],
+    review: Annotated[Path, typer.Option("--review")],
+    out: Annotated[Path | None, typer.Option("--out")] = None,
+    force: Annotated[bool, typer.Option("--force")] = False,
+    report_format: Annotated[ReportFormat, typer.Option("--report-format")] = ReportFormat.TEXT,
+) -> None:
+    _exit(
+        lambda: resume_command(
+            draft, review=review, out=out, force=force, report_format=report_format
+        ),
+        json_errors=report_format is ReportFormat.JSON,
+    )
+
+
+@app.command(help="Report how changed contracts affect a bundle; never modifies or reapproves it.")
+def impact(
+    bundle: Annotated[Path, typer.Argument()],
+    source: Annotated[Path, typer.Argument()],
+    target: Annotated[Path, typer.Argument()],
+    source_format: Annotated[
+        SchemaFormat, typer.Option("--source-format")
+    ] = SchemaFormat.JSON_SCHEMA,
+    source_selector: Annotated[str | None, typer.Option("--source-selector")] = None,
+    target_format: Annotated[
+        SchemaFormat, typer.Option("--target-format")
+    ] = SchemaFormat.JSON_SCHEMA,
+    target_selector: Annotated[str | None, typer.Option("--target-selector")] = None,
+) -> None:
+    _exit(
+        lambda: impact_command(
+            bundle,
+            source,
+            target,
+            source_format=source_format.value,
+            source_selector=source_selector,
+            target_format=target_format.value,
+            target_selector=target_selector,
+        ),
+        json_errors=True,
+    )
+
+
+@app.command(
+    "review-draft",
+    help="Review a frozen draft in the terminal or write a focused decision template.",
+)
+def review_draft(
+    draft: Annotated[Path, typer.Argument(help="Saved draft.json.")],
+    out: Annotated[Path | None, typer.Option("--out")] = None,
+    interactive: Annotated[bool, typer.Option("--interactive")] = False,
+    all_targets: Annotated[bool, typer.Option("--all-targets")] = False,
+    show_sample_values: Annotated[bool, typer.Option("--show-sample-values")] = False,
+    force: Annotated[bool, typer.Option("--force")] = False,
+) -> None:
+    _exit(
+        lambda: review_draft_command(
+            draft,
+            out=out,
+            interactive=interactive,
+            all_targets=all_targets,
+            show_sample_values=show_sample_values,
+            force=force,
         )
     )
+
+
+@app.command(help="Run the bundled example with no credentials or network access.")
+def demo(
+    out_dir: Annotated[Path | None, typer.Option("--out-dir")] = None,
+    force: Annotated[bool, typer.Option("--force")] = False,
+) -> None:
+    _exit(lambda: demo_command(out_dir=out_dir, force=force), json_errors=True)
 
 
 @app.command()
@@ -167,6 +261,12 @@ def apply(
     input_file: Annotated[Path | None, typer.Option("--input")] = None,
     out: Annotated[Path | None, typer.Option("--out")] = None,
     jsonl: Annotated[bool, typer.Option("--jsonl")] = False,
+    on_error: Annotated[
+        ErrorMode,
+        typer.Option(
+            "--on-error", help="Collect per-record outcomes for JSONL, or stop at the first error."
+        ),
+    ] = ErrorMode.RAISE,
     pretty: Annotated[bool, typer.Option("--pretty")] = False,
     force: Annotated[bool, typer.Option("--force")] = False,
     diagnostic_values: Annotated[bool, typer.Option("--diagnostic-values")] = False,
@@ -177,6 +277,7 @@ def apply(
             input_file=input_file,
             out=out,
             jsonl=jsonl,
+            on_error=on_error.value,
             pretty=pretty,
             force=force,
             diagnostic_values=diagnostic_values,
@@ -184,7 +285,7 @@ def apply(
     )
 
 
-@app.command(hidden=True)
+@app.command()
 def serve(
     bundle: Annotated[Path, typer.Argument(help="Verified .omc mapping bundle.", metavar="BUNDLE")],
     host: Annotated[str, typer.Option("--host")] = "127.0.0.1",
@@ -203,8 +304,13 @@ def serve(
     )
 
 
-def _exit(operation: Callable[[], int]) -> None:
-    raise typer.Exit(run_public_command(operation))
+def _exit(
+    operation: Callable[[], int],
+    *,
+    json_errors: bool = False,
+    mapping_id: str | None = None,
+) -> None:
+    raise typer.Exit(run_public_command(operation, json_errors=json_errors, mapping_id=mapping_id))
 
 
 @app.command(hidden=True)

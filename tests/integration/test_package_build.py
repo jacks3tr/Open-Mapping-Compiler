@@ -35,6 +35,9 @@ def test_sdist_and_wheel_contain_runtime_schemas_examples_and_public_docs(tmp_pa
     assert "Requires-Dist: httpx>=0.27" in metadata.splitlines()
     for schema_name in REQUIRED_SCHEMAS:
         assert f"open_mapping/schemas/{schema_name}" in wheel_names
+    assert "open_mapping/demo.json" in wheel_names
+    assert "open_mapping/examples/conformance/identity.json" in wheel_names
+    assert "open_mapping/examples/typescript/open_mapping_client.ts" in wheel_names
     assert "open_mapping/examples/erp-mes/source.schema.json" in wheel_names
     assert "open_mapping/examples/erp-mes/target.schema.json" in wheel_names
     assert "open_mapping/examples/erp-mes/hints.yaml" in wheel_names
@@ -83,7 +86,9 @@ def test_clean_wheel_install_imports_from_isolated_environment_and_has_help(tmp_
     help_result = run_checked([command, "--help"], cwd=tmp_path, environment=environment)
     assert "map" in help_result.stdout
     assert "| suggest" not in help_result.stdout
-    assert "| review" not in help_result.stdout
+    assert "| review " not in help_result.stdout
+    for visible_command in ("demo", "resume", "review-draft", "impact", "serve"):
+        assert visible_command in help_result.stdout
     missing_server_extra = subprocess.run(
         [command, "serve", "missing.omc"],
         cwd=tmp_path,

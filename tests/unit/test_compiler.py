@@ -76,8 +76,13 @@ def test_compiler_records_the_supplied_review_document_hash() -> None:
             )
         }
     )
+    assert first.draft is not None
     result = compiler.build(
-        source=source_schema(), target=target, mapping_id="customer", review=review
+        source=source_schema(),
+        target=target,
+        mapping_id="customer",
+        review=review,
+        draft=first.draft,
     )
 
     assert (

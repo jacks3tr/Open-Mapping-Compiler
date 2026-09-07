@@ -1,34 +1,50 @@
 # Quick start
 
-## Install
+AI generates proposals; the compiler verifies them; the runtime executes an approved bundle. Start by proving installation and execution without credentials.
 
-Install from PyPI:
+## Run the installed example
 
-```text
-python -m pip install open-mapping
-```
-
-## Map with AI
-
-Set `OPEN_MAPPING_MODEL` to `openai:<model-id>`, `anthropic:<model-id>`, or `google:<model-id>`, then set `OPENAI_API_KEY`, `ANTHROPIC_API_KEY`, or `GOOGLE_API_KEY` for that provider. The package runs in your process and calls the provider directly. You can instead pass `--model provider:model-id` to select a model per command.
-
-Get a structured first pass from a JSON record:
+From a checkout, install with `python -m pip install .`, then:
 
 ```text
-open-mapping map input.json target.schema.json --source-format json-data --hints hints.yaml --require-model --out mapping.json
+open-mapping demo --out-dir example
+open-mapping apply example/mapping.omc --input example/input.json
 ```
 
-The compiler gives the model sanitized schema context, constrains its response to valid source paths and operations, and statically verifies every proposal. The result contains one outcome for every target field and can be reviewed or consumed by another application. Raw samples stay local unless explicitly allowed.
+Expected output is `{"customerId":"C-100","displayName":"Ada"}`. The exported directory contains source and target schemas, input, expected output, verification samples, and the bundle. The demo runs outside a repository checkout and never invokes a model.
 
-Build and run an executable mapping:
+Rebuild it explicitly:
 
 ```text
-open-mapping build input.json target.schema.json --source-format json-data --hints hints.yaml --model openai:<model-id> --require-model --out mapping.omc
-open-mapping apply mapping.omc --input input.json
+open-mapping build example/source.json example/target.json --offline --samples example/samples.jsonl --require-samples --mapping-id customer --work-dir work/customer --out customer.omc --report-format json
 ```
 
-The source record is automatically used for sample verification, and the bundle retains the inferred schema. Applying the verified bundle is deterministic and does not call the model. The repository's [quick-start files](../examples/quick-start/) exercise the same input and bundle flow. To supply an authoritative source contract, use `source.schema.json` and omit `--source-format json-data`.
+For AI-assisted suggestions, configure your provider credential and replace `--offline` with `--model provider:model-id --require-model`. See the [provider example](../examples/model-assisted/README.md). Do not use an offline identity/rename example as evidence of general model-assisted accuracy.
 
-## Deterministic offline fallback
+## Resolve a review-required result
 
-Omit `--model` and leave `OPEN_MAPPING_MODEL` unset when a provider is unavailable or the mapping must stay fully offline. No provider, API key, or mapping pack is required. The fallback returns the same typed result, uses schema and privacy-safe value evidence, and leaves uncertain fields for review.
+Exit `8` means judgment is required, not that the proposal disappeared. The JSON result identifies the saved draft and generated review. A focused terminal interface uses that same draft:
+
+```text
+open-mapping review-draft work/customer/draft.json --interactive --out approved.review.yaml
+open-mapping resume work/customer/draft.json --review approved.review.yaml --out customer.omc --report-format json
+```
+
+The interface shows unresolved required targets, confidence, context, alternatives, and expressions. Use `--all-targets` to inspect every non-manual decision. Sample previews require `--show-sample-values` because they can expose saved customer data. Manual business hints must be changed through a new build, not overridden by review.
+
+Resume uses the original report, contracts, samples, and verification policy, with no new inference. It does not require the original source files or provider key. A review can still leave required decisions unresolved; the result remains `needs_review`. Never blindly accept every suggestion to obtain a green result.
+
+Changing schemas, hints, instructions, or verification samples requires a new build. Use a new work directory or deliberately replace artifacts with `--force`. Saved drafts contain sample data; keep them under your application's access controls.
+
+## Execute and embed
+
+```python
+from open_mapping import Mapper
+
+mapper = Mapper.load("example/mapping.omc")
+assert mapper.transform({"customer_id": "C-100", "name": "Ada"}) == {
+    "customerId": "C-100", "displayName": "Ada"
+}
+```
+
+Use [JSONL](workflow-integration.md) for streams, the [sidecar](server.md) for other languages, and [schema impact](sdk.md#schema-inference-and-maintenance) before changing an existing integration.
