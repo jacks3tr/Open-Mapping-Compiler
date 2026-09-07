@@ -53,7 +53,7 @@ Review found two corrections: failed output restoration must preserve the backup
 
 Docker Desktop could not start its engine: its Ingest server could not access the local `sailor-ingest.sock`. The container build and offline demo subsequently passed in [PR CI run 34141797209](https://github.com/jacks3tr/Open-Mapping-Compiler/actions/runs/34141797209), alongside the wheel and TypeScript checks. No new version or release is being created, and publisher configuration remains a prerequisite for the next release.
 
-The first Linux full CI run found seven help-text assertion failures caused by Typer forcing ANSI terminal formatting under `GITHUB_ACTIONS`; 972 tests passed. CI disables forced terminal rendering for stable captured text. Assertions and test coverage remain intact. Final-head CI on [PR #1](https://github.com/jacks3tr/Open-Mapping-Compiler/pull/1) is authoritative for the complete suite and merge gate.
+The first Linux full CI run found seven help-text assertion failures caused by Typer forcing ANSI terminal formatting under `GITHUB_ACTIONS`; 972 tests passed. CI disables forced terminal rendering for stable captured text. A subsequent run passed 978 tests and exposed one remaining text-normalization difference: Linux uses Unicode panel borders. The privacy-help test now normalizes both ASCII and Unicode vertical borders while retaining every content assertion. Final-head CI on [PR #1](https://github.com/jacks3tr/Open-Mapping-Compiler/pull/1) is authoritative for the complete suite and merge gate.
 
 ## Required completion gates
 
